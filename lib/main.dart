@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:seatu_ersih/view/HomepageView.dart';
+import 'widget/Homepage/HomepageBar.dart';
 
 void main() {
   runApp(const MyApp());

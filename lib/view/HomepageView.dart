@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:seatu_ersih/widget/Homepage/HomepageBar.dart';
+import 'package:seatu_ersih/widget/Homepage/HomepageBody.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
@@ -6,8 +8,11 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        
+      body: Column(
+        children: [
+          AppbarHome(),
+          HomeBody(),
+        ],
       ),
     );
   }
