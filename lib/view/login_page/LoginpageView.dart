@@ -13,10 +13,10 @@ class LoginPage extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Padding(
-                padding: const EdgeInsets.only(top: 58, left: 145),
+              Center(child: Padding(
+                padding: const EdgeInsets.only(top: 30),
                 child: Image.asset("assets/img/icon-app.png"),
-              ),
+              )),
           
               SizedBox(
                 height: 29,
@@ -195,7 +195,7 @@ class LoginPage extends StatelessWidget {
                           "Sign In with Google",
                           style: GoogleFonts.poppins(
                             color: Colors.black,
-                            fontWeight: FontWeight.w600,
+                            fontWeight: FontWeight.w500,
                             fontSize: 15,
                           ),
                         ),

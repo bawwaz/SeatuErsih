@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:seatu_ersih/view/register_page/register_page.controller.dart';
@@ -17,10 +18,10 @@ class Registerpage extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Padding(
-                padding: const EdgeInsets.only(top: 58, left: 145),
+              Center(child: Padding(
+                padding: const EdgeInsets.only(top: 30),
                 child: Image.asset("assets/img/icon-app.png"),
-              ),
+              )),
 
               SizedBox(
                 height: 29,
@@ -129,15 +130,17 @@ class Registerpage extends StatelessWidget {
                       child: controller.checked.value ? Icon(Icons.check, size: 18, color: Colors.white,) : SizedBox(height: 20, width: 20,),
                     ),
                   )),
-                  Container(
-                    width: 300,
-                    margin: EdgeInsets.only(left: 8),
-                    child: Text("I agree with SEATUERSIH Terms of Service, Privacy Policy. and default Notification Settings.",
-                      style: GoogleFonts.poppins(
-                        color: Color(0xFF1F1F1F),
-                        fontWeight: FontWeight.w500,
-                        fontSize: 10,
-                      ),),
+                  Expanded(
+                    child: Container(
+                      width: 290,
+                      margin: EdgeInsets.only(left: 8),
+                      child: Text("I agree with SEATUERSIH Terms of Service, Privacy Policy. and default Notification Settings.",
+                        style: GoogleFonts.poppins(
+                          color: Color(0xFF1F1F1F),
+                          fontWeight: FontWeight.w500,
+                          fontSize: 9,
+                        ),),
+                    ),
                   ),
                 ],
               ),
@@ -221,8 +224,8 @@ class Registerpage extends StatelessWidget {
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(30),
                       ),
-                      elevation: 5, // Menentukan elevasi bayangan
-                      shadowColor: Colors.black, // Menentukan warna bayangan
+                      elevation: 5, // elevasi bayangan
+                      shadowColor: Colors.black, // warna bayangan
 
                     ),
                     child: Row(
@@ -233,7 +236,7 @@ class Registerpage extends StatelessWidget {
                           "Sign Up with Google",
                           style: GoogleFonts.poppins(
                             color: Colors.black,
-                            fontWeight: FontWeight.w600,
+                            fontWeight: FontWeight.w500,
                             fontSize: 15,
                           ),
                         ),
@@ -268,7 +271,6 @@ class Registerpage extends StatelessWidget {
                         ),)),
                 ],
               ),
-
 
 
             ],
