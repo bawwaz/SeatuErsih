@@ -7,14 +7,17 @@ class Homebtm extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Center(
-      child: Container(
-        height: 67,
-        width: MediaQuery.sizeOf(context).width * 0.8,
-        decoration: BoxDecoration(
-          color: AppColors.primaryColor,
-          borderRadius: BorderRadius.circular(20),
+      child: Stack(children: [
+        Container(
+          height: 67,
+          width: MediaQuery.sizeOf(context).width * 0.8,
+          decoration: BoxDecoration(
+            color: AppColors.primaryColor,
+            borderRadius: BorderRadius.circular(20),
+          ),
         ),
-      ),
+        
+      ]),
     );
   }
 }

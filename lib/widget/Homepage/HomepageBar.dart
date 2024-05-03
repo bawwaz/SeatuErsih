@@ -20,8 +20,11 @@ class AppbarHome extends StatelessWidget {
             padding: const EdgeInsets.only(left: 25.0),
             child: Image(image: AssetImage('assets/img/icon.png')),
           ),
+          SizedBox(
+            width: MediaQuery.sizeOf(context).width / 1.6,
+          ),
           Padding(
-            padding: const EdgeInsets.only(left: 211.0, top: 4),
+            padding: const EdgeInsets.only(top: 4),
             child: Container(
               height: 48,
               width: 48,

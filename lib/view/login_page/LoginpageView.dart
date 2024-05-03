@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class LoginPage extends StatelessWidget {
@@ -13,15 +14,16 @@ class LoginPage extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Center(child: Padding(
+              Center(
+                  child: Padding(
                 padding: const EdgeInsets.only(top: 30),
                 child: Image.asset("assets/img/icon-app.png"),
               )),
-          
+
               SizedBox(
                 height: 29,
               ),
-          
+
               Row(
                 children: [
                   Text(
@@ -42,7 +44,7 @@ class LoginPage extends StatelessWidget {
                   ),
                 ],
               ),
-          
+
               SizedBox(
                 height: 20,
               ),
@@ -61,14 +63,12 @@ class LoginPage extends StatelessWidget {
                       color: Color(0xFF8A8A8A), // atur warna ikon
                     ),
                     labelStyle: TextStyle(
-                      // color: Color(0xFF8A8A8A), // atur warna teks
-                    ),
+                        // color: Color(0xFF8A8A8A), // atur warna teks
+                        ),
                   ),
-                  style: TextStyle(
-                  ),
+                  style: TextStyle(),
                 ),
               ),
-
 
               SizedBox(
                 height: 20,
@@ -83,8 +83,10 @@ class LoginPage extends StatelessWidget {
                       borderRadius: BorderRadius.circular(15),
                     ),
                     labelText: "Password",
-                    prefixIcon: Icon(Icons.lock,
-                    color: Color(0xFF8A8A8A),),
+                    prefixIcon: Icon(
+                      Icons.lock,
+                      color: Color(0xFF8A8A8A),
+                    ),
                   ),
                 ),
               ),
@@ -92,28 +94,32 @@ class LoginPage extends StatelessWidget {
               // SizedBox(
               //   height: 10,
               // ),
-          
+
               Align(
                 alignment: Alignment.centerRight,
-                child: TextButton(onPressed: () {},
-                    child: Text("Forget Password?",
+                child: TextButton(
+                    onPressed: () {},
+                    child: Text(
+                      "Forget Password?",
                       style: GoogleFonts.poppins(
                         color: Color(0xFF7EC1EB),
                         fontWeight: FontWeight.w600,
                         fontSize: 12,
-                      ),)),
+                      ),
+                    )),
               ),
-          
+
               SizedBox(
                 height: 20,
               ),
-          
+
               Center(
                 child: SizedBox(
                   width: double.infinity,
                   height: 45,
                   child: ElevatedButton(
                       onPressed: () {
+                        Navigator.pushNamed(context, '/home');
                       },
                       style: ElevatedButton.styleFrom(
                           backgroundColor: Color(0xFF7EC1EB),
@@ -128,11 +134,11 @@ class LoginPage extends StatelessWidget {
                       )),
                 ),
               ),
-          
+
               SizedBox(
                 height: 20,
               ),
-          
+
               Row(
                 children: [
                   Expanded(
@@ -144,7 +150,6 @@ class LoginPage extends StatelessWidget {
                       ),
                     ),
                   ),
-          
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 10),
                     child: Text(
@@ -156,7 +161,6 @@ class LoginPage extends StatelessWidget {
                       ),
                     ),
                   ),
-          
                   Expanded(
                     child: Container(
                       width: 99,
@@ -185,7 +189,6 @@ class LoginPage extends StatelessWidget {
                       ),
                       elevation: 5, // Menentukan elevasi bayangan
                       shadowColor: Colors.black, // Menentukan warna bayangan
-
                     ),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -202,8 +205,7 @@ class LoginPage extends StatelessWidget {
                         Container(),
                       ],
                     ),
-                  )
-              ),
+                  )),
 
               SizedBox(
                 height: 20,
@@ -220,19 +222,18 @@ class LoginPage extends StatelessWidget {
                       fontSize: 13,
                     ),
                   ),
-
-                  TextButton(onPressed: () {},
-                      child: Text("Sign Up",
+                  TextButton(
+                      onPressed: () {},
+                      child: Text(
+                        "Sign Up",
                         style: GoogleFonts.poppins(
                           color: Color(0xFF7EC1EB),
                           fontWeight: FontWeight.normal,
                           fontSize: 13,
-                        ),)),
+                        ),
+                      )),
                 ],
               ),
-          
-          
-          
             ],
           ),
         ),
