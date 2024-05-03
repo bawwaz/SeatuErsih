@@ -71,9 +71,11 @@ class HomeBody extends StatelessWidget {
             ]),
           )
         ]),
-        Center(child: Products()),
+        Center(
+          child: Products(),
+        ),
         SizedBox(
-          height: MediaQuery.sizeOf(context).height / 6,
+          height: MediaQuery.sizeOf(context).height * 0.1,
         ),
         Align(
           alignment: Alignment.bottomCenter,
