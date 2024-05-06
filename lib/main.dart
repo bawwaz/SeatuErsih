@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:seatu_ersih/widget/Homepage/HomepageView.dart';
+import 'package:seatu_ersih/view/HomepageView.dart';
 import 'package:seatu_ersih/view/login_page/LoginpageView.dart';
 import 'package:seatu_ersih/view/register_page/RegisterviewPage.dart';
-import 'widget/Homepage/HomepageBar.dart';
 
 void main() {
   runApp(const MyApp());
