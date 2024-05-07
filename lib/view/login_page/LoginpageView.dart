@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:seatu_ersih/widget/Login/Login_Icon.dart';
+import 'package:seatu_ersih/widget/Login/login_Icon.dart';
+import 'package:seatu_ersih/widget/Login/login_forget_password.dart';
+import 'package:seatu_ersih/widget/Login/login_input_password.dart';
+import 'package:seatu_ersih/widget/Login/login_input_username.dart';
+import 'package:seatu_ersih/widget/Login/login_sign.dart';
+import 'package:seatu_ersih/widget/Login/login_sign_google.dart';
 
 class LoginPage extends StatelessWidget {
   const LoginPage({Key? key}) : super(key: key);
@@ -49,22 +53,7 @@ class LoginPage extends StatelessWidget {
               SizedBox(
                 width: double.infinity,
                 height: 53,
-                child: TextField(
-                  decoration: InputDecoration(
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(15),
-                    ),
-                    labelText: "Name",
-                    prefixIcon: Icon(
-                      Icons.person,
-                      color: Color(0xFF8A8A8A), // atur warna ikon
-                    ),
-                    labelStyle: TextStyle(
-                        // color: Color(0xFF8A8A8A), // atur warna teks
-                        ),
-                  ),
-                  style: TextStyle(),
-                ),
+                child: InputUsername()
               ),
 
               SizedBox(
@@ -74,37 +63,11 @@ class LoginPage extends StatelessWidget {
               SizedBox(
                 width: double.infinity,
                 height: 53,
-                child: TextField(
-                  decoration: InputDecoration(
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(15),
-                    ),
-                    labelText: "Password",
-                    prefixIcon: Icon(
-                      Icons.lock,
-                      color: Color(0xFF8A8A8A),
-                    ),
-                  ),
-                ),
-              ),
-
-              // SizedBox(
-              //   height: 10,
-              // ),
+                child: InputPassword()),
 
               Align(
                 alignment: Alignment.centerRight,
-                child: TextButton(
-                    onPressed: () {},
-                    child: Text(
-                      "Forget Password?",
-                      style: GoogleFonts.poppins(
-                        color: Color(0xFF7EC1EB),
-                        fontWeight: FontWeight.w600,
-                        fontSize: 12,
-                      ),
-                    )),
-              ),
+                child: ForgetPassword()),
 
               SizedBox(
                 height: 20,
@@ -114,22 +77,7 @@ class LoginPage extends StatelessWidget {
                 child: SizedBox(
                   width: double.infinity,
                   height: 45,
-                  child: ElevatedButton(
-                      onPressed: () {
-                        Navigator.pushNamed(context, '/home');
-                      },
-                      style: ElevatedButton.styleFrom(
-                          backgroundColor: Color(0xFF7EC1EB),
-                          shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(15))),
-                      child: Text(
-                        "Sign In",
-                        style: GoogleFonts.poppins(
-                          color: Colors.white,
-                          fontWeight: FontWeight.w600,
-                        ),
-                      )),
-                ),
+                  child: SignIn()),
               ),
 
               SizedBox(
@@ -177,32 +125,7 @@ class LoginPage extends StatelessWidget {
               SizedBox(
                   width: double.infinity,
                   height: 53,
-                  child: ElevatedButton(
-                    onPressed: () {},
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: Color(0xFFFFFFFF),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(30),
-                      ),
-                      elevation: 5, // Menentukan elevasi bayangan
-                      shadowColor: Colors.black, // Menentukan warna bayangan
-                    ),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceAround,
-                      children: [
-                        Image.asset("assets/img/google-icon.png"),
-                        Text(
-                          "Sign In with Google",
-                          style: GoogleFonts.poppins(
-                            color: Colors.black,
-                            fontWeight: FontWeight.w500,
-                            fontSize: 15,
-                          ),
-                        ),
-                        Container(),
-                      ],
-                    ),
-                  )),
+                  child: SignInGoogle()),
 
               SizedBox(
                 height: 20,
