@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:seatu_ersih/widget/Login/Login_Icon.dart';
 
 class LoginPage extends StatelessWidget {
   const LoginPage({Key? key}) : super(key: key);
@@ -14,11 +15,7 @@ class LoginPage extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Center(
-                  child: Padding(
-                padding: const EdgeInsets.only(top: 30),
-                child: Image.asset("assets/img/icon-app.png"),
-              )),
+              Center(child: LogoProduct()),
 
               SizedBox(
                 height: 29,
