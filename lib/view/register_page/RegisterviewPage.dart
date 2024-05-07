@@ -4,6 +4,12 @@ import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:seatu_ersih/view/register_page/register_page.controller.dart';
+import 'package:seatu_ersih/widget/Register/register_create_account.dart';
+import 'package:seatu_ersih/widget/Register/register_icon.dart';
+import 'package:seatu_ersih/widget/Register/register_input_email.dart';
+import 'package:seatu_ersih/widget/Register/register_input_password.dart';
+import 'package:seatu_ersih/widget/Register/register_input_username.dart';
+import 'package:seatu_ersih/widget/Register/register_sign_up_google.dart';
 
 class Registerpage extends StatelessWidget {
   const Registerpage({Key? key}) : super(key: key);
@@ -18,10 +24,7 @@ class Registerpage extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Center(child: Padding(
-                padding: const EdgeInsets.only(top: 30),
-                child: Image.asset("assets/img/icon-app.png"),
-              )),
+              Center(child: LogoProductRegist()),
 
               SizedBox(
                 height: 29,
@@ -47,25 +50,7 @@ class Registerpage extends StatelessWidget {
               SizedBox(
                 width: double.infinity,
                 height: 53,
-                child: TextField(
-                  decoration: InputDecoration(
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(15),
-                    ),
-                    labelText: "Name",
-                    prefixIcon: Icon(
-                      Icons.person,
-                      color: Color(0xFF8A8A8A),
-                    ),
-                    labelStyle: TextStyle(
-                      // color: Color(0xFF8A8A8A),
-                    ),
-                  ),
-                  style: TextStyle(
-                  ),
-                ),
-              ),
-
+                child: InputUsernameRegist()),
 
               SizedBox(
                 height: 20,
@@ -74,24 +59,7 @@ class Registerpage extends StatelessWidget {
               SizedBox(
                 width: double.infinity,
                 height: 53,
-                child: TextField(
-                  decoration: InputDecoration(
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(15),
-                    ),
-                    labelText: "Email",
-                    prefixIcon: Icon(
-                      Icons.email,
-                      color: Color(0xFF8A8A8A),
-                    ),
-                    labelStyle: TextStyle(
-                      // color: Color(0xFF8A8A8A),
-                    ),
-                  ),
-                  style: TextStyle(
-                  ),
-                ),
-              ),
+                child: InputEmailRegist()),
 
               SizedBox(
                 height: 20,
@@ -100,17 +68,7 @@ class Registerpage extends StatelessWidget {
               SizedBox(
                 width: double.infinity,
                 height: 53,
-                child: TextField(
-                  decoration: InputDecoration(
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(15),
-                    ),
-                    labelText: "Password",
-                    prefixIcon: Icon(Icons.lock,
-                      color: Color(0xFF8A8A8A),),
-                  ),
-                ),
-              ),
+                child: InputPasswordRegist()),
 
               SizedBox(
                 height: 17,
@@ -153,20 +111,7 @@ class Registerpage extends StatelessWidget {
                 child: SizedBox(
                   width: double.infinity,
                   height: 45,
-                  child: ElevatedButton(
-                      onPressed: () {
-                      },
-                      style: ElevatedButton.styleFrom(
-                          backgroundColor: Color(0xFF7EC1EB),
-                          shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(15))),
-                      child: Text(
-                        "Create account",
-                        style: GoogleFonts.poppins(
-                          color: Colors.white,
-                          fontWeight: FontWeight.w600,
-                        ),
-                      )),
+                  child: CreateAccount(),
                 ),
               ),
 
@@ -185,7 +130,6 @@ class Registerpage extends StatelessWidget {
                       ),
                     ),
                   ),
-
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 10),
                     child: Text(
@@ -197,7 +141,6 @@ class Registerpage extends StatelessWidget {
                       ),
                     ),
                   ),
-
                   Expanded(
                     child: Container(
                       width: 99,
@@ -217,34 +160,7 @@ class Registerpage extends StatelessWidget {
               SizedBox(
                   width: double.infinity,
                   height: 53,
-                  child: ElevatedButton(
-                    onPressed: () {},
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: Color(0xFFFFFFFF),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(30),
-                      ),
-                      elevation: 5,
-                      shadowColor: Colors.black,
-
-                    ),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceAround,
-                      children: [
-                        Image.asset("assets/img/google-icon.png"),
-                        Text(
-                          "Sign Up with Google",
-                          style: GoogleFonts.poppins(
-                            color: Colors.black,
-                            fontWeight: FontWeight.w500,
-                            fontSize: 15,
-                          ),
-                        ),
-                        Container(),
-                      ],
-                    ),
-                  )
-              ),
+                  child: SignUpGoogle()),
 
               SizedBox(
                 height: 20,
@@ -261,7 +177,6 @@ class Registerpage extends StatelessWidget {
                       fontSize: 13,
                     ),
                   ),
-
                   TextButton(onPressed: () {},
                       child: Text("Sign In",
                         style: GoogleFonts.poppins(
