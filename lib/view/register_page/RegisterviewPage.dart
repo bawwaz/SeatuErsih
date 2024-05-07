@@ -55,10 +55,10 @@ class Registerpage extends StatelessWidget {
                     labelText: "Name",
                     prefixIcon: Icon(
                       Icons.person,
-                      color: Color(0xFF8A8A8A), // atur warna ikon
+                      color: Color(0xFF8A8A8A),
                     ),
                     labelStyle: TextStyle(
-                      // color: Color(0xFF8A8A8A), // atur warna teks
+                      // color: Color(0xFF8A8A8A),
                     ),
                   ),
                   style: TextStyle(
@@ -82,10 +82,10 @@ class Registerpage extends StatelessWidget {
                     labelText: "Email",
                     prefixIcon: Icon(
                       Icons.email,
-                      color: Color(0xFF8A8A8A), // atur warna ikon
+                      color: Color(0xFF8A8A8A),
                     ),
                     labelStyle: TextStyle(
-                      // color: Color(0xFF8A8A8A), // atur warna teks
+                      // color: Color(0xFF8A8A8A),
                     ),
                   ),
                   style: TextStyle(
@@ -224,8 +224,8 @@ class Registerpage extends StatelessWidget {
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(30),
                       ),
-                      elevation: 5, // elevasi bayangan
-                      shadowColor: Colors.black, // warna bayangan
+                      elevation: 5,
+                      shadowColor: Colors.black,
 
                     ),
                     child: Row(
@@ -271,8 +271,6 @@ class Registerpage extends StatelessWidget {
                         ),)),
                 ],
               ),
-
-
             ],
           ),
         ),
