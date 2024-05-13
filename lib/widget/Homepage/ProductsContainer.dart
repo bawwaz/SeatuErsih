@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class Products extends StatelessWidget {
@@ -12,12 +13,10 @@ class Products extends StatelessWidget {
         children: [
           Stack(children: [
             Padding(
-              padding: const EdgeInsets.only(
-                top: 70.0,
-              ),
+              padding: const EdgeInsets.only(),
               child: Container(
                 height: 143,
-                width: 143,
+                width: MediaQuery.sizeOf(context).width * 0.41,
                 decoration: BoxDecoration(
                     color: Colors.white,
                     borderRadius: BorderRadius.circular(5),
@@ -32,11 +31,11 @@ class Products extends StatelessWidget {
               ),
             ),
             Padding(
-              padding: EdgeInsets.only(top: 85.0, left: 36),
+              padding: EdgeInsets.only(top: 20.0, left: 30),
               child: Image(image: AssetImage('assets/img/Group 120.png')),
             ),
             Padding(
-              padding: const EdgeInsets.only(top: 170.0, left: 10),
+              padding: const EdgeInsets.only(top: 100.0, left: 10),
               child: Column(
                 crossAxisAlignment:
                     CrossAxisAlignment.start, // Align text to the left
@@ -63,12 +62,10 @@ class Products extends StatelessWidget {
             padding: const EdgeInsets.only(left: 20.0),
             child: Stack(children: [
               Padding(
-                padding: const EdgeInsets.only(
-                  top: 70.0,
-                ),
+                padding: const EdgeInsets.only(),
                 child: Container(
                   height: 143,
-                  width: 143,
+                  width: MediaQuery.sizeOf(context).width * 0.41,
                   decoration: BoxDecoration(
                       color: Colors.white,
                       borderRadius: BorderRadius.circular(5),
@@ -83,12 +80,12 @@ class Products extends StatelessWidget {
                 ),
               ),
               Padding(
-                padding: EdgeInsets.only(top: 94.0, left: 43),
+                padding: EdgeInsets.only(top: 25.0, left: 40),
                 child: Image(image: AssetImage('assets/img/cleaning.png')),
               ),
               Padding(
                 padding: const EdgeInsets.only(
-                  top: 170.0,
+                  top: 100.0,
                 ),
                 child: Padding(
                   padding: const EdgeInsets.only(left: 10.0),

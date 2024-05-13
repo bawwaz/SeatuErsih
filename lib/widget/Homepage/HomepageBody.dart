@@ -1,6 +1,4 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
 import 'package:flutter/widgets.dart';
 import 'package:seatu_ersih/themes/colors.dart';
 import 'package:seatu_ersih/themes/fonts.dart';
@@ -9,21 +7,21 @@ import 'package:seatu_ersih/widget/Homepage/ProductsContainer.dart';
 import 'Homepagebtm.dart';
 
 class HomeBody extends StatelessWidget {
-  const HomeBody({Key? key}) : super(key: key);
+  const HomeBody({Key? key});
 
   @override
   Widget build(BuildContext context) {
     return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Stack(children: [
           Container(
             height: 200,
-            width: MediaQuery.of(context).size.width,
-            decoration: BoxDecoration(color: AppColors.primaryColor),
-          ),
-          Padding(
-            padding: const EdgeInsets.only(left: 27.0, top: 13),
+            width: double.infinity,
+            color: AppColors.primaryColor,
+            padding: const EdgeInsets.symmetric(horizontal: 27, vertical: 13),
             child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
                   'Sepatu Resik',
@@ -32,33 +30,21 @@ class HomeBody extends StatelessWidget {
                 Text(
                   'dadine Apik!',
                   style: Fonts.slogan,
-                )
+                ),
               ],
             ),
           ),
-          Padding(
-            padding: const EdgeInsets.only(top: 92.0),
-            child: Center(
-              child: Stack(children: [
-                banner(),
-              ]),
+          Center(
+            child: Padding(
+              padding: const EdgeInsets.only(top: 100, left: 19.5),
+              child: banner(),
             ),
-          )
-        ]),
-        Center(
-          child: Column(
-            children: [
-              Products(),
-            ],
           ),
-        ),
+        ]),
         SizedBox(
-          height: MediaQuery.sizeOf(context).height * 0.1,
+          height: 30,
         ),
-        Align(
-          alignment: Alignment.bottomCenter,
-          child: Homebtm(),
-        )
+        Products()
       ],
     );
   }

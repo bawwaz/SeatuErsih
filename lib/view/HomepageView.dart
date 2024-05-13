@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:seatu_ersih/themes/colors.dart';
 import 'package:seatu_ersih/widget/Homepage/HomepageBar.dart';
 import 'package:seatu_ersih/widget/Homepage/HomepageBody.dart';
+import 'package:seatu_ersih/routes/routes.dart';
+import 'package:seatu_ersih/widget/Homepage/ProductsContainer.dart';
 
 class HomePage extends StatelessWidget {
-  const HomePage({super.key});
+  const HomePage({Key? key});
 
   @override
   Widget build(BuildContext context) {
@@ -19,27 +22,32 @@ class HomePage extends StatelessWidget {
         actions: [
           Padding(
             padding: const EdgeInsets.only(right: 25.0),
-            child: Stack(children: [
-              Container(
-                height: 48,
-                width: 48,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(30),
-                  color: Color(0xff545454),
+            child: Stack(
+              children: [
+                InkWell(
+                  onTap: () {
+                    Get.toNamed(Routes.profile);
+                  },
+                  child: Container(
+                    height: 48,
+                    width: 48,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(30),
+                      color: Color(0xff545454),
+                    ),
+                  ),
                 ),
-              ),
-              Padding(
-                padding: const EdgeInsets.only(top: 14.0, left: 14),
-                child: Image(image: AssetImage('assets/img/user.png')),
-              )
-            ]),
+                Padding(
+                  padding: const EdgeInsets.only(top: 14.0, left: 14),
+                  child: Image(image: AssetImage('assets/img/user.png')),
+                )
+              ],
+            ),
           ),
         ],
       ),
       body: Column(
-        children: [
-          HomeBody(),
-        ],
+        children: [HomeBody(),],
       ),
     );
   }
