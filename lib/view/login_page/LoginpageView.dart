@@ -20,11 +20,9 @@ class LoginPage extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Center(child: LogoProduct()),
-
               SizedBox(
                 height: 29,
               ),
-
               Row(
                 children: [
                   Text(
@@ -45,45 +43,28 @@ class LoginPage extends StatelessWidget {
                   ),
                 ],
               ),
-
               SizedBox(
                 height: 20,
               ),
-
               SizedBox(
-                width: double.infinity,
-                height: 53,
-                child: InputUsername()
-              ),
-
+                  width: double.infinity, height: 53, child: InputUsername()),
               SizedBox(
                 height: 20,
               ),
-
               SizedBox(
-                width: double.infinity,
-                height: 53,
-                child: InputPassword()),
-
-              Align(
-                alignment: Alignment.centerRight,
-                child: ForgetPassword()),
-
+                  width: double.infinity, height: 53, child: InputPassword()),
+              Align
+              (alignment: Alignment.centerRight, child: ForgetPassword()),
               SizedBox(
                 height: 20,
               ),
-
               Center(
                 child: SizedBox(
-                  width: double.infinity,
-                  height: 45,
-                  child: SignIn()),
+                    width: double.infinity, height: 45, child: SignIn()),
               ),
-
               SizedBox(
                 height: 20,
               ),
-
               Row(
                 children: [
                   Expanded(
@@ -117,20 +98,14 @@ class LoginPage extends StatelessWidget {
                   ),
                 ],
               ),
-
               SizedBox(
                 height: 33,
               ),
-
               SizedBox(
-                  width: double.infinity,
-                  height: 53,
-                  child: SignInGoogle()),
-
+                  width: double.infinity, height: 53, child: SignInGoogle()),
               SizedBox(
                 height: 20,
               ),
-
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
