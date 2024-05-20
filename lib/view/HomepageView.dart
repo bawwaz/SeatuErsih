@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:seatu_ersih/themes/colors.dart';
-import 'package:seatu_ersih/widget/Homepage/HomepageBar.dart';
 import 'package:seatu_ersih/widget/Homepage/HomepageBody.dart';
 import 'package:seatu_ersih/routes/routes.dart';
-import 'package:seatu_ersih/widget/Homepage/ProductsContainer.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({Key? key});
