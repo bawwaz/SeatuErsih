@@ -19,7 +19,9 @@ class ProfilePage extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.only(top: 34),
               child: InkWell(
-                  onTap: () {},
+                  onTap: () {
+                    Get.toNamed(Routes.home);
+                  },
                   child: Image.asset("assets/img/angle-circle-right 1.png")),
             ),
             Padding(
