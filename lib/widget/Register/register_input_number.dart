@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
-class InputUsernameRegist extends StatelessWidget {
-    final Function(String)? onChanged;
-  const InputUsernameRegist({Key? key, this.onChanged}) : super(key: key);
+class Inputnumberregist extends StatelessWidget {
+  final Function(String)? onChanged;
+  const Inputnumberregist({Key? key, this.onChanged}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -12,16 +12,11 @@ class InputUsernameRegist extends StatelessWidget {
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(15),
         ),
-        labelText: "Name",
+        labelText: "Password",
         prefixIcon: Icon(
-          Icons.person,
+          Icons.lock,
           color: Color(0xFF8A8A8A),
         ),
-        labelStyle: TextStyle(
-          // color: Color(0xFF8A8A8A),
-        ),
-      ),
-      style: TextStyle(
       ),
     );
   }

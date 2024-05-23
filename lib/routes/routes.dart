@@ -15,7 +15,7 @@ class Routes {
   static List<GetPage> pages = [
     GetPage(name: home, page: () => HomePage()),
     GetPage(name: login, page: () => LoginPage()),
-    GetPage(name: regis, page: () => Registerpage()),
+    GetPage(name: regis, page: () => RegisterPage()),
     GetPage(name: profile, page: ()=> ProfilePage()),
     GetPage(name: orderbookingdeep, page: ()=> OrderBookingDeepView()),
   ];

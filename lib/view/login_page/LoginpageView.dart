@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:seatu_ersih/controller/loginController.dart';
 import 'package:seatu_ersih/widget/Login/login_Icon.dart';
 import 'package:seatu_ersih/widget/Login/login_forget_password.dart';
 import 'package:seatu_ersih/widget/Login/login_input_password.dart';
@@ -12,6 +14,7 @@ class LoginPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final controller = Get.put(LoginPageController());
     return Scaffold(
       body: Container(
         margin: EdgeInsets.all(28),
@@ -51,7 +54,7 @@ class LoginPage extends StatelessWidget {
               SizedBox(
                 width: double.infinity,
                 height: 53,
-                child: InputUsername(),
+                child: InputUsername(controller: controller),
               ),
               SizedBox(
                 height: 20,
@@ -59,7 +62,7 @@ class LoginPage extends StatelessWidget {
               SizedBox(
                 width: double.infinity,
                 height: 53,
-                child: InputPassword(),
+                child: InputPassword(controller: controller),
               ),
               Align(
                 alignment: Alignment.centerRight,
