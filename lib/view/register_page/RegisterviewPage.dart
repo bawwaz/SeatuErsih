@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:seatu_ersih/controller/registerController.dart';
+import 'package:seatu_ersih/routes/routes.dart';
 import 'package:seatu_ersih/view/register_page/register_page.controller.dart';
 import 'package:seatu_ersih/widget/Register/register_create_account.dart';
 import 'package:seatu_ersih/widget/Register/register_icon.dart';
@@ -183,7 +184,9 @@ class RegisterPage extends StatelessWidget {
                     ),
                   ),
                   TextButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      Get.toNamed(Routes.login);
+                    },
                     child: Text(
                       "Sign In",
                       style: GoogleFonts.poppins(

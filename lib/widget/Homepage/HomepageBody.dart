@@ -43,7 +43,7 @@ class HomeBody extends StatelessWidget {
         SizedBox(
           height: 30,
         ),
-        Products()
+        Center(child: Products())
       ],
     );
   }

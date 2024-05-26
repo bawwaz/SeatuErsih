@@ -14,6 +14,8 @@ dependencies:
   google_fonts: any
   get: any
   http: ^1.2.1
+  shared_preferences: ^2.0.9
+
 
 dev_dependencies:
   flutter_test:
