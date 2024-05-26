@@ -6,7 +6,7 @@ class Login {
 
   Future<void> loginUser(Map<String, String> data) async {
     final url = Uri.parse('$baseUrl/Users/login');
-    
+
     final response = await http.post(url, body: json.encode(data), headers: {
       'Content-Type': 'application/json',
     });

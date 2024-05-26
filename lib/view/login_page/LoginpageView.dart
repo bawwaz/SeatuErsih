@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:seatu_ersih/controller/loginController.dart';
+import 'package:seatu_ersih/routes/routes.dart';
 import 'package:seatu_ersih/widget/Login/login_Icon.dart';
 import 'package:seatu_ersih/widget/Login/login_forget_password.dart';
 import 'package:seatu_ersih/widget/Login/login_input_password.dart';
@@ -137,7 +138,9 @@ class LoginPage extends StatelessWidget {
                     ),
                   ),
                   TextButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        Get.toNamed(Routes.regis);
+                      },
                       child: Text(
                         "Sign Up",
                         style: GoogleFonts.poppins(
