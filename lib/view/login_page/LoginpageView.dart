@@ -11,11 +11,12 @@ import 'package:seatu_ersih/widget/Login/login_sign.dart';
 import 'package:seatu_ersih/widget/Login/login_sign_google.dart';
 
 class LoginPage extends StatelessWidget {
-  const LoginPage({Key? key}) : super(key: key);
+  final LoginPageController controller = Get.put(LoginPageController());
+
+  LoginPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    final controller = Get.put(LoginPageController());
     return Scaffold(
       body: Container(
         margin: EdgeInsets.all(28),
@@ -55,7 +56,9 @@ class LoginPage extends StatelessWidget {
               SizedBox(
                 width: double.infinity,
                 height: 53,
-                child: InputUsername(controller: controller),
+                child: InputUsername(
+                  onChanged: (value) => controller.email.value = value,
+                ),
               ),
               SizedBox(
                 height: 20,
@@ -63,7 +66,9 @@ class LoginPage extends StatelessWidget {
               SizedBox(
                 width: double.infinity,
                 height: 53,
-                child: InputPassword(controller: controller),
+                child: InputPassword(
+                  onChanged: (value) => controller.password.value = value,
+                ),
               ),
               Align(
                 alignment: Alignment.centerRight,

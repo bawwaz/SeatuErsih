@@ -12,9 +12,9 @@ class Inputnumberregist extends StatelessWidget {
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(15),
         ),
-        labelText: "Password",
+        labelText: "Phone number",
         prefixIcon: Icon(
-          Icons.lock,
+          Icons.phone,
           color: Color(0xFF8A8A8A),
         ),
       ),

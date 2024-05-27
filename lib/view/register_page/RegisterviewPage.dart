@@ -67,56 +67,16 @@ class RegisterPage extends StatelessWidget {
                 ),
               ),
               SizedBox(
+                height: 20,
+              ),
+              SizedBox(
                 width: double.infinity,
                 height: 53,
                 child: Inputnumberregist(
                   onChanged: (value) => controller.phone.value = value,
                 ),
               ),
-              Row(
-                children: [
-                  Obx(() => GestureDetector(
-                        onTap: () => controller.checked.value =
-                            !controller.checked.value,
-                        child: Container(
-                          alignment: Alignment.center,
-                          decoration: BoxDecoration(
-                            border:
-                                Border.all(width: 1, color: Color(0xFFC1C1C1)),
-                            borderRadius: BorderRadius.circular(5),
-                            color: controller.checked.value
-                                ? Color(0xFF7EC1EB)
-                                : Colors.transparent,
-                          ),
-                          child: controller.checked.value
-                              ? Icon(
-                                  Icons.check,
-                                  size: 18,
-                                  color: Colors.white,
-                                )
-                              : SizedBox(
-                                  height: 20,
-                                  width: 20,
-                                ),
-                        ),
-                      )),
-                  Expanded(
-                    child: Container(
-                      width: 290,
-                      margin: EdgeInsets.only(left: 8),
-                      child: Text(
-                        "I agree with SEATUERSIH Terms of Service, Privacy Policy. and default Notification Settings.",
-                        style: GoogleFonts.poppins(
-                          color: Color(0xFF1F1F1F),
-                          fontWeight: FontWeight.w500,
-                          fontSize: 9,
-                        ),
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-              SizedBox(height: 49),
+              SizedBox(height: 30),
               Center(
                 child: SizedBox(
                   width: double.infinity,
