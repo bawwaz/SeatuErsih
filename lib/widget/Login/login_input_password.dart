@@ -1,25 +1,18 @@
 import 'package:flutter/material.dart';
-import 'package:seatu_ersih/controller/loginController.dart';
 
 class InputPassword extends StatelessWidget {
-  final LoginPageController controller;
-  const InputPassword({required this.controller});
+  final ValueChanged<String> onChanged;
+
+  InputPassword({required this.onChanged});
 
   @override
   Widget build(BuildContext context) {
     return TextField(
-      onChanged: (value) {
-        controller.password.value = value;
-      },
+      obscureText: true,
+      onChanged: onChanged,
       decoration: InputDecoration(
-        border: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(15),
-        ),
-        labelText: "Password",
-        prefixIcon: Icon(
-          Icons.lock,
-          color: Color(0xFF8A8A8A),
-        ),
+        border: OutlineInputBorder(),
+        labelText: 'Password',
       ),
     );
   }

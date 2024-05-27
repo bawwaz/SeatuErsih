@@ -1,58 +1,78 @@
-import 'package:get/get.dart';
-import 'package:http/http.dart' as http;
 import 'dart:convert';
+import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
+import 'package:http/http.dart' as http;
+import 'package:flutter/material.dart';
 
 class LoginPageController extends GetxController {
-  final String baseUrl = 'http://seatuersih.pradiptaahmad.tech/api';
-  var isLoading = false.obs;
-  var username = ''.obs;
+  // Password Visibility
+  var isObsecure = false.obs;
+
+  // Email and Password
+  var email = ''.obs;
   var password = ''.obs;
 
-  void loginUser() async {
-    isLoading.value = true;
+  // Other
+  GetStorage box = GetStorage();
 
-    final data = {
-      'email': username.value,
+  Future<void> login() async {
+    final url = 'http://seatuersih.pradiptaahmad.tech/api';
+    var data = {
+      'email': email.value,
       'password': password.value,
+    };
+    var headers = {
+      'Accept': 'application/json',
     };
 
     try {
-      final response = await http.post(
-        Uri.parse('$baseUrl/Users/login'),
-        body: json.encode(data),
-        headers: {'Content-Type': 'application/json'},
+      var response = await http.post(
+        Uri.parse("$url/users/login"),
+        headers: headers,
+        body: data,
       );
 
       if (response.statusCode == 200) {
-        // Handle success
-        var responseBody = json.decode(response.body);
-        Get.snackbar('Success', 'User logged in successfully');
-        print('User details: ${responseBody['user']}');
-        print('Token: ${responseBody['token']}');
-        // Navigate to home page
-        Get.offNamed('/home');
+        final token = json.decode(response.body)['token'];
+        final user = json.decode(response.body)['user'];
+        box.write("token", token);
+        Get.snackbar(
+          "Login Successful",
+          "Welcome ${user['username']}",
+          snackPosition: SnackPosition.TOP,
+          backgroundColor: Colors.green,
+        );
       } else {
-        // Handle error
-        var responseBody = json.decode(response.body);
-        print('Failed to log in user: ${response.statusCode}');
-        print('Response body: ${response.body}');
-
-        if (response.statusCode == 400) {
-          Get.snackbar('Error', 'Invalid username or password');
-        } else if (response.statusCode == 401) {
-          Get.snackbar('Error', 'Unauthorized access');
-        } else if (responseBody.containsKey('message')) {
-          Get.snackbar('Error', responseBody['message']);
-        } else {
-          Get.snackbar('Error', 'Failed to log in user');
-        }
+        final message =
+            json.decode(response.body)['message'] ?? 'Unknown error';
+        Get.snackbar(
+          "Login Failed",
+          message,
+          snackPosition: SnackPosition.TOP,
+        );
       }
     } catch (e) {
-      // Handle network error
-      print('Network error: $e');
-      Get.snackbar('Error', 'Failed to log in user');
-    } finally {
-      isLoading.value = false;
+      Get.snackbar(
+        "Login Failed",
+        "An error occurred. Please try again.",
+        snackPosition: SnackPosition.TOP,
+        backgroundColor: Colors.red,
+      );
     }
+  }
+
+  @override
+  void onInit() {
+    super.onInit();
+  }
+
+  @override
+  void onReady() {
+    super.onReady();
+  }
+
+  @override
+  void onClose() {
+    super.onClose();
   }
 }
