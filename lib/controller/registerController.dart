@@ -2,6 +2,7 @@ import 'dart:ffi';
 
 import 'package:get/get.dart';
 import 'package:seatu_ersih/database/seatuersihRegister.dart';
+import 'package:seatu_ersih/routes/routes.dart';
 
 class AuthController extends GetxController {
   final ApiService apiService = ApiService();
@@ -27,6 +28,7 @@ class AuthController extends GetxController {
       await apiService.registerUser(data);
       // Handle success response
       Get.snackbar('Success', 'User registered successfully');
+      Get.offNamed(Routes.home);
     } catch (e) {
       // Handle error
       print('Network error: $e');

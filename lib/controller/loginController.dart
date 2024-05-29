@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
+import 'package:seatu_ersih/routes/routes.dart';
 
 class LoginPageController extends GetxController {
   // Password Visibility
@@ -40,8 +41,8 @@ class LoginPageController extends GetxController {
           "Login Successful",
           "Welcome ${user['username']}",
           snackPosition: SnackPosition.TOP,
-          backgroundColor: Colors.green,
         );
+        Get.offNamed(Routes.home);
       } else {
         final message =
             json.decode(response.body)['message'] ?? 'Unknown error';
@@ -56,7 +57,6 @@ class LoginPageController extends GetxController {
         "Login Failed",
         "An error occurred. Please try again.",
         snackPosition: SnackPosition.TOP,
-        backgroundColor: Colors.red,
       );
     }
   }
