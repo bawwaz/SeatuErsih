@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:seatu_ersih/widget/checkout_Order/Container_checkout1.dart';
 import 'package:seatu_ersih/widget/checkout_Order/checkout_receipt.dart';
+import 'package:seatu_ersih/routes/routes.dart';
 
 class Checkout extends StatelessWidget {
   const Checkout({super.key});
@@ -10,7 +12,12 @@ class Checkout extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         automaticallyImplyLeading: false,
-        title: Image.asset('assets/img/angle-circle-right 1.png'),
+        title: InkWell(
+          onTap: () {
+            Get.toNamed(Routes.orderbookingregular);
+          },
+          child: Image.asset('assets/img/angle-circle-right 1.png'),
+        ),
       ),
       body: Column(
         children: [

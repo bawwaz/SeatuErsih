@@ -20,7 +20,7 @@ class ProfilePage extends StatelessWidget {
               padding: const EdgeInsets.only(top: 34),
               child: InkWell(
                   onTap: () {
-                    Get.toNamed(Routes.home);
+                    Get.toNamed(Routes.btmnavbar);
                   },
                   child: Image.asset("assets/img/angle-circle-right 1.png")),
             ),
