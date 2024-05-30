@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:seatu_ersih/themes/colors.dart';
 
 class Fonts {
   static TextStyle slogan = GoogleFonts.poppins(
@@ -12,6 +13,12 @@ class Fonts {
     fontSize: 22,
     fontWeight: FontWeight.w900,
     color: Colors.white,
+  );
+
+  static TextStyle header1blu = GoogleFonts.poppins(
+    fontSize: 20,
+    fontWeight: FontWeight.bold,
+    color: AppColors.primaryColor,
   );
 
   static TextStyle header2 = GoogleFonts.poppins(
