@@ -12,53 +12,59 @@ class Products extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Container(
-            height: 143,
-            width: MediaQuery.sizeOf(context).width * 0.41,
-            decoration: BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.circular(5),
-                boxShadow: [
-                  BoxShadow(
-                    color: Color(0x26000000),
-                    blurRadius: 2,
-                    offset: Offset(0, 0),
-                    spreadRadius: 1,
+          InkWell(
+            onTap: () {
+              Get.toNamed(Routes.orderbookingregular);
+            },
+            child: Container(
+              height: 143,
+              width: MediaQuery.sizeOf(context).width * 0.41,
+              decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(5),
+                  boxShadow: [
+                    BoxShadow(
+                      color: Color(0x26000000),
+                      blurRadius: 2,
+                      offset: Offset(0, 0),
+                      spreadRadius: 1,
+                    ),
+                  ]),
+              child: Column(
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.only(top: 15.0),
+                    child: Image.asset('assets/img/Group 120.png'),
                   ),
-                ]),
-            child: Column(
-              children: [
-                Padding(
-                  padding: const EdgeInsets.only(top: 15.0),
-                  child: Image.asset('assets/img/Group 120.png'),
-                ),
-                Expanded(
-                  child: Align(
-                    alignment: Alignment.bottomLeft,
-                    child: Padding(
-                      padding: const EdgeInsets.only(left: 10.0, bottom: 13.0),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          Text(
-                            'Regular Clean',
-                            style: GoogleFonts.poppins(
-                                fontWeight: FontWeight.bold),
-                          ),
-                          Text(
-                            '25K',
-                            style: GoogleFonts.poppins(
-                                fontWeight: FontWeight.bold,
-                                color: Color(0xff6C6C6C),
-                                fontSize: 10),
-                          ),
-                        ],
+                  Expanded(
+                    child: Align(
+                      alignment: Alignment.bottomLeft,
+                      child: Padding(
+                        padding:
+                            const EdgeInsets.only(left: 10.0, bottom: 13.0),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            Text(
+                              'Regular Clean',
+                              style: GoogleFonts.poppins(
+                                  fontWeight: FontWeight.bold),
+                            ),
+                            Text(
+                              '25K',
+                              style: GoogleFonts.poppins(
+                                  fontWeight: FontWeight.bold,
+                                  color: Color(0xff6C6C6C),
+                                  fontSize: 10),
+                            ),
+                          ],
+                        ),
                       ),
                     ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
           ),
           Padding(

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:seatu_ersih/view/HomepageView.dart';
+import 'package:seatu_ersih/routes/navbar.dart';
+import 'package:seatu_ersih/view/Home_Page/HomepageView.dart';
 import 'package:seatu_ersih/view/register_page/RegisterviewPage.dart';
 import 'routes/routes.dart';
 
@@ -16,13 +17,13 @@ class MyApp extends StatelessWidget {
     return GetMaterialApp(
       title: 'Flutter Demo',
       debugShowCheckedModeBanner: false,
-      initialRoute: Routes.login,
+      initialRoute: Routes.checkout,
       getPages: Routes.pages,
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home: HomePage(),
+      home: BottomNavBar(),
     );
   }
 }

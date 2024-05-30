@@ -5,7 +5,7 @@ import 'package:seatu_ersih/widget/Homepage/HomepageBody.dart';
 import 'package:seatu_ersih/routes/routes.dart';
 
 class HomePage extends StatelessWidget {
-  const HomePage({Key? key});
+  const HomePage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -38,14 +38,14 @@ class HomePage extends StatelessWidget {
                 Padding(
                   padding: const EdgeInsets.only(top: 14.0, left: 14),
                   child: Image(image: AssetImage('assets/img/user.png')),
-                )
+                ),
               ],
             ),
           ),
         ],
       ),
-      body: Column(
-        children: [HomeBody(),],
+      body: SafeArea(
+        child: HomeBody(),
       ),
     );
   }

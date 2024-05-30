@@ -19,4 +19,28 @@ class Fonts {
     fontWeight: FontWeight.w200,
     color: Colors.white,
   );
+
+  static TextStyle headerBlack = GoogleFonts.poppins(
+    fontSize: 22,
+    fontWeight: FontWeight.bold,
+    color: Colors.black,
+  );
+
+  static TextStyle detailBold = GoogleFonts.poppins(
+    fontSize: 12,
+    fontWeight: FontWeight.bold,
+    color: Colors.black,
+  );
+
+  static TextStyle detail = GoogleFonts.poppins(
+    fontSize: 12,
+    fontWeight: FontWeight.normal,
+    color: Color(0xff6C6C6C),
+  );
+
+  static TextStyle checkout = GoogleFonts.poppins(
+    fontSize: 16,
+    fontWeight: FontWeight.bold,
+    color: Colors.white,
+  );
 }
