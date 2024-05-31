@@ -20,8 +20,7 @@ class ChoiceSepatu extends StatelessWidget {
               borderRadius: BorderRadius.circular(5),
               boxShadow: [
                 BoxShadow(
-                  color:
-                      Colors.black.withOpacity(0.1),
+                  color: Colors.black.withOpacity(0.1),
                   spreadRadius: 1.2,
                   blurRadius: 1,
                 ),
@@ -41,31 +40,6 @@ class ChoiceSepatu extends StatelessWidget {
         ),
         SizedBox(
           width: 7,
-        ),
-        Container(
-          width: 95,
-          height: 23,
-          decoration: BoxDecoration(
-            color: Color(0xFF838383),
-            borderRadius: BorderRadius.circular(5),
-            boxShadow: [
-              BoxShadow(
-                color: Colors.black.withOpacity(0.1),
-                spreadRadius: 1.2,
-                blurRadius: 1,
-              ),
-            ],
-          ),
-          child: Center(
-            child: Text(
-              "Nike Pro 1’s",
-              style: GoogleFonts.poppins(
-                color: Color(0xFFFFFFFF),
-                fontWeight: FontWeight.w500,
-                fontSize: 10,
-              ),
-            ),
-          ),
         ),
       ],
     );

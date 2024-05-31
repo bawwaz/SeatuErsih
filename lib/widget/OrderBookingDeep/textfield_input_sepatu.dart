@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:seatu_ersih/themes/colors.dart';
 
 class TextfieldInputSepatu extends StatelessWidget {
   const TextfieldInputSepatu({
@@ -27,24 +28,40 @@ class TextfieldInputSepatu extends StatelessWidget {
         SizedBox(
           width: 9,
         ),
-        Container(
-          width: 25,
-          height: 25,
-          decoration: BoxDecoration(
-            color: Color(0xFF7EC1EB),
-            borderRadius: BorderRadius.circular(5),
-            boxShadow: [
-              BoxShadow(
-                color: Colors.black.withOpacity(0.1),
-                spreadRadius: 1.2,
-                blurRadius: 1,
-              ),
-            ],
-          ),
-          child: Icon(
-            Icons.check,
-            color: Colors.white,
-            size: 18,
+        InkWell(
+          onTap: () {
+            showModalBottomSheet(
+              context: context,
+              builder: (BuildContext context) {
+                return Container(
+                  height: 350,
+                  width: MediaQuery.sizeOf(context).width,
+                  decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(10)),
+                );
+              },
+            );
+          },
+          child: Container(
+            width: 25,
+            height: 25,
+            decoration: BoxDecoration(
+              color: AppColors.primaryColor,
+              borderRadius: BorderRadius.circular(5),
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.black.withOpacity(0.1),
+                  spreadRadius: 1.2,
+                  blurRadius: 1,
+                ),
+              ],
+            ),
+            child: Icon(
+              Icons.check,
+              color: Colors.white,
+              size: 18,
+            ),
           ),
         ),
       ],
