@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:seatu_ersih/themes/colors.dart';
+import 'package:seatu_ersih/view/order_booking_regular/order_booking_regular_controller.dart';
+import 'package:seatu_ersih/widget/OrderBookingDeep/add_ons.dart';
 
 class TextfieldInputSepatu extends StatelessWidget {
   const TextfieldInputSepatu({
@@ -29,19 +32,16 @@ class TextfieldInputSepatu extends StatelessWidget {
           width: 9,
         ),
         InkWell(
-          onTap: () {
-            showModalBottomSheet(
-              context: context,
-              builder: (BuildContext context) {
-                return Container(
-                  height: 350,
-                  width: MediaQuery.sizeOf(context).width,
-                  decoration: BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.circular(10)),
-                );
-              },
-            );
+          onTap: () async {
+            await Get.bottomSheet(Container(
+                height: 300,
+                decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(10),
+                    color: Colors.white),
+                child: Padding(
+                  padding: const EdgeInsets.only(top: 10.0),
+                  child: AddOns(controller: OrderBookingRegularController()),
+                ))).then((value) => null);
           },
           child: Container(
             width: 25,
