@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:seatu_ersih/routes/navbar.dart';
-import 'package:seatu_ersih/themes/colors.dart';
 import 'routes/routes.dart';
+import 'package:seatu_ersih/themes/colors.dart';
 
-void main() {
+void main() async {
   runApp(const MyApp());
 }
 

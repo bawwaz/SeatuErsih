@@ -108,16 +108,8 @@ class OrderBookingRegularView extends StatelessWidget {
                               Padding(
                                 padding:
                                     const EdgeInsets.only(left: 27, top: 11),
-                                child: Text(
-                                  "Add-Ons",
-                                  style: GoogleFonts.poppins(
-                                    color: Color(0xFF000000),
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 12,
-                                  ),
-                                ),
                               ),
-                              AddOns(controller: controller),
+                              // AddOns(controller: controller),
                               Center(
                                 child: Padding(
                                   padding: const EdgeInsets.only(top: 10),

@@ -413,17 +413,22 @@ class OrderBookingDeepView extends StatelessWidget {
                 padding: const EdgeInsets.only(top: 20),
                 child: Align(
                   alignment: Alignment.centerRight,
-                  child: Container(
-                    width: 68,
-                    height: 29,
-                    decoration: BoxDecoration(
-                      color: Color(0xFF7EC1EB),
-                      borderRadius: BorderRadius.circular(5),
-                    ),
-                    child: Center(
-                      child: Icon(
-                        Icons.east,
-                        color: Colors.white,
+                  child: InkWell(
+                    onTap: () {
+                      Get.offNamed(Routes.checkoutanimation);
+                    },
+                    child: Container(
+                      width: 68,
+                      height: 29,
+                      decoration: BoxDecoration(
+                        color: Color(0xFF7EC1EB),
+                        borderRadius: BorderRadius.circular(5),
+                      ),
+                      child: Center(
+                        child: Icon(
+                          Icons.east,
+                          color: Colors.white,
+                        ),
                       ),
                     ),
                   ),

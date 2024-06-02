@@ -26,36 +26,23 @@ class AddOns extends StatelessWidget {
         physics: NeverScrollableScrollPhysics(),
         itemBuilder: (context, index) {
           return Container(
-            padding:
-                EdgeInsets.only(top: 5, left: 27),
+            padding: EdgeInsets.only(top: 5, left: 27),
             child: Row(
-              crossAxisAlignment:
-                  CrossAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Obx(
                   () => GestureDetector(
-                    onTap: () => controller
-                        .checkedkotoll[index]
-                        .toggle(),
+                    onTap: () => controller.checkedkotoll[index].toggle(),
                     child: Container(
                       alignment: Alignment.center,
                       decoration: BoxDecoration(
-                          border: Border.all(
-                              width: 1,
-                              color:
-                                  Color(0xFFC1C1C1)),
-                          borderRadius:
-                              BorderRadius.circular(
-                                  5),
-                          color: controller
-                                  .checkedkotoll[
-                                      index]
-                                  .value
+                          border:
+                              Border.all(width: 1, color: Color(0xFFC1C1C1)),
+                          borderRadius: BorderRadius.circular(5),
+                          color: controller.checkedkotoll[index].value
                               ? Color(0xFF7EC1EB)
                               : Colors.transparent),
-                      child: controller
-                              .checkedkotoll[index]
-                              .value
+                      child: controller.checkedkotoll[index].value
                           ? Icon(
                               Icons.check,
                               size: 15,
