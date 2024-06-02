@@ -1,6 +1,6 @@
 # seatu_ersih
 
-A new Flutter project.
+Official Code for SEATU ERSIH BUSINESS
 
 ## Getting Started
 
