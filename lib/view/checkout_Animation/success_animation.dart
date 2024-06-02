@@ -7,6 +7,7 @@ class animationcheckout extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white,
       body: ListView(
         children: [
           Lottie.asset('assets/img/success.json')

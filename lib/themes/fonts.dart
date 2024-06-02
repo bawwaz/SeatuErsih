@@ -45,6 +45,11 @@ class Fonts {
     color: Color(0xff6C6C6C),
   );
 
+  static TextStyle desc = GoogleFonts.poppins(
+    fontSize: 18,
+    fontWeight: FontWeight.normal,
+    color: Colors.black,
+  );
   static TextStyle checkout = GoogleFonts.poppins(
     fontSize: 16,
     fontWeight: FontWeight.bold,

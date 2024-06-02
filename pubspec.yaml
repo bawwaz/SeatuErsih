@@ -16,8 +16,8 @@ dependencies:
   http: ^1.2.1
   shared_preferences: ^2.0.9
   get_storage: ^2.1.1
-  firebase_core: 
   lottie: ^3.1.2
+  
 
 
 dev_dependencies:
