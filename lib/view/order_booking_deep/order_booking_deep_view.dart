@@ -75,8 +75,16 @@ class OrderBookingDeepView extends StatelessWidget {
                                     height: 35,
                                     child: Padding(
                                       padding: const EdgeInsets.only(left: 27),
-                                      child: TextField(
+                                      child: TextFormField(
+                                        validator: (value) {
+                                          if (value == null || value.isEmpty) {
+                                            return 'Please enter some text';
+                                          }
+                                          return null;
+                                        },
                                         decoration: InputDecoration(
+                                          contentPadding: EdgeInsets.symmetric(
+                                              horizontal: 5, vertical: 5),
                                           border: OutlineInputBorder(
                                             borderRadius:
                                                 BorderRadius.circular(5),
@@ -117,7 +125,7 @@ class OrderBookingDeepView extends StatelessWidget {
                                 children: [
                                   Padding(
                                     padding: const EdgeInsets.only(left: 27),
-                                    child: Container(
+                                    child: Container( 
                                       width: 95,
                                       height: 23,
                                       decoration: BoxDecoration(

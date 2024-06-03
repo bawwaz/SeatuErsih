@@ -5,7 +5,11 @@ import 'package:seatu_ersih/view/order_booking_regular/order_booking_regular_con
 import 'package:seatu_ersih/widget/OrderBookingDeep/add_ons.dart';
 
 class TextfieldInputSepatu extends StatelessWidget {
+  final Function()? onTap;
+  final Function(String)? onChanged;
   const TextfieldInputSepatu({
+    this.onChanged,
+    this.onTap,
     super.key,
   });
 
@@ -19,6 +23,7 @@ class TextfieldInputSepatu extends StatelessWidget {
           child: Padding(
             padding: const EdgeInsets.only(left: 27),
             child: TextField(
+              onChanged: onChanged,
               decoration: InputDecoration(
                 contentPadding: EdgeInsets.only(bottom: 5, left: 5),
                 border: OutlineInputBorder(
@@ -32,17 +37,7 @@ class TextfieldInputSepatu extends StatelessWidget {
           width: 9,
         ),
         InkWell(
-          onTap: () async {
-            await Get.bottomSheet(Container(
-                height: 300,
-                decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(10),
-                    color: Colors.white),
-                child: Padding(
-                  padding: const EdgeInsets.only(top: 10.0),
-                  child: AddOns(controller: OrderBookingRegularController()),
-                ))).then((value) => null);
-          },
+          onTap: onTap,
           child: Container(
             width: 25,
             height: 25,
