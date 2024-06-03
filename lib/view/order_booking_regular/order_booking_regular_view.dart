@@ -75,11 +75,44 @@ class OrderBookingRegularView extends StatelessWidget {
                               SizedBox(
                                 height: 7,
                               ),
-                              TextfieldInputSepatu(),
+                              TextfieldInputSepatu(
+                                onTap: () {
+                                  controller.addShoes(
+                                      controller.shoesName.value,
+                                      "Jahit, De-Yellowing, Repairation,",
+                                      "1");
+                                },
+                              ),
                               SizedBox(
                                 height: 15,
                               ),
-                              ChoiceSepatu(),
+                              Obx(() => controller.shoes.length == 0
+                                  ? Center(
+                                      child: Text(
+                                        "Tambah Sepatu",
+                                        style: GoogleFonts.poppins(
+                                          color: Color(0xFF000000),
+                                          fontWeight: FontWeight.bold,
+                                          fontSize: 12,
+                                        ),
+                                      ),
+                                    )
+                                  : Container(
+                                      width: 100,
+                                      height: 100,
+                                      child: ListView.builder(
+                                        itemCount: controller.shoes.length,
+                                        shrinkWrap: true,
+                                        scrollDirection: Axis.horizontal,
+                                        itemBuilder: (context, index) {
+                                          Map<String, dynamic> shoe =
+                                              controller.shoes[index];
+                                          return ChoiceSepatu(
+                                            name: shoe['name'],
+                                          );
+                                        },
+                                      ),
+                                    )),
                               Center(
                                 child: Padding(
                                   padding: const EdgeInsets.only(top: 10),

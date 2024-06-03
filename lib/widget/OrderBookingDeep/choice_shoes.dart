@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class ChoiceSepatu extends StatelessWidget {
+  final String name;
   const ChoiceSepatu({
+    required this.name, 
     super.key,
   });
 
@@ -28,7 +30,7 @@ class ChoiceSepatu extends StatelessWidget {
             ),
             child: Center(
               child: Text(
-                "Adidas samba",
+                name,
                 style: GoogleFonts.poppins(
                   color: Color(0xFFFFFFFF),
                   fontWeight: FontWeight.w500,
