@@ -5,8 +5,21 @@ import 'package:seatu_ersih/themes/fonts.dart';
 import 'package:seatu_ersih/widget/order_detail.dart/order_detailAsset.dart';
 import 'package:seatu_ersih/widget/order_detail.dart/order_detailTextDesc.dart';
 
-class DetailBody extends StatelessWidget {
+class DetailBody extends StatefulWidget {
   const DetailBody({super.key});
+
+  @override
+  _DetailBodyState createState() => _DetailBodyState();
+}
+
+class _DetailBodyState extends State<DetailBody> {
+  bool _isExpanded = false;
+
+  void _toggleExpansion() {
+    setState(() {
+      _isExpanded = !_isExpanded;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -19,27 +32,25 @@ class DetailBody extends StatelessWidget {
               height: 163,
               width: 163,
               decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(100),
-                  color: Colors.white,
-                  boxShadow: [
-                    BoxShadow(
-                        color: Color(0xff000000),
-                        blurRadius: 0.5,
-                        offset: Offset(0, 0))
-                  ]),
+                borderRadius: BorderRadius.circular(100),
+                color: Colors.white,
+                boxShadow: [
+                  BoxShadow(
+                    color: Color(0xff000000),
+                    blurRadius: 0.5,
+                    offset: Offset(0, 0),
+                  ),
+                ],
+              ),
               child: Center(
                 child: Image.asset(
                   'assets/img/Group 120.png',
                 ),
               ),
             ),
-            SizedBox(
-              height: 28,
-            ),
+            SizedBox(height: 28),
             Desc(),
-            SizedBox(
-              height: 25,
-            ),
+            SizedBox(height: 25),
             Padding(
               padding: const EdgeInsets.only(left: 61.0),
               child: assetOrderDetail(),
@@ -50,50 +61,52 @@ class DetailBody extends StatelessWidget {
           left: 0,
           right: 0,
           bottom: 0,
-          child: ClipRRect(
-            borderRadius: BorderRadius.only(
-              topLeft: Radius.circular(25.0),
-              topRight: Radius.circular(25.0),
-            ),
-            child: Container(
-              color: AppColors.primaryColor,
-              height: 60, // Adjust the height if needed
-              alignment: Alignment.center,
-              child: Text(
-                'Order Detail',
-                style: GoogleFonts.poppins(
-                  color: Colors.white,
-                  fontWeight: FontWeight.bold,
-                  fontSize: 20,
-                ),
-                textAlign: TextAlign.center,
+          child: GestureDetector(
+            onTap: _toggleExpansion,
+            child: ClipRRect(
+              borderRadius: BorderRadius.only(
+                topLeft: Radius.circular(25.0),
+                topRight: Radius.circular(25.0),
               ),
-            ),
-          ),
-        ),
-        Positioned(
-          left: 0,
-          right: 0,
-          bottom: 70, // Adjust this value as needed
-          child: Center(
-            child: Container(
-              height: 50, // Adjust as needed
-              width: 50, // Adjust as needed
-              decoration: BoxDecoration(
-                color: Colors.white,
-                shape: BoxShape.circle,
-                boxShadow: [
-                  BoxShadow(
-                    color: Colors.black26,
-                    blurRadius: 4.0,
-                    offset: Offset(0, 2),
-                  ),
-                ],
-              ),
-              child: Icon(
-                Icons.arrow_upward,
-                size: 30.0,
+              child: AnimatedContainer(
+                duration: Duration(milliseconds: 300),
+                height: _isExpanded ? 250 : 90, // Adjust height as needed
                 color: AppColors.primaryColor,
+                alignment: Alignment.center,
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Icon(
+                      _isExpanded
+                          ? Icons.arrow_downward_rounded
+                          : Icons.arrow_upward_rounded,
+                      size: 30.0,
+                      color: Colors.white,
+                    ),
+                    Text(
+                      'Order Detail',
+                      style: GoogleFonts.poppins(
+                        color: Colors.white,
+                        fontWeight: FontWeight.bold,
+                        fontSize: 20,
+                      ),
+                      textAlign: TextAlign.center,
+                    ),
+                    if (_isExpanded)
+                      Expanded(
+                        child: Center(
+                          child: Text(
+                            'Additional details go here',
+                            style: GoogleFonts.poppins(
+                              color: Colors.white,
+                              fontSize: 16.0,
+                            ),
+                            textAlign: TextAlign.center,
+                          ),
+                        ),
+                      ),
+                  ],
+                ),
               ),
             ),
           ),

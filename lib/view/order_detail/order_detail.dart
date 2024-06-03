@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:seatu_ersih/routes/routes.dart';
 import 'package:seatu_ersih/widget/order_detail.dart/order_detailBody.dart';
 
 class status extends StatelessWidget {
@@ -8,8 +10,7 @@ class status extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        automaticallyImplyLeading: false,
-        title: Image.asset('assets/img/angle-circle-right 1.png'),
+        automaticallyImplyLeading: true,
       ),
       body: Center(child: (DetailBody())),
     );
