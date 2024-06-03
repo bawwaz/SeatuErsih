@@ -37,12 +37,13 @@ class LoginPageController extends GetxController {
         final token = json.decode(response.body)['token'];
         final user = json.decode(response.body)['user'];
         box.write("token", token);
+        box.write("username", user['username']); // Save the username
         Get.snackbar(
           "Login Successful",
           "Welcome ${user['username']}",
           snackPosition: SnackPosition.TOP,
         );
-        Get.offNamed(Routes.home);
+        Get.offNamed(Routes.btmnavbar);
       } else {
         final message =
             json.decode(response.body)['message'] ?? 'Unknown error';

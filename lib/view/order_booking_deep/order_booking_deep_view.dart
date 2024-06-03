@@ -415,7 +415,7 @@ class OrderBookingDeepView extends StatelessWidget {
                   alignment: Alignment.centerRight,
                   child: InkWell(
                     onTap: () {
-                      Get.offNamed(Routes.checkoutanimation);
+                      Get.offNamed(Routes.checkout);
                     },
                     child: Container(
                       width: 68,

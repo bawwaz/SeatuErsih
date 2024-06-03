@@ -37,6 +37,7 @@ class Routes {
     GetPage(name: checkout, page: () => Checkout()),
     GetPage(name: btmnavbar, page: () => BottomNavBar()),
     GetPage(name: statusorder, page: () => status()),
-    GetPage(name: checkoutanimation, page: () => animationcheckout()),
+    GetPage(name: checkoutanimation, page: () => animationCheckout()),
+    
   ];
 }

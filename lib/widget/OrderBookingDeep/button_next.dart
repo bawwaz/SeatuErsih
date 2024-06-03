@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:seatu_ersih/routes/routes.dart';
+import 'package:seatu_ersih/widget/checkout_Order/Container_checkout1.dart';
 
 class ButtonNext extends StatelessWidget {
   const ButtonNext({
@@ -12,7 +15,9 @@ class ButtonNext extends StatelessWidget {
       child: Align(
         alignment: Alignment.centerRight,
         child: InkWell(
-          onTap: () {},
+          onTap: () {
+            Get.toNamed(Routes.checkout);
+          },
           child: Container(
             width: 68,
             height: 29,

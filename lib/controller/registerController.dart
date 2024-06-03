@@ -28,7 +28,7 @@ class AuthController extends GetxController {
       await apiService.registerUser(data);
       // Handle success response
       Get.snackbar('Success', 'User registered successfully');
-      Get.offNamed(Routes.home);
+      Get.offNamed(Routes.btmnavbar);
     } catch (e) {
       // Handle error
       print('Network error: $e');
