@@ -1,6 +1,7 @@
 import 'package:get/get.dart';
 import 'package:seatu_ersih/routes/navbar.dart';
 import 'package:seatu_ersih/view/Home_Page/HomepageView.dart';
+import 'package:seatu_ersih/view/add_address_page/add_address_view.dart';
 import 'package:seatu_ersih/view/checkout_Animation/success_animation.dart';
 import 'package:seatu_ersih/view/checkout_Order/checkout_order_view.dart';
 import 'package:seatu_ersih/view/login_page/LoginpageView.dart';
@@ -25,6 +26,7 @@ class Routes {
   static String orders = '/myorder';
   static String statusorder = '/status';
   static String checkoutanimation = '/checkoutsuccess';
+  static String addadress = '/addaddress';
 
   static List<GetPage> pages = [
     GetPage(name: orders, page: () => myorder()),
@@ -38,6 +40,6 @@ class Routes {
     GetPage(name: btmnavbar, page: () => BottomNavBar()),
     GetPage(name: statusorder, page: () => status()),
     GetPage(name: checkoutanimation, page: () => animationCheckout()),
-    
+    GetPage(name: addadress, page: () => AddAddressView()),
   ];
 }
