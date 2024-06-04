@@ -12,6 +12,7 @@ import 'package:seatu_ersih/view/orderstatus/order_status.dart';
 import 'package:seatu_ersih/view/profile_page/profileView.dart';
 import 'package:seatu_ersih/view/register_page/RegisterviewPage.dart';
 import 'package:flutter/animation.dart';
+import 'package:seatu_ersih/view/saved_address_page/saved_address_view.dart';
 import 'package:seatu_ersih/widget/checkout_Order/order_detail.dart';
 
 class Routes {
@@ -27,6 +28,7 @@ class Routes {
   static String statusorder = '/status';
   static String checkoutanimation = '/checkoutsuccess';
   static String addadress = '/addaddress';
+  static String savedaddress = '/savedaddress';
 
   static List<GetPage> pages = [
     GetPage(name: orders, page: () => myorder()),
@@ -41,5 +43,6 @@ class Routes {
     GetPage(name: statusorder, page: () => status()),
     GetPage(name: checkoutanimation, page: () => animationCheckout()),
     GetPage(name: addadress, page: () => AddAddressView()),
+    GetPage(name: savedaddress, page: () => SavedAddressView()),
   ];
 }
