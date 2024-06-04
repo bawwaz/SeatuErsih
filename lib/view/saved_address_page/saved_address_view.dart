@@ -7,6 +7,27 @@ class SavedAddressView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      floatingActionButtonLocation: FloatingActionButtonLocation.endDocked,
+      floatingActionButton: InkWell(
+        onTap: () {},
+        child: Padding(
+          padding: const EdgeInsets.only(bottom: 30),
+          child: Container(
+            width: 68,
+            height: 29,
+            decoration: BoxDecoration(
+              color: Color(0xFF7EC1EB),
+              borderRadius: BorderRadius.circular(5),
+            ),
+            child: Center(
+              child: Icon(
+                Icons.east,
+                color: Colors.white,
+              ),
+            ),
+          ),
+        ),
+      ),
       backgroundColor: Color(0xFFFFFFFF),
       body: SingleChildScrollView(
         child: Column(
