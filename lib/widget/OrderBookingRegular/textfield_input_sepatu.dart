@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:seatu_ersih/themes/colors.dart';
 import 'package:seatu_ersih/view/order_booking_regular/order_booking_regular_controller.dart';
-import 'package:seatu_ersih/widget/OrderBookingDeep/add_ons.dart';
+import 'package:seatu_ersih/widget/OrderBookingRegular/add_ons.dart';
 
 class TextfieldInputSepatu extends StatelessWidget {
   final Function()? onTap;
