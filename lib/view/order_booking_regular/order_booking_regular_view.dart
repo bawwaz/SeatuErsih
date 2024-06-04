@@ -5,13 +5,13 @@ import 'package:get/get_core/src/get_main.dart';
 import 'package:get/get_state_manager/src/rx_flutter/rx_obx_widget.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:seatu_ersih/view/order_booking_regular/order_booking_regular_controller.dart';
-import 'package:seatu_ersih/widget/OrderBookingDeep/add_ons.dart';
-import 'package:seatu_ersih/widget/OrderBookingDeep/address.dart';
-import 'package:seatu_ersih/widget/OrderBookingDeep/button_next.dart';
-import 'package:seatu_ersih/widget/OrderBookingDeep/choice_shoes.dart';
-import 'package:seatu_ersih/widget/OrderBookingDeep/input_item_pickup.dart';
-import 'package:seatu_ersih/widget/OrderBookingDeep/input_note.dart';
-import 'package:seatu_ersih/widget/OrderBookingDeep/textfield_input_sepatu.dart';
+import 'package:seatu_ersih/widget/OrderBookingRegular/add_ons.dart';
+import 'package:seatu_ersih/widget/OrderBookingRegular/address.dart';
+import 'package:seatu_ersih/widget/OrderBookingRegular/button_next.dart';
+import 'package:seatu_ersih/widget/OrderBookingRegular/choice_shoes.dart';
+import 'package:seatu_ersih/widget/OrderBookingRegular/input_item_pickup.dart';
+import 'package:seatu_ersih/widget/OrderBookingRegular/input_note.dart';
+import 'package:seatu_ersih/widget/OrderBookingRegular/input_sepatu.dart';
 
 class OrderBookingRegularView extends StatelessWidget {
   const OrderBookingRegularView({super.key});
