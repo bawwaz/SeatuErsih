@@ -1,16 +1,12 @@
-import 'dart:ffi';
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:seatu_ersih/app/pages/intial_pages/register_page/registerController.dart';
-import 'package:seatu_ersih/app/pages/intial_pages/register_page/widget/register_create_account.dart';
 import 'package:seatu_ersih/app/pages/intial_pages/register_page/widget/register_icon.dart';
 import 'package:seatu_ersih/app/pages/intial_pages/register_page/widget/register_input_email.dart';
 import 'package:seatu_ersih/app/pages/intial_pages/register_page/widget/register_input_number.dart';
 import 'package:seatu_ersih/app/pages/intial_pages/register_page/widget/register_input_password.dart';
 import 'package:seatu_ersih/app/pages/intial_pages/register_page/widget/register_input_username.dart';
-import 'package:seatu_ersih/app/api/database/seatuersihRegister.dart';
 import 'package:seatu_ersih/app/pages/intial_pages/register_page/widget/register_sign_up_google.dart';
 import 'package:seatu_ersih/app/router/app_pages.dart';
 

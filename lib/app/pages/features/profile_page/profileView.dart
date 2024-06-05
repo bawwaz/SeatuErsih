@@ -4,13 +4,11 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:seatu_ersih/app/router/app_pages.dart';
 import 'profileController.dart';
 
-class ProfilePage extends StatelessWidget {
+class ProfilePage extends GetView<ProfileController> {
   const ProfilePage({super.key});
 
   @override
   Widget build(BuildContext context) {
-    final ProfileController profileController = Get.put(ProfileController());
-
     return Scaffold(
       backgroundColor: Colors.white,
       body: Container(
@@ -34,7 +32,7 @@ class ProfilePage extends StatelessWidget {
             SizedBox(height: 9),
             Center(
               child: Obx(() => Text(
-                    profileController.username.value,
+                    controller.username.value,
                     style: GoogleFonts.poppins(
                       color: Color(0xFF000000),
                       fontWeight: FontWeight.bold,
@@ -45,7 +43,7 @@ class ProfilePage extends StatelessWidget {
             SizedBox(height: 9),
             Center(
               child: Obx(() => Text(
-                    profileController.phoneNumber.value,
+                    controller.phoneNumber.value,
                     style: GoogleFonts.poppins(
                       color: Color(0xFF616161),
                       fontWeight: FontWeight.w600,
@@ -76,7 +74,7 @@ class ProfilePage extends StatelessWidget {
                         color: Color(0xFF7EC1EB),
                       ),
                       Obx(() => Text(
-                            profileController.phoneNumber.value,
+                            controller.phoneNumber.value,
                             style: GoogleFonts.poppins(
                               color: Color(0xFF000000),
                               fontWeight: FontWeight.w600,
@@ -127,24 +125,29 @@ class ProfilePage extends StatelessWidget {
             ),
             SizedBox(height: 20),
             Center(
-              child: Container(
-                width: 305,
-                height: 50,
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.circular(5),
-                  border: Border.all(
-                    color: Color(0xFF292929),
-                    width: 1,
+              child: InkWell(
+                onTap: () {
+                  controller.logout();
+                },
+                child: Container(
+                  width: 305,
+                  height: 50,
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(5),
+                    border: Border.all(
+                      color: Color(0xFF292929),
+                      width: 1,
+                    ),
                   ),
-                ),
-                child: Center(
-                  child: Text(
-                    "LOGOUT",
-                    style: GoogleFonts.poppins(
-                      color: Color(0xFFFF0000),
-                      fontWeight: FontWeight.w600,
-                      fontSize: 12,
+                  child: Center(
+                    child: Text(
+                      "LOGOUT",
+                      style: GoogleFonts.poppins(
+                        color: Color(0xFFFF0000),
+                        fontWeight: FontWeight.w600,
+                        fontSize: 12,
+                      ),
                     ),
                   ),
                 ),

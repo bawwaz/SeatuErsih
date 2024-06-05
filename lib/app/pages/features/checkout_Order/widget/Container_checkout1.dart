@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:seatu_ersih/themes/colors.dart';
-import 'package:seatu_ersih/themes/fonts.dart';
 
 class ordernow extends StatelessWidget {
   const ordernow({super.key});

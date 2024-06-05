@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:seatu_ersih/themes/colors.dart';
-import 'package:seatu_ersih/themes/fonts.dart';
 import 'package:seatu_ersih/app/pages/features/order_detail/widget/order_detailAsset.dart';
 import 'package:seatu_ersih/app/pages/features/order_detail/widget/order_detailTextDesc.dart';
 
