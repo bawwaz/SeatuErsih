@@ -1,6 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:seatu_ersih/app/pages/features/add_address_page/widget/button_tambah_alamat.dart';
+import 'package:seatu_ersih/app/pages/features/add_address_page/widget/textfield_add_city.dart';
+import 'package:seatu_ersih/app/pages/features/add_address_page/widget/textfield_add_detail_street.dart';
+import 'package:seatu_ersih/app/pages/features/add_address_page/widget/textfield_add_name_location.dart';
+import 'package:seatu_ersih/app/pages/features/add_address_page/widget/textfield_add_number.dart';
+import 'package:seatu_ersih/app/pages/features/add_address_page/widget/textfield_add_street.dart';
 
 class AddAddressView extends StatelessWidget {
   const AddAddressView({super.key});
@@ -61,24 +67,7 @@ class AddAddressView extends StatelessWidget {
                               child: SizedBox(
                                 width: 209,
                                 height: 34,
-                                child: TextField(
-                                  keyboardType: TextInputType.number,
-                                  inputFormatters: [
-                                    FilteringTextInputFormatter.digitsOnly
-                                  ],
-                                  decoration: InputDecoration(
-                                    hintText: "+62 8XX XXXX XXXX",
-                                    hintStyle: GoogleFonts.poppins(
-                                      fontSize: 12,
-                                      fontWeight: FontWeight.w600,
-                                    ),
-                                    contentPadding:
-                                        EdgeInsets.only(bottom: 5, left: 10),
-                                    border: OutlineInputBorder(
-                                      borderRadius: BorderRadius.circular(5),
-                                    ),
-                                  ),
-                                ),
+                                child: TextFieldAddNumber(),
                               ),
                             ),
                             Padding(
@@ -97,20 +86,7 @@ class AddAddressView extends StatelessWidget {
                               child: SizedBox(
                                 width: 209,
                                 height: 34,
-                                child: TextField(
-                                  decoration: InputDecoration(
-                                    hintText: "Isi disini",
-                                    hintStyle: GoogleFonts.poppins(
-                                      fontSize: 12,
-                                      fontWeight: FontWeight.w600,
-                                    ),
-                                    contentPadding:
-                                        EdgeInsets.only(bottom: 5, left: 10),
-                                    border: OutlineInputBorder(
-                                      borderRadius: BorderRadius.circular(5),
-                                    ),
-                                  ),
-                                ),
+                                child: TextFieldAddCity(),
                               ),
                             ),
                             Padding(
@@ -129,20 +105,7 @@ class AddAddressView extends StatelessWidget {
                               child: SizedBox(
                                 width: 209,
                                 height: 34,
-                                child: TextField(
-                                  decoration: InputDecoration(
-                                    hintText: "Nama Jalan",
-                                    hintStyle: GoogleFonts.poppins(
-                                      fontSize: 12,
-                                      fontWeight: FontWeight.w600,
-                                    ),
-                                    contentPadding:
-                                        EdgeInsets.only(bottom: 5, left: 10),
-                                    border: OutlineInputBorder(
-                                      borderRadius: BorderRadius.circular(5),
-                                    ),
-                                  ),
-                                ),
+                                child: TextFieldAddStreet(),
                               ),
                             ),
                             Padding(
@@ -150,21 +113,7 @@ class AddAddressView extends StatelessWidget {
                               child: SizedBox(
                                 width: 209,
                                 height: 55,
-                                child: TextField(
-                                  maxLines: 5,
-                                  decoration: InputDecoration(
-                                    hintText: "Detail Lokasi",
-                                    hintStyle: GoogleFonts.poppins(
-                                      fontSize: 12,
-                                      fontWeight: FontWeight.w500,
-                                    ),
-                                    contentPadding:
-                                        EdgeInsets.only(bottom: 5, left: 10),
-                                    border: OutlineInputBorder(
-                                      borderRadius: BorderRadius.circular(5),
-                                    ),
-                                  ),
-                                ),
+                                child: TextFieldAddDetailStreet(),
                               ),
                             ),
                             Padding(
@@ -183,20 +132,7 @@ class AddAddressView extends StatelessWidget {
                               child: SizedBox(
                                 width: 209,
                                 height: 34,
-                                child: TextField(
-                                  decoration: InputDecoration(
-                                    hintText: "Rumah, Kantor, Apartment",
-                                    hintStyle: GoogleFonts.poppins(
-                                      fontSize: 12,
-                                      fontWeight: FontWeight.w600,
-                                    ),
-                                    contentPadding:
-                                        EdgeInsets.only(bottom: 5, left: 10),
-                                    border: OutlineInputBorder(
-                                      borderRadius: BorderRadius.circular(5),
-                                    ),
-                                  ),
-                                ),
+                                child: TextFieldAddNameLocation(),
                               ),
                             ),
                           ],
@@ -222,29 +158,7 @@ class AddAddressView extends StatelessWidget {
               padding: const EdgeInsets.only(top: 20),
               child: Align(
                 alignment: Alignment.center,
-                child: InkWell(
-                  onTap: () {
-                    print("tes");
-                  },
-                  child: Container(
-                    width: 210,
-                    height: 30,
-                    decoration: BoxDecoration(
-                      color: Color(0xFF7EC1EB),
-                      borderRadius: BorderRadius.circular(5),
-                    ),
-                    child: Center(
-                      child: Text(
-                        "Tambah Alamat",
-                        style: GoogleFonts.poppins(
-                          color: Color(0xFFFFFFFF),
-                          fontWeight: FontWeight.w600,
-                          fontSize: 12,
-                        ),
-                      ),
-                    ),
-                  ),
-                ),
+                child: ButtonTambahAlamat(),
               ),
             ),
           ],

@@ -125,6 +125,31 @@ class ProfilePage extends StatelessWidget {
                 ),
               ),
             ),
+            SizedBox(height: 20),
+            Center(
+              child: Container(
+                width: 305,
+                height: 50,
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(5),
+                  border: Border.all(
+                    color: Color(0xFF292929),
+                    width: 1,
+                  ),
+                ),
+                child: Center(
+                  child: Text(
+                    "LOGOUT",
+                    style: GoogleFonts.poppins(
+                      color: Color(0xFFFF0000),
+                      fontWeight: FontWeight.w600,
+                      fontSize: 12,
+                    ),
+                  ),
+                ),
+              ),
+            ),
           ],
         ),
       ),

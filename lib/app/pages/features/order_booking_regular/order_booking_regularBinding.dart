@@ -4,6 +4,6 @@ import 'package:seatu_ersih/app/pages/features/order_booking_regular/order_booki
 class orderBookingRegularBinding extends Bindings {
   @override
   void dependencies() {
-    Get.lazyPut(() => OrderBookingRegularController());
+    Get.lazyPut<OrderBookingRegularController>(() => OrderBookingRegularController());
   }
 }
