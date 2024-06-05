@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:seatu_ersih/app/router/app_pages.dart';
+import 'package:seatu_ersih/themes/colors.dart';
 import 'package:seatu_ersih/themes/fonts.dart';
 import 'slider.dart';
 
@@ -42,7 +43,7 @@ class _OnBoardingState extends State<OnBoarding> {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Text(
-            "Kebersihan Tanpa Repot",
+            "Kepentingan Jasa kami",
             style: Fonts.header1blu,
             textAlign: TextAlign.center,
           ),
@@ -52,7 +53,7 @@ class _OnBoardingState extends State<OnBoarding> {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Text(
-            "Mulai dari rumah hingga kantor, kami akan mengurus semuanya untuk Anda dengan cepat dan efisien.",
+            "Higenitas pakaian sangat lah penting untuk kantor sekolah & sehari-hari, tidak perlu merepotkan diri sendiri dengan jasa kami",
             style: Fonts.onboarding,
             textAlign: TextAlign.center,
           ),
@@ -119,7 +120,7 @@ class _OnBoardingState extends State<OnBoarding> {
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(5),
                       color: (index == _currentPage)
-                          ? Colors.black
+                          ? AppColors.primaryColor
                           : Colors.grey.withOpacity(0.5),
                     ),
                   );
@@ -142,17 +143,17 @@ class _OnBoardingState extends State<OnBoarding> {
                   height: 70,
                   width: (_currentPage == (_pages.length - 1)) ? 200 : 75,
                   decoration: BoxDecoration(
-                    color:
-                        Colors.blue, // Replace with your actual secondary color
+                    color: AppColors
+                        .primaryColor, // Replace with your actual secondary color
                     borderRadius: BorderRadius.circular(35),
                   ),
                   child: (_currentPage == (_pages.length - 1))
                       ? Text(
-                          "Daftar",
+                          "Bergabung",
                           style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 20,
-                          ),
+                              color: Colors.white,
+                              fontSize: 20,
+                              fontWeight: FontWeight.bold),
                         )
                       : Icon(
                           Icons.navigate_next,
