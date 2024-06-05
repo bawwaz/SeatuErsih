@@ -6,6 +6,8 @@ import 'package:seatu_ersih/app/pages/features/address_detail_page/address_detai
 import 'package:seatu_ersih/app/pages/features/address_detail_page/address_detail_view.dart';
 import 'package:seatu_ersih/app/pages/features/checkout_Animation/animationBinding.dart';
 import 'package:seatu_ersih/app/pages/features/checkout_Order/checkout_order_binding.dart';
+import 'package:seatu_ersih/app/pages/features/mutasi_page/mutasi_binding.dart';
+import 'package:seatu_ersih/app/pages/features/mutasi_page/mutasi_view.dart';
 import 'package:seatu_ersih/app/pages/features/mutasi_page/paymenthistoryBinding.dart';
 import 'package:seatu_ersih/app/pages/features/mutasi_page/paymenthistoryView.dart';
 import 'package:seatu_ersih/app/pages/features/order_booking_deep/order_booking_deepBinding.dart';
@@ -37,7 +39,7 @@ part 'routes.dart';
 class AppPages {
   AppPages._();
 
-  static const INITIAL = Routes.ONBOARDING;
+  static const INITIAL = Routes.MUTASI;
 
   static final routes = [
     GetPage(
@@ -125,12 +127,18 @@ class AppPages {
       transition: Transition.noTransition,
     ),
     GetPage(
+      name: Routes.MUTASI,
+      page: () => MutasiView(),
+      binding: MutasiBinding(),
+      transition: Transition.noTransition,
+    ),
+    GetPage(
         name: Routes.PROFILE_INFO,
         page: () => profileinfo(),
         binding: profileBinding(),
         transition: Transition.noTransition),
     GetPage(
-        name: Routes.MUTASI,
+        name: Routes.RIWAYAT_PAYMENT,
         page: () => paymentHistory(),
         binding: paymenthistoryBinding(),
         transition: Transition.noTransition),
