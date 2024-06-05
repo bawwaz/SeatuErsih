@@ -4,13 +4,11 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:seatu_ersih/app/router/app_pages.dart';
 import 'profileController.dart';
 
-class ProfilePage extends StatelessWidget {
+class ProfilePage extends GetView<ProfileController> {
   const ProfilePage({super.key});
 
   @override
   Widget build(BuildContext context) {
-    final ProfileController profileController = Get.put(ProfileController());
-
     return Scaffold(
       backgroundColor: Colors.white,
       body: Container(
@@ -34,7 +32,7 @@ class ProfilePage extends StatelessWidget {
             SizedBox(height: 9),
             Center(
               child: Obx(() => Text(
-                    profileController.username.value,
+                    controller.username.value,
                     style: GoogleFonts.poppins(
                       color: Color(0xFF000000),
                       fontWeight: FontWeight.bold,

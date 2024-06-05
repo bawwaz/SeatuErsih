@@ -4,6 +4,6 @@ import 'package:seatu_ersih/app/pages/features/order_detail/order_detailControll
 class orderDetailBinding extends Bindings {
   @override
   void dependencies() {
-    Get.lazyPut(() => orderDetailBinding());
+    Get.lazyPut<orderDetailController>(() => orderDetailController());
   }
 }

@@ -1,5 +1,9 @@
 import 'package:get/get.dart';
 import 'package:seatu_ersih/app/pages/features/Home_Page/HomepageBinding.dart';
+import 'package:seatu_ersih/app/pages/features/add_address_page/add_address_binding.dart';
+import 'package:seatu_ersih/app/pages/features/add_address_page/add_address_view.dart';
+import 'package:seatu_ersih/app/pages/features/address_detail_page/address_detail_binding.dart';
+import 'package:seatu_ersih/app/pages/features/address_detail_page/address_detail_view.dart';
 import 'package:seatu_ersih/app/pages/features/checkout_Animation/animationBinding.dart';
 import 'package:seatu_ersih/app/pages/features/checkout_Order/checkout_order_binding.dart';
 import 'package:seatu_ersih/app/pages/features/order_booking_deep/order_booking_deepBinding.dart';
@@ -8,11 +12,13 @@ import 'package:seatu_ersih/app/pages/features/order_detail/order_detailBinding.
 import 'package:seatu_ersih/app/pages/features/orderstatus/order_statusBinding.dart';
 import 'package:seatu_ersih/app/pages/features/profile_Information/profileInfoView.dart';
 import 'package:seatu_ersih/app/pages/features/profile_page/profileBinding.dart';
-import 'package:seatu_ersih/app/pages/global_component/navbar/navbar.dart';
+import 'package:seatu_ersih/app/global_component/navbar/navbar.dart';
 import 'package:seatu_ersih/app/pages/features/Home_Page/HomepageView.dart';
 import 'package:seatu_ersih/app/pages/features/checkout_Animation/success_animation.dart';
 import 'package:seatu_ersih/app/pages/features/checkout_Order/checkout_order_view.dart';
-import 'package:seatu_ersih/app/pages/global_component/navbar/navbarBinding.dart';
+import 'package:seatu_ersih/app/global_component/navbar/navbarBinding.dart';
+import 'package:seatu_ersih/app/pages/features/saved_address_page/saved_address_binding.dart';
+import 'package:seatu_ersih/app/pages/features/saved_address_page/saved_address_view.dart';
 import 'package:seatu_ersih/app/pages/intial_pages/login_page/LoginpageView.dart';
 import 'package:seatu_ersih/app/pages/features/order_booking_deep/order_booking_deep_view.dart';
 import 'package:seatu_ersih/app/pages/features/order_booking_regular/order_booking_regular_view.dart';
@@ -21,7 +27,6 @@ import 'package:seatu_ersih/app/pages/features/orderstatus/order_status.dart';
 import 'package:seatu_ersih/app/pages/features/profile_page/profileView.dart';
 import 'package:seatu_ersih/app/pages/intial_pages/login_page/loginBinding.dart';
 import 'package:seatu_ersih/app/pages/intial_pages/register_page/RegisterviewPage.dart';
-import 'package:seatu_ersih/app/pages/features/checkout_Order/widget/order_detail.dart';
 import 'package:seatu_ersih/app/pages/intial_pages/register_page/registerBinding.dart';
 
 
@@ -36,7 +41,7 @@ class AppPages {
     GetPage(
       name: Routes.HOME,
       page: () => HomePage(),
-      binding: homePageBinding() ,
+      binding: homePageBinding(),
       transition: Transition.noTransition,
     ),
     GetPage(
@@ -97,6 +102,24 @@ class AppPages {
       name: Routes.CHECKOUT_ANIMATION,
       page: () => animationCheckout(),
       binding: animationBinding(),
+      transition: Transition.noTransition,
+    ),
+    GetPage(
+      name: Routes.SAVED_ADDRESS,
+      page: () => SavedAddressView(),
+      binding: SavedAddressBinding(),
+      transition: Transition.noTransition,
+    ),
+    GetPage(
+      name: Routes.ADD_ADDRESS,
+      page: () => AddAddressView(),
+      binding: AddAddressBinding(),
+      transition: Transition.noTransition,
+    ),
+    GetPage(
+      name: Routes.ADDRESS_DETAIL,
+      page: () => AddressDetailView(),
+      binding: AddressDetailBinding(),
       transition: Transition.noTransition,
     ),
     GetPage(

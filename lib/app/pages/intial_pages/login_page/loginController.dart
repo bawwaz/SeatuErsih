@@ -2,18 +2,14 @@ import 'dart:convert';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:http/http.dart' as http;
-import 'package:flutter/material.dart';
 import 'package:seatu_ersih/app/router/app_pages.dart';
 
 class LoginPageController extends GetxController {
-  // Password Visibility
   var isObsecure = false.obs;
 
-  // Email and Password
   var email = ''.obs;
   var password = ''.obs;
 
-  // Other
   GetStorage box = GetStorage();
 
   Future<void> login() async {
@@ -36,6 +32,7 @@ class LoginPageController extends GetxController {
       if (response.statusCode == 200) {
         final token = json.decode(response.body)['token'];
         final user = json.decode(response.body)['user'];
+      
         box.write("token", token);
         box.write("username", user['username']);
 
@@ -44,7 +41,7 @@ class LoginPageController extends GetxController {
           "Welcome ${user['username']}",
           snackPosition: SnackPosition.TOP,
         );
-        Get.offNamed(Routes.BTMNAVBAR);
+        Get.offNamed(Routes.PROFILE);
       } else {
         final message =
             json.decode(response.body)['message'] ?? 'Unknown error';

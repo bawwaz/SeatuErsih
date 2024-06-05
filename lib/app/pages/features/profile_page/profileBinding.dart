@@ -4,6 +4,6 @@ import 'package:seatu_ersih/app/pages/features/profile_page/profileController.da
 class profileBinding extends Bindings {
   @override
   void dependencies() {
-    Get.lazyPut(() => ProfileController());
+    Get.lazyPut<ProfileController>(() => ProfileController());
   }
 }

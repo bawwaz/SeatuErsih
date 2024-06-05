@@ -1,5 +1,3 @@
-import 'dart:ffi';
-
 import 'package:get/get.dart';
 import 'package:seatu_ersih/app/api/database/seatuersihRegister.dart';
 import 'package:seatu_ersih/app/router/app_pages.dart';
