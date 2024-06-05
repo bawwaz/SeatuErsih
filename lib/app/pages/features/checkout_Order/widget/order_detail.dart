@@ -4,13 +4,11 @@ import 'package:seatu_ersih/app/pages/features/checkout_Order/checkout_order_Con
 import 'package:seatu_ersih/themes/fonts.dart';
 import 'package:seatu_ersih/app/pages/features/checkout_Order/widget/greyLines.dart';
 
-class OrderDetail extends StatelessWidget {
+class OrderDetail extends GetView<CheckoutController> {
   const OrderDetail({super.key});
 
   @override
   Widget build(BuildContext context) {
-    final CheckoutController controller = Get.put(CheckoutController());
-
     return Obx(() {
       return Padding(
         padding: const EdgeInsets.only(left: 22.0, right: 22, bottom: 50),
@@ -22,7 +20,7 @@ class OrderDetail extends StatelessWidget {
               style: Fonts.detailBold,
             ),
             SizedBox(height: 9),
-            for (var shoe in controller.shoes)
+            for (var shoe in controller.shoess)
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
@@ -64,7 +62,7 @@ class OrderDetail extends StatelessWidget {
                   style: Fonts.detail,
                 ),
                 Text(
-                  '${controller.shoes.length}',
+                  '${controller.shoess.length}',
                   style: Fonts.detail,
                 ),
               ],
@@ -78,7 +76,7 @@ class OrderDetail extends StatelessWidget {
                   style: Fonts.detail,
                 ),
                 Text(
-                  '${controller.shoes.length * 25000}',
+                  '${controller.shoess.length * 25000}',
                   style: Fonts.detail,
                 ),
               ],
@@ -101,15 +99,12 @@ class OrderDetail extends StatelessWidget {
             ),
             SizedBox(height: 9),
             Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Text(
-                  'Tanggal pengambilan',
-                  style: Fonts.detail,
-                ),
-                Text(
-                  controller.pickupDate.value,
-                  style: Fonts.detail,
+                Obx(
+                  () => Text(
+                    controller.pickupDate.value,
+                    style: Fonts.detail,
+                  ),
                 ),
               ],
             ),

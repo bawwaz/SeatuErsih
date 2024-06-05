@@ -94,13 +94,21 @@ class _DetailBodyState extends State<DetailBody> {
                     if (_isExpanded)
                       Expanded(
                         child: Center(
-                          child: Text(
-                            'Additional details go here',
-                            style: GoogleFonts.poppins(
-                              color: Colors.white,
-                              fontSize: 16.0,
-                            ),
-                            textAlign: TextAlign.center,
+                          child: Container(
+                            decoration: BoxDecoration(
+                                color: Colors.white,
+                                borderRadius: BorderRadius.only(
+                                  topLeft: Radius.circular(10),
+                                  topRight: Radius.circular(10),
+                                ),
+                                boxShadow: [
+                                  BoxShadow(
+                                    color: Colors.black,
+                                    blurRadius: 1,
+                                    offset: Offset(0, 3),
+                                  )
+                                ]),
+                            child: Container(),
                           ),
                         ),
                       ),
