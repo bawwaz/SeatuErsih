@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:seatu_ersih/app/pages/features/order_booking_regular/dateController.dart';
 import 'package:seatu_ersih/app/pages/features/order_booking_regular/order_booking_regular_controller.dart';
 import 'package:seatu_ersih/app/pages/features/order_booking_regular/widget/add_ons.dart';
 import 'package:seatu_ersih/app/pages/features/order_booking_regular/widget/address.dart';
@@ -11,14 +12,14 @@ import 'package:seatu_ersih/app/pages/features/order_booking_regular/widget/inpu
 import 'package:seatu_ersih/app/pages/features/order_booking_regular/widget/textfield_input_sepatu.dart';
 import 'package:seatu_ersih/app/router/app_pages.dart';
 
-
 class OrderBookingRegularView extends StatelessWidget {
   const OrderBookingRegularView({super.key});
 
   @override
   Widget build(BuildContext context) {
     final controller = Get.put(OrderBookingRegularController());
-    final datePickerController = Get.put(());
+    final dateController =
+        Get.put(DateController()); // Instantiate the DateController
 
     return Scaffold(
       backgroundColor: Color(0xFFFFFFFF),
@@ -137,9 +138,10 @@ class OrderBookingRegularView extends StatelessWidget {
                                   ),
                                 ),
                               ),
-                              // ItemPickup(
-                                
-                              // ),
+                              ItemPickup(
+                                dateController: dateController.dateController,
+                                selectDate: dateController.selectDate,
+                              ),
                               Padding(
                                 padding:
                                     const EdgeInsets.only(left: 27, top: 11),

@@ -32,7 +32,7 @@ class OrderBookingRegularController extends GetxController {
 
   final textShoesControlller = TextEditingController();
 
-  final TextEditingController dateController = TextEditingController();
+  
 
 
   Future<void> addShoes(String name, String addons, String orderId) async {
@@ -107,18 +107,7 @@ class OrderBookingRegularController extends GetxController {
     });
   }
 
-  Future<void> selectDate(BuildContext context) async {
-    DateTime? selectedDate = await showDatePicker(
-      context: context,
-      initialDate: DateTime.now(),
-      firstDate: DateTime(2000),
-      lastDate: DateTime(2101),
-    );
-
-    if (selectedDate != null) {
-      dateController.text = "${selectedDate.toLocal()}".split(' ')[0];
-    }
-  }
+  
 
   
 

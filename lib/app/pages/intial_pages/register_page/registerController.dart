@@ -28,7 +28,7 @@ class RegisterPageController extends GetxController {
       await apiService.registerUser(data);
       // Handle success response
       Get.snackbar('Success', 'User registered successfully');
-      Get.offNamed(Routes.BTMNAVBAR);
+      Get.offNamed(Routes.LOGIN);
     } catch (e) {
       // Handle error
       print('Network error: $e');
