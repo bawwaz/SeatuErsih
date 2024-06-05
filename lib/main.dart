@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:seatu_ersih/routes/navbar.dart';
-import 'package:seatu_ersih/view/login_page/LoginpageView.dart';
-import 'routes/routes.dart';
+import 'package:seatu_ersih/app/pages/global_component/navbar/navbar.dart';
+import 'package:seatu_ersih/app/pages/intial_pages/login_page/LoginpageView.dart';
+import 'package:seatu_ersih/app/router/app_pages.dart';
+
 import 'package:seatu_ersih/themes/colors.dart';
 
 void main() async {
@@ -17,8 +18,8 @@ class MyApp extends StatelessWidget {
     return GetMaterialApp(
       title: 'Flutter Demo',
       debugShowCheckedModeBanner: false,
-      initialRoute: Routes.addressdetail,
-      getPages: Routes.pages,
+      initialRoute: AppPages.INITIAL,
+      getPages: AppPages.routes,
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: AppColors.primaryColor),
         useMaterial3: true,

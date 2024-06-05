@@ -17,6 +17,8 @@ dependencies:
   shared_preferences: ^2.0.9
   get_storage: ^2.1.1
   lottie: ^3.1.2
+  path_provider: 
+  sqflite: ^2.3.3+1
   
 
 
