@@ -37,7 +37,8 @@ class LoginPageController extends GetxController {
         final token = json.decode(response.body)['token'];
         final user = json.decode(response.body)['user'];
         box.write("token", token);
-        box.write("username", user['username']); // Save the username
+        box.write("username", user['username']);
+
         Get.snackbar(
           "Login Successful",
           "Welcome ${user['username']}",

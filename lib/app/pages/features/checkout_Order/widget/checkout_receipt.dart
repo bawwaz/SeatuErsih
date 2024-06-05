@@ -12,7 +12,7 @@ class receipt extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.only(top: 15.0),
       child: Container(
-        height: 374,
+        height: 420,
         width: 265,
         decoration: BoxDecoration(
           color: Colors.white,
@@ -53,12 +53,12 @@ class receipt extends StatelessWidget {
                     ),
                   )
                 ],
-              ), 
+              ),
             ),
             SizedBox(
               height: 12,
             ),
-            orderdetail(),
+            OrderDetail(),
           ],
         ),
       ),

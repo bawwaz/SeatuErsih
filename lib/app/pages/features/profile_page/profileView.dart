@@ -45,7 +45,7 @@ class ProfilePage extends StatelessWidget {
             SizedBox(height: 9),
             Center(
               child: Obx(() => Text(
-                    profileController.phoneNumber.value,
+                    profileController.email.value,
                     style: GoogleFonts.poppins(
                       color: Color(0xFF616161),
                       fontWeight: FontWeight.w600,
@@ -76,7 +76,7 @@ class ProfilePage extends StatelessWidget {
                         color: Color(0xFF7EC1EB),
                       ),
                       Obx(() => Text(
-                            profileController.phoneNumber.value,
+                            profileController.email.value,
                             style: GoogleFonts.poppins(
                               color: Color(0xFF000000),
                               fontWeight: FontWeight.w600,
@@ -104,23 +104,28 @@ class ProfilePage extends StatelessWidget {
                 ),
                 child: Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 20),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Icon(
-                        Icons.info,
-                        color: Color(0xFF7EC1EB),
-                      ),
-                      Text(
-                        "Informasi",
-                        style: GoogleFonts.poppins(
-                          color: Color(0xFF000000),
-                          fontWeight: FontWeight.w600,
-                          fontSize: 12,
+                  child: InkWell(
+                    onTap: () {
+                      Get.toNamed(Routes.PROFILE_INFO);
+                    },
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Icon(
+                          Icons.info,
+                          color: Color(0xFF7EC1EB),
                         ),
-                      ),
-                      Icon(Icons.arrow_forward_ios),
-                    ],
+                        Text(
+                          "Informasi",
+                          style: GoogleFonts.poppins(
+                            color: Color(0xFF000000),
+                            fontWeight: FontWeight.w600,
+                            fontSize: 12,
+                          ),
+                        ),
+                        Icon(Icons.arrow_forward_ios),
+                      ],
+                    ),
                   ),
                 ),
               ),

@@ -9,7 +9,7 @@ import 'package:sqflite/sqflite.dart';
 class OrderBookingRegularController extends GetxController {
   var textShoesController = TextEditingController();
   var pickupDateController = TextEditingController();
-  
+
   var noteController = TextEditingController();
 
   final notes = "".obs;
@@ -31,9 +31,6 @@ class OrderBookingRegularController extends GetxController {
   final List<dynamic> date = [].obs;
 
   final textShoesControlller = TextEditingController();
-
-  
-
 
   Future<void> addShoes(String name, String addons, String orderId) async {
     final token = box.read('token');
@@ -102,14 +99,10 @@ class OrderBookingRegularController extends GetxController {
   Future<void> addShoesLocally() async {
     shoes.add({
       'name': textShoesControlller.text,
-      'addons': "Jahit, De-Yellowing, Kontol",
+      'addons': "Jahit, De-Yellowing,",
       'order_id': 1,
     });
   }
-
-  
-
-  
 
   @override
   void onInit() {
