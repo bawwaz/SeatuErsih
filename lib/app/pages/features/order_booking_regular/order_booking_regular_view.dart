@@ -6,6 +6,7 @@ import 'package:seatu_ersih/app/pages/features/order_booking_regular/order_booki
 import 'package:seatu_ersih/app/pages/features/order_booking_regular/widget/address.dart';
 import 'package:seatu_ersih/app/pages/features/order_booking_regular/widget/button_next.dart';
 import 'package:seatu_ersih/app/pages/features/order_booking_regular/widget/choice_shoes.dart';
+import 'package:seatu_ersih/app/pages/features/order_booking_regular/widget/input_item_pickup.dart';
 import 'package:seatu_ersih/app/pages/features/order_booking_regular/widget/input_note.dart';
 import 'package:seatu_ersih/app/pages/features/order_booking_regular/widget/textfield_input_sepatu.dart';
 import 'package:seatu_ersih/app/router/app_pages.dart';

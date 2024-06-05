@@ -5,7 +5,7 @@ import 'package:seatu_ersih/app/router/app_pages.dart';
 import 'profileController.dart';
 
 class ProfilePage extends GetView<ProfileController> {
-  const ProfilePage({super.key});
+  const ProfilePage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -43,7 +43,8 @@ class ProfilePage extends GetView<ProfileController> {
             SizedBox(height: 9),
             Center(
               child: Obx(() => Text(
-                    profileController.email.value,
+                    controller.email
+                        .value, // Access email through controller instance
                     style: GoogleFonts.poppins(
                       color: Color(0xFF616161),
                       fontWeight: FontWeight.w600,
@@ -74,7 +75,8 @@ class ProfilePage extends GetView<ProfileController> {
                         color: Color(0xFF7EC1EB),
                       ),
                       Obx(() => Text(
-                            profileController.email.value,
+                            controller.email
+                                .value, // Access email through controller instance
                             style: GoogleFonts.poppins(
                               color: Color(0xFF000000),
                               fontWeight: FontWeight.w600,

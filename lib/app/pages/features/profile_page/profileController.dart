@@ -24,6 +24,7 @@ class ProfileController extends GetxController {
   }
 
   Future<void> logout() async {
+    GetStorage box = GetStorage(); // Move this line here
     try {
       SharedPreferences prefs = await SharedPreferences.getInstance();
       await authenticationService.logoutService();
@@ -37,6 +38,6 @@ class ProfileController extends GetxController {
         e.toString(),
       );
     }
-    email.value = box.read('email') ?? 'No email'; // Add phone number if available
+    email.value = box.read('email') ?? 'No email'; // Access box variable here
   }
 }
