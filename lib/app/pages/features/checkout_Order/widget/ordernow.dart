@@ -1,10 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:seatu_ersih/app/pages/features/checkout_Order/checkout_order_Controller.dart';
+import 'package:seatu_ersih/app/router/app_pages.dart';
 
 class ordernow extends StatelessWidget {
-  const ordernow({super.key});
+  const ordernow({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    final CheckoutController controller = Get.find();
+
     return Container(
       width: 305,
       height: 114,
@@ -54,19 +60,16 @@ class ordernow extends StatelessWidget {
             ),
           ),
           Positioned(
-            left: 20,
-            top: 79,
-            child: Text(
-              'Rp 35.000',
-              style: TextStyle(
-                color: Colors.white,
-                fontSize: 16,
-                fontFamily: 'Poppins',
-                fontWeight: FontWeight.w700,
-                height: 0,
-              ),
-            ),
-          ),
+              left: 20,
+              top: 79,
+              child: Obx(() => Text(
+                    'Rp ${controller.totalPrice}',
+                    style: GoogleFonts.poppins(
+                      color: Colors.white,
+                      fontSize: 16,
+                      fontWeight: FontWeight.w700,
+                    ),
+                  ))),
           Positioned(
             left: 162,
             top: 61,
@@ -78,13 +81,18 @@ class ordernow extends StatelessWidget {
                   Positioned(
                     left: 0,
                     top: 0,
-                    child: Container(
-                      width: 123,
-                      height: 38,
-                      decoration: ShapeDecoration(
-                        color: Colors.white,
-                        shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(5)),
+                    child: InkWell(
+                      onTap: () {
+                        Get.toNamed(Routes.CHECKOUT_ANIMATION);
+                      },
+                      child: Container(
+                        width: 123,
+                        height: 38,
+                        decoration: ShapeDecoration(
+                          color: Colors.white,
+                          shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(5)),
+                        ),
                       ),
                     ),
                   ),

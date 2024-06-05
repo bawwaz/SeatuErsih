@@ -8,6 +8,7 @@ class ProfileController extends GetxController {
   var username = ''.obs;
   var phoneNumber = ''.obs;
   late AuthenticationService authenticationService;
+  var email = ''.obs;
 
   @override
   void onInit() {
@@ -23,6 +24,7 @@ class ProfileController extends GetxController {
   }
 
   Future<void> logout() async {
+    GetStorage box = GetStorage(); // Move this line here
     try {
       SharedPreferences prefs = await SharedPreferences.getInstance();
       await authenticationService.logoutService();
@@ -36,5 +38,6 @@ class ProfileController extends GetxController {
         e.toString(),
       );
     }
+    email.value = box.read('email') ?? 'No email'; // Access box variable here
   }
 }

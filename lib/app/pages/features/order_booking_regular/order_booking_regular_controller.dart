@@ -7,7 +7,7 @@ import 'package:http/http.dart' as http;
 class OrderBookingRegularController extends GetxController {
   var textShoesController = TextEditingController();
   var pickupDateController = TextEditingController();
-  
+
   var noteController = TextEditingController();
 
   final notes = "".obs;
@@ -29,9 +29,6 @@ class OrderBookingRegularController extends GetxController {
   final List<dynamic> date = [].obs;
 
   final textShoesControlller = TextEditingController();
-
-  final TextEditingController dateController = TextEditingController();
-
 
   Future<void> addShoes(String name, String addons, String orderId) async {
     final token = box.read('token');
@@ -100,25 +97,10 @@ class OrderBookingRegularController extends GetxController {
   Future<void> addShoesLocally() async {
     shoes.add({
       'name': textShoesControlller.text,
-      'addons': "Jahit, De-Yellowing, Kontol",
+      'addons': "Jahit, De-Yellowing,",
       'order_id': 1,
     });
   }
-
-  Future<void> selectDate(BuildContext context) async {
-    DateTime? selectedDate = await showDatePicker(
-      context: context,
-      initialDate: DateTime.now(),
-      firstDate: DateTime(2000),
-      lastDate: DateTime(2101),
-    );
-
-    if (selectedDate != null) {
-      dateController.text = "${selectedDate.toLocal()}".split(' ')[0];
-    }
-  }
-
-  
 
   @override
   void onInit() {

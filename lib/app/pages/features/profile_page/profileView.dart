@@ -5,7 +5,7 @@ import 'package:seatu_ersih/app/router/app_pages.dart';
 import 'profileController.dart';
 
 class ProfilePage extends GetView<ProfileController> {
-  const ProfilePage({super.key});
+  const ProfilePage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -43,7 +43,8 @@ class ProfilePage extends GetView<ProfileController> {
             SizedBox(height: 9),
             Center(
               child: Obx(() => Text(
-                    controller.phoneNumber.value,
+                    controller.email
+                        .value, // Access email through controller instance
                     style: GoogleFonts.poppins(
                       color: Color(0xFF616161),
                       fontWeight: FontWeight.w600,
@@ -74,7 +75,8 @@ class ProfilePage extends GetView<ProfileController> {
                         color: Color(0xFF7EC1EB),
                       ),
                       Obx(() => Text(
-                            controller.phoneNumber.value,
+                            controller.email
+                                .value, // Access email through controller instance
                             style: GoogleFonts.poppins(
                               color: Color(0xFF000000),
                               fontWeight: FontWeight.w600,
@@ -102,52 +104,27 @@ class ProfilePage extends GetView<ProfileController> {
                 ),
                 child: Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 20),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Icon(
-                        Icons.info,
-                        color: Color(0xFF7EC1EB),
-                      ),
-                      Text(
-                        "Informasi",
-                        style: GoogleFonts.poppins(
-                          color: Color(0xFF000000),
-                          fontWeight: FontWeight.w600,
-                          fontSize: 12,
+                  child: InkWell(
+                    onTap: () {
+                      Get.toNamed(Routes.PROFILE_INFO);
+                    },
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Icon(
+                          Icons.info,
+                          color: Color(0xFF7EC1EB),
                         ),
-                      ),
-                      Icon(Icons.arrow_forward_ios),
-                    ],
-                  ),
-                ),
-              ),
-            ),
-            SizedBox(height: 20),
-            Center(
-              child: InkWell(
-                onTap: () {
-                  controller.logout();
-                },
-                child: Container(
-                  width: 305,
-                  height: 50,
-                  decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.circular(5),
-                    border: Border.all(
-                      color: Color(0xFF292929),
-                      width: 1,
-                    ),
-                  ),
-                  child: Center(
-                    child: Text(
-                      "LOGOUT",
-                      style: GoogleFonts.poppins(
-                        color: Color(0xFFFF0000),
-                        fontWeight: FontWeight.w600,
-                        fontSize: 12,
-                      ),
+                        Text(
+                          "Informasi",
+                          style: GoogleFonts.poppins(
+                            color: Color(0xFF000000),
+                            fontWeight: FontWeight.w600,
+                            fontSize: 12,
+                          ),
+                        ),
+                        Icon(Icons.arrow_forward_ios),
+                      ],
                     ),
                   ),
                 ),
