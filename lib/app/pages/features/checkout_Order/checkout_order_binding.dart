@@ -4,6 +4,6 @@ import 'package:seatu_ersih/app/pages/features/checkout_Order/checkout_order_Con
 class checkoutOrderBinding extends Bindings {
   @override
   void dependencies() {
-    Get.lazyPut<checkoutController>(() => checkoutController());
+    Get.lazyPut<CheckoutController>(() => CheckoutController());
   }
 }

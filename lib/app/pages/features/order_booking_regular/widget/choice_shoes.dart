@@ -5,8 +5,8 @@ class ChoiceSepatu extends StatelessWidget {
   final String name;
   const ChoiceSepatu({
     required this.name,
-    super.key,
-  });
+    Key? key,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

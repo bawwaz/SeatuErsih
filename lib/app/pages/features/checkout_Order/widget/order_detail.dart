@@ -1,172 +1,124 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:seatu_ersih/app/pages/features/checkout_Order/checkout_order_Controller.dart';
 import 'package:seatu_ersih/themes/fonts.dart';
 import 'package:seatu_ersih/app/pages/features/checkout_Order/widget/greyLines.dart';
 
-class orderdetail extends StatelessWidget {
-  const orderdetail({super.key});
+class OrderDetail extends GetView<CheckoutController> {
+  const OrderDetail({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        Row(
-          mainAxisAlignment: MainAxisAlignment.center,
+    return Obx(() {
+      return Padding(
+        padding: const EdgeInsets.only(left: 22.0, right: 22, bottom: 50),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
               'Barang',
               style: Fonts.detailBold,
             ),
-            Padding(
-              padding: const EdgeInsets.only(left: 127.0),
-              child: Text(
-                'Harga',
-                style: Fonts.detailBold,
+            SizedBox(height: 9),
+            for (var shoe in controller.shoess)
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Expanded(
+                    child: Text(
+                      shoe['name'],
+                      style: Fonts.detail,
+                      overflow: TextOverflow.ellipsis,
+                    ),
+                  ),
+                  Text(
+                    '25000',
+                    style: Fonts.detail,
+                  ),
+                ],
               ),
+            SizedBox(height: 15),
+            Lines(),
+            SizedBox(height: 15),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(
+                  'Rangkuman',
+                  style: Fonts.detailBold,
+                ),
+                Text(
+                  'Total',
+                  style: Fonts.detailBold,
+                ),
+              ],
             ),
+            SizedBox(height: 9),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(
+                  'Total Barang',
+                  style: Fonts.detail,
+                ),
+                Text(
+                  '${controller.shoess.length}',
+                  style: Fonts.detail,
+                ),
+              ],
+            ),
+            SizedBox(height: 6),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(
+                  'Total Harga',
+                  style: Fonts.detail,
+                ),
+                Text(
+                  '${controller.shoess.length * 25000}',
+                  style: Fonts.detail,
+                ),
+              ],
+            ),
+            SizedBox(height: 15),
+            Lines(),
+            SizedBox(height: 15),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(
+                  'Schedule',
+                  style: Fonts.detailBold,
+                ),
+                Text(
+                  'Tanggal',
+                  style: Fonts.detailBold,
+                ),
+              ],
+            ),
+            SizedBox(height: 9),
+            Row(
+              children: [
+                Text(
+                  'Pickup',
+                  style: Fonts.detail,
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(left: 105.0),
+                  child: Obx(
+                    () => Text(
+                      controller.pickupDate.value,
+                      style: Fonts.detail,
+                    ),
+                  ),
+                ),
+              ],
+            ),
+            SizedBox(height: 6),
           ],
         ),
-        SizedBox(
-          height: 9,
-        ),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Text(
-              'Regular Clean',
-              style: Fonts.detail,
-            ),
-            Padding(
-              padding: const EdgeInsets.only(left: 83.4),
-              child: Text(
-                '25.000',
-                style: Fonts.detail,
-              ),
-            ),
-          ],
-        ),
-        SizedBox(
-          height: 15,
-        ),
-        Lines(),
-        SizedBox(
-          height: 15,
-        ),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Text(
-              'Rangkuman',
-              style: Fonts.detailBold,
-            ),
-            Padding(
-              padding: const EdgeInsets.only(left: 100.0),
-              child: Text(
-                'Total',
-                style: Fonts.detailBold,
-              ),
-            ),
-          ],
-        ),
-        SizedBox(
-          height: 9,
-        ),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Text(
-              'Total Barang',
-              style: Fonts.detail,
-            ),
-            Padding(
-              padding: const EdgeInsets.only(left: 125.0),
-              child: Text(
-                '2',
-                style: Fonts.detail,
-              ),
-            )
-          ],
-        ),
-        SizedBox(
-          height: 6,
-        ),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Text(
-              'Total Harga',
-              style: Fonts.detail,
-            ),
-            Padding(
-              padding: const EdgeInsets.only(left: 96.5),
-              child: Text(
-                '35.000',
-                style: Fonts.detail,
-              ),
-            )
-          ],
-        ),
-        SizedBox(
-          height: 15,
-        ),
-        Lines(),
-        SizedBox(
-          height: 15,
-        ),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Text(
-              'Schedule',
-              style: Fonts.detailBold,
-            ),
-            Padding(
-              padding: const EdgeInsets.only(left: 96.0),
-              child: Text(
-                'Tanggal',
-                style: Fonts.detailBold,
-              ),
-            ),
-          ],
-        ),
-        SizedBox(
-          height: 9,
-        ),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Text(
-              'Tanggal pengambilan',
-              style: Fonts.detail,
-            ),
-            Padding(
-              padding: const EdgeInsets.only(left: 22.0),
-              child: Text(
-                '10/4/25',
-                style: Fonts.detail,
-              ),
-            )
-          ],
-        ),
-        SizedBox(
-          height: 6,
-        ),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Text(
-              'Estimasi Selesai',
-              style: Fonts.detail,
-            ),
-            Padding(
-              padding: const EdgeInsets.only(left: 60.0),
-              child: Text(
-                '12/4/25',
-                style: Fonts.detail,
-              ),
-            )
-          ],
-        ),
-      ],
-    );
+      );
+    });
   }
 }

@@ -1,20 +1,22 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:seatu_ersih/app/pages/features/checkout_Order/widget/Container_checkout1.dart';
+import 'package:seatu_ersih/app/pages/features/checkout_Order/checkout_order_Controller.dart';
+import 'package:seatu_ersih/app/pages/features/checkout_Order/widget/ordernow.dart';
 import 'package:seatu_ersih/app/pages/features/checkout_Order/widget/checkout_receipt.dart';
 import 'package:seatu_ersih/app/router/app_pages.dart';
 
-class Checkout extends StatelessWidget {
+class Checkout extends GetView<CheckoutController> {
   const Checkout({super.key});
 
   @override
   Widget build(BuildContext context) {
+    controller.arguments = Get.arguments;
     return Scaffold(
       appBar: AppBar(
         automaticallyImplyLeading: false,
         title: InkWell(
           onTap: () {
-            Get.toNamed(Routes.ORDER_BOOKING_REGULAR);
+            Get.back();
           },
           child: Image.asset('assets/img/angle-circle-right 1.png'),
         ),
