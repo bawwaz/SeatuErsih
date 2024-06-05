@@ -4,6 +4,6 @@ import 'package:seatu_ersih/app/pages/features/checkout_Animation/animation_Cont
 class animationBinding extends Bindings {
   @override
   void dependencies() {
-    Get.lazyPut(() => checkoutAnimationController());
+    Get.lazyPut<checkoutAnimationController>(() => checkoutAnimationController());
   }
 }

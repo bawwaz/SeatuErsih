@@ -4,6 +4,6 @@ import 'package:seatu_ersih/app/pages/intial_pages/register_page/registerControl
 class RegisterPageBinding extends Bindings {
   @override
   void dependencies() {
-    Get.lazyPut(() => RegisterPageController());
+    Get.lazyPut<RegisterPageController>(() => RegisterPageController());
   }
 }

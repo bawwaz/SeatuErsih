@@ -56,4 +56,7 @@ class Routes {
   static const String ORDERS = '/myorder';
   static const String STATUS_ORDER = '/status';
   static const String CHECKOUT_ANIMATION = '/checkoutsuccess';
+  static const String SAVED_ADDRESS = '/savedaddress';
+  static const String ADD_ADDRESS = '/addaddress';
+  static const String ADDRESS_DETAIL = '/addressdetail';
 }

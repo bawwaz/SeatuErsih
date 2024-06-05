@@ -4,7 +4,7 @@ import 'package:seatu_ersih/app/pages/features/order_booking_deep/order_booking_
 class orderBookingDeepBinding extends Bindings {
   @override
   void dependencies() {
-    Get.lazyPut(() => OrderBookingDeepController());
+    Get.lazyPut<OrderBookingDeepController>(() => OrderBookingDeepController());
   }
 
 }
