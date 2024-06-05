@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-
 import 'package:seatu_ersih/app/pages/features/order_detail/widget/order_detailBody.dart';
 
 class status extends StatelessWidget {

@@ -5,9 +5,12 @@ import 'package:seatu_ersih/app/api/api_endpoint.dart';
 class DioInstance {
   late Dio _dio;
 
-  DioInstance() {
+ DioInstance() {
     _dio = Dio(BaseOptions(
       baseUrl: ApiEndpoint.baseUrl,
+      validateStatus: (status) {
+        return status! < 500;
+      },
     ));
     initializeInterceptors();
   }
@@ -41,14 +44,14 @@ class DioInstance {
   Future<Response> postRequest({
     required String endpoint,
     bool? isAuthorize,
-    required Object data,
+    Object? data,
   }) async {
     Response response;
     SharedPreferences prefs = await SharedPreferences.getInstance();
     final token = prefs.getString('token');
 
-    if (token == null) {
-      print("Token is null. Please log in again.");
+    if (isAuthorize ?? false) {
+      throw Exception("Token is null. Please log in again.");
     }
 
     try {
@@ -122,15 +125,17 @@ class DioInstance {
   initializeInterceptors() {
     _dio.interceptors.add(InterceptorsWrapper(
       onError: (error, handler) {
+        print("Request error: ${error.message}");
         return handler.next(error);
       },
       onRequest: (request, handler) {
-        print(request.method + " " + request.path);
-        print(request.data);
+        print("Request: ${request.method} ${request.path}");
+        print("Request headers: ${request.headers}");
+        print("Request data: ${request.data}");
         return handler.next(request);
       },
       onResponse: (response, handler) {
-        print(response.data);
+        print("Response: ${response.data}");
         return handler.next(response);
       },
     ));
