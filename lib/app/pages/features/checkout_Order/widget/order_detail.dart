@@ -100,10 +100,17 @@ class OrderDetail extends GetView<CheckoutController> {
             SizedBox(height: 9),
             Row(
               children: [
-                Obx(
-                  () => Text(
-                    controller.pickupDate.value,
-                    style: Fonts.detail,
+                Text(
+                  'Pickup',
+                  style: Fonts.detail,
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(left: 105.0),
+                  child: Obx(
+                    () => Text(
+                      controller.pickupDate.value,
+                      style: Fonts.detail,
+                    ),
                   ),
                 ),
               ],

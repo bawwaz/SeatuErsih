@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:seatu_ersih/app/pages/features/mutasi_page/widget/paymenthistoryitems.dart';
 import 'package:seatu_ersih/themes/fonts.dart';
 
 class paymentHistory extends StatelessWidget {
@@ -14,6 +15,9 @@ class paymentHistory extends StatelessWidget {
           style: Fonts.header1blu,
         ),
         centerTitle: true,
+      ),
+      body: Center(
+        child: PaymentItems(),
       ),
     );
   }
