@@ -8,28 +8,17 @@ class OrderBookingRegularController extends GetxController {
   var textShoesController = TextEditingController();
   var pickupDateController = TextEditingController();
   TextEditingController dateController = TextEditingController();
-
   var noteController = TextEditingController();
-
   final notes = "".obs;
-
   var checked = false.obs;
-
   get selectedIndex => null;
-
   final List<RxBool> checkedkotoll = List.generate(4, (index) => false.obs);
-
   final url = "http://seatuersih.pradiptaahmad.tech/api";
-
   final box = GetStorage();
-
   final List<dynamic> shoes = [].obs;
-
   var shoesName = "".obs;
-
   var dates = "".obs;
   final List<dynamic> date = [].obs;
-
   final textShoesControlller = TextEditingController();
 
   Future<void> addShoes(String name, String addons, String orderId) async {
@@ -48,7 +37,7 @@ class OrderBookingRegularController extends GetxController {
 
     try {
       final response = await http.post(
-        Uri.parse('$url/shoe/ '),
+        Uri.parse('$url/shoe/'),
         headers: headers,
         body: body,
       );
@@ -74,11 +63,11 @@ class OrderBookingRegularController extends GetxController {
       'Authorization': 'Bearer $token'
     };
     try {
-      final response =
-          await http.get(Uri.parse("$url/shoe/all"), headers: headers);
+      final response = await http.get(Uri.parse("$url/shoe/all"), headers: headers);
 
       if (response.statusCode == 200) {
         final data = json.decode(response.body)['data'];
+        shoes.clear(); // Clear the list before adding new items
         for (var item in data) {
           shoes.add({
             'name': item['name'],

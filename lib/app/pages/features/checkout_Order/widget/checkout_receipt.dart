@@ -12,7 +12,7 @@ class receipt extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.only(top: 15.0),
       child: Container(
-        height: 420,
+        height: 400,
         width: 265,
         decoration: BoxDecoration(
           color: Colors.white,
