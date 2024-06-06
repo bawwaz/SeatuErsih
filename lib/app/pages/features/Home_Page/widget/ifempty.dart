@@ -6,20 +6,23 @@ class ImgIfEmpty extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        Image.asset('assets/img/box 1.png'),
-        Text(
-          'You havent ordered anything...',
-          style: Fonts.desc,
-          textAlign: TextAlign.center,
-        ),
-        Text(
-          'there’s nothing to see here',
-          style: Fonts.desc,
-          textAlign: TextAlign.center,
-        )
-      ],
+    return Padding(
+      padding: const EdgeInsets.only(top: 58.0),
+      child: Column(
+        children: [
+          Image.asset('assets/img/box 1.png'),
+          Text(
+            'You havent ordered anything...',
+            style: Fonts.desc,
+            textAlign: TextAlign.center,
+          ),
+          Text(
+            'there’s nothing to see here',
+            style: Fonts.desc,
+            textAlign: TextAlign.center,
+          ),
+        ],
+      ),
     );
   }
 }
