@@ -55,4 +55,7 @@ class Fonts {
     fontWeight: FontWeight.bold,
     color: Colors.white,
   );
+  static TextStyle onboarding = GoogleFonts.poppins(
+    fontSize: 18,
+  );
 }

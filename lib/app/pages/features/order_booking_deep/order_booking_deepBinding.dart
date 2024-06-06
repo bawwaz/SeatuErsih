@@ -6,5 +6,4 @@ class orderBookingDeepBinding extends Bindings {
   void dependencies() {
     Get.lazyPut<OrderBookingDeepController>(() => OrderBookingDeepController());
   }
-
 }

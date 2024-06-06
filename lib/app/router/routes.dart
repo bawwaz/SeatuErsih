@@ -60,4 +60,6 @@ class Routes {
   static const String ADD_ADDRESS = '/addaddress';
   static const String ADDRESS_DETAIL = '/addressdetail';
   static const String PROFILE_INFO = '/profile_info';
+  static const String HISTORY_PAYMENT = '/historypayment';
+  static const String ONBOARDING = '/onboarding';
 }

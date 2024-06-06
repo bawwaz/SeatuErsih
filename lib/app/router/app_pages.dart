@@ -6,6 +6,8 @@ import 'package:seatu_ersih/app/pages/features/address_detail_page/address_detai
 import 'package:seatu_ersih/app/pages/features/address_detail_page/address_detail_view.dart';
 import 'package:seatu_ersih/app/pages/features/checkout_Animation/animationBinding.dart';
 import 'package:seatu_ersih/app/pages/features/checkout_Order/checkout_order_binding.dart';
+import 'package:seatu_ersih/app/pages/features/payment_history_page/paymenthistoryBinding.dart';
+import 'package:seatu_ersih/app/pages/features/payment_history_page/paymenthistoryView.dart';
 import 'package:seatu_ersih/app/pages/features/order_booking_deep/order_booking_deepBinding.dart';
 import 'package:seatu_ersih/app/pages/features/order_booking_regular/order_booking_regularBinding.dart';
 import 'package:seatu_ersih/app/pages/features/order_detail/order_detailBinding.dart';
@@ -26,16 +28,16 @@ import 'package:seatu_ersih/app/pages/features/order_detail/order_detail.dart';
 import 'package:seatu_ersih/app/pages/features/orderstatus/order_status.dart';
 import 'package:seatu_ersih/app/pages/features/profile_page/profileView.dart';
 import 'package:seatu_ersih/app/pages/intial_pages/login_page/loginBinding.dart';
+import 'package:seatu_ersih/app/pages/intial_pages/onboarding/boardingscreen.dart';
 import 'package:seatu_ersih/app/pages/intial_pages/register_page/RegisterviewPage.dart';
 import 'package:seatu_ersih/app/pages/intial_pages/register_page/registerBinding.dart';
-
 
 part 'routes.dart';
 
 class AppPages {
   AppPages._();
 
-  static const INITIAL = Routes.LOGIN;
+  static const INITIAL = Routes.BTMNAVBAR;
 
   static final routes = [
     GetPage(
@@ -83,7 +85,11 @@ class AppPages {
     GetPage(
       name: Routes.BTMNAVBAR,
       page: () => BottomNavBar(),
-      binding: navbarBinding(),
+      bindings: [
+        homePageBinding(),
+        paymenthistoryBinding(),
+        orderStatusBinding(),
+      ],
       transition: Transition.noTransition,
     ),
     GetPage(
@@ -123,10 +129,18 @@ class AppPages {
       transition: Transition.noTransition,
     ),
     GetPage(
-      name: Routes.PROFILE_INFO,
-      page: () => profileinfo(),
-      binding: profileBinding(),
-      transition: Transition.noTransition
-    )
+        name: Routes.PROFILE_INFO,
+        page: () => profileinfo(),
+        binding: profileBinding(),
+        transition: Transition.noTransition),
+    GetPage(
+        name: Routes.HISTORY_PAYMENT,
+        page: () => PaymentHistory(),
+        binding: paymenthistoryBinding(),
+        transition: Transition.noTransition),
+    GetPage(
+        name: Routes.ONBOARDING,
+        page: () => OnBoarding(),
+        transition: Transition.noTransition),
   ];
 }
