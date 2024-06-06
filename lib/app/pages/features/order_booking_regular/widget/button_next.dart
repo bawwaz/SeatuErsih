@@ -1,8 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get_storage/get_storage.dart';
-
-import 'package:seatu_ersih/app/pages/features/checkout_Order/widget/ordernow.dart';
 import 'package:seatu_ersih/app/pages/features/order_booking_regular/order_booking_regular_controller.dart';
 import 'package:seatu_ersih/app/router/app_pages.dart';
 

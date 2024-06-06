@@ -59,8 +59,7 @@ class Routes {
   static const String SAVED_ADDRESS = '/savedaddress';
   static const String ADD_ADDRESS = '/addaddress';
   static const String ADDRESS_DETAIL = '/addressdetail';
-  static const String MUTASI = '/mutasi';
   static const String PROFILE_INFO = '/profile_info';
-  static const String RIWAYAT_PAYMENT = '/payment';
+  static const String HISTORY_PAYMENT = '/historypayment';
   static const String ONBOARDING = '/onboarding';
 }
