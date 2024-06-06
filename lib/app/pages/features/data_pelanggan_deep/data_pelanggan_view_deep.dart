@@ -1,12 +1,12 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:seatu_ersih/app/pages/features/data_pelanggan/widget/textfieldata.dart';
+import 'package:seatu_ersih/app/pages/features/data_pelanggan_reg/widget/textfieldata.dart';
 import 'package:seatu_ersih/themes/colors.dart';
 import 'package:seatu_ersih/themes/fonts.dart';
 
-class DataPelangganView extends StatelessWidget {
-  const DataPelangganView({super.key});
+class DataPelangganDeepView extends StatelessWidget {
+  const DataPelangganDeepView({super.key});
 
   @override
   Widget build(BuildContext context) {

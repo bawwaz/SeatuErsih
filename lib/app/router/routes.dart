@@ -45,6 +45,7 @@
 part of 'app_pages.dart';
 
 class Routes {
+  static const String DATA_PELANGGAN_DEEP = '/datapelanggandeep';
   static const String HOME = '/home';
   static const String LOGIN = '/log';
   static const String REGIS = '/regis';
