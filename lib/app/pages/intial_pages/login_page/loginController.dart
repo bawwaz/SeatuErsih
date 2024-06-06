@@ -13,6 +13,8 @@ class LoginPageController extends GetxController {
   var isLoading = false.obs;
   GetStorage box = GetStorage();
 
+  var user = {}.obs; // Add this line
+
   Future<void> login() async {
     isLoading.value = true;
     final url = 'http://seatuersih.pradiptaahmad.tech/api';
@@ -26,21 +28,23 @@ class LoginPageController extends GetxController {
 
     try {
       var response = await http.post(
-        Uri.parse("$url/users/login"),
+        Uri.parse("$url/admins/login"),
         headers: headers,
         body: data,
       );
 
       if (response.statusCode == 200) {
         final token = json.decode(response.body)['token'];
-        final user = json.decode(response.body)['user'];
+        final userData = json.decode(response.body)['user'];
       
         box.write("token", token);
-        box.write("username", user['username']);
+        box.write("username", userData['username']);
+
+        user.value = userData; // Store user data
 
         Get.snackbar(
           "Login Successful",
-          "Welcome ${user['username']}",
+          "Welcome ${userData['username']}",
           snackPosition: SnackPosition.TOP,
         );
         isLoading.value = false;
