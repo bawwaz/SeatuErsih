@@ -59,7 +59,9 @@ class ChooseService extends StatelessWidget {
               ),
               SizedBox(height: 20),
               ServiceContainer(
-                onPressed: () {},
+                onPressed: () {
+                  Get.toNamed(Routes.DATA_PELANGGAN_DEEP);
+                },
                 title: 'Deep Clean',
                 description:
                     'Proses pembersihan standar untuk sepatu yang meliputi beberapa langkah dasar untuk menghilangkan kotoran, noda, dan bau yang menempel pada sepatu.',

@@ -8,7 +8,9 @@ import 'package:seatu_ersih/app/pages/features/checkout_Animation/animationBindi
 import 'package:seatu_ersih/app/pages/features/checkout_Order/checkout_order_binding.dart';
 import 'package:seatu_ersih/app/pages/features/choose_service/choose_service_binding.dart';
 import 'package:seatu_ersih/app/pages/features/choose_service/choose_service_view.dart';
-import 'package:seatu_ersih/app/pages/features/data_pelanggan/data_pelanggan_view.dart';
+import 'package:seatu_ersih/app/pages/features/data_pelanggan_deep/data_pelanggan_view_deep.dart';
+import 'package:seatu_ersih/app/pages/features/data_pelanggan_reg/data_pelanggan_binding_reg.dart';
+import 'package:seatu_ersih/app/pages/features/data_pelanggan_reg/data_pelanggan_view_reg.dart';
 import 'package:seatu_ersih/app/pages/features/payment_history_page/paymenthistoryBinding.dart';
 import 'package:seatu_ersih/app/pages/features/payment_history_page/paymenthistoryView.dart';
 import 'package:seatu_ersih/app/pages/features/order_booking_deep/order_booking_deepBinding.dart';
@@ -153,7 +155,13 @@ class AppPages {
         transition: Transition.noTransition),
     GetPage(
         name: Routes.DATA_PELANGGAN_REG,
-        page: () => DataPelangganView(),
+        page: () => DataPelangganRegView(),
+        binding: DataPelangganRegBinding(),
+        transition: Transition.noTransition),
+    GetPage(
+        name: Routes.DATA_PELANGGAN_DEEP,
+        page: () => DataPelangganDeepView(),
+        binding: DataPelangganRegBinding(),
         transition: Transition.noTransition),
   ];
 }
