@@ -51,7 +51,9 @@ class HomeBody extends GetView<ProfileController> {
                 child: Padding(
               padding: const EdgeInsets.only(top: 100.0),
               child: InkWell(
-                onTap: () {},
+                onTap: () {
+                  Get.toNamed(Routes.CHOOSE_SERVICE);
+                },
                 child: OrderService(),
               ),
             ))
@@ -72,7 +74,6 @@ class HomeBody extends GetView<ProfileController> {
               style: Fonts.header1.copyWith(color: Colors.black),
             ),
           ),
-          
           Center(child: ImgIfEmpty()),
         ],
       ),

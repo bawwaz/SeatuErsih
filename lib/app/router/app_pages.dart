@@ -6,6 +6,9 @@ import 'package:seatu_ersih/app/pages/features/address_detail_page/address_detai
 import 'package:seatu_ersih/app/pages/features/address_detail_page/address_detail_view.dart';
 import 'package:seatu_ersih/app/pages/features/checkout_Animation/animationBinding.dart';
 import 'package:seatu_ersih/app/pages/features/checkout_Order/checkout_order_binding.dart';
+import 'package:seatu_ersih/app/pages/features/choose_service/choose_service_binding.dart';
+import 'package:seatu_ersih/app/pages/features/choose_service/choose_service_view.dart';
+import 'package:seatu_ersih/app/pages/features/data_pelanggan/data_pelanggan_view.dart';
 import 'package:seatu_ersih/app/pages/features/payment_history_page/paymenthistoryBinding.dart';
 import 'package:seatu_ersih/app/pages/features/payment_history_page/paymenthistoryView.dart';
 import 'package:seatu_ersih/app/pages/features/order_booking_deep/order_booking_deepBinding.dart';
@@ -40,6 +43,12 @@ class AppPages {
   static const INITIAL = Routes.ONBOARDING;
 
   static final routes = [
+    GetPage(
+      name: Routes.CHOOSE_SERVICE,
+      page: () => ChooseService(),
+      binding: ChooseServiceBinding(),
+      transition: Transition.noTransition,
+    ),
     GetPage(
       name: Routes.HOME,
       page: () => HomePage(),
@@ -141,6 +150,10 @@ class AppPages {
     GetPage(
         name: Routes.ONBOARDING,
         page: () => OnBoarding(),
+        transition: Transition.noTransition),
+    GetPage(
+        name: Routes.DATA_PELANGGAN_REG,
+        page: () => DataPelangganView(),
         transition: Transition.noTransition),
   ];
 }
