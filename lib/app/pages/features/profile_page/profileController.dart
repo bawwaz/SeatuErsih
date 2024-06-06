@@ -1,17 +1,26 @@
+import 'dart:convert';
+
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:seatu_ersih/app/api/auth/authentication_service.dart';
 import 'package:seatu_ersih/app/router/app_pages.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:http/http.dart' as http;
 
 class ProfileController extends GetxController {
   var username = ''.obs;
   var phoneNumber = ''.obs;
   late AuthenticationService authenticationService;
   var email = ''.obs;
+  var isLoading = false.obs;
+
+  final users = {}.obs;
+  final box = GetStorage();
+  final url = 'http://seatuersih.pradiptaahmad.tech/api';
 
   @override
   void onInit() {
+    fetchUser();
     super.onInit();
     loadProfile();
     authenticationService = AuthenticationService();
@@ -40,4 +49,29 @@ class ProfileController extends GetxController {
     }
     email.value = box.read('email') ?? 'No email'; // Access box variable here
   }
+
+  Future<void> fetchUser() async {
+    isLoading.value = true;
+    final token = box.read('token');
+    try {
+      var headers = {
+        'Accept': 'application/json',
+        'Authorization': 'Bearer $token',
+      };
+
+      final response =
+          await http.get(Uri.parse('$url/users/me'), headers: headers);
+      if (response.statusCode == 200) {
+        final jsonData = json.decode(response.body)['user'];
+        users.value = jsonData;
+        isLoading.value = false;
+      } else {
+        print("Failed to fetch user");
+      }
+    } catch (e) {
+      print("Fetch user error: $e");
+    }
+  }
+
+  
 }

@@ -5,18 +5,19 @@ import 'package:seatu_ersih/app/pages/intial_pages/login_page/loginController.da
 import 'package:seatu_ersih/app/router/app_pages.dart';
 import 'package:seatu_ersih/app/pages/intial_pages/login_page/widget/login_Icon.dart';
 import 'package:seatu_ersih/app/pages/intial_pages/login_page/widget/login_forget_password.dart';
-import 'package:seatu_ersih/app/pages/intial_pages/login_page/widget/login_input_password.dart';
-import 'package:seatu_ersih/app/pages/intial_pages/login_page/widget/login_input_username.dart';
+import 'package:seatu_ersih/app/pages/intial_pages/login_page/widget/auth_textfield.dart';
 import 'package:seatu_ersih/app/pages/intial_pages/login_page/widget/login_sign.dart';
 import 'package:seatu_ersih/app/pages/intial_pages/login_page/widget/login_sign_google.dart';
+import 'package:seatu_ersih/themes/theme.dart';
 
-class LoginPage extends StatelessWidget {
-  final LoginPageController controller = Get.put(LoginPageController());
-
+class LoginPage extends GetView<LoginPageController> {
   LoginPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    final emailKey = GlobalKey<FormState>();
+    final passwordKey = GlobalKey<FormState>();
+
     return Scaffold(
       body: Container(
         margin: EdgeInsets.all(28),
@@ -53,21 +54,45 @@ class LoginPage extends StatelessWidget {
               SizedBox(
                 height: 20,
               ),
-              SizedBox(
-                width: double.infinity,
-                height: 53,
-                child: InputUsername(
-                  onChanged: (value) => controller.email.value = value,
+              AuthTextField(
+                formKey: emailKey,
+                hintText: "Email",
+                validator: (value) {
+                  if (value == null || value.isEmpty) {
+                    return 'Email tidak boleh kosong';
+                  } else if (GetUtils.isEmail(value) == false) {
+                    return 'Email tidak valid';
+                  }
+                  controller.email.value = value;
+                  return null;
+                },
+                prefixIcon: Icon(
+                  Icons.email,
+                  size: 25,
+                  color: darkGrey,
                 ),
               ),
               SizedBox(
                 height: 20,
               ),
-              SizedBox(
-                width: double.infinity,
-                height: 53,
-                child: InputPassword(
-                  onChanged: (value) => controller.password.value = value,
+              AuthTextField(
+                formKey: passwordKey,
+                hintText: "Password",
+                obsecureText: true,
+                validator: (value) {
+                  if (value == null || value.isEmpty) {
+                    return 'Password tidak boleh kosong';
+                  } else {
+                    controller.password.value = value;
+                  }
+                  ;
+
+                  return null;
+                },
+                prefixIcon: Icon(
+                  Icons.lock,
+                  size: 25,
+                  color: darkGrey,
                 ),
               ),
               Align(
@@ -80,8 +105,15 @@ class LoginPage extends StatelessWidget {
               Center(
                 child: SizedBox(
                   width: double.infinity,
-                  height: 45,
-                  child: SignIn(),
+                  height: 50,
+                  child: SignIn(
+                    onPressed: () {
+                      if (emailKey.currentState!.validate() &&
+                          passwordKey.currentState!.validate()) {
+                        controller.login();
+                      }
+                    },
+                  ),
                 ),
               ),
               SizedBox(

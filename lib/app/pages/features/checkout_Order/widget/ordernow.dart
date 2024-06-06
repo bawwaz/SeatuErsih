@@ -4,12 +4,11 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:seatu_ersih/app/pages/features/checkout_Order/checkout_order_Controller.dart';
 import 'package:seatu_ersih/app/router/app_pages.dart';
 
-class ordernow extends StatelessWidget {
+class ordernow extends GetView<CheckoutController> {
   const ordernow({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    final CheckoutController controller = Get.find();
 
     return Container(
       width: 305,
@@ -82,8 +81,8 @@ class ordernow extends StatelessWidget {
                     left: 0,
                     top: 0,
                     child: InkWell(
-                      onTap: () {
-                        Get.toNamed(Routes.CHECKOUT_ANIMATION);
+                      onTap: () async {
+                        controller.createOrder();
                       },
                       child: Container(
                         width: 123,
@@ -99,16 +98,18 @@ class ordernow extends StatelessWidget {
                   Positioned(
                     left: 14,
                     top: 11,
-                    child: Text(
-                      'Place order',
-                      style: TextStyle(
-                        color: Colors.black,
-                        fontSize: 12,
-                        fontFamily: 'Poppins',
-                        fontWeight: FontWeight.w700,
-                        height: 0,
-                      ),
-                    ),
+                    child: Obx(() => Text(
+                          controller.isLoading.value
+                              ? "Loading..."
+                              : "Place Order",
+                          style: TextStyle(
+                            color: Colors.black,
+                            fontSize: 12,
+                            fontFamily: 'Poppins',
+                            fontWeight: FontWeight.w700,
+                            height: 0,
+                          ),
+                        )),
                   ),
                   Positioned(
                     left: 90,
