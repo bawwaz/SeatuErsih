@@ -82,7 +82,7 @@ class ordernow extends GetView<CheckoutController> {
                     top: 0,
                     child: InkWell(
                       onTap: () async {
-                        controller.createOrder();
+                        Get.offAllNamed(Routes.CHECKOUT_ANIMATION);
                       },
                       child: Container(
                         width: 123,

@@ -96,19 +96,55 @@ class _DetailBodyState extends State<DetailBody> {
                         child: Center(
                           child: Container(
                             decoration: BoxDecoration(
-                                color: Colors.white,
-                                borderRadius: BorderRadius.only(
-                                  topLeft: Radius.circular(10),
-                                  topRight: Radius.circular(10),
-                                ),
-                                boxShadow: [
-                                  BoxShadow(
-                                    color: Colors.black,
-                                    blurRadius: 1,
-                                    offset: Offset(0, 3),
-                                  )
-                                ]),
-                            child: Container(),
+                              color: Colors.white,
+                              borderRadius: BorderRadius.only(
+                                topLeft: Radius.circular(10),
+                                topRight: Radius.circular(10),
+                              ),
+                              boxShadow: [
+                                BoxShadow(
+                                  color: Colors.black,
+                                  blurRadius: 1,
+                                  offset: Offset(0, 3),
+                                )
+                              ],
+                            ),
+                            child: Padding(
+                              padding: const EdgeInsets.all(16.0),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    'Receipt',
+                                    style: GoogleFonts.poppins(
+                                      fontSize: 18,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
+                                  SizedBox(height: 10),
+                                  Text(
+                                    'Regular Clean: \Rp 25000',
+                                    style: GoogleFonts.poppins(
+                                      fontSize: 16,
+                                    ),
+                                  ),
+                                  Text(
+                                    'Sepatu: x 2',
+                                    style: GoogleFonts.poppins(
+                                      fontSize: 16,
+                                    ),
+                                  ),
+                                  Divider(color: Colors.black),
+                                  Text(
+                                    'Total: \Rp 50000',
+                                    style: GoogleFonts.poppins(
+                                      fontSize: 16,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
                           ),
                         ),
                       ),
