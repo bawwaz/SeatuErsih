@@ -10,27 +10,25 @@ class ButtonNext extends GetView<OrderBookingRegularController> {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.only(top: 100),
-      child: Align(
-        alignment: Alignment.centerRight,
-        child: InkWell(
-          onTap: () {
-            Get.toNamed(Routes.CHECKOUT, arguments: [controller.shoes, controller.dates.value]);
-          },
-          child: Container(
-            width: 68,
-            height: 29,
-            decoration: BoxDecoration(
-              color: Color(0xFF7EC1EB),
-              borderRadius: BorderRadius.circular(5),
-            ),
-            child: Center(
-              child: Icon(
-                Icons.east,
-                color: Colors.white,
-              ),
-            ),
+    return InkWell(
+      onTap: () {
+        Get.toNamed(Routes.CHECKOUT, arguments: [
+          controller.shoes,
+          controller.dates.value,
+          controller.address.value  
+        ]);
+      },
+      child: Container(
+        width: 80,
+        height: 40,
+        decoration: BoxDecoration(
+          color: Color(0xFF7EC1EB),
+          borderRadius: BorderRadius.circular(5),
+        ),
+        child: Center(
+          child: Icon(
+            Icons.east,
+            color: Colors.white,
           ),
         ),
       ),

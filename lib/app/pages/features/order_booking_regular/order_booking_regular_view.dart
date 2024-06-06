@@ -15,6 +15,10 @@ class OrderBookingRegularView extends GetView<OrderBookingRegularController> {
 
   @override
   Widget build(BuildContext context) {
+
+    // Instantiate the DateController
+
+
     return Scaffold(
       backgroundColor: Color(0xFFFFFFFF),
       body: Container(
@@ -156,7 +160,7 @@ class OrderBookingRegularView extends GetView<OrderBookingRegularController> {
                                 padding:
                                     const EdgeInsets.only(top: 10, left: 27),
                                 child: Text(
-                                  "Note",
+                                  "Alamat",
                                   style: GoogleFonts.poppins(
                                     color: Color(0xFF000000),
                                     fontWeight: FontWeight.bold,
@@ -168,7 +172,7 @@ class OrderBookingRegularView extends GetView<OrderBookingRegularController> {
                                 padding:
                                     const EdgeInsets.only(top: 2, left: 27),
                                 child: Text(
-                                  "(Ciri ciri sepatu anda dan instruksi laundry)",
+                                  "(Isi dengan alamat aslimu)",
                                   style: GoogleFonts.poppins(
                                     color: Color(0xFF6C6C6C),
                                     fontWeight: FontWeight.w500,
@@ -177,9 +181,9 @@ class OrderBookingRegularView extends GetView<OrderBookingRegularController> {
                                 ),
                               ),
                               InputNote(onchanged: (value) {
-                                controller.notes.value = value!;
+                                controller.address.value = value!;
                               }),
-                              Address(),
+                              // Address(),
                             ],
                           ),
                         ),
@@ -199,11 +203,15 @@ class OrderBookingRegularView extends GetView<OrderBookingRegularController> {
                   ),
                 ),
               ),
-              ButtonNext(),
+             
             ],
           ),
         ),
       ),
+      floatingActionButton:
+          Container(padding: EdgeInsets.all(20), child: ButtonNext()),
+      floatingActionButtonLocation: FloatingActionButtonLocation.endDocked,
+      resizeToAvoidBottomInset: false,
     );
   }
 }

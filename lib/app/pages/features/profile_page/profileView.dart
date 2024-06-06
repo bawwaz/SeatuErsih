@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:seatu_ersih/app/router/app_pages.dart';
+import 'package:seatu_ersih/themes/theme.dart';
 import 'profileController.dart';
 
 class ProfilePage extends GetView<ProfileController> {
@@ -40,96 +42,82 @@ class ProfilePage extends GetView<ProfileController> {
                     ),
                   )),
             ),
-            SizedBox(height: 9),
-            Center(
-              child: Obx(() => Text(
-                    controller.email
-                        .value, // Access email through controller instance
-                    style: GoogleFonts.poppins(
-                      color: Color(0xFF616161),
-                      fontWeight: FontWeight.w600,
-                      fontSize: 12,
+            SizedBox(height: 25),
+            Container(
+              width: double.infinity,
+              padding: EdgeInsets.all(15),
+              alignment: Alignment.topLeft,
+              decoration: BoxDecoration(
+                  color: Colors.white,
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.grey.withOpacity(0.5),
+                      spreadRadius: 1,
+                      blurRadius: 5,
+                      offset: Offset(0, 3),
                     ),
+                  ],
+                  borderRadius: BorderRadius.circular(10)),
+              child: Obx(() => Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        "Nama Pengguna",
+                        style: tsBodyMediumMedium(Colors.black),
+                      ),
+                      Text(
+                        controller.isLoading.value
+                            ? "Loading..."
+                            : controller.users['username'],
+                        style: tsBodyMediumMedium(darkGrey),
+                      ),
+                      SizedBox(
+                        height: 10,
+                      ),
+                      Text(
+                        "Email",
+                        style: tsBodyMediumMedium(Colors.black),
+                      ),
+                      Text(
+                        controller.isLoading.value
+                            ? "Loading..."
+                            : controller.users['email'],
+                        style: tsBodyMediumMedium(darkGrey),
+                      ),
+                      SizedBox(
+                        height: 10,
+                      ),
+                      Text(
+                        "Nomor Telepon",
+                        style: tsBodyMediumMedium(Colors.black),
+                      ),
+                      Text(
+                        controller.isLoading.value
+                            ? "Loading..."
+                            : controller.users['phone'],
+                        style: tsBodyMediumMedium(darkGrey),
+                      ),
+                    ],
                   )),
             ),
-            SizedBox(height: 58),
-            Center(
+            SizedBox(
+              height: 15,
+            ),
+            GestureDetector(
               child: Container(
-                width: 305,
-                height: 50,
+                height: 55,
+                width: double.infinity,
+                alignment: Alignment.center,
                 decoration: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.circular(5),
-                  border: Border.all(
-                    color: Color(0xFF292929),
-                    width: 1,
-                  ),
+                  color: Colors.red,
+                  borderRadius: BorderRadius.circular(10),
                 ),
-                child: Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 20),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Icon(
-                        Icons.bookmark,
-                        color: Color(0xFF7EC1EB),
-                      ),
-                      Obx(() => Text(
-                            controller.email
-                                .value, // Access email through controller instance
-                            style: GoogleFonts.poppins(
-                              color: Color(0xFF000000),
-                              fontWeight: FontWeight.w600,
-                              fontSize: 12,
-                            ),
-                          )),
-                      Icon(Icons.arrow_forward_ios),
-                    ],
-                  ),
+                child: Text(
+                  "Logout",
+                  style: tsBodyMediumBold(Colors.white),
                 ),
               ),
-            ),
-            SizedBox(height: 20),
-            Center(
-              child: Container(
-                width: 305,
-                height: 50,
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.circular(5),
-                  border: Border.all(
-                    color: Color(0xFF292929),
-                    width: 1,
-                  ),
-                ),
-                child: Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 20),
-                  child: InkWell(
-                    onTap: () {
-                      Get.toNamed(Routes.PROFILE_INFO);
-                    },
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Icon(
-                          Icons.info,
-                          color: Color(0xFF7EC1EB),
-                        ),
-                        Text(
-                          "Informasi",
-                          style: GoogleFonts.poppins(
-                            color: Color(0xFF000000),
-                            fontWeight: FontWeight.w600,
-                            fontSize: 12,
-                          ),
-                        ),
-                        Icon(Icons.arrow_forward_ios),
-                      ],
-                    ),
-                  ),
-                ),
-              ),
-            ),
+            )
           ],
         ),
       ),

@@ -12,8 +12,9 @@ class receipt extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.only(top: 15.0),
       child: Container(
-        height: 400,
-        width: 265,
+
+        margin: EdgeInsets.symmetric(horizontal: 50),
+        padding: EdgeInsets.symmetric(horizontal: 20, vertical: 20),
         decoration: BoxDecoration(
           color: Colors.white,
           borderRadius: BorderRadius.circular(10), // Border radius

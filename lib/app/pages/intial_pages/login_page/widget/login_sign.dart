@@ -4,17 +4,14 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:seatu_ersih/app/pages/intial_pages/login_page/loginController.dart';
 
 
-class SignIn extends StatelessWidget {
-  final LoginPageController controller = Get.put(LoginPageController());
-
-  SignIn({Key? key}) : super(key: key);
+class SignIn extends GetView<LoginPageController> {
+  final void Function()? onPressed;
+  SignIn({Key? key, this.onPressed}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return ElevatedButton(
-      onPressed: () {
-        controller.login();
-      },
+      onPressed: onPressed,
       style: ElevatedButton.styleFrom(
         backgroundColor: Color(0xFF7EC1EB),
         shape: RoundedRectangleBorder(

@@ -18,6 +18,7 @@ class OrderBookingRegularController extends GetxController {
   final List<dynamic> shoes = [].obs;
   var shoesName = "".obs;
   var dates = "".obs;
+  var address = "".obs;
   final List<dynamic> date = [].obs;
   final textShoesControlller = TextEditingController();
 
@@ -44,7 +45,7 @@ class OrderBookingRegularController extends GetxController {
 
       if (response.statusCode == 200) {
         print('Shoes added successfully');
-        getShoes(); // Assuming getShoes is defined elsewhere in your code
+        // getShoes(); // Assuming getShoes is defined elsewhere in your code
       } else {
         print('Failed to add shoes: ${response.statusCode}');
         print('Response body: ${response.body}');
@@ -55,35 +56,36 @@ class OrderBookingRegularController extends GetxController {
     }
   }
 
-  Future<void> getShoes() async {
-    final token = box.read('token');
 
-    var headers = {
-      'Accept': 'application/json',
-      'Authorization': 'Bearer $token'
-    };
-    try {
-      final response = await http.get(Uri.parse("$url/shoe/all"), headers: headers);
+  // Future<void> getShoes() async {
+  //   final token = box.read('token');
 
-      if (response.statusCode == 200) {
-        final data = json.decode(response.body)['data'];
-        shoes.clear(); // Clear the list before adding new items
-        for (var item in data) {
-          shoes.add({
-            'name': item['name'],
-            'addons': item['addons'],
-            'order_id': item['order_id'],
-          });
-        }
-      } else {
-        print('Failed to fetch shoes: ${response.statusCode}');
-        print('Response body: ${response.body}');
-        throw Exception('Failed to fetch shoes');
-      }
-    } catch (e) {
-      print(e);
-    }
-  }
+  //   var headers = {
+  //     'Accept': 'application/json',
+  //     'Authorization': 'Bearer $token'
+  //   };
+  //   try {
+  //     final response =
+  //         await http.get(Uri.parse("$url/shoe/all"), headers: headers);
+
+  //     if (response.statusCode == 200) {
+  //       final data = json.decode(response.body)['data'];
+  //       for (var item in data) {
+  //         shoes.add({
+  //           'name': item['name'],
+  //           'addons': item['addons'],
+  //           'order_id': item['order_id'],
+  //         });
+  //       }
+  //     } else {
+  //       print('Failed to fetch shoes: ${response.statusCode}');
+  //       print('Response body: ${response.body}');
+  //       throw Exception('Failed to fetch shoes');
+  //     }
+  //   } catch (e) {
+  //     print(e);
+  //   }
+  // }
 
   Future<void> selectDate(BuildContext context) async {
     DateTime? selectedDate = await showDatePicker(
@@ -103,13 +105,12 @@ class OrderBookingRegularController extends GetxController {
     shoes.add({
       'name': textShoesControlller.text,
       'addons': "Jahit, De-Yellowing,",
-      'order_id': 1,
     });
   }
 
   @override
   void onInit() {
-    getShoes();
+    // getShoes();
     super.onInit();
   }
 

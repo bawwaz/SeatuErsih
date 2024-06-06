@@ -5,14 +5,16 @@ import 'package:http/http.dart' as http;
 import 'package:seatu_ersih/app/router/app_pages.dart';
 
 class LoginPageController extends GetxController {
-  var isObsecure = false.obs;
+  var isObsecure = true.obs;
 
   var email = ''.obs;
   var password = ''.obs;
 
+  var isLoading = false.obs;
   GetStorage box = GetStorage();
 
   Future<void> login() async {
+    isLoading.value = true;
     final url = 'http://seatuersih.pradiptaahmad.tech/api';
     var data = {
       'email': email.value,
@@ -41,6 +43,7 @@ class LoginPageController extends GetxController {
           "Welcome ${user['username']}",
           snackPosition: SnackPosition.TOP,
         );
+        isLoading.value = false;
         Get.offNamed(Routes.PROFILE);
       } else {
         final message =
@@ -50,6 +53,7 @@ class LoginPageController extends GetxController {
           message,
           snackPosition: SnackPosition.TOP,
         );
+        isLoading.value = false;
       }
     } catch (e) {
       Get.snackbar(
@@ -57,6 +61,7 @@ class LoginPageController extends GetxController {
         "An error occurred. Please try again.",
         snackPosition: SnackPosition.TOP,
       );
+      isLoading.value = false;
     }
   }
 
