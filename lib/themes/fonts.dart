@@ -23,7 +23,7 @@ class Fonts {
 
   static TextStyle header2 = GoogleFonts.poppins(
     fontSize: 18,
-    fontWeight: FontWeight.w200,
+    fontWeight: FontWeight.w400,
   );
 
   static TextStyle headerBlack = GoogleFonts.poppins(

@@ -62,4 +62,6 @@ class Routes {
   static const String PROFILE_INFO = '/profile_info';
   static const String HISTORY_PAYMENT = '/historypayment';
   static const String ONBOARDING = '/onboarding';
+  static const String DATA_PELANGGAN_REG = '/datapelangganreg';
+  static const String CHOOSE_SERVICE = '/choose_service';
 }
