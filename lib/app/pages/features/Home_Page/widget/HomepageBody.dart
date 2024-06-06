@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:seatu_ersih/app/pages/features/Home_Page/widget/bannerstatus.dart';
 import 'package:seatu_ersih/themes/colors.dart';
 import 'package:seatu_ersih/themes/fonts.dart';
 import 'package:seatu_ersih/app/pages/features/Home_Page/widget/Banner.dart';
@@ -39,17 +41,31 @@ class HomeBody extends StatelessWidget {
           ),
           Center(
               child: Padding(
-            padding: const EdgeInsets.only(top: 150.0),
-            child: Products(),
+            padding: const EdgeInsets.only(top: 150.0, left: 15),
+            child: banner(),
           ))
         ]),
         SizedBox(
-          height: 50,
+          height: 20,
         ),
         Center(
           child: Padding(
             padding: const EdgeInsets.only(left: 15.0),
-            child: banner(),
+            child: Products(),
+          ),
+        ),
+        SizedBox(
+          height: 45,
+        ),
+        Center(
+          child: Container(
+            width: 360,
+            height: 71,
+            decoration: BoxDecoration(
+              color: Color(0xFFC6EAFF),
+              borderRadius: BorderRadius.circular(10),
+            ),
+            child: Bannerstatus(),
           ),
         ),
       ],
