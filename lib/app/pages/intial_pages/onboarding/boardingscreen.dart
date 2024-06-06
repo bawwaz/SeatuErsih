@@ -52,7 +52,7 @@ class _OnBoardingState extends State<OnBoarding> {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Text(
-            "Higenitas pakaian sangat lah penting untuk kantor sekolah & sehari-hari, tidak perlu merepotkan diri sendiri dengan jasa kami",
+            "Higenitas pakaian sangat lah penting untuk lingkungan kantor sekolah & sehari-hari, tidak perlu merepotkan diri sendiri dengan jasa kami",
             style: Fonts.onboarding,
             textAlign: TextAlign.center,
           ),
