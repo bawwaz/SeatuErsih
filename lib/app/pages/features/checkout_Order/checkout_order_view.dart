@@ -3,7 +3,6 @@ import 'package:get/get.dart';
 import 'package:seatu_ersih/app/pages/features/checkout_Order/checkout_order_Controller.dart';
 import 'package:seatu_ersih/app/pages/features/checkout_Order/widget/ordernow.dart';
 import 'package:seatu_ersih/app/pages/features/checkout_Order/widget/checkout_receipt.dart';
-import 'package:seatu_ersih/app/router/app_pages.dart';
 
 class Checkout extends GetView<CheckoutController> {
   const Checkout({super.key});

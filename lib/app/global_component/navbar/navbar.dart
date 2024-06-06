@@ -2,8 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:seatu_ersih/app/global_component/navbar/btmnavcontroller.dart';
 import 'package:seatu_ersih/app/pages/features/Home_Page/HomepageView.dart';
-import 'package:seatu_ersih/app/pages/features/mutasi_page/paymenthistoryView.dart';
-import 'package:seatu_ersih/app/pages/features/order_booking_deep/order_booking_deep_view.dart';
+import 'package:seatu_ersih/app/pages/features/payment_history_page/paymenthistoryView.dart';
 import 'package:seatu_ersih/themes/colors.dart';
 import 'package:seatu_ersih/app/pages/features/orderstatus/order_status.dart';
 
@@ -13,7 +12,7 @@ class BottomNavBar extends StatelessWidget {
 
   final List<Widget> pages = [
     HomePage(),
-    paymentHistory(),
+    PaymentHistory(),
     myorder(),
   ];
 
@@ -32,7 +31,8 @@ class BottomNavBar extends StatelessWidget {
           items: const [
             BottomNavigationBarItem(
                 icon: Icon(Icons.home_rounded), label: 'Home'),
-            BottomNavigationBarItem(icon: Icon(Icons.history), label: 'Mutasi'),
+            BottomNavigationBarItem(
+                icon: Icon(Icons.history), label: 'History'),
             BottomNavigationBarItem(
                 icon: Icon(Icons.local_laundry_service), label: 'My Orders'),
           ],
