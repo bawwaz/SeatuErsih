@@ -73,10 +73,13 @@ class DeepCleanListView extends StatelessWidget {
                                 fontSize: 16,
                               ),
                             ),
+                            SizedBox(
+                              width: 10,
+                            ),
                             Text(
                               "Addons : De-Yellowing, Semir",
                               style: GoogleFonts.poppins(
-                                fontWeight: FontWeight.w400,
+                                fontWeight: FontWeight.normal,
                                 color: Color(0xFF8A8A8A),
                                 fontSize: 14,
                               ),
@@ -84,7 +87,7 @@ class DeepCleanListView extends StatelessWidget {
                             Text(
                               "Note : Tolong bersihkan sole ...",
                               style: GoogleFonts.poppins(
-                                fontWeight: FontWeight.w400,
+                                fontWeight: FontWeight.normal,
                                 color: Color(0xFF8A8A8A),
                                 fontSize: 14,
                               ),
@@ -98,7 +101,11 @@ class DeepCleanListView extends StatelessWidget {
                               ),
                             ),
                           ],
-                        )
+                        ),
+                        SizedBox(
+                          width: 10,
+                        ),
+                        Icon(Icons.delete)
                       ],
                     ),
                   ),
