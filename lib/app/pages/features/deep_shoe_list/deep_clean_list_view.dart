@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:seatu_ersih/app/router/app_pages.dart';
 
 class DeepCleanListView extends StatelessWidget {
   const DeepCleanListView({super.key});
@@ -10,7 +12,9 @@ class DeepCleanListView extends StatelessWidget {
       appBar: AppBar(
         automaticallyImplyLeading: false,
         leading: InkWell(
-            onTap: () {},
+            onTap: () {
+              Get.toNamed(Routes.DATA_PELANGGAN_DEEP);
+            },
             child: Image.asset('assets/img/angle-circle-right 1.png')),
         centerTitle: true,
         title: Text(

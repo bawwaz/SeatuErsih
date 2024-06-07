@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:seatu_ersih/app/pages/features/add_ons_page/widget/button_tambah_sepatu.dart';
 import 'package:seatu_ersih/app/pages/features/add_ons_page/widget/list_view_addons.dart';
@@ -6,6 +7,7 @@ import 'package:seatu_ersih/app/pages/features/add_ons_page/widget/textfield_inp
 import 'package:seatu_ersih/app/pages/features/add_ons_page/widget/textfield_input_sepatu.dart';
 import 'package:seatu_ersih/app/pages/features/order_booking_regular/widget/add_ons.dart';
 import 'package:seatu_ersih/app/pages/features/order_booking_regular/widget/input_note.dart';
+import 'package:seatu_ersih/app/router/app_pages.dart';
 
 class AddOnsView extends StatelessWidget {
   const AddOnsView({super.key});
@@ -16,7 +18,9 @@ class AddOnsView extends StatelessWidget {
       appBar: AppBar(
         automaticallyImplyLeading: false,
         leading: InkWell(
-          onTap: () {},
+          onTap: () {
+            Get.toNamed(Routes.REG_CLEAN_LIST);
+          },
           child: Image.asset('assets/img/angle-circle-right 1.png'),
         ),
         centerTitle: true,
@@ -115,4 +119,3 @@ class AddOnsView extends StatelessWidget {
     );
   }
 }
-
