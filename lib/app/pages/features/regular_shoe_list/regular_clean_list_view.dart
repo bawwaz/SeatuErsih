@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:seatu_ersih/app/pages/features/regular_shoe_list/widget/reg_clean_list_container.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:seatu_ersih/app/router/app_pages.dart';
-import 'package:seatu_ersih/themes/colors.dart';
-import 'package:seatu_ersih/themes/fonts.dart';
 
 class RegCleanListView extends StatelessWidget {
   const RegCleanListView({super.key});
@@ -21,82 +19,148 @@ class RegCleanListView extends StatelessWidget {
         centerTitle: true,
         title: Text(
           'Regular Clean',
-          style: Fonts.header1.copyWith(color: Colors.black),
+          style: GoogleFonts.poppins(
+            fontWeight: FontWeight.w600,
+            color: Colors.black,
+            fontSize: 20,
+          ),
         ),
       ),
-      body: Container(
-        margin: EdgeInsets.symmetric(horizontal: 20),
-        child: Stack(
-          children: [
-            SingleChildScrollView(
-              child: Padding(
-                padding: const EdgeInsets.all(16.0),
-                child: Column(
-                  children: [
-                    // Add your actual form content or widgets here
-                    // Example form fields, replace with your actual widgets
-
-                    SizedBox(height: 80), // Add some space at the bottom
+      body: Column(
+        children: [
+          ListView.builder(
+            padding: EdgeInsets.all(20),
+            itemCount: 2,
+            itemBuilder: (context, index) {
+              return Container(
+                margin: EdgeInsets.only(bottom: 20),
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.grey.withOpacity(0.5),
+                      blurRadius: 5,
+                      offset: Offset(0, 0),
+                    ),
                   ],
+                  borderRadius: BorderRadius.circular(10),
                 ),
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.only(bottom: 67.0),
-              child: Align(
-                alignment: Alignment.bottomCenter,
-                child: SizedBox(
-                  width: double.infinity,
-                  height: 50,
-                  child: InkWell(
-                    onTap: () {},
-                    child: Container(
-                        width: double.infinity,
-                        height: 55,
+                height: 130,
+                width: double.infinity,
+                child: Padding(
+                  padding: const EdgeInsets.all(20),
+                  child: Row(
+                    children: [
+                      Container(
+                        height: 60,
+                        width: 60,
                         decoration: BoxDecoration(
-                          color: AppColors.lightGrey,
-                          borderRadius: BorderRadius.circular(10),
-                        ),
-                        child: Center(
-                          child: Text(
-                            'Tambah Sepatu',
-                            style: Fonts.slogan
-                                .copyWith(fontWeight: FontWeight.w500),
+                          image: DecorationImage(
+                            image: AssetImage('assets/img/icon-app.png'),
+                            fit: BoxFit.cover,
                           ),
-                        )),
+                        ),
+                      ),
+                      SizedBox(
+                        width: 20,
+                      ),
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text(
+                            "Nike",
+                            style: GoogleFonts.poppins(
+                              fontWeight: FontWeight.w600,
+                              color: Colors.black,
+                              fontSize: 16,
+                            ),
+                          ),
+                          Text(
+                            "Addons : De-Yellowing, Semir",
+                            style: GoogleFonts.poppins(
+                              fontWeight: FontWeight.normal,
+                              color: Color(0xFF8A8A8A),
+                              fontSize: 14,
+                            ),
+                          ),
+                          Text(
+                            "Note : Tolong bersihkan sole ...",
+                            style: GoogleFonts.poppins(
+                              fontWeight: FontWeight.normal,
+                              color: Color(0xFF8A8A8A),
+                              fontSize: 14,
+                            ),
+                          ),
+                          Text(
+                            "Rp. 30.000",
+                            style: GoogleFonts.poppins(
+                              fontWeight: FontWeight.w600,
+                              color: Colors.black,
+                              fontSize: 18,
+                            ),
+                          ),
+                        ],
+                      ),
+                      SizedBox(
+                          width: 10,
+                        ),
+                        Icon(Icons.delete)
+                    ],
                   ),
                 ),
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.only(bottom: 8.0),
-              child: Align(
-                alignment: Alignment.bottomCenter,
-                child: SizedBox(
-                  width: double.infinity,
-                  height: 50,
-                  child: InkWell(
-                    onTap: () {},
-                    child: Container(
-                        width: double.infinity,
-                        height: 55,
-                        decoration: BoxDecoration(
-                          color: AppColors.primaryColor,
-                          borderRadius: BorderRadius.circular(10),
+              );
+            },
+          ),
+          Padding(
+            padding: const EdgeInsets.all(20.0),
+            child: Column(
+              children: [
+                InkWell(
+                  onTap: () {},
+                  child: Container(
+                    height: 40,
+                    decoration: BoxDecoration(
+                      color: Color(0xFFC6EAFF),
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                    child: Center(
+                      child: Text(
+                        'Add Shoes',
+                        style: GoogleFonts.poppins(
+                          fontWeight: FontWeight.w600,
+                          color: Colors.white,
+                          fontSize: 16,
                         ),
-                        child: Center(
-                          child: Text(
-                            'Checkout - ',
-                            style: Fonts.slogan
-                                .copyWith(fontWeight: FontWeight.w500),
-                          ),
-                        )),
+                      ),
+                    ),
                   ),
                 ),
-              ),
+                SizedBox(height: 10),
+                InkWell(
+                  onTap: () {},
+                  child: Container(
+                    height: 50,
+                    decoration: BoxDecoration(
+                      color: Color(0xFF7EC1EB),
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                    child: Center(
+                      child: Text(
+                        'Checkout - 60.000',
+                        style: GoogleFonts.poppins(
+                          fontWeight: FontWeight.w600,
+                          color: Colors.white,
+                          fontSize: 18,
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+              ],
             ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }
