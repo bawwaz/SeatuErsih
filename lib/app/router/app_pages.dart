@@ -48,7 +48,7 @@ part 'routes.dart';
 class AppPages {
   AppPages._();
 
-  static const INITIAL = Routes.ONBOARDING;
+  static const INITIAL = Routes.REG_CLEAN_LIST;
 
   static final routes = [
     GetPage(
