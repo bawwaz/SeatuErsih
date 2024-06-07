@@ -4,6 +4,8 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:seatu_ersih/app/pages/features/Home_Page/widget/bannerstatus.dart';
 import 'package:seatu_ersih/app/pages/features/Home_Page/widget/ifempty.dart';
 import 'package:seatu_ersih/app/pages/features/Home_Page/widget/homepage_orders.dart';
+import 'package:seatu_ersih/app/pages/features/Home_Page/widget/ordercontainer.dart';
+import 'package:seatu_ersih/app/pages/features/orderstatus/widget/orderCards.dart';
 import 'package:seatu_ersih/app/pages/features/profile_page/profileController.dart';
 import 'package:seatu_ersih/app/router/app_pages.dart';
 import 'package:seatu_ersih/themes/colors.dart';
@@ -74,7 +76,10 @@ class HomeBody extends GetView<ProfileController> {
               style: Fonts.header1.copyWith(color: Colors.black),
             ),
           ),
-          Center(child: ImgIfEmpty()),
+          Center(
+              child: Container(
+                  margin: EdgeInsets.only(left: 20, right: 20),
+                  child: OrderContainer())),
         ],
       ),
     );

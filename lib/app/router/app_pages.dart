@@ -2,6 +2,8 @@ import 'package:get/get.dart';
 import 'package:seatu_ersih/app/pages/features/Home_Page/HomepageBinding.dart';
 import 'package:seatu_ersih/app/pages/features/add_address_page/add_address_binding.dart';
 import 'package:seatu_ersih/app/pages/features/add_address_page/add_address_view.dart';
+import 'package:seatu_ersih/app/pages/features/add_ons_page/add_ons_binding.dart';
+import 'package:seatu_ersih/app/pages/features/add_ons_page/add_ons_view.dart';
 import 'package:seatu_ersih/app/pages/features/address_detail_page/address_detail_binding.dart';
 import 'package:seatu_ersih/app/pages/features/address_detail_page/address_detail_view.dart';
 import 'package:seatu_ersih/app/pages/features/checkout_Animation/animationBinding.dart';
@@ -170,5 +172,9 @@ class AppPages {
         page: () => RegCleanListView(),
         binding: RegCleanListBinding(),
         transition: Transition.noTransition),
+    GetPage(
+        name: Routes.ADD_ONS,
+        page: () => AddOnsView(),
+        binding: AddOnsBinding()),
   ];
 }
