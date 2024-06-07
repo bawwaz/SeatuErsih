@@ -5,7 +5,7 @@ class ApiService {
   final String baseUrl = 'http://seatuersih.pradiptaahmad.tech/api';
 
   Future<void> registerUser(Map<String, String> data) async {
-    final url = Uri.parse('$baseUrl/admins/register');
+    final url = Uri.parse('$baseUrl/users/register');
     final response = await http.post(url, body: data, headers: {
       'Accept': 'application/json',
     });
@@ -23,7 +23,7 @@ class ApiService {
 
   Future<Map<String, dynamic>> getUserInfo() async {
     final url =
-        Uri.parse('$baseUrl/admins/login'); // Adjust the endpoint if necessary
+        Uri.parse('$baseUrl/users/login'); // Adjust the endpoint if necessary
     final response = await http.get(url, headers: {
       'Accept': 'application/json',
       // Add authentication headers if required, for example:

@@ -28,7 +28,7 @@ class LoginPageController extends GetxController {
 
     try {
       var response = await http.post(
-        Uri.parse("$url/admins/login"),
+        Uri.parse("$url/users/login"),
         headers: headers,
         body: data,
       );
@@ -36,7 +36,7 @@ class LoginPageController extends GetxController {
       if (response.statusCode == 200) {
         final token = json.decode(response.body)['token'];
         final userData = json.decode(response.body)['user'];
-      
+
         box.write("token", token);
         box.write("username", userData['username']);
 
