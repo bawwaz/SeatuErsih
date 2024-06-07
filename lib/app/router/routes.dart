@@ -68,4 +68,5 @@ class Routes {
   static const String ONBOARDING = '/onboarding';
   static const String DATA_PELANGGAN_REG = '/datapelangganreg';
   static const String CHOOSE_SERVICE = '/choose_service';
+  static const String PROFILE_EDIT = '/profile_edit';
 }
