@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:seatu_ersih/app/pages/features/Home_Page/widget/ordercontainer.dart';
+import 'package:seatu_ersih/app/router/app_pages.dart';
 import 'package:seatu_ersih/themes/fonts.dart';
 import 'package:seatu_ersih/app/pages/features/orderstatus/widget/orderCards.dart';
 
@@ -25,7 +27,12 @@ class myorder extends StatelessWidget {
             SizedBox(
               height: 2,
             ),
-            Center(child: OrderContainer()),
+            Center(
+                child: InkWell(
+                    onTap: () {
+                      Get.toNamed(Routes.ORDER_DETAIL);
+                    },
+                    child: OrderContainer())),
           ],
         ),
       ),
