@@ -21,7 +21,7 @@ class ChooseService extends StatelessWidget {
         ),
         title: Text(
           'Pilih Jasa',
-          style: Fonts.headerBlack,
+          style: Fonts.header1.copyWith(color: Colors.black),
         ),
         centerTitle: true,
       ),

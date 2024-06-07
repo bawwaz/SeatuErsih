@@ -1,7 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:get/get.dart';
 import 'package:seatu_ersih/app/pages/features/data_pelanggan_reg/widget/textfieldata.dart';
+import 'package:seatu_ersih/app/router/app_pages.dart';
 import 'package:seatu_ersih/themes/colors.dart';
 import 'package:seatu_ersih/themes/fonts.dart';
 
@@ -15,9 +17,13 @@ class DataPelangganRegView extends StatelessWidget {
         automaticallyImplyLeading: false,
         title: Text(
           'Data Pelanggan',
-          style: Fonts.headerBlack,
+          style: Fonts.header1.copyWith(color: Colors.black),
         ),
-        leading: Image.asset('assets/img/angle-circle-right 1.png'),
+        leading: InkWell(
+            onTap: () {
+              Get.toNamed(Routes.CHOOSE_SERVICE);
+            },
+            child: Image.asset('assets/img/angle-circle-right 1.png')),
         centerTitle: true,
       ),
       body: Container(
@@ -125,20 +131,25 @@ class DataPelangganRegView extends StatelessWidget {
               Padding(
                 padding: const EdgeInsets.only(top: 150.0),
                 child: GestureDetector(
-                  child: Container(
-                      width: double.infinity,
-                      height: 55,
-                      decoration: BoxDecoration(
-                        color: AppColors.primaryColor,
-                        borderRadius: BorderRadius.circular(10),
-                      ),
-                      child: Center(
-                        child: Text(
-                          'Next',
-                          style: Fonts.header1.copyWith(
-                              fontWeight: FontWeight.w100, fontSize: 18),
+                  child: InkWell(
+                    onTap: () {
+                      Get.toNamed(Routes.REG_CLEAN_LIST);
+                    },
+                    child: Container(
+                        width: double.infinity,
+                        height: 55,
+                        decoration: BoxDecoration(
+                          color: AppColors.primaryColor,
+                          borderRadius: BorderRadius.circular(10),
                         ),
-                      )),
+                        child: Center(
+                          child: Text(
+                            'Next',
+                            style: Fonts.header1.copyWith(
+                                fontWeight: FontWeight.w100, fontSize: 18),
+                          ),
+                        )),
+                  ),
                 ),
               ),
             ],

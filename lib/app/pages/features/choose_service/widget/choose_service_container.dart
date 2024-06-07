@@ -70,7 +70,7 @@ class ServiceContainer extends StatelessWidget {
               color: Colors.black54,
             ),
           ),
-          const SizedBox(height: 16), // Replace Spacer with SizedBox
+          const SizedBox(height: 16), 
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
