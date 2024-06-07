@@ -24,6 +24,8 @@ import 'package:seatu_ersih/app/pages/features/Home_Page/HomepageView.dart';
 import 'package:seatu_ersih/app/pages/features/checkout_Animation/success_animation.dart';
 import 'package:seatu_ersih/app/pages/features/checkout_Order/checkout_order_view.dart';
 import 'package:seatu_ersih/app/global_component/navbar/navbarBinding.dart';
+import 'package:seatu_ersih/app/pages/features/regular_shoe_list/regular_clean_list_binding.dart';
+import 'package:seatu_ersih/app/pages/features/regular_shoe_list/regular_clean_list_view.dart';
 import 'package:seatu_ersih/app/pages/features/saved_address_page/saved_address_binding.dart';
 import 'package:seatu_ersih/app/pages/features/saved_address_page/saved_address_view.dart';
 import 'package:seatu_ersih/app/pages/intial_pages/login_page/LoginpageView.dart';
@@ -162,6 +164,11 @@ class AppPages {
         name: Routes.DATA_PELANGGAN_DEEP,
         page: () => DataPelangganDeepView(),
         binding: DataPelangganRegBinding(),
+        transition: Transition.noTransition),
+    GetPage(
+        name: Routes.REG_CLEAN_LIST,
+        page: () => RegCleanListView(),
+        binding: RegCleanListBinding(),
         transition: Transition.noTransition),
   ];
 }

@@ -1,7 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:get/get.dart';
 import 'package:seatu_ersih/app/pages/features/data_pelanggan_reg/widget/textfieldata.dart';
+import 'package:seatu_ersih/app/router/app_pages.dart';
 import 'package:seatu_ersih/themes/colors.dart';
 import 'package:seatu_ersih/themes/fonts.dart';
 
@@ -17,7 +19,11 @@ class DataPelangganDeepView extends StatelessWidget {
           'Data Pelanggan',
           style: Fonts.headerBlack,
         ),
-        leading: Image.asset('assets/img/angle-circle-right 1.png'),
+        leading: InkWell(
+            onTap: () {
+              Get.toNamed(Routes.CHOOSE_SERVICE);
+            },
+            child: Image.asset('assets/img/angle-circle-right 1.png')),
         centerTitle: true,
       ),
       body: Container(
