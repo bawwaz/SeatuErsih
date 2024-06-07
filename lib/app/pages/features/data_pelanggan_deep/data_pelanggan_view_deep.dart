@@ -126,7 +126,7 @@ class DataPelangganDeepView extends StatelessWidget {
                 padding: const EdgeInsets.only(top: 150.0),
                 child: GestureDetector(
                   onTap: () {
-                    Get.toNamed(Routes.REG_CLEAN_LIST);
+                    Get.toNamed(Routes.DEEP_CLEAN_LIST);
                   },
                   child: Container(
                       width: double.infinity,
