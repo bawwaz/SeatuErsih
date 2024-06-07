@@ -17,7 +17,8 @@ class DataPelangganDeepView extends StatelessWidget {
         automaticallyImplyLeading: false,
         title: Text(
           'Data Pelanggan',
-          style: Fonts.headerBlack,
+          style: Fonts.header1.copyWith(
+              color: Colors.black, fontSize: 16, fontWeight: FontWeight.w500),
         ),
         leading: InkWell(
             onTap: () {
@@ -27,29 +28,23 @@ class DataPelangganDeepView extends StatelessWidget {
         centerTitle: true,
       ),
       body: Container(
-        margin: EdgeInsets.symmetric(horizontal: 15),
+        margin: EdgeInsets.symmetric(horizontal: 20),
         child: Padding(
           padding: const EdgeInsets.only(top: 40.0),
           child: Column(
             children: [
-              Padding(
-                padding: const EdgeInsets.only(left: 20.0),
-                child: Align(
-                  alignment: Alignment.centerLeft,
-                  child: Text(
-                    'Alamat',
-                    style: Fonts.header1.copyWith(color: Colors.black),
-                  ),
+              Align(
+                alignment: Alignment.centerLeft,
+                child: Text(
+                  'Alamat',
+                  style: Fonts.header1.copyWith(color: Colors.black),
                 ),
               ),
-              Padding(
-                padding: const EdgeInsets.only(left: 20.0),
-                child: Align(
-                  alignment: Alignment.centerLeft,
-                  child: Text(
-                    'Alamat lokasi pengambilan sepatu',
-                    style: Fonts.detail,
-                  ),
+              Align(
+                alignment: Alignment.centerLeft,
+                child: Text(
+                  'Alamat lokasi pengambilan sepatu',
+                  style: Fonts.detail,
                 ),
               ),
               SizedBox(
@@ -57,7 +52,7 @@ class DataPelangganDeepView extends StatelessWidget {
               ),
               TextFieldData(),
               Padding(
-                padding: const EdgeInsets.only(left: 20.0),
+                padding: const EdgeInsets.only(top: 20),
                 child: Align(
                   alignment: Alignment.centerLeft,
                   child: Text(
@@ -66,14 +61,11 @@ class DataPelangganDeepView extends StatelessWidget {
                   ),
                 ),
               ),
-              Padding(
-                padding: const EdgeInsets.only(left: 20.0),
-                child: Align(
-                  alignment: Alignment.centerLeft,
-                  child: Text(
-                    'No. Telephone',
-                    style: Fonts.detail,
-                  ),
+              Align(
+                alignment: Alignment.centerLeft,
+                child: Text(
+                  'No. Telephone',
+                  style: Fonts.detail,
                 ),
               ),
               SizedBox(
@@ -81,7 +73,7 @@ class DataPelangganDeepView extends StatelessWidget {
               ),
               TextFieldData(),
               Padding(
-                padding: const EdgeInsets.only(left: 20.0),
+                padding: const EdgeInsets.only(top: 20),
                 child: Align(
                   alignment: Alignment.centerLeft,
                   child: Text(
@@ -90,22 +82,27 @@ class DataPelangganDeepView extends StatelessWidget {
                   ),
                 ),
               ),
-              Padding(
-                padding: const EdgeInsets.only(left: 20.0),
-                child: Align(
-                  alignment: Alignment.centerLeft,
-                  child: Text(
-                    'Tanggal pengambillan',
-                    style: Fonts.detail,
-                  ),
+              Align(
+                alignment: Alignment.centerLeft,
+                child: Text(
+                  'Tanggal pengambillan',
+                  style: Fonts.detail,
                 ),
               ),
               SizedBox(
                 height: 7,
               ),
-              TextFieldData(),
+              Stack(children: [
+                TextFieldData(),
+                Positioned(
+                  left: 10,
+                  top: 15,
+                  child:
+                      InkWell(onTap: () {}, child: Icon(Icons.calendar_month)),
+                ),
+              ]),
               Padding(
-                padding: const EdgeInsets.only(left: 20.0),
+                padding: const EdgeInsets.only(top: 20),
                 child: Align(
                   alignment: Alignment.centerLeft,
                   child: Text(
@@ -114,14 +111,11 @@ class DataPelangganDeepView extends StatelessWidget {
                   ),
                 ),
               ),
-              Padding(
-                padding: const EdgeInsets.only(left: 20.0),
-                child: Align(
-                  alignment: Alignment.centerLeft,
-                  child: Text(
-                    'Berikan pesan tentang alamat mu',
-                    style: Fonts.detail,
-                  ),
+              Align(
+                alignment: Alignment.centerLeft,
+                child: Text(
+                  'Berikan pesan tentang alamat mu',
+                  style: Fonts.detail,
                 ),
               ),
               SizedBox(
@@ -131,6 +125,9 @@ class DataPelangganDeepView extends StatelessWidget {
               Padding(
                 padding: const EdgeInsets.only(top: 150.0),
                 child: GestureDetector(
+                  onTap: () {
+                    Get.toNamed(Routes.REG_CLEAN_LIST);
+                  },
                   child: Container(
                       width: double.infinity,
                       height: 55,
