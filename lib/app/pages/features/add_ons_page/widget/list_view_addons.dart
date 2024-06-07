@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:seatu_ersih/app/pages/features/add_ons_page/add_ons_controller.dart';
+import 'package:seatu_ersih/app/pages/features/add_ons_page/widget/addons_check_widget.dart';
 
-class Addons extends StatelessWidget {
+class Addons extends GetView<AddOnsController> {
   const Addons({
     super.key,
   });
@@ -11,7 +14,7 @@ class Addons extends StatelessWidget {
     return ListView.builder(
       shrinkWrap: true,
       physics: NeverScrollableScrollPhysics(),
-      itemCount: 4,
+      itemCount: controller.addOnsData.length,
       itemBuilder: (context, index) {
         return Container(
           margin: EdgeInsets.only(bottom: 15),
@@ -32,14 +35,7 @@ class Addons extends StatelessWidget {
           padding: EdgeInsets.all(16),
           child: Row(
             children: [
-              Container(
-                decoration: BoxDecoration(
-                  shape: BoxShape.circle,
-                  border: Border.all(color: Colors.black),
-                ),
-                width: 24,
-                height: 24,
-              ),
+              AddOnsCheckWidget(),
               SizedBox(
                 width: 15,
               ),
@@ -48,7 +44,7 @@ class Addons extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      'De-yellowing - 10K',
+                      controller.addOnsData[index]['title'],
                       style: GoogleFonts.poppins(
                         fontWeight: FontWeight.w600,
                         color: Colors.black,
@@ -59,7 +55,7 @@ class Addons extends StatelessWidget {
                       height: 5,
                     ),
                     Text(
-                      'Mengembalikan sepatu putih yang menjadi kuning kembali.',
+                      controller.addOnsData[index]['description'],
                       style: GoogleFonts.poppins(
                         fontWeight: FontWeight.w600,
                         color: Color(0xFF8A8A8A),

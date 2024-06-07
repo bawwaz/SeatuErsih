@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:seatu_ersih/app/router/app_pages.dart';
@@ -28,96 +29,100 @@ class RegCleanListView extends StatelessWidget {
       ),
       body: Column(
         children: [
-          ListView.builder(
-            padding: EdgeInsets.all(20),
-            itemCount: 2,
-            itemBuilder: (context, index) {
-              return Container(
-                margin: EdgeInsets.only(bottom: 20),
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                  boxShadow: [
-                    BoxShadow(
-                      color: Colors.grey.withOpacity(0.5),
-                      blurRadius: 5,
-                      offset: Offset(0, 0),
-                    ),
-                  ],
-                  borderRadius: BorderRadius.circular(10),
-                ),
-                height: 130,
-                width: double.infinity,
-                child: Padding(
-                  padding: const EdgeInsets.all(20),
-                  child: Row(
-                    children: [
-                      Container(
-                        height: 60,
-                        width: 60,
-                        decoration: BoxDecoration(
-                          image: DecorationImage(
-                            image: AssetImage('assets/img/icon-app.png'),
-                            fit: BoxFit.cover,
+          Expanded(
+            child: ListView.builder(
+              padding: EdgeInsets.all(20),
+              itemCount: 2,
+              itemBuilder: (context, index) {
+                return Container(
+                  margin: EdgeInsets.only(bottom: 20),
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.grey.withOpacity(0.5),
+                        blurRadius: 5,
+                        offset: Offset(0, 0),
+                      ),
+                    ],
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                  height: 130,
+                  width: double.infinity,
+                  child: Padding(
+                    padding: const EdgeInsets.all(20),
+                    child: Row(
+                      children: [
+                        Container(
+                          height: 60,
+                          width: 60,
+                          decoration: BoxDecoration(
+                            image: DecorationImage(
+                              image: AssetImage('assets/img/icon-app.png'),
+                              fit: BoxFit.cover,
+                            ),
                           ),
                         ),
-                      ),
-                      SizedBox(
-                        width: 20,
-                      ),
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Text(
-                            "Nike",
-                            style: GoogleFonts.poppins(
-                              fontWeight: FontWeight.w600,
-                              color: Colors.black,
-                              fontSize: 16,
+                        SizedBox(
+                          width: 20,
+                        ),
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Text(
+                              "Nike",
+                              style: GoogleFonts.poppins(
+                                fontWeight: FontWeight.w600,
+                                color: Colors.black,
+                                fontSize: 16,
+                              ),
                             ),
-                          ),
-                          Text(
-                            "Addons : De-Yellowing, Semir",
-                            style: GoogleFonts.poppins(
-                              fontWeight: FontWeight.normal,
-                              color: Color(0xFF8A8A8A),
-                              fontSize: 14,
+                            Text(
+                              "Addons : De-Yellowing, Semir",
+                              style: GoogleFonts.poppins(
+                                fontWeight: FontWeight.normal,
+                                color: Color(0xFF8A8A8A),
+                                fontSize: 14,
+                              ),
                             ),
-                          ),
-                          Text(
-                            "Note : Tolong bersihkan sole ...",
-                            style: GoogleFonts.poppins(
-                              fontWeight: FontWeight.normal,
-                              color: Color(0xFF8A8A8A),
-                              fontSize: 14,
+                            Text(
+                              "Note : Tolong bersihkan sole ...",
+                              style: GoogleFonts.poppins(
+                                fontWeight: FontWeight.normal,
+                                color: Color(0xFF8A8A8A),
+                                fontSize: 14,
+                              ),
                             ),
-                          ),
-                          Text(
-                            "Rp. 30.000",
-                            style: GoogleFonts.poppins(
-                              fontWeight: FontWeight.w600,
-                              color: Colors.black,
-                              fontSize: 18,
+                            Text(
+                              "Rp. 30.000",
+                              style: GoogleFonts.poppins(
+                                fontWeight: FontWeight.w600,
+                                color: Colors.black,
+                                fontSize: 18,
+                              ),
                             ),
-                          ),
-                        ],
-                      ),
-                      SizedBox(
+                          ],
+                        ),
+                        SizedBox(
                           width: 10,
                         ),
                         Icon(Icons.delete)
-                    ],
+                      ],
+                    ),
                   ),
-                ),
-              );
-            },
+                );
+              },
+            ),
           ),
           Padding(
             padding: const EdgeInsets.all(20.0),
             child: Column(
               children: [
                 InkWell(
-                  onTap: () {},
+                  onTap: () {
+                    Get.toNamed(Routes.ADD_ONS);
+                  },
                   child: Container(
                     height: 40,
                     decoration: BoxDecoration(
