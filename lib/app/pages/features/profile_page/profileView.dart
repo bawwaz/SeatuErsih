@@ -82,10 +82,15 @@ class ProfilePage extends GetView<ProfileController> {
               ],
             ),
             SizedBox(height: 36),
-            ProfileWidgetContainer(
-              icon: Icons.edit,
-              title: 'Edit Profile',
-              arrowIcon: Icons.arrow_forward_ios_rounded,
+            InkWell(
+              onTap: () {
+                Get.toNamed(Routes.PROFILE_EDIT);
+              },
+              child: ProfileWidgetContainer(
+                icon: Icons.edit,
+                title: 'Edit Profile',
+                arrowIcon: Icons.arrow_forward_ios_rounded,
+              ),
             ),
             Padding(
               padding: const EdgeInsets.only(top: 17.0),
