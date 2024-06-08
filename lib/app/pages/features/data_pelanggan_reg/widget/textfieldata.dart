@@ -2,8 +2,19 @@ import 'package:flutter/material.dart';
 
 class TextFieldData extends StatelessWidget {
   final String hintText;
+  final Function(String)? onChanged;
+  final String? initialValue;
+  final bool readOnly;
+  final TextAlign textAlign;
 
-  const TextFieldData({Key? key, this.hintText = ''}) : super(key: key);
+  const TextFieldData({
+    Key? key,
+    this.hintText = '',
+    this.onChanged,
+    this.initialValue,
+    this.readOnly = false,
+    this.textAlign = TextAlign.left,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -21,6 +32,10 @@ class TextFieldData extends StatelessWidget {
         ],
       ),
       child: TextField(
+        readOnly: readOnly,
+        controller: TextEditingController(text: initialValue),
+        onChanged: onChanged,
+        textAlign: textAlign,
         decoration: InputDecoration(
           hintText: hintText,
           border: InputBorder.none,

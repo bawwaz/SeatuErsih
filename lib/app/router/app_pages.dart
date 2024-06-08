@@ -52,7 +52,7 @@ part 'routes.dart';
 class AppPages {
   AppPages._();
 
-  static const INITIAL = Routes.REG_CLEAN_LIST;
+  static const INITIAL = Routes.LOGIN;
 
   static final routes = [
     GetPage(
@@ -192,7 +192,7 @@ class AppPages {
         page: () => OrderDetailView(),
         binding: orderDetailBinding(),
         transition: Transition.noTransition),
-        GetPage(
+    GetPage(
         name: Routes.PAYMENT_CONFIRMATION,
         page: () => PaymentConfirmationView(),
         binding: PaymentConfirmationBinding(),
