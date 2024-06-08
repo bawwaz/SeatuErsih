@@ -70,4 +70,5 @@ class Routes {
   static const String CHOOSE_SERVICE = '/choose_service';
   static const String PROFILE_EDIT = '/profile_edit';
   static const String ORDER_DETAIL = '/order_detail';
+  static const String PAYMENT_CONFIRMATION = '/paymentconfirmation';
 }

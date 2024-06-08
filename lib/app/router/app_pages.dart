@@ -16,6 +16,8 @@ import 'package:seatu_ersih/app/pages/features/data_pelanggan_reg/data_pelanggan
 import 'package:seatu_ersih/app/pages/features/deep_shoe_list/deep_clean_list_binding.dart';
 import 'package:seatu_ersih/app/pages/features/deep_shoe_list/deep_clean_list_view.dart';
 import 'package:seatu_ersih/app/pages/features/order_detail/order_detail_view.dart';
+import 'package:seatu_ersih/app/pages/features/payment_confirmation_page/payment_confirmation_binding.dart';
+import 'package:seatu_ersih/app/pages/features/payment_confirmation_page/payment_confirmation_view.dart';
 import 'package:seatu_ersih/app/pages/features/payment_history_page/paymenthistoryBinding.dart';
 import 'package:seatu_ersih/app/pages/features/payment_history_page/paymenthistoryView.dart';
 import 'package:seatu_ersih/app/pages/features/order_booking_deep/order_booking_deepBinding.dart';
@@ -189,6 +191,11 @@ class AppPages {
         name: Routes.ORDER_DETAIL,
         page: () => OrderDetailView(),
         binding: orderDetailBinding(),
+        transition: Transition.noTransition),
+        GetPage(
+        name: Routes.PAYMENT_CONFIRMATION,
+        page: () => PaymentConfirmationView(),
+        binding: PaymentConfirmationBinding(),
         transition: Transition.noTransition),
   ];
 }
