@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:seatu_ersih/app/router/app_pages.dart';
 
 class PaymentConfirmationView extends StatelessWidget {
   const PaymentConfirmationView({super.key});
@@ -116,7 +118,9 @@ class PaymentConfirmationView extends StatelessWidget {
       appBar: AppBar(
         automaticallyImplyLeading: false,
         leading: InkWell(
-            onTap: () {},
+            onTap: () {
+              Get.toNamed(Routes.REG_CLEAN_LIST);
+            },
             child: Image.asset('assets/img/angle-circle-right 1.png')),
         centerTitle: true,
         title: Text(

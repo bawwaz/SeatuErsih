@@ -143,7 +143,9 @@ class RegCleanListView extends StatelessWidget {
                 ),
                 SizedBox(height: 10),
                 InkWell(
-                  onTap: () {},
+                  onTap: () {
+                    Get.toNamed(Routes.PAYMENT_CONFIRMATION);
+                  },
                   child: Container(
                     height: 50,
                     decoration: BoxDecoration(
