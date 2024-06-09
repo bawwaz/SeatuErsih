@@ -20,6 +20,7 @@ dependencies:
   path_provider: null
   shared_preferences: ^2.0.9
   sqflite: ^2.3.3+1
+  flutter_rating_bar:
 
 dev_dependencies:
   flutter_test:
