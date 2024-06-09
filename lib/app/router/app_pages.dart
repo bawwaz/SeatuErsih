@@ -33,6 +33,8 @@ import 'package:seatu_ersih/app/pages/features/checkout_Order/checkout_order_vie
 import 'package:seatu_ersih/app/global_component/navbar/navbarBinding.dart';
 import 'package:seatu_ersih/app/pages/features/profile_page_edit/profile_edit_binding.dart';
 import 'package:seatu_ersih/app/pages/features/profile_page_edit/profile_edit_view.dart';
+import 'package:seatu_ersih/app/pages/features/rating_page/rating_binding.dart';
+import 'package:seatu_ersih/app/pages/features/rating_page/rating_view.dart';
 import 'package:seatu_ersih/app/pages/features/regular_shoe_list/regular_clean_list_binding.dart';
 import 'package:seatu_ersih/app/pages/features/regular_shoe_list/regular_clean_list_view.dart';
 import 'package:seatu_ersih/app/pages/features/saved_address_page/saved_address_binding.dart';
@@ -52,7 +54,7 @@ part 'routes.dart';
 class AppPages {
   AppPages._();
 
-  static const INITIAL = Routes.LOGIN;
+  static const INITIAL = Routes.RATING;
 
   static final routes = [
     GetPage(
@@ -196,6 +198,11 @@ class AppPages {
         name: Routes.PAYMENT_CONFIRMATION,
         page: () => PaymentConfirmationView(),
         binding: PaymentConfirmationBinding(),
+        transition: Transition.noTransition),
+        GetPage(
+        name: Routes.RATING,
+        page: () => RatingView(),
+        binding: RatingBinding(),
         transition: Transition.noTransition),
   ];
 }
