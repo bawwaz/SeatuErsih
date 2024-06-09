@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
+import 'package:seatu_ersih/app/pages/features/profile_page_edit/profile_edit_controller.dart';
 import 'package:seatu_ersih/app/pages/features/profile_page_edit/widget/profile_edit_texfield.dart';
 import 'package:seatu_ersih/app/router/app_pages.dart';
 import 'package:seatu_ersih/themes/colors.dart';
 import 'package:seatu_ersih/themes/fonts.dart';
+import 'package:seatu_ersih/themes/theme.dart';
 
-class ProfileEditView extends StatelessWidget {
+class ProfileEditView extends GetView<ProfileEditController> {
   const ProfileEditView({super.key});
 
   @override
@@ -28,72 +30,125 @@ class ProfileEditView extends StatelessWidget {
         padding: const EdgeInsets.only(top: 17.0),
         child: Container(
           margin: EdgeInsets.only(left: 28, right: 28),
-          child: Column(
-            children: [
-              Image.asset('assets/img/profile-icon.png'),
-              SizedBox(
-                height: 16,
-              ),
-              Container(
-                height: 35,
-                width: MediaQuery.sizeOf(context).width * 0.3,
-                decoration: BoxDecoration(
-                  color: AppColors.primaryColor,
-                  borderRadius: BorderRadius.circular(10),
+          child: SingleChildScrollView(
+            child: Column(
+              children: [
+                Obx(
+                  () => controller.users['profile_picture'] != null
+                      ? CircleAvatar(
+                          radius: 50,
+                          backgroundImage: NetworkImage(
+                              'http://seatuersih.pradiptaahmad.tech/image/${controller.users['profile_picture']}'),
+                        )
+                      : controller.image.value == null
+                          ? CircleAvatar(
+                              radius: 60,
+                              backgroundImage:
+                                  AssetImage('assets/img/profile-icon.png'),
+                            )
+                          : CircleAvatar(
+                              radius: 60,
+                              backgroundImage:
+                                  FileImage(controller.image.value!),
+                            ),
                 ),
-                child: Center(
-                  child: Text(
-                    'Edit Picture',
-                    style: Fonts.detailBold.copyWith(color: Colors.white),
+                SizedBox(
+                  height: 16,
+                ),
+                GestureDetector(
+                  onTap: controller.pickImage,
+                  child: Container(
+                    height: 35,
+                    width: MediaQuery.sizeOf(context).width * 0.3,
+                    decoration: BoxDecoration(
+                      color: AppColors.primaryColor,
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                    child: Center(
+                      child: Text(
+                        'Edit Picture',
+                        style: Fonts.detailBold.copyWith(color: Colors.white),
+                      ),
+                    ),
                   ),
                 ),
-              ),
-              SizedBox(
-                height: 32,
-              ),
-              Align(
-                alignment: Alignment.centerLeft,
-                child: Text(
-                  'Nama',
-                  style:
-                      Fonts.header1.copyWith(color: Colors.black, fontSize: 15),
+                SizedBox(
+                  height: 32,
                 ),
-              ),
-              Padding(
-                padding: const EdgeInsets.only(top: 10.0),
-                child: ProfileEditTextField(hintText: 'value.username'),
-              ),
-              Align(
-                alignment: Alignment.centerLeft,
-                child: Padding(
-                  padding: const EdgeInsets.only(top: 20.0),
+                Align(
+                  alignment: Alignment.centerLeft,
                   child: Text(
-                    'Email',
+                    'Nama',
                     style: Fonts.header1
                         .copyWith(color: Colors.black, fontSize: 15),
                   ),
                 ),
-              ),
-              Padding(
-                padding: const EdgeInsets.only(top: 10.0),
-                child: ProfileEditTextField(hintText: 'value.Email'),
-              ),
-              Align(
-                alignment: Alignment.centerLeft,
-                child: Padding(
-                  padding: const EdgeInsets.only(top: 20.0),
-                  child: Text(
-                    'Nomore Telepon',
-                    style: Fonts.header1
-                        .copyWith(color: Colors.black, fontSize: 15),
+                Padding(
+                  padding: const EdgeInsets.only(top: 10.0),
+                  child: ProfileEditTextField(
+                    hintText: "Nama",
+                    controller: controller.textNamaController,
                   ),
                 ),
-              ),
-              Padding(
-                padding: const EdgeInsets.only(top: 10.0),
-                child: ProfileEditTextField(hintText: 'value.Telepon'),
-              ),
-            ],
+                Align(
+                  alignment: Alignment.centerLeft,
+                  child: Padding(
+                    padding: const EdgeInsets.only(top: 20.0),
+                    child: Text(
+                      'Email',
+                      style: Fonts.header1
+                          .copyWith(color: Colors.black, fontSize: 15),
+                    ),
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(top: 10.0),
+                  child: ProfileEditTextField(
+                    hintText: 'Email',
+                    controller: controller.textEmailController,
+                  ),
+                ),
+                Align(
+                  alignment: Alignment.centerLeft,
+                  child: Padding(
+                    padding: const EdgeInsets.only(top: 20.0),
+                    child: Text(
+                      'Nomore Telepon',
+                      style: Fonts.header1
+                          .copyWith(color: Colors.black, fontSize: 15),
+                    ),
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(top: 10.0),
+                  child: ProfileEditTextField(
+                    hintText: 'Telepon',
+                    controller: controller.textPhoneController,
+                  ),
+                ),
+                SizedBox(
+                  height: 15,
+                ),
+                GestureDetector(
+                  onTap: () async {
+                    await controller.updateUsers();
+                  },
+                  child: Container(
+                    width: double.infinity,
+                    height: 55,
+                    alignment: Alignment.center,
+                    decoration: BoxDecoration(
+                      color: AppColors.primaryColor,
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                    child: Text(
+                      "Submit",
+                      style: tsBodyMediumSemibold(Colors.white),
+                    ),
+                  ),
+                )
+              ],
+            ),
           ),
         ),
       ),

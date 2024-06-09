@@ -34,12 +34,19 @@ class ProfilePage extends GetView<ProfileController> {
               children: [
                 Padding(
                   padding: const EdgeInsets.only(top: 36.0),
-                  child: Container(
-                    height: 60,
-                    width: 60,
-                    child: Image.asset('assets/img/profile-icon.png'),
-                  ),
-                ),
+                    child: Obx(
+                      () => controller.users['profile_picture'] != null
+                          ? CircleAvatar(
+                              radius: 50,
+                              backgroundImage: NetworkImage(
+                                  'http://seatuersih.pradiptaahmad.tech/image/${controller.users['profile_picture']}'),
+                            )
+                          : CircleAvatar(
+                              radius: 60,
+                              backgroundImage:
+                                  AssetImage('assets/img/profile-icon.png'),
+                            ),
+                    )),
                 Padding(
                   padding: const EdgeInsets.only(top: 36.0, left: 16.0),
                   child: Column(
@@ -83,8 +90,13 @@ class ProfilePage extends GetView<ProfileController> {
             ),
             SizedBox(height: 36),
             InkWell(
-              onTap: () {
-                Get.toNamed(Routes.PROFILE_EDIT);
+              onTap: () async {
+                await Get.toNamed(Routes.PROFILE_EDIT,
+                        arguments: [controller.users.value])!
+                    .then((value) {
+                  controller.fetchUser();
+                });
+                
               },
               child: ProfileWidgetContainer(
                 icon: Icons.edit,
