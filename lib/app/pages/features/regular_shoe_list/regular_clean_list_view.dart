@@ -78,18 +78,23 @@ class RegCleanListView extends GetView<RegCleanListController> {
                                   children: [
                                     Text(
                                       "${shoe['name']}",
+                                      overflow: TextOverflow.ellipsis,
                                       style: GoogleFonts.poppins(
                                         fontWeight: FontWeight.w600,
                                         color: Colors.black,
                                         fontSize: 16,
                                       ),
                                     ),
-                                    Text(
-                                      "Addons : ${shoe['addons']}",
-                                      style: GoogleFonts.poppins(
-                                        fontWeight: FontWeight.normal,
-                                        color: Color(0xFF8A8A8A),
-                                        fontSize: 14,
+                                    Container(
+                                      width: 210,
+                                      child: Text(
+                                        "Addons : ${shoe['addons']}",
+                                        overflow: TextOverflow.ellipsis,
+                                        style: GoogleFonts.poppins(
+                                          fontWeight: FontWeight.normal,
+                                          color: Color(0xFF8A8A8A),
+                                          fontSize: 14,
+                                        ),
                                       ),
                                     ),
                                     Text(
@@ -101,7 +106,7 @@ class RegCleanListView extends GetView<RegCleanListController> {
                                       ),
                                     ),
                                     Text(
-                                      "Rp. ${controller.formatPrice(int.parse(shoe['price'].toString()))}",
+                                      "${controller.formatPrice(int.parse(shoe['price'].toString()))}",
                                       style: GoogleFonts.poppins(
                                         fontWeight: FontWeight.w600,
                                         color: Colors.black,

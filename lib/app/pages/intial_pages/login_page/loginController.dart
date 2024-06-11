@@ -48,7 +48,7 @@ class LoginPageController extends GetxController {
           snackPosition: SnackPosition.TOP,
         );
         isLoading.value = false;
-        Get.offNamed(Routes.PROFILE);
+        Get.offNamed(Routes.REG_CLEAN_LIST);
       } else {
         final message =
             json.decode(response.body)['message'] ?? 'Unknown error';
