@@ -88,9 +88,10 @@ class DataPelangganRegView extends GetView<DataPelangganRegController> {
                 ),
                 child: InkWell(
                   onTap: () async {
-                    bool success = await controller.DataOrder();
+                    bool success = await controller.postOrders();
                     if (success) {
-                      Get.toNamed(Routes.REG_CLEAN_LIST);
+                      Get.offNamed(Routes.REG_CLEAN_LIST,
+                          arguments: [controller.orders['id'].toString()]);
                     } else {
                       Get.snackbar('Error', 'Failed to submit data');
                     }

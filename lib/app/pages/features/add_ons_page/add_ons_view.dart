@@ -19,7 +19,7 @@ class AddOnsView extends StatelessWidget {
         automaticallyImplyLeading: false,
         leading: InkWell(
           onTap: () {
-            Get.toNamed(Routes.REG_CLEAN_LIST);
+            Get.back();
           },
           child: Image.asset('assets/img/angle-circle-right 1.png'),
         ),

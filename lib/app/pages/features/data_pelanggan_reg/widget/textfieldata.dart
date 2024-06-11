@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:seatu_ersih/themes/theme.dart';
 
 class TextFieldData extends StatelessWidget {
   final String hintText;
@@ -38,8 +39,9 @@ class TextFieldData extends StatelessWidget {
         textAlign: textAlign,
         decoration: InputDecoration(
           hintText: hintText,
+          hintStyle: tsBodyMediumMedium(darkGrey),
           border: InputBorder.none,
-          contentPadding: const EdgeInsets.only(left: 5),
+          contentPadding: const EdgeInsets.only(left: 15),
         ),
       ),
     );
