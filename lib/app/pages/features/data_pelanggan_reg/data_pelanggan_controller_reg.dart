@@ -15,11 +15,13 @@ class DataPelangganRegController extends GetxController {
   var userId = 0.obs;
 
   final box = GetStorage();
+  final orders = {}.obs;
 
-  Future<bool> DataOrder() async {
+  Future<bool> postOrders() async {
     final url = 'http://seatuersih.pradiptaahmad.tech/api';
     final token = box.read('token');
     var data = {
+      'order_type': 'regular_clean',
       'address': address.value,
       'phone': phone.value,
       'pickup_date': pickup_date.value.toString(),
@@ -43,7 +45,9 @@ class DataPelangganRegController extends GetxController {
       print('Response status: ${response.statusCode}');
       print('Response body: ${response.body}');
 
-      if (response.statusCode == 200) {
+      if (response.statusCode == 201) {
+        orders.value = json.decode(response.body)['order'];
+        box.write('order_id', orders['id'].toString());
         return true;
       } else {
         Get.snackbar('Error', 'Failed to submit data: ${response.body}');

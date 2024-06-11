@@ -62,7 +62,7 @@ class LoginPageController extends GetxController {
     } catch (e) {
       Get.snackbar(
         "Login Failed",
-        "An error occurred. Please try again.",
+        "$e",
         snackPosition: SnackPosition.TOP,
       );
       isLoading.value = false;

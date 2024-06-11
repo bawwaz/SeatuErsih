@@ -15,14 +15,14 @@ dependencies:
   get: any
   get_storage: ^2.1.1
   google_fonts: any
-  http: any
+  http: ^1.2.1
   lottie: ^3.1.2
-  path_provider: null
+  path_provider: any
   shared_preferences: ^2.0.9
   sqflite: ^2.3.3+1
   image_picker:
+  intl: any
   flutter_rating_bar:
-
 
 dev_dependencies:
   flutter_test:
