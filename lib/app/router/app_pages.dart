@@ -54,7 +54,7 @@ part 'routes.dart';
 class AppPages {
   AppPages._();
 
-  static const INITIAL = Routes.RATING;
+  static const INITIAL = Routes.LOGIN;
 
   static final routes = [
     GetPage(
@@ -199,7 +199,7 @@ class AppPages {
         page: () => PaymentConfirmationView(),
         binding: PaymentConfirmationBinding(),
         transition: Transition.noTransition),
-        GetPage(
+    GetPage(
         name: Routes.RATING,
         page: () => RatingView(),
         binding: RatingBinding(),
