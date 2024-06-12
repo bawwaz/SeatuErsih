@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:seatu_ersih/app/pages/features/data_pelanggan_deep/data_pelanggan_controller_deep.dart';
 import 'package:seatu_ersih/app/pages/features/data_pelanggan_reg/widget/textfieldata.dart';
 import 'package:seatu_ersih/app/router/app_pages.dart';
 import 'package:seatu_ersih/themes/colors.dart';
 import 'package:seatu_ersih/themes/fonts.dart';
 
-class DataPelangganDeepView extends StatelessWidget {
+class DataPelangganDeepView extends GetView<DataPelangganControllerDeep> {
   const DataPelangganDeepView({super.key});
 
   @override
@@ -31,104 +32,70 @@ class DataPelangganDeepView extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Align(
-              alignment: Alignment.centerLeft,
-              child: Text(
-                'Alamat',
-                style: Fonts.header1.copyWith(color: Colors.black),
-              ),
+            _buildSectionHeader('Alamat', 'Alamat lokasi pengambilan sepatu'),
+            TextFieldData(
+              hintText: 'Masukkan alamat',
+              onChanged: (value) {
+                controller.address.value = value;
+              },
             ),
-            Align(
-              alignment: Alignment.centerLeft,
-              child: Text(
-                'Alamat lokasi pengambilan sepatu',
-                style: Fonts.detail,
-              ),
+            SizedBox(height: 20),
+            _buildSectionHeader('Contact', 'No. Telephone'),
+            TextFieldData(
+              hintText: 'Masukkan no. telephone',
+              onChanged: (value) {
+                controller.phone.value = value;
+              },
             ),
-            SizedBox(height: 7),
-            TextFieldData(),
-            Padding(
-              padding: const EdgeInsets.only(top: 20),
-              child: Align(
-                alignment: Alignment.centerLeft,
-                child: Text(
-                  'Contact',
-                  style: Fonts.header1.copyWith(color: Colors.black),
-                ),
-              ),
-            ),
-            Align(
-              alignment: Alignment.centerLeft,
-              child: Text(
-                'No. Telephone',
-                style: Fonts.detail,
-              ),
-            ),
-            SizedBox(height: 7),
-            TextFieldData(),
-            Padding(
-              padding: const EdgeInsets.only(top: 20),
-              child: Align(
-                alignment: Alignment.centerLeft,
-                child: Text(
-                  'Jadwal',
-                  style: Fonts.header1.copyWith(color: Colors.black),
-                ),
-              ),
-            ),
-            Align(
-              alignment: Alignment.centerLeft,
-              child: Text(
-                'Tanggal pengambilan',
-                style: Fonts.detail,
-              ),
-            ),
-            SizedBox(height: 7),
+            SizedBox(height: 20),
+            _buildSectionHeader('Jadwal', 'Tanggal pengambilan'),
             Stack(
               children: [
-                TextFieldData(),
+                Obx(() => TextFieldData(
+                      hintText: 'Masukkan tanggal pengambilan',
+                      initialValue: controller.pickup_date.value,
+                      readOnly: true,
+                      textAlign: TextAlign.center,
+                    )),
                 Positioned(
                   left: 10,
                   top: 15,
                   child: InkWell(
-                    onTap: () {},
+                    onTap: () {
+                      controller.pickDate(context);
+                    },
                     child: Icon(Icons.calendar_month),
                   ),
                 ),
               ],
             ),
-            Padding(
-              padding: const EdgeInsets.only(top: 20),
-              child: Align(
-                alignment: Alignment.centerLeft,
-                child: Text(
-                  'Note',
-                  style: Fonts.header1.copyWith(color: Colors.black),
-                ),
-              ),
+            SizedBox(height: 20),
+            _buildSectionHeader('Note', 'Berikan pesan tentang alamat mu'),
+            TextFieldData(
+              hintText: 'Masukkan pesan',
+              onChanged: (value) {
+                controller.notes.value = value;
+              },
             ),
-            Align(
-              alignment: Alignment.centerLeft,
-              child: Text(
-                'Berikan pesan tentang alamat mu',
-                style: Fonts.detail,
-              ),
-            ),
-            SizedBox(height: 7),
-            TextFieldData(),
             Padding(
               padding: const EdgeInsets.only(top: 150.0),
-              child: GestureDetector(
-                onTap: () {
-                  Get.toNamed(Routes.DEEP_CLEAN_LIST);
-                },
-                child: Container(
-                  width: double.infinity,
-                  height: 55,
-                  decoration: BoxDecoration(
-                    color: AppColors.primaryColor,
-                    borderRadius: BorderRadius.circular(10),
-                  ),
+              child: Container(
+                width: double.infinity,
+                height: 55,
+                decoration: BoxDecoration(
+                  color: AppColors.primaryColor,
+                  borderRadius: BorderRadius.circular(10),
+                ),
+                child: InkWell(
+                  onTap: () async {
+                    bool success = await controller.postOrders();
+                    if (success) {
+                      Get.offNamed(Routes.DEEP_CLEAN_LIST,
+                          arguments: [controller.orders['id'].toString()]);
+                    } else {
+                      Get.snackbar('Error', 'Failed to submit data');
+                    }
+                  },
                   child: Center(
                     child: Text(
                       'Next',
@@ -142,6 +109,29 @@ class DataPelangganDeepView extends StatelessWidget {
           ],
         ),
       ),
+    );
+  }
+
+  Widget _buildSectionHeader(String title, String subtitle) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Align(
+          alignment: Alignment.centerLeft,
+          child: Text(
+            title,
+            style: Fonts.header1.copyWith(color: Colors.black),
+          ),
+        ),
+        Align(
+          alignment: Alignment.centerLeft,
+          child: Text(
+            subtitle,
+            style: Fonts.detail,
+          ),
+        ),
+        SizedBox(height: 7),
+      ],
     );
   }
 }

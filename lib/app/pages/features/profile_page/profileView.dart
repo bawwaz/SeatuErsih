@@ -1,11 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get_storage/get_storage.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:seatu_ersih/app/pages/features/profile_page/widget/profile_widget.dart';
 import 'package:seatu_ersih/app/router/app_pages.dart';
 import 'package:seatu_ersih/themes/fonts.dart';
-import 'package:seatu_ersih/themes/theme.dart';
 import 'profileController.dart';
 
 class ProfilePage extends GetView<ProfileController> {
@@ -92,7 +89,7 @@ class ProfilePage extends GetView<ProfileController> {
             InkWell(
               onTap: () async {
                 await Get.toNamed(Routes.PROFILE_EDIT,
-                        arguments: [controller.users.value])!
+                        arguments: [controller.users])!
                     .then((value) {
                   controller.fetchUser();
                 });

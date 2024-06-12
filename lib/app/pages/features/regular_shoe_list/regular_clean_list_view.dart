@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:seatu_ersih/app/pages/features/regular_shoe_list/regular_clean_list_controller.dart';
@@ -78,22 +77,32 @@ class RegCleanListView extends GetView<RegCleanListController> {
                                   children: [
                                     Text(
                                       "${shoe['name']}",
+                                      overflow: TextOverflow.ellipsis,
+                                      maxLines: 1,
                                       style: GoogleFonts.poppins(
                                         fontWeight: FontWeight.w600,
                                         color: Colors.black,
                                         fontSize: 16,
+                            
                                       ),
                                     ),
-                                    Text(
-                                      "Addons : ${shoe['addons']}",
-                                      style: GoogleFonts.poppins(
-                                        fontWeight: FontWeight.normal,
-                                        color: Color(0xFF8A8A8A),
-                                        fontSize: 14,
+                                    Container(
+                                      width: Get.width * 0.45,
+                                      child: Text(
+                                        "Addons : ${shoe['addons']}",
+                                        overflow: TextOverflow.ellipsis,
+                                        maxLines: 1,
+                                        style: GoogleFonts.poppins(
+                                          fontWeight: FontWeight.normal,
+                                          color: Color(0xFF8A8A8A),
+                                          fontSize: 14,
+                                        ),
                                       ),
                                     ),
                                     Text(
                                       "Note : ${shoe['notes']}",
+                                      maxLines: 1,
+                                      overflow: TextOverflow.ellipsis,
                                       style: GoogleFonts.poppins(
                                         fontWeight: FontWeight.normal,
                                         color: Color(0xFF8A8A8A),
@@ -101,7 +110,7 @@ class RegCleanListView extends GetView<RegCleanListController> {
                                       ),
                                     ),
                                     Text(
-                                      "Rp. ${controller.formatPrice(int.parse(shoe['price'].toString()))}",
+                                      "${controller.formatPrice(int.parse(shoe['price'].toString()))}",
                                       style: GoogleFonts.poppins(
                                         fontWeight: FontWeight.w600,
                                         color: Colors.black,
@@ -113,7 +122,12 @@ class RegCleanListView extends GetView<RegCleanListController> {
                                 SizedBox(
                                   width: 10,
                                 ),
-                                Icon(Icons.delete)
+                                Spacer(),
+                                IconButton(
+                                    onPressed: () {
+                                      controller.deleteShoes(shoe['id']);
+                                    },
+                                    icon: Icon(Icons.delete))
                               ],
                             ),
                           ),

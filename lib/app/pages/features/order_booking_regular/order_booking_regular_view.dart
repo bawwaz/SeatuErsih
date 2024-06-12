@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:seatu_ersih/app/pages/features/order_booking_regular/order_booking_regular_controller.dart';
-import 'package:seatu_ersih/app/pages/features/order_booking_regular/widget/address.dart';
 import 'package:seatu_ersih/app/pages/features/order_booking_regular/widget/button_next.dart';
 import 'package:seatu_ersih/app/pages/features/order_booking_regular/widget/choice_shoes.dart';
 import 'package:seatu_ersih/app/pages/features/order_booking_regular/widget/input_item_pickup.dart';

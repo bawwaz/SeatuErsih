@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:seatu_ersih/app/pages/features/order_detail/widget/order_detail_contact_widget.dart';
 import 'package:seatu_ersih/app/pages/features/order_detail/widget/order_detail_container_widget.dart';
-import 'package:seatu_ersih/app/router/app_pages.dart';
 import 'package:seatu_ersih/themes/colors.dart';
 import 'package:seatu_ersih/themes/fonts.dart';
 

@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:http/http.dart' as http;
-import 'package:seatu_ersih/app/router/app_pages.dart';
 
 class DataPelangganRegController extends GetxController {
   var address = "".obs;
