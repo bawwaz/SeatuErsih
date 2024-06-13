@@ -1,10 +1,9 @@
 import 'package:get/get.dart';
-import 'package:seatu_ersih/app/pages/features/data_pelanggan_deep/data_pelanggan_controller_deep.dart';
+import 'package:seatu_ersih/app/pages/features/data_pelanggan_reg/data_pelanggan_controller_reg.dart';
 
 class DataPelangganRegBinding extends Bindings {
   @override
   void dependencies() {
-    Get.lazyPut<DataPelangganControllerDeep>(
-        () => DataPelangganControllerDeep());
+    Get.lazyPut<DataPelangganRegController>(() => DataPelangganRegController());
   }
 }

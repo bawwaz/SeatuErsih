@@ -1,9 +1,19 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:seatu_ersih/app/pages/features/Home_Page/HomepageController.dart';
 import 'package:seatu_ersih/themes/colors.dart';
 import 'package:seatu_ersih/themes/fonts.dart';
 
-class OrderContainer extends StatelessWidget {
-  const OrderContainer({super.key});
+class OrderContainer extends GetView<HomePageController> {
+  final String title;
+  final String pickupDate;
+  final String price;
+  const OrderContainer({
+    Key? key,
+    required this.title,
+    required this.pickupDate,
+    required this.price,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -45,7 +55,7 @@ class OrderContainer extends StatelessWidget {
                     Row(
                       children: [
                         Text(
-                          'Deep Clean',
+                          '$title',
                           style: Fonts.desc.copyWith(
                             fontWeight: FontWeight.w800,
                             fontSize: 16,
@@ -54,7 +64,7 @@ class OrderContainer extends StatelessWidget {
                         Padding(
                           padding: const EdgeInsets.only(left: 8.0),
                           child: Text(
-                            'x2',
+                            '',
                             style: Fonts.detail.copyWith(
                               fontWeight: FontWeight.w800,
                               fontSize: 16,
@@ -64,7 +74,7 @@ class OrderContainer extends StatelessWidget {
                       ],
                     ),
                     Text(
-                      '02/06/24',
+                      '$pickupDate',
                       style: Fonts.desc.copyWith(
                         fontSize: 15,
                         fontWeight: FontWeight.normal,
@@ -72,7 +82,7 @@ class OrderContainer extends StatelessWidget {
                       ),
                     ),
                     Text(
-                      '50000',
+                      '$price',
                       style: Fonts.detail.copyWith(
                         fontSize: 15,
                         color: AppColors.primaryColor,

@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:seatu_ersih/app/pages/features/order_detail/order_detailController.dart';
 import 'package:seatu_ersih/app/pages/features/order_detail/widget/order_detail_contact_widget.dart';
 import 'package:seatu_ersih/app/pages/features/order_detail/widget/order_detail_container_widget.dart';
 import 'package:seatu_ersih/themes/colors.dart';
 import 'package:seatu_ersih/themes/fonts.dart';
 
-class OrderDetailView extends StatelessWidget {
+class OrderDetailView extends GetView<OrderDetailcontroller> {
   const OrderDetailView({super.key});
 
   @override
@@ -37,10 +39,14 @@ class OrderDetailView extends StatelessWidget {
                     ),
                   ),
                   DetailContainerWidget(
-                    productName: 'Regular Clean',
+                    productName:
+                        controller.orders['order_type'] == "regular_clean"
+                            ? "Regular Clean"
+                            : "Deep Clean",
                     productStatus: 'Completed',
-                    pickupDate: '08/06/24',
-                    noteOrder: 'Tiati bersihin nya mas',
+                    pickupDate:
+                        '${controller.formatDate(controller.orders['pickup_date'].toString())}',
+                    noteOrder: '${controller.orders['notes']}',
                   ),
                   Align(
                     alignment: Alignment.centerLeft,
@@ -56,8 +62,8 @@ class OrderDetailView extends StatelessWidget {
                     ),
                   ),
                   OrderDetailContactWidget(
-                    alamat: 'Jl.Besito',
-                    phone: '0812828',
+                    alamat: '${controller.orders['address']}',
+                    phone: '${controller.orders['phone']}',
                   ),
                 ],
               ),
