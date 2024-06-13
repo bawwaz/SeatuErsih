@@ -1,12 +1,15 @@
 import 'package:get/get.dart';
 import 'package:seatu_ersih/app/router/app_pages.dart';
 
-class checkoutAnimationController extends GetxController {
+class CheckoutAnimationController extends GetxController {
+
+  var text = "assets/img/success.json".obs;
   @override
   void onInit() {
-    super.onInit();
-    Future.delayed(const Duration(seconds: 1), () {
-      Get.toNamed(Routes.BTMNAVBAR);
+    print("konoshojh");
+    Future.delayed(Duration(seconds: 2), () {
+      Get.offAllNamed(Routes.BTMNAVBAR);
     });
+    super.onInit();
   }
 }

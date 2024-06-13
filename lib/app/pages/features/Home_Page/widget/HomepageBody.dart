@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:seatu_ersih/app/pages/features/Home_Page/HomepageController.dart';
+import 'package:seatu_ersih/app/pages/features/Home_Page/widget/ifempty.dart';
 import 'package:seatu_ersih/app/pages/features/Home_Page/widget/ordercontainer.dart';
 import 'package:seatu_ersih/app/pages/features/profile_page/profileController.dart';
 import 'package:seatu_ersih/app/router/app_pages.dart';
@@ -8,11 +10,13 @@ import 'package:seatu_ersih/themes/fonts.dart';
 import 'package:seatu_ersih/app/pages/features/Home_Page/widget/orderservice.dart';
 import 'package:seatu_ersih/app/pages/features/Home_Page/widget/bannerslogan.dart';
 
-class HomeBody extends GetView<ProfileController> {
+class HomeBody extends GetView<HomePageController> {
+  
   const HomeBody({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    final profileController = Get.put(ProfileController());
     return SingleChildScrollView(
       physics: BouncingScrollPhysics(),
       child: Column(
@@ -37,7 +41,7 @@ class HomeBody extends GetView<ProfileController> {
                   ),
                   Obx(
                     () => Text(
-                      controller.username.value,
+                      profileController.username.value,
                       style: Fonts.slogan,
                     ),
                   ),
@@ -71,10 +75,34 @@ class HomeBody extends GetView<ProfileController> {
               style: Fonts.header1.copyWith(color: Colors.black),
             ),
           ),
-          Center(
-              child: Container(
-                  margin: EdgeInsets.only(left: 20, right: 20),
-                  child: OrderContainer())),
+          Obx(
+            () => controller.orders.isEmpty
+                ? Center(child: ImgIfEmpty())
+                : ListView.builder(
+                    shrinkWrap: true,
+                    physics: NeverScrollableScrollPhysics(),
+                    itemCount: controller.orders.length,
+                    itemBuilder: (context, index) {
+                      Map<dynamic, dynamic> order = controller.orders[index];
+                      return InkWell(
+                        onTap: () {
+                          Get.toNamed(Routes.ORDER_DETAIL, arguments: [order]);
+                        },
+                        child: Container(
+                            margin: EdgeInsets.only(left: 20, right: 20),
+                            child: OrderContainer(
+                              title: order['order_type'] == "regular_clean"
+                                  ? "Regular Cleaning"
+                                  : "Deep Cleaning",
+                              pickupDate: controller
+                                  .formatDate(order['pickup_date'].toString()),
+                              price: controller.formatPrice(
+                                  int.parse(order['total_price'].toString())),
+                            )),
+                      );
+                    },
+                  ),
+          )
         ],
       ),
     );

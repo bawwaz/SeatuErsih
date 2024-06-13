@@ -4,6 +4,6 @@ import 'package:seatu_ersih/app/pages/features/orderstatus/order_statusControlle
 class orderStatusBinding extends Bindings {
   @override
   void dependencies() {
-    Get.lazyPut<orderStatusController>(() => orderStatusController());
+    Get.lazyPut<OrderStatuscontroller>(() => OrderStatuscontroller());
   }
 }
