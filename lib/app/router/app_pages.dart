@@ -32,6 +32,8 @@ import 'package:seatu_ersih/app/pages/features/checkout_Animation/success_animat
 import 'package:seatu_ersih/app/pages/features/checkout_Order/checkout_order_view.dart';
 import 'package:seatu_ersih/app/pages/features/profile_page_edit/profile_edit_binding.dart';
 import 'package:seatu_ersih/app/pages/features/profile_page_edit/profile_edit_view.dart';
+import 'package:seatu_ersih/app/pages/features/rating_page/rating_binding.dart';
+import 'package:seatu_ersih/app/pages/features/rating_page/rating_view.dart';
 import 'package:seatu_ersih/app/pages/features/regular_shoe_list/regular_clean_list_binding.dart';
 import 'package:seatu_ersih/app/pages/features/regular_shoe_list/regular_clean_list_view.dart';
 import 'package:seatu_ersih/app/pages/features/saved_address_page/saved_address_binding.dart';
@@ -195,6 +197,11 @@ class AppPages {
         name: Routes.PAYMENT_CONFIRMATION,
         page: () => PaymentConfirmationView(),
         binding: PaymentConfirmationBinding(),
+        transition: Transition.noTransition),
+    GetPage(
+        name: Routes.RATING,
+        page: () => RatingView(),
+        binding: RatingBinding(),
         transition: Transition.noTransition),
   ];
 }
