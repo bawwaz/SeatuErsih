@@ -115,7 +115,7 @@ class AppPages {
     ),
     GetPage(
       name: Routes.ORDERS,
-      page: () => myorder(),
+      page: () => MyOrder(),
       binding: orderStatusBinding(),
       transition: Transition.noTransition,
     ),

@@ -13,7 +13,7 @@ class BottomNavBar extends StatelessWidget {
   final List<Widget> pages = [
     HomePage(),
     PaymentHistory(),
-    myorder(),
+    MyOrder(),
   ];
 
   @override

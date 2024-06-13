@@ -1,13 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:seatu_ersih/app/pages/features/Home_Page/HomepageController.dart';
+import 'package:seatu_ersih/app/pages/features/Home_Page/widget/ifempty.dart';
+import 'package:seatu_ersih/app/pages/features/Home_Page/widget/ordercontainer.dart';
+import 'package:seatu_ersih/app/pages/features/orderstatus/order_statusController.dart';
 import 'package:seatu_ersih/app/router/app_pages.dart';
 import 'package:seatu_ersih/themes/fonts.dart';
 
-class myorder extends StatelessWidget {
-  const myorder({super.key});
+class MyOrder extends GetView<HomePageController>  {
+  const MyOrder({super.key});
 
   @override
   Widget build(BuildContext context) {
+    
+
     return Scaffold(
       appBar: AppBar(
         automaticallyImplyLeading: false,
@@ -25,12 +31,36 @@ class myorder extends StatelessWidget {
             SizedBox(
               height: 2,
             ),
-            Center(
-                child: InkWell(
-                    onTap: () {
-                      Get.toNamed(Routes.ORDER_DETAIL);
-                    },
-                    child: SizedBox())),
+            Obx(
+              () => controller.orders.isEmpty
+                  ? Center(child: ImgIfEmpty())
+                  : ListView.builder(
+                      shrinkWrap: true,
+                      physics: NeverScrollableScrollPhysics(),
+                      itemCount: controller.orders.length,
+                      itemBuilder: (context, index) {
+                        Map<dynamic, dynamic> order = controller.orders[index];
+                        return InkWell(
+                          onTap: () {
+                            Get.toNamed(Routes.ORDER_DETAIL,
+                                arguments: [order]);
+                          },
+                          child: Container(
+                            margin: EdgeInsets.only(left: 20, right: 20),
+                            child: OrderContainer(
+                              title: order['order_type'] == "regular_clean"
+                                  ? "Regular Cleaning"
+                                  : "Deep Cleaning",
+                              pickupDate: controller
+                                  .formatDate(order['pickup_date'].toString()),
+                              price: controller.formatPrice(
+                                  int.parse(order['total_price'].toString())),
+                            ),
+                          ),
+                        );
+                      },
+                    ),
+            ),
           ],
         ),
       ),
