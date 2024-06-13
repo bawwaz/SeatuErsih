@@ -1,6 +1,5 @@
 import 'dart:convert';
 
-import 'package:dio/dio.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:seatu_ersih/app/pages/features/order_booking_regular/order_booking_regular_controller.dart';
@@ -96,7 +95,7 @@ class CheckoutController extends GetxController {
         var body = jsonEncode({
           'name': shoes['name'],
           'addons': shoes['addons'],
-          'order_id': orders.value['id'],
+          'order_id': orders['id'],
         });
 
         final response = await http.post(

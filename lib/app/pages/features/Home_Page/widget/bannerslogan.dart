@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:seatu_ersih/themes/colors.dart';
 
 class BannerSlogan extends StatelessWidget {
   const BannerSlogan({super.key});

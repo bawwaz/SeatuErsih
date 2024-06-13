@@ -5,9 +5,6 @@ import 'package:seatu_ersih/app/pages/features/add_ons_page/widget/button_tambah
 import 'package:seatu_ersih/app/pages/features/add_ons_page/widget/list_view_addons.dart';
 import 'package:seatu_ersih/app/pages/features/add_ons_page/widget/textfield_input_note.dart';
 import 'package:seatu_ersih/app/pages/features/add_ons_page/widget/textfield_input_sepatu.dart';
-import 'package:seatu_ersih/app/pages/features/order_booking_regular/widget/add_ons.dart';
-import 'package:seatu_ersih/app/pages/features/order_booking_regular/widget/input_note.dart';
-import 'package:seatu_ersih/app/router/app_pages.dart';
 
 class AddOnsView extends StatelessWidget {
   const AddOnsView({super.key});

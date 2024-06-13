@@ -31,15 +31,26 @@ class RegCleanListContainer extends StatelessWidget {
       child: Row(
         children: [
           logo,
-          Column(
-            children: [
-              Text(shoename),
-              Text('Addons : $add_ons'),
-              Text('Note: $note'),
-              Text('Rp.$total_harga'),
-            ],
+          Expanded(
+            child: Column(
+              children: [
+                Text(shoename),
+                Text(
+                  'Addons : $add_ons',
+                  overflow: TextOverflow.ellipsis,
+                  maxLines: 1,
+                ),
+                Text(
+                  'Note: $note',
+                  overflow: TextOverflow.ellipsis,
+                  maxLines: 1,
+                ),
+                Text('$total_harga'),
+              ],
+            ),
           ),
-          Icon(Icons.delete),
+          // Spacer(),
+          // Icon(Icons.delete),
         ],
       ),
     );

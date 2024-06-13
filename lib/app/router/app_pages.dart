@@ -30,7 +30,6 @@ import 'package:seatu_ersih/app/global_component/navbar/navbar.dart';
 import 'package:seatu_ersih/app/pages/features/Home_Page/HomepageView.dart';
 import 'package:seatu_ersih/app/pages/features/checkout_Animation/success_animation.dart';
 import 'package:seatu_ersih/app/pages/features/checkout_Order/checkout_order_view.dart';
-import 'package:seatu_ersih/app/global_component/navbar/navbarBinding.dart';
 import 'package:seatu_ersih/app/pages/features/profile_page_edit/profile_edit_binding.dart';
 import 'package:seatu_ersih/app/pages/features/profile_page_edit/profile_edit_view.dart';
 import 'package:seatu_ersih/app/pages/features/rating_page/rating_binding.dart';

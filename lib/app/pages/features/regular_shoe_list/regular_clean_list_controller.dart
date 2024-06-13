@@ -48,6 +48,32 @@ class RegCleanListController extends GetxController{
     return formattedPrice;
   }
 
+  Future<void> deleteShoes(int id) async {
+    final url = 'http://seatuersih.pradiptaahmad.tech/api';
+    final token = box.read('token');
+    var headers = {
+      'Accept': 'application/json',
+      'Authorization': 'Bearer $token'
+    };
+
+    try {
+      final response = await http.delete(Uri.parse('$url/shoe/delete/$id'),
+          headers: headers);
+
+      if (response.statusCode == 200) {
+        fetchShoes();
+        Get.snackbar("Success", "Shoes deleted successfully");
+      } else {
+        print('Failed to delete shoes: ${response.statusCode}');
+        print('Response body: ${response.body}');
+        throw Exception('Failed to delete shoes');
+      }
+    } catch (e) {
+      Get.snackbar("Errro", e.toString());
+    }
+  }
+
+
   @override
   void onInit() {
     fetchShoes();
