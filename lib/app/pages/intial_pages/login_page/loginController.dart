@@ -13,7 +13,7 @@ class LoginPageController extends GetxController {
   var isLoading = false.obs;
   GetStorage box = GetStorage();
 
-  var user = {}.obs; // Add this line
+  var user = {}.obs; 
 
   Future<void> login() async {
     isLoading.value = true;
@@ -48,7 +48,7 @@ class LoginPageController extends GetxController {
           snackPosition: SnackPosition.TOP,
         );
         isLoading.value = false;
-        Get.offNamed(Routes.REG_CLEAN_LIST);
+        Get.offNamed(Routes.PROFILE);
       } else {
         final message =
             json.decode(response.body)['message'] ?? 'Unknown error';
@@ -57,7 +57,7 @@ class LoginPageController extends GetxController {
           message,
           snackPosition: SnackPosition.TOP,
         );
-        isLoading.value = false;
+        isLoading.value = true;
       }
     } catch (e) {
       Get.snackbar(
@@ -65,7 +65,7 @@ class LoginPageController extends GetxController {
         "$e",
         snackPosition: SnackPosition.TOP,
       );
-      isLoading.value = false;
+      isLoading.value = true;
     }
   }
 

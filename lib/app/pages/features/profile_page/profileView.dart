@@ -30,7 +30,7 @@ class ProfilePage extends GetView<ProfileController> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Padding(
-                  padding: const EdgeInsets.only(top: 36.0),
+                    padding: const EdgeInsets.only(top: 36.0),
                     child: Obx(
                       () => controller.users['profile_picture'] != null
                           ? CircleAvatar(
@@ -93,7 +93,6 @@ class ProfilePage extends GetView<ProfileController> {
                     .then((value) {
                   controller.fetchUser();
                 });
-                
               },
               child: ProfileWidgetContainer(
                 icon: Icons.edit,
@@ -110,11 +109,16 @@ class ProfilePage extends GetView<ProfileController> {
             ),
             Padding(
               padding: const EdgeInsets.only(top: 17.0),
-              child: ProfileWidgetContainer(
-                icon: Icons.logout,
-                title: 'Logout',
-                arrowIcon: Icons.circle,
-                color: Colors.red,
+              child: InkWell(
+                onTap: () {
+                  controller.logout();
+                },
+                child: ProfileWidgetContainer(
+                  icon: Icons.logout,
+                  title: 'Logout',
+                  arrowIcon: Icons.circle,
+                  color: Colors.red,
+                ),
               ),
             )
           ],

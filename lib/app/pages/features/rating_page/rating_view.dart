@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
+import 'package:get/get.dart';
+import 'rating_controller.dart';
 
 class RatingView extends StatelessWidget {
-  const RatingView({super.key});
-
   @override
   Widget build(BuildContext context) {
+    final RatingController controller = Get.put(RatingController());
+
     return Scaffold(
       appBar: AppBar(
         automaticallyImplyLeading: false,
@@ -52,7 +54,7 @@ class RatingView extends StatelessWidget {
                     color: Colors.amber,
                   ),
                   onRatingUpdate: (rating) {
-                    print(rating);
+                    controller.rating.value = rating;
                   },
                 ),
               ),
@@ -166,11 +168,23 @@ class RatingView extends StatelessWidget {
                     border: InputBorder.none,
                     contentPadding: EdgeInsets.all(10),
                   ),
+                  onChanged: (value) {
+                    controller.review.value = value;
+                  },
                 ),
               ),
               SizedBox(height: 300),
               InkWell(
-                onTap: () {},
+                onTap: () async {
+                  // Ensure the order ID is correctly set
+                  controller.order_id.value = 9320139201; // Example order ID
+                  bool result = await controller.postReview();
+                  if (result) {
+                    Get.snackbar('Success', 'Review submitted successfully');
+                  } else {
+                    Get.snackbar('Error', 'Failed to submit review');
+                  }
+                },
                 child: Container(
                   height: 50,
                   decoration: BoxDecoration(
