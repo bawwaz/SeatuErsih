@@ -8,6 +8,7 @@ import 'package:seatu_ersih/app/pages/intial_pages/login_page/widget/login_forge
 import 'package:seatu_ersih/app/pages/intial_pages/login_page/widget/auth_textfield.dart';
 import 'package:seatu_ersih/app/pages/intial_pages/login_page/widget/login_sign.dart';
 import 'package:seatu_ersih/app/pages/intial_pages/login_page/widget/login_sign_google.dart';
+import 'package:seatu_ersih/themes/colors.dart';
 import 'package:seatu_ersih/themes/theme.dart';
 
 class LoginPage extends GetView<LoginPageController> {
@@ -17,6 +18,7 @@ class LoginPage extends GetView<LoginPageController> {
   Widget build(BuildContext context) {
     final emailKey = GlobalKey<FormState>();
     final passwordKey = GlobalKey<FormState>();
+    final controller = Get.put(LoginPageController());
 
     return Scaffold(
       body: Container(
@@ -85,8 +87,6 @@ class LoginPage extends GetView<LoginPageController> {
                   } else {
                     controller.password.value = value;
                   }
-                  ;
-
                   return null;
                 },
                 prefixIcon: Icon(
@@ -103,18 +103,32 @@ class LoginPage extends GetView<LoginPageController> {
                 height: 20,
               ),
               Center(
-                child: SizedBox(
-                  width: double.infinity,
-                  height: 50,
-                  child: SignIn(
-                    onPressed: () {
-                      if (emailKey.currentState!.validate() &&
-                          passwordKey.currentState!.validate()) {
-                        controller.login();
-                      }
-                    },
-                  ),
-                ),
+                child: Obx(() {
+                  return SizedBox(
+                    width: double.infinity,
+                    height: 50,
+                    child: ElevatedButton(
+                      onPressed: () {
+                        if (emailKey.currentState!.validate() &&
+                            passwordKey.currentState!.validate()) {
+                          controller.login();
+                        }
+                      },
+                      child: controller.isLoading.value
+                          ? CircularProgressIndicator(
+                              color: Colors.white,
+                            )
+                          : Text(
+                              "Sign In",
+                              style: GoogleFonts.poppins(
+                                color: AppColors.primaryColor,
+                                fontWeight: FontWeight.bold,
+                                fontSize: 18,
+                              ),
+                            ),
+                    ),
+                  );
+                }),
               ),
               SizedBox(
                 height: 20,

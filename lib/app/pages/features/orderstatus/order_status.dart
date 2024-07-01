@@ -23,45 +23,48 @@ class MyOrder extends GetView<HomePageController>  {
         ),
         centerTitle: true,
       ),
-      body: Container(
-        margin: EdgeInsets.only(left: 20, right: 20),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.start,
-          children: [
-            SizedBox(
-              height: 2,
-            ),
-            Obx(
-              () => controller.orders.isEmpty
-                  ? Center(child: ImgIfEmpty())
-                  : ListView.builder(
-                      shrinkWrap: true,
-                      physics: NeverScrollableScrollPhysics(),
-                      itemCount: controller.orders.length,
-                      itemBuilder: (context, index) {
-                        Map<dynamic, dynamic> order = controller.orders[index];
-                        return InkWell(
-                          onTap: () {
-                            Get.toNamed(Routes.ORDER_DETAIL,
-                                arguments: [order]);
-                          },
-                          child: Container(
-                            margin: EdgeInsets.only(left: 20, right: 20),
-                            child: OrderContainer(
-                              title: order['order_type'] == "regular_clean"
-                                  ? "Regular Cleaning"
-                                  : "Deep Cleaning",
-                              pickupDate: controller
-                                  .formatDate(order['pickup_date'].toString()),
-                              price: controller.formatPrice(
-                                  int.parse(order['total_price'].toString())),
+      body: SingleChildScrollView(
+        scrollDirection: Axis.vertical,
+        child: Container(
+          margin: EdgeInsets.only(left: 20, right: 20),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: [
+              SizedBox(
+                height: 2,
+              ),
+              Obx(
+                () => controller.orders.isEmpty
+                    ? Center(child: ImgIfEmpty())
+                    : ListView.builder(
+                        shrinkWrap: true,
+                        physics: NeverScrollableScrollPhysics(),
+                        itemCount: controller.orders.length,
+                        itemBuilder: (context, index) {
+                          Map<dynamic, dynamic> order = controller.orders[index];
+                          return InkWell(
+                            onTap: () {
+                              Get.toNamed(Routes.ORDER_DETAIL,
+                                  arguments: [order]);
+                            },
+                            child: Container(
+                              margin: EdgeInsets.only(left: 20, right: 20),
+                              child: OrderContainer(
+                                title: order['order_type'] == "regular_clean"
+                                    ? "Regular Cleaning"
+                                    : "Deep Cleaning",
+                                pickupDate: controller
+                                    .formatDate(order['pickup_date'].toString()),
+                                price: controller.formatPrice(
+                                    int.parse(order['total_price'].toString())),
+                              ),
                             ),
-                          ),
-                        );
-                      },
-                    ),
-            ),
-          ],
+                          );
+                        },
+                      ),
+              ),
+            ],
+          ),
         ),
       ),
     );
