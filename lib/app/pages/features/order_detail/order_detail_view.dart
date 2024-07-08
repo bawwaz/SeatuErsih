@@ -74,7 +74,7 @@ class OrderDetailView extends GetView<OrderDetailcontroller> {
             padding: const EdgeInsets.all(20.0),
             child: GestureDetector(
               onTap: () {
-                Get.toNamed(Routes.RATING);
+                Get.toNamed(Routes.RATING, arguments: controller.orders);
               },
               child: Container(
                 width: double.infinity,
