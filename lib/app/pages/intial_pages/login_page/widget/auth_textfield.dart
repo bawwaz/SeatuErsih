@@ -25,7 +25,7 @@ class AuthTextField extends StatelessWidget {
     return Form(
       key: formKey,
       autovalidateMode: AutovalidateMode.onUserInteraction,
-      child: TextFormField(
+      child:  TextFormField(
         onChanged: onChanged,
         validator: validator,
         obscureText: obsecureText ?? false,

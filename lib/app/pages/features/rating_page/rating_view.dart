@@ -9,11 +9,16 @@ class RatingView extends StatelessWidget {
   Widget build(BuildContext context) {
     final RatingController controller = Get.put(RatingController());
 
+    // Retrieve the order data from arguments
+    final order = Get.arguments;
+
     return Scaffold(
       appBar: AppBar(
         automaticallyImplyLeading: false,
         leading: InkWell(
-          onTap: () {},
+          onTap: () {
+            Get.back();
+          },
           child: Image.asset('assets/img/angle-circle-right 1.png'),
         ),
         centerTitle: true,
@@ -86,7 +91,9 @@ class RatingView extends StatelessWidget {
                         Row(
                           children: [
                             Text(
-                              'Regular Clean',
+                              order['order_type'] == "regular_clean"
+                                  ? "Regular Clean"
+                                  : "Deep Clean",
                               style: GoogleFonts.poppins(
                                 fontWeight: FontWeight.w600,
                                 color: Colors.black,
@@ -95,7 +102,7 @@ class RatingView extends StatelessWidget {
                             ),
                             SizedBox(width: 8),
                             Text(
-                              'x2',
+                              'x${order['quantity']}',
                               style: GoogleFonts.poppins(
                                 fontWeight: FontWeight.w400,
                                 color: Colors.black,
@@ -105,17 +112,9 @@ class RatingView extends StatelessWidget {
                           ],
                         ),
                         SizedBox(height: 8),
-                        Text(
-                          '06/06/24',
-                          style: GoogleFonts.poppins(
-                            fontWeight: FontWeight.w400,
-                            color: Colors.black,
-                            fontSize: 14,
-                          ),
-                        ),
                         SizedBox(height: 8),
                         Text(
-                          'Rp. 50.000',
+                          'Rp. ${order['price']}',
                           style: GoogleFonts.poppins(
                             fontWeight: FontWeight.w600,
                             color: Color(0xFF7EC1EB),
@@ -124,7 +123,7 @@ class RatingView extends StatelessWidget {
                         ),
                         SizedBox(height: 8),
                         Text(
-                          'Order Id: 9320139201',
+                          'Order Id: ${order['id']}',
                           style: GoogleFonts.poppins(
                             fontWeight: FontWeight.w400,
                             color: Color(0xFF8F8F8F),
@@ -176,14 +175,8 @@ class RatingView extends StatelessWidget {
               SizedBox(height: 300),
               InkWell(
                 onTap: () async {
-                  // Ensure the order ID is correctly set
-                  controller.order_id.value = 9320139201; // Example order ID
+                  controller.order_id.value = order['id'];
                   bool result = await controller.postReview();
-                  if (result) {
-                    Get.snackbar('Success', 'Review submitted successfully');
-                  } else {
-                    Get.snackbar('Error', 'Failed to submit review');
-                  }
                 },
                 child: Container(
                   height: 50,
