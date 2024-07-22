@@ -45,10 +45,15 @@ class HomePageController extends GetxController {
     return formattedDate;
   }
 
-  String formatPrice(int price) {
-    String formattedPrice =
-        NumberFormat.currency(locale: 'id_ID', symbol: 'Rp').format(price);
-    return formattedPrice;
+  String formatPrice(String price) {
+    if (price == 'null') {
+      return 'N/A';
+    } else {
+      int intPrice = int.tryParse(price) ?? 0;
+      String formattedPrice =
+          NumberFormat.currency(locale: 'id_ID', symbol: 'Rp').format(intPrice);
+      return formattedPrice;
+    }
   }
 
   @override

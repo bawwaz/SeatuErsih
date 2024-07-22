@@ -7,13 +7,11 @@ import 'package:seatu_ersih/app/pages/features/orderstatus/order_statusControlle
 import 'package:seatu_ersih/app/router/app_pages.dart';
 import 'package:seatu_ersih/themes/fonts.dart';
 
-class MyOrder extends GetView<HomePageController>  {
+class MyOrder extends GetView<HomePageController> {
   const MyOrder({super.key});
 
   @override
   Widget build(BuildContext context) {
-    
-
     return Scaffold(
       appBar: AppBar(
         automaticallyImplyLeading: false,
@@ -41,7 +39,8 @@ class MyOrder extends GetView<HomePageController>  {
                         physics: NeverScrollableScrollPhysics(),
                         itemCount: controller.orders.length,
                         itemBuilder: (context, index) {
-                          Map<dynamic, dynamic> order = controller.orders[index];
+                          Map<dynamic, dynamic> order =
+                              controller.orders[index];
                           return InkWell(
                             onTap: () {
                               Get.toNamed(Routes.ORDER_DETAIL,
@@ -53,10 +52,10 @@ class MyOrder extends GetView<HomePageController>  {
                                 title: order['order_type'] == "regular_clean"
                                     ? "Regular Cleaning"
                                     : "Deep Cleaning",
-                                pickupDate: controller
-                                    .formatDate(order['pickup_date'].toString()),
+                                pickupDate: controller.formatDate(
+                                    order['pickup_date'].toString()),
                                 price: controller.formatPrice(
-                                    int.parse(order['total_price'].toString())),
+                                    order['total_price'].toString()),
                               ),
                             ),
                           );

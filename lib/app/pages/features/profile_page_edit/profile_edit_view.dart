@@ -112,7 +112,7 @@ class ProfileEditView extends GetView<ProfileEditController> {
                   child: Padding(
                     padding: const EdgeInsets.only(top: 20.0),
                     child: Text(
-                      'Nomore Telepon',
+                      'Nomor Telepon',
                       style: Fonts.header1
                           .copyWith(color: Colors.black, fontSize: 15),
                     ),

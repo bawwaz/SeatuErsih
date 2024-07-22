@@ -11,7 +11,6 @@ import 'package:seatu_ersih/app/pages/features/Home_Page/widget/orderservice.dar
 import 'package:seatu_ersih/app/pages/features/Home_Page/widget/bannerslogan.dart';
 
 class HomeBody extends GetView<HomePageController> {
-  
   const HomeBody({Key? key}) : super(key: key);
 
   @override
@@ -96,8 +95,8 @@ class HomeBody extends GetView<HomePageController> {
                                   : "Deep Cleaning",
                               pickupDate: controller
                                   .formatDate(order['pickup_date'].toString()),
-                              price: controller.formatPrice(
-                                  int.parse(order['total_price'].toString())),
+                              price: controller
+                                  .formatPrice(order['total_price'].toString()),
                             )),
                       );
                     },
