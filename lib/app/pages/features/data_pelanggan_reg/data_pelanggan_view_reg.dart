@@ -63,6 +63,7 @@ class DataPelangganRegView extends GetView<DataPelangganRegController> {
                   child: InkWell(
                     onTap: () {
                       controller.pickDate(context);
+                      
                     },
                     child: Icon(Icons.calendar_month),
                   ),
