@@ -46,6 +46,8 @@ import 'package:seatu_ersih/app/pages/features/orderstatus/order_status.dart';
 import 'package:seatu_ersih/app/pages/features/profile_page/profileView.dart';
 import 'package:seatu_ersih/app/pages/intial_pages/login_page/loginBinding.dart';
 import 'package:seatu_ersih/app/pages/intial_pages/onboarding/boardingscreen.dart';
+import 'package:seatu_ersih/app/pages/intial_pages/otp_page/otp_page_binding.dart';
+import 'package:seatu_ersih/app/pages/intial_pages/otp_page/otp_page_view.dart';
 import 'package:seatu_ersih/app/pages/intial_pages/register_page/RegisterviewPage.dart';
 import 'package:seatu_ersih/app/pages/intial_pages/register_page/registerBinding.dart';
 
@@ -54,7 +56,7 @@ part 'routes.dart';
 class AppPages {
   AppPages._();
 
-  static const INITIAL = Routes.LOGIN;
+  static const INITIAL = Routes.OTP;
 
   static final routes = [
     GetPage(
@@ -204,5 +206,10 @@ class AppPages {
         page: () => RatingView(),
         binding: RatingBinding(),
         transition: Transition.noTransition),
+    GetPage(
+        name: Routes.OTP,
+        page: () => OtpPageView(),
+        binding: OtpPageBinding(),
+        transition: Transition.noTransition)
   ];
 }
