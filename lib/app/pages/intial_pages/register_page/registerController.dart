@@ -12,6 +12,8 @@ class RegisterPageController extends GetxController {
   var password = ''.obs;
   var checked = false.obs;
 
+  var isPasswordHidden = true.obs;
+
   void registerUser() async {
     isLoading.value = true;
 
