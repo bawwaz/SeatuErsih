@@ -44,10 +44,11 @@ class OrderDetailView extends GetView<OrderDetailcontroller> {
                         controller.orders['order_type'] == "regular_clean"
                             ? "Regular Clean"
                             : "Deep Clean",
-                    productStatus: 'Completed',
+                    productStatus: controller.orders['order_status'],
                     pickupDate:
                         '${controller.formatDate(controller.orders['pickup_date'].toString())}',
                     noteOrder: '${controller.orders['notes']}',
+                    price: '${controller.orders['total_price']}',
                   ),
                   Align(
                     alignment: Alignment.centerLeft,

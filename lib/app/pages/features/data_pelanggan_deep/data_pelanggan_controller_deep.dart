@@ -5,7 +5,6 @@ import 'package:get_storage/get_storage.dart';
 import 'package:http/http.dart' as http;
 
 class DataPelangganControllerDeep extends GetxController {
-  
   var address = "".obs;
   var phone = "".obs;
   var total_price = 0.obs;
@@ -63,7 +62,7 @@ class DataPelangganControllerDeep extends GetxController {
     DateTime? picked = await showDatePicker(
       context: context,
       initialDate: DateTime.now(),
-      firstDate: DateTime(2000),
+      firstDate: DateTime.now(),
       lastDate: DateTime(2101),
     );
 
