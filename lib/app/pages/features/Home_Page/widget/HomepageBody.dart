@@ -97,6 +97,7 @@ class HomeBody extends GetView<HomePageController> {
                                   .formatDate(order['pickup_date'].toString()),
                               price: controller
                                   .formatPrice(order['total_price'].toString()),
+                              status: order['order_status'].toString(),
                             )),
                       );
                     },

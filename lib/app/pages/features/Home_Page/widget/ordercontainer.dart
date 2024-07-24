@@ -8,11 +8,13 @@ class OrderContainer extends GetView<HomePageController> {
   final String title;
   final String pickupDate;
   final String price;
+  final String status;
   const OrderContainer({
     Key? key,
     required this.title,
     required this.pickupDate,
     required this.price,
+    required this.status,
   }) : super(key: key);
 
   @override
@@ -83,6 +85,13 @@ class OrderContainer extends GetView<HomePageController> {
                     ),
                     Text(
                       '$price',
+                      style: Fonts.detail.copyWith(
+                        fontSize: 15,
+                        color: AppColors.primaryColor,
+                      ),
+                    ),
+                    Text(
+                      '$status',
                       style: Fonts.detail.copyWith(
                         fontSize: 15,
                         color: AppColors.primaryColor,

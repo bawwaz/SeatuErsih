@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:get/get.dart';
+import 'package:seatu_ersih/app/router/app_pages.dart';
 import 'rating_controller.dart';
 
 class RatingView extends StatelessWidget {
@@ -101,20 +102,20 @@ class RatingView extends StatelessWidget {
                               ),
                             ),
                             SizedBox(width: 8),
-                            Text(
-                              'x${order['quantity']}',
-                              style: GoogleFonts.poppins(
-                                fontWeight: FontWeight.w400,
-                                color: Colors.black,
-                                fontSize: 14,
-                              ),
-                            ),
+                            // Text(
+                            //   'x${order['quantity']}',
+                            //   style: GoogleFonts.poppins(
+                            //     fontWeight: FontWeight.w400,
+                            //     color: Colors.black,
+                            //     fontSize: 14,
+                            //   ),
+                            // ),
                           ],
                         ),
                         SizedBox(height: 8),
                         SizedBox(height: 8),
                         Text(
-                          'Rp. ${order['price']}',
+                          'Rp. ${order['total_price']}',
                           style: GoogleFonts.poppins(
                             fontWeight: FontWeight.w600,
                             color: Color(0xFF7EC1EB),
@@ -177,6 +178,7 @@ class RatingView extends StatelessWidget {
                 onTap: () async {
                   controller.order_id.value = order['id'];
                   bool result = await controller.postReview();
+                  Get.toNamed(Routes.HOME);
                 },
                 child: Container(
                   height: 50,

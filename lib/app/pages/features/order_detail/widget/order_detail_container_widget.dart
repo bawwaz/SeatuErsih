@@ -6,6 +6,7 @@ class DetailContainerWidget extends StatelessWidget {
   final String? productStatus;
   final String? pickupDate;
   final String? noteOrder;
+  final String? price;
 
   const DetailContainerWidget({
     super.key,
@@ -13,6 +14,7 @@ class DetailContainerWidget extends StatelessWidget {
     this.productStatus,
     this.pickupDate,
     this.noteOrder,
+    this.price,
   });
 
   @override
@@ -100,6 +102,21 @@ class DetailContainerWidget extends StatelessWidget {
                 fontSize: 14,
               ),
             ),
+            Divider(color: Colors.grey),
+            Text(
+              'Price',
+              style: GoogleFonts.poppins(
+                fontWeight: FontWeight.bold,
+                fontSize: 16,
+              ),
+            ),
+            Text(
+              price!,
+              style: GoogleFonts.poppins(
+                color: Colors.grey,
+                fontSize: 14,
+              ),
+            )
           ],
         ],
       ),
