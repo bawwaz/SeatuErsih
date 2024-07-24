@@ -6,6 +6,7 @@ import 'package:seatu_ersih/app/router/app_pages.dart';
 
 class LoginPageController extends GetxController {
   var isObsecure = true.obs;
+  var isPasswordHidden = true.obs;
 
   var email = ''.obs;
   var password = ''.obs;
@@ -13,7 +14,7 @@ class LoginPageController extends GetxController {
   var isLoading = false.obs;
   GetStorage box = GetStorage();
 
-  var user = {}.obs; 
+  var user = {}.obs;
 
   Future<void> login() async {
     isLoading.value = true;
@@ -48,7 +49,7 @@ class LoginPageController extends GetxController {
           snackPosition: SnackPosition.TOP,
         );
         isLoading.value = false;
-        Get.offNamed(Routes.PROFILE);
+        Get.offNamed(Routes.HOME);
       } else {
         final message =
             json.decode(response.body)['message'] ?? 'Unknown error';

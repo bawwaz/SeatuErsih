@@ -1,3 +1,5 @@
+// login_page.dart
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -12,6 +14,9 @@ import 'package:seatu_ersih/themes/colors.dart';
 import 'package:seatu_ersih/themes/theme.dart';
 
 class LoginPage extends GetView<LoginPageController> {
+  final LoginPageController loginPageController =
+      Get.put(LoginPageController());
+
   LoginPage({Key? key}) : super(key: key);
 
   @override
@@ -62,7 +67,7 @@ class LoginPage extends GetView<LoginPageController> {
                 validator: (value) {
                   if (value == null || value.isEmpty) {
                     return 'Email tidak boleh kosong';
-                  } else if (GetUtils.isEmail(value) == false) {
+                  } else if (!GetUtils.isEmail(value)) {
                     return 'Email tidak valid';
                   }
                   controller.email.value = value;
@@ -77,22 +82,23 @@ class LoginPage extends GetView<LoginPageController> {
               SizedBox(
                 height: 20,
               ),
-              AuthTextField(
-                formKey: passwordKey,
-                hintText: "Password",
-                obsecureText: true,
-                validator: (value) {
-                  if (value == null || value.isEmpty) {
-                    return 'Password tidak boleh kosong';
-                  } else {
-                    controller.password.value = value;
-                  }
-                  return null;
-                },
-                prefixIcon: Icon(
-                  Icons.lock,
-                  size: 25,
-                  color: darkGrey,
+              Obx(
+                () => AuthTextField(
+                  formKey: passwordKey,
+                  hintText: 'Password',
+                  prefixIcon: Icon(
+                    Icons.lock,
+                    color: darkGrey,
+                  ),
+                  obsecureText: true,
+                  isPasswordHidden: loginPageController.isPasswordHidden.value,
+                  onChanged: (value) {
+                    loginPageController.password.value = value!;
+                  },
+                  toggleVisibility: () {
+                    loginPageController.isPasswordHidden.value =
+                        !loginPageController.isPasswordHidden.value;
+                  },
                 ),
               ),
               Align(
@@ -189,17 +195,18 @@ class LoginPage extends GetView<LoginPageController> {
                     ),
                   ),
                   TextButton(
-                      onPressed: () {
-                        Get.toNamed(Routes.REGIS);
-                      },
-                      child: Text(
-                        "Sign Up",
-                        style: GoogleFonts.poppins(
-                          color: Color(0xFF7EC1EB),
-                          fontWeight: FontWeight.normal,
-                          fontSize: 13,
-                        ),
-                      )),
+                    onPressed: () {
+                      Get.toNamed(Routes.REGIS);
+                    },
+                    child: Text(
+                      "Sign Up",
+                      style: GoogleFonts.poppins(
+                        color: Color(0xFF7EC1EB),
+                        fontWeight: FontWeight.normal,
+                        fontSize: 13,
+                      ),
+                    ),
+                  ),
                 ],
               ),
             ],
