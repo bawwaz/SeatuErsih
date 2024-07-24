@@ -69,7 +69,7 @@ class OtpPageView extends GetView<OtpPageController> {
                       _pinController4.text +
                       _pinController5.text +
                       _pinController6.text;
-                  // controller.verifyOtp(pinCode);
+                  controller.verifyOtp(pinCode);
         },
         child: Container(
           height: 35,
