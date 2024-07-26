@@ -4,7 +4,7 @@ import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:intl/intl.dart';
 
-class RegCleanListController extends GetxController{
+class RegCleanListController extends GetxController {
   var isLoading = false.obs;
   final shoes = [].obs;
 
@@ -20,12 +20,11 @@ class RegCleanListController extends GetxController{
       'Authorization': 'Bearer $token'
     };
 
-    var body = {
-      'order_id': order_id.toString(),
-    };
     try {
-      final response = await http.post(Uri.parse('$url/shoe/getall'),
-          headers: headers, body: body);
+      final response = await http.get(
+        Uri.parse('$url/shoe/getall'),
+        headers: headers,
+      );
 
       if (response.statusCode == 200) {
         final data = json.decode(response.body)['data'];
@@ -72,7 +71,6 @@ class RegCleanListController extends GetxController{
       Get.snackbar("Errro", e.toString());
     }
   }
-
 
   @override
   void onInit() {

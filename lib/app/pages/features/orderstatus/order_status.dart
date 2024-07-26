@@ -56,7 +56,7 @@ class MyOrder extends GetView<HomePageController> {
                                     order['pickup_date'].toString()),
                                 price: controller.formatPrice(
                                     order['total_price'].toString()),
-                                status: order['status'],
+                                status: order['order_status'],
                               ),
                             ),
                           );

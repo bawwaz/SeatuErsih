@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:ffi';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
@@ -12,6 +13,7 @@ class DataPelangganRegController extends GetxController {
   var notes = ''.obs;
   var shoesId = 0.obs;
   var userId = 0.obs;
+  var laundry_id = 0.obs;
 
   final box = GetStorage();
   final orders = {}.obs;
@@ -20,12 +22,13 @@ class DataPelangganRegController extends GetxController {
     final url = 'http://seatuersih.pradiptaahmad.tech/api';
     final token = box.read('token');
     var data = {
+      'laundry_id': Get.arguments.toString(),
       'order_type': 'regular_clean',
       'address': address.value,
       'phone': phone.value,
       'pickup_date': pickup_date.value.toString(),
       'notes': notes.value,
-      'userId': userId.value.toString(),
+      'user_id': box.read('userid').toString(),
     };
 
     var headers = {
@@ -46,7 +49,10 @@ class DataPelangganRegController extends GetxController {
 
       if (response.statusCode == 201) {
         orders.value = json.decode(response.body)['order'];
-        box.write('order_id', orders['id'].toString());
+        box.write(
+          'order_id',
+          orders['id'].toString(),
+        );
         return true;
       } else {
         Get.snackbar('Error', 'Failed to submit data: ${response.body}');

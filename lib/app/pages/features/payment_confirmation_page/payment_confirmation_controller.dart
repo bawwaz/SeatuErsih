@@ -5,7 +5,7 @@ import 'package:get_storage/get_storage.dart';
 import 'package:http/http.dart' as http;
 import 'package:intl/intl.dart';
 
-class PaymentConfirmationController extends GetxController{
+class PaymentConfirmationController extends GetxController {
   final box = GetStorage();
   late final order_id;
 
@@ -15,7 +15,6 @@ class PaymentConfirmationController extends GetxController{
   var orderData = {}.obs;
   late final arguments;
 
-  // Fetch data from API
   Future<void> fetchShoe() async {
     isLoading.value = true;
     final url = 'http://seatuersih.pradiptaahmad.tech/api';
@@ -25,12 +24,11 @@ class PaymentConfirmationController extends GetxController{
       'Authorization': 'Bearer $token'
     };
 
-    var body = {
-      'order_id': order_id.toString(),
-    };
     try {
-      final response = await http.post(Uri.parse('$url/shoe/getall'),
-          headers: headers, body: body);
+      final response = await http.get(
+        Uri.parse('$url/shoe/getall'),
+        headers: headers,
+      );
 
       if (response.statusCode == 200) {
         final data = json.decode(response.body)['data'];

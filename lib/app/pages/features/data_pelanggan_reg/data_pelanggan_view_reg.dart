@@ -63,7 +63,6 @@ class DataPelangganRegView extends GetView<DataPelangganRegController> {
                   child: InkWell(
                     onTap: () {
                       controller.pickDate(context);
-                      
                     },
                     child: Icon(Icons.calendar_month),
                   ),
@@ -91,8 +90,10 @@ class DataPelangganRegView extends GetView<DataPelangganRegController> {
                   onTap: () async {
                     bool success = await controller.postOrders();
                     if (success) {
-                      Get.offNamed(Routes.REG_CLEAN_LIST,
-                          arguments: [controller.orders['id'].toString()]);
+                      Get.offNamed(Routes.REG_CLEAN_LIST, arguments: [
+                        controller.orders['id'].toString(),
+                        controller.orders['laundry_id'].toString(),
+                      ]);
                     } else {
                       Get.snackbar('Error', 'Failed to submit data');
                     }
