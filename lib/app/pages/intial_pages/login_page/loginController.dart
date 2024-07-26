@@ -40,6 +40,7 @@ class LoginPageController extends GetxController {
 
         box.write("token", token);
         box.write("username", userData['username']);
+        box.write("userid", userData['id']);
 
         user.value = userData; // Store user data
 

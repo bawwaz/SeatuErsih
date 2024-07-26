@@ -6,7 +6,7 @@ import 'package:http/http.dart' as http;
 import 'package:intl/intl.dart';
 
 class DeepCleanController extends GetxController {
-   var isLoading = false.obs;
+  var isLoading = false.obs;
   final shoes = [].obs;
 
   final box = GetStorage();
@@ -21,12 +21,11 @@ class DeepCleanController extends GetxController {
       'Authorization': 'Bearer $token'
     };
 
-    var body = {
-      'order_id': order_id.toString(),
-    };
     try {
-      final response = await http.post(Uri.parse('$url/shoe/getall'),
-          headers: headers, body: body);
+      final response = await http.get(
+        Uri.parse('$url/shoe/getall'),
+        headers: headers,
+      );
 
       if (response.statusCode == 200) {
         final data = json.decode(response.body)['data'];

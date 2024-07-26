@@ -15,7 +15,7 @@ class DataPelangganDeepView extends GetView<DataPelangganControllerDeep> {
       appBar: AppBar(
         automaticallyImplyLeading: false,
         title: Text(
-          'Data Pelanggan',
+          'Data Pelanggan ',
           style: Fonts.header1.copyWith(
               color: Colors.black, fontSize: 16, fontWeight: FontWeight.w500),
         ),

@@ -20,12 +20,13 @@ class DataPelangganControllerDeep extends GetxController {
     final url = 'http://seatuersih.pradiptaahmad.tech/api';
     final token = box.read('token');
     var data = {
-      'order_type': 'deep_clean',
+      'laundry_id': Get.arguments.toString(),
+      'order_type': 'regular_clean',
       'address': address.value,
       'phone': phone.value,
       'pickup_date': pickup_date.value.toString(),
       'notes': notes.value,
-      'userId': userId.value.toString(),
+      'user_id': box.read('userid').toString(),
     };
 
     var headers = {

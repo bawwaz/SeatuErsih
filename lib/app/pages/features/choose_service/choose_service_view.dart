@@ -1,15 +1,21 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:seatu_ersih/app/pages/features/choose_service/choose_service_controller.dart';
 import 'package:seatu_ersih/app/pages/features/choose_service/widget/choose_service_container.dart';
 import 'package:seatu_ersih/app/router/app_pages.dart';
 import 'package:seatu_ersih/themes/fonts.dart';
 
-class ChooseService extends StatelessWidget {
+class ChooseService extends GetView<ChooseServiceController> {
   const ChooseService({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final ChooseServiceController controller =
+        Get.put(ChooseServiceController());
+
     return Scaffold(
       appBar: AppBar(
         automaticallyImplyLeading: false,
@@ -46,29 +52,29 @@ class ChooseService extends StatelessWidget {
                 ),
               ),
               SizedBox(height: 20),
-              ServiceContainer(
-                onPressed: () {
-                  Get.toNamed(Routes.DATA_PELANGGAN_REG);
-                },
-                title: 'Regular Clean',
-                description:
-                    'Proses pembersihan standar untuk sepatu yang meliputi bebxerapa langkah dasar untuk menghilangkan kotoran, noda, dan bau yang menempel pada sepatu.',
-                price: '25K',
-                buttonText: 'Order Now',
-                icon: Icons.cleaning_services,
-              ),
-              SizedBox(height: 20),
-              ServiceContainer(
-                onPressed: () {
-                  Get.toNamed(Routes.DATA_PELANGGAN_DEEP);
-                },
-                title: 'Deep Clean',
-                description:
-                    'Proses pembersihan standar untuk sepatu yang meliputi beberapa langkah dasar untuk menghilangkan kotoran, noda, dan bau yang menempel pada sepatu.',
-                price: '35K',
-                buttonText: 'Order Now',
-                icon: Icons.cleaning_services,
-              ),
+              Obx(() => ListView.builder(
+                    itemCount: controller.laundries.length,
+                    shrinkWrap: true,
+                    itemBuilder: (BuildContext context, int index) {
+                      return ServiceContainer(
+                        title: controller.laundries[index]["name"],
+                        description: controller.laundries[index]["Description"],
+                        price: '25K',
+                        buttonText: "Pesan Sekarang",
+                        icon: Icons.cleaning_services,
+                        onPressed: () {
+                          if (controller.laundries[index]["name"] ==
+                              "Regular Clean") {
+                            Get.toNamed(Routes.DATA_PELANGGAN_REG,
+                                arguments: controller.laundries[index]["id"]);
+                          } else {
+                            Get.toNamed(Routes.DATA_PELANGGAN_DEEP,
+                                arguments: controller.laundries[index]["id"]);
+                          }
+                        },
+                      );
+                    },
+                  ))
             ],
           ),
         ),
