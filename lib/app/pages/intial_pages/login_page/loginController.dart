@@ -49,7 +49,7 @@ class LoginPageController extends GetxController {
           snackPosition: SnackPosition.TOP,
         );
         isLoading.value = false;
-        Get.offNamed(Routes.HOME);
+        Get.offNamed(Routes.BTMNAVBAR);
       } else {
         final message =
             json.decode(response.body)['message'] ?? 'Unknown error';
