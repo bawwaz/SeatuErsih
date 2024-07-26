@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:seatu_ersih/app/pages/features/Home_Page/HomepageController.dart';
+import 'package:seatu_ersih/app/pages/features/Home_Page/widget/card_review.dart';
 import 'package:seatu_ersih/app/pages/features/Home_Page/widget/ifempty.dart';
 import 'package:seatu_ersih/app/pages/features/Home_Page/widget/ordercontainer.dart';
 import 'package:seatu_ersih/app/pages/features/profile_page/profileController.dart';
@@ -58,51 +60,86 @@ class HomeBody extends GetView<HomePageController> {
               ),
             ))
           ]),
-          SizedBox(
-            height: 31,
-          ),
-          Center(
-            child: BannerSlogan(),
-          ),
+          // SizedBox(
+          //   height: 31,
+          // ),
+          // Center(
+          //   child: BannerSlogan(),
+          // ),
           SizedBox(
             height: 20,
           ),
           Padding(
             padding: const EdgeInsets.only(left: 20.0),
             child: Text(
-              'My Orders',
+              'Review Kami!',
               style: Fonts.header1.copyWith(color: Colors.black),
             ),
           ),
-          Obx(
-            () => controller.orders.isEmpty
-                ? Center(child: ImgIfEmpty())
-                : ListView.builder(
-                    shrinkWrap: true,
-                    physics: NeverScrollableScrollPhysics(),
-                    itemCount: controller.orders.length,
-                    itemBuilder: (context, index) {
-                      Map<dynamic, dynamic> order = controller.orders[index];
-                      return InkWell(
-                        onTap: () {
-                          Get.toNamed(Routes.ORDER_DETAIL, arguments: [order]);
-                        },
-                        child: Container(
-                            margin: EdgeInsets.only(left: 20, right: 20),
-                            child: OrderContainer(
-                              title: order['order_type'] == "regular_clean"
-                                  ? "Regular Cleaning"
-                                  : "Deep Cleaning",
-                              pickupDate: controller
-                                  .formatDate(order['pickup_date'].toString()),
-                              price: controller
-                                  .formatPrice(order['total_price'].toString()),
-                              status: order['order_status'].toString(),
-                            )),
-                      );
-                    },
-                  ),
+          SizedBox(
+            height: 7,
+          ),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 15),
+            child: SizedBox(
+              height: 135,
+              child: ListView.builder(
+                scrollDirection: Axis.horizontal,
+                itemCount: 3,
+                itemBuilder: (context, index) {
+                  return Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Container(
+                      width: 360,
+                      height: 120,
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.all(Radius.circular(10)),
+                        boxShadow: [
+                          BoxShadow(
+                            color: Colors.black.withOpacity(0.25),
+                            spreadRadius: 0,
+                            blurRadius: 3,
+                            offset: Offset(0, 0),
+                          ),
+                        ],
+                      ),
+                      child: CardReview(),
+                    ),
+                  );
+                },
+              ),
+            ),
           )
+          // Obx(
+          //   () => controller.orders.isEmpty
+          //       ? Center(child: ImgIfEmpty())
+          //       : ListView.builder(
+          //           shrinkWrap: true,
+          //           physics: NeverScrollableScrollPhysics(),
+          //           itemCount: controller.orders.length,
+          //           itemBuilder: (context, index) {
+          //             Map<dynamic, dynamic> order = controller.orders[index];
+          //             return InkWell(
+          //               onTap: () {
+          //                 Get.toNamed(Routes.ORDER_DETAIL, arguments: [order]);
+          //               },
+          //               child: Container(
+          //                   margin: EdgeInsets.only(left: 20, right: 20),
+          //                   child: OrderContainer(
+          //                     title: order['order_type'] == "regular_clean"
+          //                         ? "Regular Cleaning"
+          //                         : "Deep Cleaning",
+          //                     pickupDate: controller
+          //                         .formatDate(order['pickup_date'].toString()),
+          //                     price: controller
+          //                         .formatPrice(order['total_price'].toString()),
+          //                     status: order['order_status'].toString(),
+          //                   )),
+          //             );
+          //           },
+          //         ),
+          // )
         ],
       ),
     );
