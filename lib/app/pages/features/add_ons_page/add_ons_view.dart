@@ -5,6 +5,7 @@ import 'package:seatu_ersih/app/pages/features/add_ons_page/widget/button_tambah
 import 'package:seatu_ersih/app/pages/features/add_ons_page/widget/list_view_addons.dart';
 import 'package:seatu_ersih/app/pages/features/add_ons_page/widget/textfield_input_note.dart';
 import 'package:seatu_ersih/app/pages/features/add_ons_page/widget/textfield_input_sepatu.dart';
+import 'package:seatu_ersih/app/pages/features/add_ons_page/add_ons_controller.dart';
 
 class AddOnsView extends StatelessWidget {
   const AddOnsView({super.key});
@@ -107,9 +108,7 @@ class AddOnsView extends StatelessWidget {
               height: 30,
             ),
             InkWell(
-              onTap: () {
-                
-              },
+              onTap: () {},
               child: ButtonTambahSepatu(),
             ),
           ],

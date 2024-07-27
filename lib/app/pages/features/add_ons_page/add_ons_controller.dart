@@ -27,6 +27,7 @@ class AddOnsController extends GetxController {
   // variable
   var shoesName = "".obs;
   var shoesNote = "".obs;
+  var isOtherSelected = false.obs;
 
   List<dynamic> selectedAddOns = [].obs;
   List<dynamic> nameSelectedAddons = [].obs;
@@ -93,5 +94,11 @@ class AddOnsController extends GetxController {
     }
     isSelected = List.generate(addOnsData.length, (index) => false.obs).obs;
     super.onInit();
+  }
+
+  void checkShoesName() {
+    if (shoesName.value.isEmpty) {
+      isOtherSelected.value = false;
+    }
   }
 }
