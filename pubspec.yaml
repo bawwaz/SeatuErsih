@@ -23,6 +23,7 @@ dependencies:
   image_picker:
   intl: any
   flutter_rating_bar:
+  dropdown_button2:
 
 dev_dependencies:
   flutter_test:
