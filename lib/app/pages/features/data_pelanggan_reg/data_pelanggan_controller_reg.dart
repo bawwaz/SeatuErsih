@@ -1,5 +1,4 @@
 import 'dart:convert';
-import 'dart:ffi';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
@@ -14,6 +13,10 @@ class DataPelangganRegController extends GetxController {
   var shoesId = 0.obs;
   var userId = 0.obs;
   var laundry_id = 0.obs;
+
+  var isOtherSelected = false.obs;
+  var kabupatenName = "".obs;
+  var kecamatanName = "".obs;
 
   final box = GetStorage();
   final orders = {}.obs;
@@ -61,6 +64,12 @@ class DataPelangganRegController extends GetxController {
     } catch (e) {
       Get.snackbar('Error', 'Exception occurred: $e');
       return false;
+    }
+  }
+
+  void checkKabupatenName() {
+    if (kabupatenName.value.isEmpty) {
+      isOtherSelected.value = false;
     }
   }
 
