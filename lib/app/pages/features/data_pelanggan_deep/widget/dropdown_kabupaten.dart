@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:seatu_ersih/app/pages/features/data_pelanggan_reg/data_pelanggan_controller_reg.dart';
+import 'package:seatu_ersih/app/pages/features/data_pelanggan_deep/data_pelanggan_controller_deep.dart';
 
-class DropdownKabupatenReg extends GetView<DataPelangganRegController> {
-  const DropdownKabupatenReg({super.key});
+class DropdownKabupatenDeep extends GetView<DataPelangganControllerDeep> {
+  const DropdownKabupatenDeep({super.key});
 
   @override
   Widget build(BuildContext context) {
