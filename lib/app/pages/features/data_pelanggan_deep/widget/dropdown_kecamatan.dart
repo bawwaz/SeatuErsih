@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:seatu_ersih/app/pages/features/data_pelanggan_reg/data_pelanggan_controller_reg.dart';
+import 'package:seatu_ersih/app/pages/features/data_pelanggan_deep/data_pelanggan_controller_deep.dart';
 
-class DropdownKabupatenReg extends GetView<DataPelangganRegController> {
-  const DropdownKabupatenReg({super.key});
+class DropdownKecamatanDeep extends GetView<DataPelangganControllerDeep> {
+  const DropdownKecamatanDeep({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -27,27 +27,27 @@ class DropdownKabupatenReg extends GetView<DataPelangganRegController> {
         () => DropdownButtonHideUnderline(
           child: DropdownButton<String>(
             hint: Text(
-              'Kabupaten',
+              'Kecamatan',
               style: GoogleFonts.poppins(
                 color: Colors.grey,
                 fontSize: 16,
               ),
             ),
-            value: controller.kabupatenName.value.isEmpty
+            value: controller.kecamatanName.value.isEmpty
                 ? null
-                : controller.kabupatenName.value,
+                : controller.kecamatanName.value,
             items: [
               DropdownMenuItem(
-                value: 'Pati',
-                child: Text('Pati', style: GoogleFonts.poppins(fontSize: 16)),
+                value: 'Gebog',
+                child: Text('Gebog', style: GoogleFonts.poppins(fontSize: 16)),
               ),
               DropdownMenuItem(
-                value: 'Kudus',
-                child: Text('Kudus', style: GoogleFonts.poppins(fontSize: 16)),
+                value: 'Kaliwungu',
+                child: Text('Kaliwungu', style: GoogleFonts.poppins(fontSize: 16)),
               ),
             ],
             onChanged: (value) {
-              controller.kabupatenName.value = value ?? '';
+              controller.kecamatanName.value = value ?? '';
             },
             icon: Icon(Icons.arrow_drop_down, color: Colors.grey),
           ),

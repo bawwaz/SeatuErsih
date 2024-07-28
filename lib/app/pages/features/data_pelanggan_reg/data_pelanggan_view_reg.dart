@@ -67,7 +67,7 @@ class DataPelangganRegView extends GetView<DataPelangganRegController> {
                     ),
                   ],
                 ),
-                child: DropdownKabupaten(),
+                child: DropdownKabupatenReg(),
               ),
             ),
             Padding(
@@ -85,7 +85,7 @@ class DataPelangganRegView extends GetView<DataPelangganRegController> {
                     ),
                   ],
                 ),
-                child: DropdownKecamatan(),
+                child: DropdownKecamatanReg(),
               ),
             ),
             SizedBox(height: 11),

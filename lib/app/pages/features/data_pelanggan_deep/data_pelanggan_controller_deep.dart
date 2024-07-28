@@ -13,6 +13,10 @@ class DataPelangganControllerDeep extends GetxController {
   var shoesId = 0.obs;
   var userId = 0.obs;
 
+    var isOtherSelected = false.obs;
+  var kabupatenName = "".obs;
+  var kecamatanName = "".obs;
+
   final box = GetStorage();
   final orders = {}.obs;
 

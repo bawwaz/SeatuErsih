@@ -4,8 +4,8 @@ import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:seatu_ersih/app/pages/features/data_pelanggan_reg/data_pelanggan_controller_reg.dart';
 
-class DropdownKecamatan extends GetView<DataPelangganRegController> {
-  const DropdownKecamatan({super.key});
+class DropdownKecamatanReg extends GetView<DataPelangganRegController> {
+  const DropdownKecamatanReg({super.key});
 
   @override
   Widget build(BuildContext context) {

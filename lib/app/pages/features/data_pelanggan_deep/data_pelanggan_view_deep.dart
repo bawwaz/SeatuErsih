@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:seatu_ersih/app/pages/features/data_pelanggan_deep/data_pelanggan_controller_deep.dart';
+import 'package:seatu_ersih/app/pages/features/data_pelanggan_deep/widget/dropdown_kabupaten.dart';
+import 'package:seatu_ersih/app/pages/features/data_pelanggan_deep/widget/dropdown_kecamatan.dart';
+import 'package:seatu_ersih/app/pages/features/data_pelanggan_deep/widget/textfield_alamat_spesifik.dart';
 import 'package:seatu_ersih/app/pages/features/data_pelanggan_reg/widget/textfieldata.dart';
 import 'package:seatu_ersih/app/router/app_pages.dart';
 import 'package:seatu_ersih/themes/colors.dart';
@@ -28,16 +32,79 @@ class DataPelangganDeepView extends GetView<DataPelangganControllerDeep> {
         centerTitle: true,
       ),
       body: SingleChildScrollView(
-        padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
+        padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 5),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            _buildSectionHeader('Alamat', 'Alamat lokasi pengambilan sepatu'),
-            TextFieldData(
-              hintText: 'Masukkan alamat',
-              onChanged: (value) {
-                controller.address.value = value;
-              },
+            Text(
+              'Alamat',
+              style: GoogleFonts.poppins(
+                fontWeight: FontWeight.w500,
+                color: Colors.black,
+                fontSize: 24,
+              ),
+            ),
+            Text(
+              'Alamat lokasi pengambilan sepatu',
+              style: GoogleFonts.poppins(
+                fontWeight: FontWeight.w300,
+                color: Colors.black,
+                fontSize: 13,
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.only(top: 7),
+              child: Container(
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(10),
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.grey.withOpacity(0.5),
+                      spreadRadius: 0,
+                      blurRadius: 3,
+                      offset: Offset(0, 0),
+                    ),
+                  ],
+                ),
+                child: DropdownKabupatenDeep(),
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.only(top: 11),
+              child: Container(
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(10),
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.grey.withOpacity(0.5),
+                      spreadRadius: 0,
+                      blurRadius: 3,
+                      offset: Offset(0, 0),
+                    ),
+                  ],
+                ),
+                child: DropdownKecamatanDeep(),
+              ),
+            ),
+            SizedBox(height: 11),
+            Container(
+              width: double.infinity,
+              height: 70,
+              decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.circular(10),
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.grey.withOpacity(0.5),
+                    spreadRadius: 0,
+                    blurRadius: 3,
+                    offset: Offset(0, 0),
+                  ),
+                ],
+              ),
+              child: TextfieldAlamatSpesifikDeep(controller: controller),
             ),
             SizedBox(height: 20),
             _buildSectionHeader('Contact', 'No. Telephone'),
@@ -78,7 +145,7 @@ class DataPelangganDeepView extends GetView<DataPelangganControllerDeep> {
               },
             ),
             Padding(
-              padding: const EdgeInsets.only(top: 150.0),
+              padding: const EdgeInsets.only(top: 70),
               child: Container(
                 width: double.infinity,
                 height: 55,
