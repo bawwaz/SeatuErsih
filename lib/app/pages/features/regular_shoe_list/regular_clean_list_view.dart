@@ -51,7 +51,7 @@ class RegCleanListView extends GetView<RegCleanListController> {
                             ],
                             borderRadius: BorderRadius.circular(10),
                           ),
-                          height: 130,
+                          height: 140,
                           width: double.infinity,
                           child: Padding(
                             padding: const EdgeInsets.all(20),
@@ -83,7 +83,6 @@ class RegCleanListView extends GetView<RegCleanListController> {
                                         fontWeight: FontWeight.w600,
                                         color: Colors.black,
                                         fontSize: 16,
-                            
                                       ),
                                     ),
                                     Container(
@@ -120,7 +119,7 @@ class RegCleanListView extends GetView<RegCleanListController> {
                                   ],
                                 ),
                                 SizedBox(
-                                  width: 10,
+                                  width: 5,
                                 ),
                                 Spacer(),
                                 IconButton(

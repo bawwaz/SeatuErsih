@@ -11,102 +11,104 @@ class PaymentConfirmationView extends GetView<PaymentConfirmationController> {
     showModalBottomSheet(
       context: context,
       builder: (BuildContext context) {
-        return Container(
-          padding: EdgeInsets.all(20),
-          height: 400,
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                'Select payment method',
-                style: GoogleFonts.poppins(
-                  fontWeight: FontWeight.w600,
-                  color: Colors.black,
-                  fontSize: 18,
-                ),
-              ),
-              SizedBox(height: 10),
-              Text(
-                'Digital Payment',
-                style: GoogleFonts.poppins(
-                  fontWeight: FontWeight.w600,
-                  color: Colors.black,
-                  fontSize: 14,
-                ),
-              ),
-              SizedBox(height: 10),
-              ListTile(
-                leading: Image.asset(
-                  'assets/img/dana-icon.png',
-                  height: 24,
-                  width: 24,
-                ),
-                title: Text(
-                  'Dana',
+        return SingleChildScrollView(
+          child: Container(
+            padding: EdgeInsets.all(20),
+            height: 400,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  'Select payment method',
                   style: GoogleFonts.poppins(
                     fontWeight: FontWeight.w600,
                     color: Colors.black,
-                    fontSize: 16,
+                    fontSize: 18,
                   ),
                 ),
-                onTap: () {
-                  Navigator.pop(context);
-                },
-              ),
-              ListTile(
-                leading: Image.asset(
-                  'assets/img/dana-icon.png',
-                  height: 24,
-                  width: 24,
-                ),
-                title: Text(
-                  'Qris',
+                SizedBox(height: 10),
+                Text(
+                  'Digital Payment',
                   style: GoogleFonts.poppins(
                     fontWeight: FontWeight.w600,
                     color: Colors.black,
-                    fontSize: 16,
+                    fontSize: 14,
                   ),
                 ),
-                onTap: () {
-                  Navigator.pop(context);
-                },
-              ),
-              Center(
-                child: Container(
-                  width: double.infinity,
-                  height: 1,
-                  decoration: BoxDecoration(
-                    color: Color(0xFFD9D9D9),
+                SizedBox(height: 10),
+                ListTile(
+                  leading: Image.asset(
+                    'assets/img/dana-icon.png',
+                    height: 24,
+                    width: 24,
+                  ),
+                  title: Text(
+                    'Dana',
+                    style: GoogleFonts.poppins(
+                      fontWeight: FontWeight.w600,
+                      color: Colors.black,
+                      fontSize: 16,
+                    ),
+                  ),
+                  onTap: () {
+                    Navigator.pop(context);
+                  },
+                ),
+                ListTile(
+                  leading: Image.asset(
+                    'assets/img/dana-icon.png',
+                    height: 24,
+                    width: 24,
+                  ),
+                  title: Text(
+                    'Qris',
+                    style: GoogleFonts.poppins(
+                      fontWeight: FontWeight.w600,
+                      color: Colors.black,
+                      fontSize: 16,
+                    ),
+                  ),
+                  onTap: () {
+                    Navigator.pop(context);
+                  },
+                ),
+                Center(
+                  child: Container(
+                    width: double.infinity,
+                    height: 1,
+                    decoration: BoxDecoration(
+                      color: Color(0xFFD9D9D9),
+                    ),
                   ),
                 ),
-              ),
-              SizedBox(height: 10),
-              Text(
-                'Other option',
-                style: GoogleFonts.poppins(
-                  fontWeight: FontWeight.w600,
-                  color: Colors.black,
-                  fontSize: 14,
-                ),
-              ),
-              ListTile(
-                leading: Icon(
-                  Icons.money,
-                  color: Colors.black,
-                ),
-                title: Text(
-                  'Cash',
+                SizedBox(height: 10),
+                Text(
+                  'Other option',
                   style: GoogleFonts.poppins(
                     fontWeight: FontWeight.w600,
                     color: Colors.black,
-                    fontSize: 16,
+                    fontSize: 14,
                   ),
                 ),
-                onTap: () {
-                  Navigator.pop(context);
-                },
-              ),
-            ],
+                ListTile(
+                  leading: Icon(
+                    Icons.money,
+                    color: Colors.black,
+                  ),
+                  title: Text(
+                    'Cash',
+                    style: GoogleFonts.poppins(
+                      fontWeight: FontWeight.w600,
+                      color: Colors.black,
+                      fontSize: 16,
+                    ),
+                  ),
+                  onTap: () {
+                    Navigator.pop(context);
+                  },
+                ),
+              ],
+            ),
           ),
         );
       },
@@ -159,7 +161,7 @@ class PaymentConfirmationView extends GetView<PaymentConfirmationController> {
                             ],
                             borderRadius: BorderRadius.circular(10),
                           ),
-                          height: 165,
+                          height: 180,
                           width: double.infinity,
                           child: Padding(
                             padding: const EdgeInsets.all(20),
@@ -363,34 +365,36 @@ class PaymentConfirmationView extends GetView<PaymentConfirmationController> {
             SizedBox(
               height: 80,
             ),
-            Padding(
-              padding: const EdgeInsets.all(20.0),
-              child: InkWell(
-                onTap: () {
-                  Get.offAllNamed(Routes.CHECKOUT_ANIMATION);
-                },
-                child: Container(
-                  height: 50,
-                  decoration: BoxDecoration(
-                    color: Color(0xFF7EC1EB),
-                    borderRadius: BorderRadius.circular(10),
-                  ),
-                  child: Center(
-                    child: Text(
-                      'Pay',
-                      style: GoogleFonts.poppins(
-                        fontWeight: FontWeight.w600,
-                        color: Colors.white,
-                        fontSize: 18,
-                      ),
-                    ),
-                  ),
-                ),
-              ),
-            ),
           ],
         ),
       ),
+      floatingActionButton: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 20.0),
+        child: SizedBox(
+          width: double.infinity,
+          child: ElevatedButton(
+            onPressed: () {
+              Get.offAllNamed(Routes.CHECKOUT_ANIMATION);
+            },
+            style: ElevatedButton.styleFrom(
+              backgroundColor: Color(0xFF7EC1EB),
+              padding: EdgeInsets.symmetric(vertical: 15),
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(10),
+              ),
+            ),
+            child: Text(
+              'Pay',
+              style: GoogleFonts.poppins(
+                fontWeight: FontWeight.w600,
+                color: Colors.white,
+                fontSize: 18,
+              ),
+            ),
+          ),
+        ),
+      ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
     );
   }
 }
