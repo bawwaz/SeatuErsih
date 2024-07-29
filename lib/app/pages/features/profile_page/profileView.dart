@@ -12,116 +12,118 @@ class ProfilePage extends GetView<ProfileController> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
-      body: Container(
-        margin: const EdgeInsets.only(left: 28, right: 28),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Padding(
-              padding: const EdgeInsets.only(top: 34),
-              child: InkWell(
-                onTap: () {
-                  Get.toNamed(Routes.BTMNAVBAR);
-                },
-                child: Image.asset("assets/img/angle-circle-right 1.png"),
-              ),
-            ),
-            Row(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Padding(
-                    padding: const EdgeInsets.only(top: 36.0),
-                    child: Obx(
-                      () => controller.users['profile_picture'] != null
-                          ? CircleAvatar(
-                              radius: 50,
-                              backgroundImage: NetworkImage(
-                                  'http://seatuersih.pradiptaahmad.tech/image/${controller.users['profile_picture']}'),
-                            )
-                          : CircleAvatar(
-                              radius: 60,
-                              backgroundImage:
-                                  AssetImage('assets/img/profile-icon.png'),
-                            ),
-                    )),
-                Padding(
-                  padding: const EdgeInsets.only(top: 36.0, left: 16.0),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Obx(
-                        () => Text(
-                          controller.isLoading.value
-                              ? "Loading..."
-                              : controller.users['username'],
-                          style: Fonts.header1
-                              .copyWith(color: Colors.black, fontSize: 16),
-                        ),
-                      ),
-                      const SizedBox(height: 8),
-                      Row(
-                        children: [
-                          Obx(
-                            () => Text(
-                              controller.isLoading.value
-                                  ? "Loading..."
-                                  : controller.users['email'],
-                              style: TextStyle(fontSize: 14),
-                            ),
-                          ),
-                          const SizedBox(width: 16),
-                          Obx(
-                            () => Text(
-                              controller.isLoading.value
-                                  ? "Loading..."
-                                  : controller.users['phone'],
-                              style: TextStyle(fontSize: 14),
-                            ),
-                          ),
-                        ],
-                      ),
-                    ],
-                  ),
+      body: SingleChildScrollView(
+        child: Container(
+          margin: const EdgeInsets.only(left: 28, right: 28),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Padding(
+                padding: const EdgeInsets.only(top: 34),
+                child: InkWell(
+                  onTap: () {
+                    Get.toNamed(Routes.BTMNAVBAR);
+                  },
+                  child: Image.asset("assets/img/angle-circle-right 1.png"),
                 ),
-              ],
-            ),
-            SizedBox(height: 36),
-            InkWell(
-              onTap: () async {
-                await Get.toNamed(Routes.PROFILE_EDIT,
-                        arguments: [controller.users])!
-                    .then((value) {
-                  controller.fetchUser();
-                });
-              },
-              child: ProfileWidgetContainer(
-                icon: Icons.edit,
-                title: 'Edit Profile',
-                arrowIcon: Icons.arrow_forward_ios_rounded,
               ),
-            ),
-            Padding(
-              padding: const EdgeInsets.only(top: 17.0),
-              child: ProfileWidgetContainer(
-                  icon: Icons.notifications,
-                  title: 'Notification',
-                  arrowIcon: Icons.arrow_forward_ios_rounded),
-            ),
-            Padding(
-              padding: const EdgeInsets.only(top: 17.0),
-              child: InkWell(
-                onTap: () {
-                  controller.logout();
+              Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Padding(
+                      padding: const EdgeInsets.only(top: 36.0),
+                      child: Obx(
+                        () => controller.users['profile_picture'] != null
+                            ? CircleAvatar(
+                                radius: 50,
+                                backgroundImage: NetworkImage(
+                                    'http://seatuersih.pradiptaahmad.tech/image/${controller.users['profile_picture']}'),
+                              )
+                            : CircleAvatar(
+                                radius: 60,
+                                backgroundImage:
+                                    AssetImage('assets/img/profile-icon.png'),
+                              ),
+                      )),
+                  Padding(
+                    padding: const EdgeInsets.only(top: 36.0, left: 16.0),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Obx(
+                          () => Text(
+                            controller.isLoading.value
+                                ? "Loading..."
+                                : controller.users['username'],
+                            style: Fonts.header1
+                                .copyWith(color: Colors.black, fontSize: 16),
+                          ),
+                        ),
+                        const SizedBox(height: 8),
+                        Row(
+                          children: [
+                            Obx(
+                              () => Text(
+                                controller.isLoading.value
+                                    ? "Loading..."
+                                    : controller.users['email'],
+                                style: TextStyle(fontSize: 14),
+                              ),
+                            ),
+                            const SizedBox(width: 16),
+                            Obx(
+                              () => Text(
+                                controller.isLoading.value
+                                    ? "Loading..."
+                                    : controller.users['phone'],
+                                style: TextStyle(fontSize: 14),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
+              SizedBox(height: 36),
+              InkWell(
+                onTap: () async {
+                  await Get.toNamed(Routes.PROFILE_EDIT,
+                          arguments: [controller.users])!
+                      .then((value) {
+                    controller.fetchUser();
+                  });
                 },
                 child: ProfileWidgetContainer(
-                  icon: Icons.logout,
-                  title: 'Logout',
-                  arrowIcon: Icons.circle,
-                  color: Colors.red,
+                  icon: Icons.edit,
+                  title: 'Edit Profile',
+                  arrowIcon: Icons.arrow_forward_ios_rounded,
                 ),
               ),
-            )
-          ],
+              Padding(
+                padding: const EdgeInsets.only(top: 17.0),
+                child: ProfileWidgetContainer(
+                    icon: Icons.notifications,
+                    title: 'Notification',
+                    arrowIcon: Icons.arrow_forward_ios_rounded),
+              ),
+              Padding(
+                padding: const EdgeInsets.only(top: 17.0),
+                child: InkWell(
+                  onTap: () {
+                    controller.logout();
+                  },
+                  child: ProfileWidgetContainer(
+                    icon: Icons.logout,
+                    title: 'Logout',
+                    arrowIcon: Icons.circle,
+                    color: Colors.red,
+                  ),
+                ),
+              )
+            ],
+          ),
         ),
       ),
     );

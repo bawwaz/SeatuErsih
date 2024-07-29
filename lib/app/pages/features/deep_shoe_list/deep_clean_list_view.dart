@@ -51,7 +51,7 @@ class DeepCleanListView extends GetView<DeepCleanController> {
                             ],
                             borderRadius: BorderRadius.circular(10),
                           ),
-                          height: 130,
+                          height: 140,
                           width: double.infinity,
                           child: Padding(
                             padding: const EdgeInsets.all(20),
@@ -119,7 +119,7 @@ class DeepCleanListView extends GetView<DeepCleanController> {
                                   ],
                                 ),
                                 SizedBox(
-                                  width: 10,
+                                  width: 5,
                                 ),
                                 Spacer(),
                                 IconButton(

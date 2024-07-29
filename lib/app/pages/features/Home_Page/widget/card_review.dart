@@ -32,14 +32,12 @@ class CardReview extends StatelessWidget {
                   ),
                   SizedBox(width: 10),
                   Column(
-                    crossAxisAlignment:
-                        CrossAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Row(
                         children: [
                           Row(
-                            children:
-                                List.generate(5, (index) {
+                            children: List.generate(5, (index) {
                               return Icon(
                                 Icons.star,
                                 color: Color(0xffFFCE31),

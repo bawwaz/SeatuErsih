@@ -82,7 +82,7 @@ class HomeBody extends GetView<HomePageController> {
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 15),
             child: SizedBox(
-              height: 135,
+              height: 140,
               child: ListView.builder(
                 scrollDirection: Axis.horizontal,
                 itemCount: 3,
