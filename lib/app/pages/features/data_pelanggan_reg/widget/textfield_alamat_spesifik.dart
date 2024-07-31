@@ -24,7 +24,7 @@ class TextfieldAlamatSpesifik extends StatelessWidget {
         contentPadding: EdgeInsets.all(10),
       ),
       onChanged: (value) {
-        controller.address.value = value;
+        controller.detail_address.value = value;
       },
     );
   }

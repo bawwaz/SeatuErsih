@@ -2,9 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class CardReview extends StatelessWidget {
+  final Map<String, dynamic> review;
+
   const CardReview({
-    super.key,
-  });
+    Key? key,
+    required this.review,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -16,7 +19,7 @@ class CardReview extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                'Regular Clean',
+                review['order_type'] ?? 'Regular Clean',
                 style: GoogleFonts.poppins(
                   fontSize: 15,
                   fontWeight: FontWeight.w600,
@@ -47,7 +50,7 @@ class CardReview extends StatelessWidget {
                           ),
                           SizedBox(width: 5),
                           Text(
-                            '• 04 Juli 2024',
+                            '• ${formatDate(review['created_at'])}',
                             style: GoogleFonts.poppins(
                               fontSize: 12,
                               fontWeight: FontWeight.w600,
@@ -58,7 +61,7 @@ class CardReview extends StatelessWidget {
                       ),
                       SizedBox(height: 5),
                       Text(
-                        'Note: terimakasih, sangat bersih',
+                        'Note: ${review['review'] ?? ''}',
                         style: GoogleFonts.poppins(
                           fontSize: 12,
                           fontWeight: FontWeight.w400,
@@ -92,5 +95,11 @@ class CardReview extends StatelessWidget {
         ),
       ],
     );
+  }
+
+  String formatDate(String date) {
+    DateTime dateTime = DateTime.parse(date);
+    String formattedDate = "${dateTime.day}/${dateTime.month}/${dateTime.year}";
+    return formattedDate;
   }
 }

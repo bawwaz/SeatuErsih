@@ -24,6 +24,7 @@ dependencies:
   intl: any
   flutter_rating_bar:
   dropdown_button2:
+  shimmer: 
 
 dev_dependencies:
   flutter_test:

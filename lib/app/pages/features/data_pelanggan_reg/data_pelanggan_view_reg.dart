@@ -67,7 +67,7 @@ class DataPelangganRegView extends GetView<DataPelangganRegController> {
                     ),
                   ],
                 ),
-                child: DropdownKabupatenReg(),
+                child: DropdownKabupatenReg(), // No need to pass kabupaten here
               ),
             ),
             Padding(
