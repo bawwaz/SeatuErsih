@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -7,6 +5,7 @@ import 'package:seatu_ersih/app/pages/features/choose_service/choose_service_con
 import 'package:seatu_ersih/app/pages/features/choose_service/widget/choose_service_container.dart';
 import 'package:seatu_ersih/app/router/app_pages.dart';
 import 'package:seatu_ersih/themes/fonts.dart';
+import 'package:shimmer/shimmer.dart'; // Import shimmer package
 
 class ChooseService extends GetView<ChooseServiceController> {
   const ChooseService({super.key});
@@ -52,7 +51,21 @@ class ChooseService extends GetView<ChooseServiceController> {
                 ),
               ),
               SizedBox(height: 20),
-              Obx(() => ListView.builder(
+              Obx(() {
+                if (controller.laundries.isEmpty) {
+                  // Show shimmer loading if data is not yet fetched
+                  return ListView.builder(
+                    itemCount: 5, // Placeholder count
+                    shrinkWrap: true,
+                    itemBuilder: (BuildContext context, int index) {
+                      return ServiceContainer(
+                        isLoading: true,
+                      );
+                    },
+                  );
+                } else {
+                  // Show actual data when fetched
+                  return ListView.builder(
                     itemCount: controller.laundries.length,
                     shrinkWrap: true,
                     itemBuilder: (BuildContext context, int index) {
@@ -74,7 +87,9 @@ class ChooseService extends GetView<ChooseServiceController> {
                         },
                       );
                     },
-                  ))
+                  );
+                }
+              }),
             ],
           ),
         ),

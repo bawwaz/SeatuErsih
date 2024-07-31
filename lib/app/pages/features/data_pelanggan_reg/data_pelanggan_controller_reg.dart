@@ -1,11 +1,12 @@
 import 'dart:convert';
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:http/http.dart' as http;
 
 class DataPelangganRegController extends GetxController {
-  var address = "".obs;
+  var detail_address = "".obs;
   var phone = "".obs;
   var total_price = 0.obs;
   var pickup_date = "".obs;
@@ -20,6 +21,8 @@ class DataPelangganRegController extends GetxController {
 
   final box = GetStorage();
   final orders = {}.obs;
+  final kabupaten = [].obs;
+  final kecamatan = [].obs;
 
   Future<bool> postOrders() async {
     final url = 'http://seatuersih.pradiptaahmad.tech/api';
@@ -27,7 +30,7 @@ class DataPelangganRegController extends GetxController {
     var data = {
       'laundry_id': Get.arguments.toString(),
       'order_type': 'regular_clean',
-      'address': address.value,
+      'detail_address': detail_address.value,
       'phone': phone.value,
       'pickup_date': pickup_date.value.toString(),
       'notes': notes.value,
@@ -84,5 +87,78 @@ class DataPelangganRegController extends GetxController {
     if (picked != null) {
       pickup_date.value = picked.toLocal().toString().split(' ')[0];
     }
+  }
+
+  Future<void> fetchKabupaten() async {
+    final url = 'http://seatuersih.pradiptaahmad.tech/api';
+    final token = box.read('token');
+    var headers = {
+      'Accept': 'application/json',
+      'Authorization': 'Bearer $token'
+    };
+
+    try {
+      final response =
+          await http.get(Uri.parse('$url/kabupaten/get/1'), headers: headers);
+
+      if (response.statusCode == 200) {
+        final data = json.decode(response.body);
+        if (data != null && data['data'] != null) {
+          kabupaten.assign({'name': data['data']['kabupaten']});
+          print('Kabupaten found: ${data['data']['kabupaten']}');
+        } else {
+          print('No kabupaten found');
+        }
+      } else {
+        print('Failed to fetch kabupaten: ${response.statusCode}');
+        print('Response body: ${response.body}');
+        throw Exception('Failed to fetch kabupaten');
+      }
+    } catch (e) {
+      print(e);
+    }
+  }
+
+  Future<void> fetchKecamatan() async {
+    final url = 'http://seatuersih.pradiptaahmad.tech/api';
+    final token = box.read('token');
+    var headers = {
+      'Accept': 'application/json',
+      'Authorization': 'Bearer $token'
+    };
+
+    try {
+      final response = await http.get(Uri.parse('$url/kecamatan/laundry/1'),
+          headers: headers);
+
+      if (response.statusCode == 200) {
+        final data = json.decode(response.body);
+        if (data != null && data['data'] != null && data['data'] is List) {
+          final List<dynamic> kecamatanList = data['data'] as List<dynamic>;
+          kecamatan.assignAll(kecamatanList
+              .map((item) => {
+                    'id': item['id'],
+                    'name': item['kecamatan'],
+                  } as Map<String, dynamic>)
+              .toList());
+          print('Kecamatan found: ${kecamatan}');
+        } else {
+          print('No kecamatan found');
+        }
+      } else {
+        print('Failed to fetch kecamatan: ${response.statusCode}');
+        print('Response body: ${response.body}');
+        throw Exception('Failed to fetch kecamatan');
+      }
+    } catch (e) {
+      print(e);
+    }
+  }
+
+  @override
+  void onInit() {
+    fetchKabupaten();
+    fetchKecamatan();
+    super.onInit();
   }
 }

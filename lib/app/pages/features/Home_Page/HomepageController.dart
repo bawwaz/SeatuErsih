@@ -8,6 +8,7 @@ import 'package:intl/intl.dart';
 class HomePageController extends GetxController {
   var isLoading = false.obs;
   final orders = [].obs;
+  final reviews = [].obs;
 
   // GetStorage
   final box = GetStorage();
@@ -27,11 +28,15 @@ class HomePageController extends GetxController {
 
       if (response.statusCode == 200) {
         final data = json.decode(response.body)['data'];
-        orders.assignAll(data);
+        if (data != null && data is Iterable) {
+          orders.assignAll(data);
+        } else {
+          print('No orders found in response');
+        }
       } else {
-        print('Failed to fetch shoes: ${response.statusCode}');
+        print('Failed to fetch orders: ${response.statusCode}');
         print('Response body: ${response.body}');
-        throw Exception('Failed to fetch shoes');
+        throw Exception('Failed to fetch orders');
       }
     } catch (e) {
       print(e);
@@ -56,9 +61,42 @@ class HomePageController extends GetxController {
     }
   }
 
+  Future<void> fetchReviews() async {
+    isLoading.value = true;
+    final url = 'http://seatuersih.pradiptaahmad.tech/api';
+    final token = box.read('token');
+    var headers = {
+      'Accept': 'application/json',
+      'Authorization': 'Bearer $token'
+    };
+
+    try {
+      final response =
+          await http.get(Uri.parse('$url/review/all/1'), headers: headers);
+
+      if (response.statusCode == 200) {
+        final data = json.decode(response.body)['reviews'];
+        if (data != null && data is Iterable) {
+          reviews.assignAll(data);
+        } else {
+          print('No reviews found in response');
+        }
+      } else {
+        print('Failed to fetch reviews: ${response.statusCode}');
+        print('Response body: ${response.body}');
+        throw Exception('Failed to fetch reviews');
+      }
+    } catch (e) {
+      print(e);
+    }
+
+    isLoading.value = false;
+  }
+
   @override
   void onInit() {
     fetchOrder();
+    fetchReviews();
     super.onInit();
   }
 }

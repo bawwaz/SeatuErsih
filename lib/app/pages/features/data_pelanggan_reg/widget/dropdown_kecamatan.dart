@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:seatu_ersih/app/pages/features/data_pelanggan_reg/data_pelanggan_controller_reg.dart';
@@ -34,19 +33,20 @@ class DropdownKecamatanReg extends GetView<DataPelangganRegController> {
                 fontSize: 16,
               ),
             ),
-            value: controller.kecamatanName.value.isEmpty
-                ? null
-                : controller.kecamatanName.value,
-            items: [
-              DropdownMenuItem(
-                value: 'Gebog',
-                child: Text('Gebog', style: GoogleFonts.poppins(fontSize: 16)),
-              ),
-              DropdownMenuItem(
-                value: 'Kaliwungu',
-                child: Text('Kaliwungu', style: GoogleFonts.poppins(fontSize: 16)),
-              ),
-            ],
+            value: controller.kecamatanName.value.isNotEmpty &&
+                    controller.kecamatan.any(
+                        (kec) => kec['name'] == controller.kecamatanName.value)
+                ? controller.kecamatanName.value
+                : null,
+            items: controller.kecamatan.map((kec) {
+              return DropdownMenuItem<String>(
+                value: kec['name'],
+                child: Text(
+                  kec['name'] ?? '',
+                  style: GoogleFonts.poppins(fontSize: 16),
+                ),
+              );
+            }).toList(),
             onChanged: (value) {
               controller.kecamatanName.value = value ?? '';
             },
