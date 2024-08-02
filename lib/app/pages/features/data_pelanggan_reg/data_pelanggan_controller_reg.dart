@@ -18,6 +18,7 @@ class DataPelangganRegController extends GetxController {
   var isOtherSelected = false.obs;
   var kabupatenName = "".obs;
   var kecamatanName = "".obs;
+  var specificAddress = "".obs;
 
   final box = GetStorage();
   final orders = {}.obs;
@@ -27,6 +28,9 @@ class DataPelangganRegController extends GetxController {
   Future<bool> postOrders() async {
     final url = 'http://seatuersih.pradiptaahmad.tech/api';
     final token = box.read('token');
+    // Forming detail address
+    detail_address.value = '${kabupatenName.value}, ${kecamatanName.value}, ${specificAddress.value}';
+    
     var data = {
       'laundry_id': Get.arguments.toString(),
       'order_type': 'regular_clean',

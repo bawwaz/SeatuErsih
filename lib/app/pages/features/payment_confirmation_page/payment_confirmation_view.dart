@@ -185,17 +185,6 @@ class PaymentConfirmationView extends GetView<PaymentConfirmationController> {
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   children: [
-                                    // Text(
-                                    //   controller.orderData['order_type'] ==
-                                    //           "Regular Clean"
-                                    //       ? "Regular Clean"
-                                    //       : "Deep Clean",
-                                    //   style: GoogleFonts.poppins(
-                                    //     fontWeight: FontWeight.w600,
-                                    //     color: Colors.black,
-                                    //     fontSize: 16,
-                                    //   ),
-                                    // ),
                                     SizedBox(
                                       height: 1,
                                     ),
@@ -349,16 +338,19 @@ class PaymentConfirmationView extends GetView<PaymentConfirmationController> {
                       fontSize: 16,
                     ),
                   ),
-                  Obx(() => Text(
-                        controller.orderData['total_price'] == null
-                            ? "Loading..."
-                            : "${controller.formatPrice(int.parse(controller.orderData['total_price'].toString()))}",
-                        style: GoogleFonts.poppins(
-                          fontWeight: FontWeight.w600,
-                          color: Colors.black,
-                          fontSize: 16,
-                        ),
-                      )),
+                  Obx(() {
+                    final totalPrice = controller.orderData['total_price'];
+                    return Text(
+                      totalPrice == null
+                        ? "Loading..."
+                        : "${controller.formatPrice(totalPrice)}",
+                      style: GoogleFonts.poppins(
+                        fontWeight: FontWeight.w600,
+                        color: Colors.black,
+                        fontSize: 16,
+                      ),
+                    );
+                  }),
                 ],
               ),
             ),

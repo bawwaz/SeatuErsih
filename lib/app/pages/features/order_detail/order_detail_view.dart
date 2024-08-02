@@ -64,7 +64,7 @@ class OrderDetailView extends GetView<OrderDetailcontroller> {
                     ),
                   ),
                   OrderDetailContactWidget(
-                    alamat: '${controller.orders['address']}',
+                    alamat: '${controller.orders['detail_address']}',
                     phone: '${controller.orders['phone']}',
                   ),
                 ],

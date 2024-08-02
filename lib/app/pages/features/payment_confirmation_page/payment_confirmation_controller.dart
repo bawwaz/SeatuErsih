@@ -9,11 +9,17 @@ class PaymentConfirmationController extends GetxController {
   final box = GetStorage();
   late final order_id;
 
-  // Declare variable
+  // Declare variables
   var isLoading = false.obs;
   var shoeData = [].obs;
   var orderData = {}.obs;
-  late final arguments;
+
+  @override
+  void onInit() {
+    order_id = box.read('order_id');
+    fetchShoe();
+    super.onInit();
+  }
 
   Future<void> fetchShoe() async {
     isLoading.value = true;
@@ -64,6 +70,7 @@ class PaymentConfirmationController extends GetxController {
       if (response.statusCode == 200) {
         final data = json.decode(response.body)['order'];
         orderData.assignAll(data);
+        print('Order data fetched: $orderData'); // Debug line
       } else {
         print('Failed to fetch orders: ${response.statusCode}');
         print('Response body: ${response.body}');
@@ -78,12 +85,5 @@ class PaymentConfirmationController extends GetxController {
     String formattedPrice =
         NumberFormat.currency(locale: 'id_ID', symbol: 'Rp').format(price);
     return formattedPrice;
-  }
-
-  @override
-  void onInit() {
-    order_id = box.read('order_id');
-    fetchShoe();
-    super.onInit();
   }
 }

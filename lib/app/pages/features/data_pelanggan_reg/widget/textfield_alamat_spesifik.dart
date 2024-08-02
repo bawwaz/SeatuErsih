@@ -3,9 +3,12 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:seatu_ersih/app/pages/features/data_pelanggan_reg/data_pelanggan_controller_reg.dart';
 
 class TextfieldAlamatSpesifik extends StatelessWidget {
+  final ValueChanged<String>? onChanged; // Add this line
+
   const TextfieldAlamatSpesifik({
     super.key,
     required this.controller,
+    this.onChanged,
   });
 
   final DataPelangganRegController controller;
