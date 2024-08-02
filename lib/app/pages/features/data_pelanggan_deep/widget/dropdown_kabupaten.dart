@@ -36,16 +36,15 @@ class DropdownKabupatenDeep extends GetView<DataPelangganControllerDeep> {
             value: controller.kabupatenName.value.isEmpty
                 ? null
                 : controller.kabupatenName.value,
-            items: [
-              DropdownMenuItem(
-                value: 'Pati',
-                child: Text('Pati', style: GoogleFonts.poppins(fontSize: 16)),
-              ),
-              DropdownMenuItem(
-                value: 'Kudus',
-                child: Text('Kudus', style: GoogleFonts.poppins(fontSize: 16)),
-              ),
-            ],
+            items: controller.kabupaten.map((kab) {
+              return DropdownMenuItem<String>(
+                value: kab['name'],
+                child: Text(
+                  kab['name'],
+                  style: GoogleFonts.poppins(fontSize: 16),
+                ),
+              );
+            }).toList(),
             onChanged: (value) {
               controller.kabupatenName.value = value ?? '';
             },

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:intl/intl.dart';
 
 class CardReview extends StatelessWidget {
   final Map<String, dynamic> review;
@@ -11,89 +12,97 @@ class CardReview extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Stack(
-      children: [
-        Padding(
-          padding: EdgeInsets.all(10),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
+    double rating = double.tryParse(review['rating'] ?? '0') ?? 0.0;
+
+    return Container(
+      width:
+          MediaQuery.of(context).size.width * 0.8, // Adjust the width as needed
+      margin: EdgeInsets.symmetric(horizontal: 10),
+      padding: EdgeInsets.all(10),
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(10),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.grey.withOpacity(0.3),
+            spreadRadius: 2,
+            blurRadius: 5,
+            offset: Offset(0, 3), // changes position of shadow
+          ),
+        ],
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            review['order_type'] ?? 'Regular Clean',
+            style: GoogleFonts.poppins(
+              fontSize: 15,
+              fontWeight: FontWeight.w600,
+            ),
+          ),
+          SizedBox(height: 5),
+          Row(
             children: [
-              Text(
-                review['order_type'] ?? 'Regular Clean',
-                style: GoogleFonts.poppins(
-                  fontSize: 15,
-                  fontWeight: FontWeight.w600,
-                ),
+              Image.asset(
+                "assets/img/Group 120.png",
+                width: 60,
+                height: 60,
               ),
-              SizedBox(height: 5),
-              Row(
+              SizedBox(width: 10),
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Image.asset(
-                    "assets/img/Group 120.png",
-                    width: 60,
-                    height: 60,
-                  ),
-                  SizedBox(width: 10),
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
+                  Row(
                     children: [
                       Row(
-                        children: [
-                          Row(
-                            children: List.generate(5, (index) {
-                              return Icon(
-                                Icons.star,
-                                color: Color(0xffFFCE31),
-                                size: 22,
-                              );
-                            }),
-                          ),
-                          SizedBox(width: 5),
-                          Text(
-                            '• ${formatDate(review['created_at'])}',
-                            style: GoogleFonts.poppins(
-                              fontSize: 12,
-                              fontWeight: FontWeight.w600,
-                              color: Color(0xff8A8A8A),
-                            ),
-                          ),
-                        ],
+                        children: List.generate(5, (index) {
+                          return Icon(
+                            Icons.star,
+                            color: index < rating.floor()
+                                ? Color(0xffFFCE31)
+                                : index < rating
+                                    ? Color(0xffFFCE31).withOpacity(0.5)
+                                    : Colors.grey.withOpacity(0.3),
+                            size: 22,
+                          );
+                        }),
                       ),
-                      SizedBox(height: 5),
+                      SizedBox(width: 5),
                       Text(
-                        'Note: ${review['review'] ?? ''}',
+                        '• ${formatDate(review['created_at'])}',
                         style: GoogleFonts.poppins(
                           fontSize: 12,
-                          fontWeight: FontWeight.w400,
-                          color: Color(0xff8A8A8A),
-                        ),
-                      ),
-                      SizedBox(height: 5),
-                      Text(
-                        'Rp50.000',
-                        style: GoogleFonts.poppins(
-                          fontSize: 15,
-                          color: Color(0xFF7EC1EB),
                           fontWeight: FontWeight.w600,
+                          color: Color(0xff8A8A8A),
                         ),
                       ),
                     ],
                   ),
+                  SizedBox(height: 5),
+                  Text(
+                    'Note: ${review['review'] ?? ''}',
+                    style: GoogleFonts.poppins(
+                      fontSize: 12,
+                      fontWeight: FontWeight.w400,
+                      color: Color(0xff8A8A8A),
+                    ),
+                  ),
+                  SizedBox(height: 5),
+                  // Text(
+                  //   'Rp50.000',
+                  //   style: GoogleFonts.poppins(
+                  //     fontSize: 15,
+                  //     color: Color(0xFF7EC1EB),
+                  //     fontWeight: FontWeight.w600,
+                  //   ),
+                  // ),
                 ],
               ),
             ],
           ),
-        ),
-        Positioned(
-          top: 10,
-          right: 10,
-          child: Image.asset(
-            "assets/img/profile-icon.png",
-            width: 27,
-            height: 27,
-          ),
-        ),
-      ],
+        ],
+      ),
     );
   }
 

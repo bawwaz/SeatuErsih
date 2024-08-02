@@ -1,9 +1,11 @@
+import 'dart:convert';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:http/http.dart' as http;
 
 class AddOnsController extends GetxController {
   late final arguments;
+  final brand = <Map<String, dynamic>>[].obs;
   List<dynamic> addOnsData = [
     {
       'title': 'Un-Yellowing - 5k',
@@ -21,10 +23,9 @@ class AddOnsController extends GetxController {
       'price': 5000
     },
   ];
-  final totalPrice = 0.obs;
+  final total_price = 0.obs;
   final box = GetStorage();
 
-  // variable
   var shoesName = "".obs;
   var shoesNote = "".obs;
   var isOtherSelected = false.obs;
@@ -33,6 +34,7 @@ class AddOnsController extends GetxController {
   List<dynamic> nameSelectedAddons = [].obs;
 
   RxList<RxBool?>? isSelected;
+
   void addAddOns(dynamic addOns, dynamic nameAddOns) {
     selectedAddOns.add(addOns);
     nameSelectedAddons.add(nameAddOns);
@@ -40,14 +42,14 @@ class AddOnsController extends GetxController {
 
   void removeAddOns(dynamic addOns, dynamic nameAddOns) {
     selectedAddOns.remove(addOns);
-    nameSelectedAddons.remove(nameAddOns);
+    nameSelectedAddons.remove(addOns);
   }
 
   void calculateTotal() {
     for (int i = 0; i < selectedAddOns.length; i++) {
-      totalPrice.value += int.parse(selectedAddOns[i].toString());
+      total_price.value += int.parse(selectedAddOns[i].toString());
     }
-    print(totalPrice.value);
+    print(total_price.value);
   }
 
   Future<void> postShoes() async {
@@ -60,8 +62,8 @@ class AddOnsController extends GetxController {
     };
 
     var body = {
-      'name': shoesName.value.toString(),
-      'price': totalPrice.value.toString(),
+      'brand': shoesName.value.toString(),
+      'price': total_price.value.toString(),
       'addons': nameSelectedAddons.join(', '),
       'notes': shoesNote.value.toString(),
       'order_id': box.read('order_id').toString(),
@@ -83,16 +85,53 @@ class AddOnsController extends GetxController {
     }
   }
 
+  Future<void> fetchShoename() async {
+    final url = "http://seatuersih.pradiptaahmad.tech/api";
+    final token = box.read('token');
+
+    var headers = {
+      "Accept": 'application/json',
+      'Authorization': 'Bearer $token',
+    };
+
+    try {
+      final response =
+          await http.get(Uri.parse('$url/brand/getall'), headers: headers);
+
+      if (response.statusCode == 200) {
+        final data = json.decode(response.body);
+        if (data != null && data['data'] != null) {
+          brand.clear();
+          for (var item in data['data']) {
+            brand.add({
+              'id': item['id'],
+              'brand': item['brand'],
+            });
+          }
+          print('Brands found: ${brand}');
+        } else {
+          print('Cannot find brands');
+        }
+      } else {
+        print('Failed to fetch brands: ${response.statusCode}');
+        print('Response body: ${response.body}');
+        throw Exception('Failed to fetch brands');
+      }
+    } catch (e) {
+      print(e);
+    }
+  }
+
   @override
   void onInit() {
-    // TODO: implement onInit
     arguments = Get.arguments;
     if (arguments[0].toString() == 'regular_clean') {
-      totalPrice.value = 25000;
+      total_price.value = 25000;
     } else {
-      totalPrice.value = 30000;
+      total_price.value = 30000;
     }
     isSelected = List.generate(addOnsData.length, (index) => false.obs).obs;
+    fetchShoename();
     super.onInit();
   }
 
@@ -102,4 +141,3 @@ class AddOnsController extends GetxController {
     }
   }
 }
-

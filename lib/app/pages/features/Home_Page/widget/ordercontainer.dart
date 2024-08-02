@@ -63,14 +63,14 @@ class OrderContainer extends GetView<HomePageController> {
                             fontSize: 16,
                           ),
                         ),
-                        Padding(
-                          padding: const EdgeInsets.only(left: 8.0),
-                          child: Text(
-                            '',
-                            style: Fonts.detail.copyWith(
-                              fontWeight: FontWeight.w800,
-                              fontSize: 16,
-                            ),
+                        SizedBox(
+                          width: MediaQuery.sizeOf(context).width / 20,
+                        ),
+                        Text(
+                          '$status',
+                          style: Fonts.detail.copyWith(
+                            fontSize: 15,
+                            color: AppColors.primaryColor,
                           ),
                         ),
                       ],
@@ -85,13 +85,6 @@ class OrderContainer extends GetView<HomePageController> {
                     ),
                     Text(
                       '$price',
-                      style: Fonts.detail.copyWith(
-                        fontSize: 15,
-                        color: AppColors.primaryColor,
-                      ),
-                    ),
-                    Text(
-                      '$status',
                       style: Fonts.detail.copyWith(
                         fontSize: 15,
                         color: AppColors.primaryColor,

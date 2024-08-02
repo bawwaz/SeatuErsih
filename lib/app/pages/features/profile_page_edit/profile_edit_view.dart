@@ -16,7 +16,7 @@ class ProfileEditView extends GetView<ProfileEditController> {
       appBar: AppBar(
         leading: InkWell(
             onTap: () {
-              Get.toNamed(Routes.PROFILE);
+              Get.back();
             },
             child: Image.asset('assets/img/angle-circle-right 1.png')),
         title: Text(

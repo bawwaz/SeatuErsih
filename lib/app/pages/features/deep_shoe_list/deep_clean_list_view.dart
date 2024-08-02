@@ -38,6 +38,7 @@ class DeepCleanListView extends GetView<DeepCleanController> {
                       itemCount: controller.shoes.length,
                       itemBuilder: (context, index) {
                         Map<dynamic, dynamic> shoe = controller.shoes[index];
+                        String brandName = shoe['brand'] ?? 'No Brand';
                         return Container(
                           margin: EdgeInsets.only(bottom: 20),
                           decoration: BoxDecoration(
@@ -76,7 +77,7 @@ class DeepCleanListView extends GetView<DeepCleanController> {
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   children: [
                                     Text(
-                                      "${shoe['name']}",
+                                      brandName,
                                       overflow: TextOverflow.ellipsis,
                                       maxLines: 1,
                                       style: GoogleFonts.poppins(
@@ -88,7 +89,7 @@ class DeepCleanListView extends GetView<DeepCleanController> {
                                     Container(
                                       width: Get.width * 0.45,
                                       child: Text(
-                                        "Addons : ${shoe['addons']}",
+                                        "Addons: ${shoe['addons']}",
                                         overflow: TextOverflow.ellipsis,
                                         maxLines: 1,
                                         style: GoogleFonts.poppins(
@@ -99,7 +100,7 @@ class DeepCleanListView extends GetView<DeepCleanController> {
                                       ),
                                     ),
                                     Text(
-                                      "Note : ${shoe['notes']}",
+                                      "Note: ${shoe['notes']}",
                                       maxLines: 1,
                                       overflow: TextOverflow.ellipsis,
                                       style: GoogleFonts.poppins(
@@ -109,7 +110,8 @@ class DeepCleanListView extends GetView<DeepCleanController> {
                                       ),
                                     ),
                                     Text(
-                                      "${controller.formatPrice(int.parse(shoe['price'].toString()))}",
+                                      controller.formatPrice(
+                                          int.parse(shoe['price'].toString())),
                                       style: GoogleFonts.poppins(
                                         fontWeight: FontWeight.w600,
                                         color: Colors.black,
@@ -123,10 +125,11 @@ class DeepCleanListView extends GetView<DeepCleanController> {
                                 ),
                                 Spacer(),
                                 IconButton(
-                                    onPressed: () {
-                                      controller.deleteShoes(shoe['id']);
-                                    },
-                                    icon: Icon(Icons.delete))
+                                  onPressed: () {
+                                    controller.deleteShoes(shoe['id']);
+                                  },
+                                  icon: Icon(Icons.delete),
+                                ),
                               ],
                             ),
                           ),
@@ -169,7 +172,11 @@ class DeepCleanListView extends GetView<DeepCleanController> {
                 SizedBox(height: 10),
                 InkWell(
                   onTap: () {
-                    Get.toNamed(Routes.PAYMENT_CONFIRMATION);
+                    Get.toNamed(Routes.PAYMENT_CONFIRMATION)?.then((value) {
+                      if (value == "success") {
+                        controller.clearShoes();
+                      }
+                    });
                   },
                   child: Container(
                     height: 50,

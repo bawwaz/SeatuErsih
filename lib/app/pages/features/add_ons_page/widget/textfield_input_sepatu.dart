@@ -25,8 +25,8 @@ class InputNamaSepatu extends GetView<AddOnsController> {
           ),
         ],
       ),
-      child: Obx(
-        () => controller.isOtherSelected.value
+      child: Obx(() {
+        return controller.isOtherSelected.value
             ? TextField(
                 onChanged: (value) {
                   controller.shoesName.value = value;
@@ -53,28 +53,22 @@ class InputNamaSepatu extends GetView<AddOnsController> {
                   value: controller.shoesName.value.isEmpty
                       ? null
                       : controller.shoesName.value,
-                  items: [
-                    DropdownMenuItem(
-                      value: 'Nike Air Force 1',
-                      child: Text('Nike Air Force 1',
-                          style: GoogleFonts.poppins(fontSize: 16)),
+                  items: controller.brand.map((brand) {
+                    return DropdownMenuItem<String>(
+                      value: brand['brand'],
+                      child: Text(
+                        brand['brand'],
+                        style: GoogleFonts.poppins(fontSize: 16),
+                      ),
+                    );
+                  }).toList()
+                    ..add(
+                      DropdownMenuItem(
+                        value: 'Other',
+                        child: Text('Other',
+                            style: GoogleFonts.poppins(fontSize: 16)),
+                      ),
                     ),
-                    DropdownMenuItem(
-                      value: 'Adidas Samba',
-                      child: Text('Adidas Samba',
-                          style: GoogleFonts.poppins(fontSize: 16)),
-                    ),
-                    DropdownMenuItem(
-                      value: 'Converse 70',
-                      child: Text('Converse 70',
-                          style: GoogleFonts.poppins(fontSize: 16)),
-                    ),
-                    DropdownMenuItem(
-                      value: 'Other',
-                      child: Text('Other',
-                          style: GoogleFonts.poppins(fontSize: 16)),
-                    ),
-                  ],
                   onChanged: (value) {
                     if (value == 'Other') {
                       controller.isOtherSelected.value = true;
@@ -86,8 +80,8 @@ class InputNamaSepatu extends GetView<AddOnsController> {
                   },
                   icon: Icon(Icons.arrow_drop_down, color: Colors.grey),
                 ),
-              ),
-      ),
+              );
+      }),
     );
   }
 }

@@ -6,7 +6,9 @@ import 'package:seatu_ersih/app/router/app_pages.dart';
 import 'package:seatu_ersih/themes/colors.dart';
 
 void main() async {
+  
   await GetStorage.init();
+  
   runApp(const MyApp());
 }
 
