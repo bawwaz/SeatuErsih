@@ -73,9 +73,19 @@ class DeepCleanController extends GetxController {
     }
   }
 
+  void clearShoes() {
+    shoes.clear();
+  }
+
   @override
   void onInit() {
     fetchShoes();
     super.onInit();
+  }
+
+  @override
+  void onClose() {
+    clearShoes();
+    super.onClose();
   }
 }

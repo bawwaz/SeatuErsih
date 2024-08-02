@@ -185,22 +185,22 @@ class PaymentConfirmationView extends GetView<PaymentConfirmationController> {
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   children: [
-                                    Text(
-                                      controller.orderData['order_type'] ==
-                                              "regular_clean"
-                                          ? "Regular Clean"
-                                          : "Deep Clean",
-                                      style: GoogleFonts.poppins(
-                                        fontWeight: FontWeight.w600,
-                                        color: Colors.black,
-                                        fontSize: 16,
-                                      ),
-                                    ),
+                                    // Text(
+                                    //   controller.orderData['order_type'] ==
+                                    //           "Regular Clean"
+                                    //       ? "Regular Clean"
+                                    //       : "Deep Clean",
+                                    //   style: GoogleFonts.poppins(
+                                    //     fontWeight: FontWeight.w600,
+                                    //     color: Colors.black,
+                                    //     fontSize: 16,
+                                    //   ),
+                                    // ),
                                     SizedBox(
                                       height: 1,
                                     ),
                                     Text(
-                                      "${shoe['name']}",
+                                      "${shoe['brand']}",
                                       style: GoogleFonts.poppins(
                                         fontWeight: FontWeight.normal,
                                         color: Color(0xFF8A8A8A),

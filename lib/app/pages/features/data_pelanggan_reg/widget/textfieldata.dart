@@ -6,6 +6,7 @@ class TextFieldData extends StatelessWidget {
   final Function(String)? onChanged;
   final String? initialValue;
   final bool readOnly;
+  final EdgeInsets? padding;
   final TextAlign textAlign;
 
   const TextFieldData({
@@ -15,6 +16,7 @@ class TextFieldData extends StatelessWidget {
     this.initialValue,
     this.readOnly = false,
     this.textAlign = TextAlign.left,
+    this.padding = const EdgeInsets.only(left: 15),
   }) : super(key: key);
 
   @override
@@ -41,7 +43,7 @@ class TextFieldData extends StatelessWidget {
           hintText: hintText,
           hintStyle: tsBodyMediumMedium(darkGrey),
           border: InputBorder.none,
-          contentPadding: const EdgeInsets.only(left: 15),
+          contentPadding: padding,
         ),
       ),
     );

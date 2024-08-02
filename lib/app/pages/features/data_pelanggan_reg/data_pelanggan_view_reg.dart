@@ -122,7 +122,8 @@ class DataPelangganRegView extends GetView<DataPelangganRegController> {
                       hintText: 'Masukkan tanggal pengambilan',
                       initialValue: controller.pickup_date.value,
                       readOnly: true,
-                      textAlign: TextAlign.center,
+                      textAlign: TextAlign.start,
+                      padding: EdgeInsets.only(left: 50),
                     )),
                 Positioned(
                   left: 10,

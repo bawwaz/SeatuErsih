@@ -1,5 +1,4 @@
 import 'dart:convert';
-
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:http/http.dart' as http;
@@ -8,7 +7,8 @@ import 'package:intl/intl.dart';
 class HomePageController extends GetxController {
   var isLoading = false.obs;
   final orders = [].obs;
-  final reviews = [].obs;
+  final reviews1 = [].obs; // Reviews for Regular Clean
+  final reviews2 = [].obs; // Reviews for Deep Clean
 
   // GetStorage
   final box = GetStorage();
@@ -29,7 +29,14 @@ class HomePageController extends GetxController {
       if (response.statusCode == 200) {
         final data = json.decode(response.body)['data'];
         if (data != null && data is Iterable) {
-          orders.assignAll(data);
+          // Mengurutkan pesanan berdasarkan tanggal created_at secara terbalik
+          List<dynamic> sortedData = data.toList();
+          sortedData.sort((a, b) {
+            DateTime dateA = DateTime.parse(a['created_at']);
+            DateTime dateB = DateTime.parse(b['created_at']);
+            return dateB.compareTo(dateA); // Urutan terbalik
+          });
+          orders.assignAll(sortedData);
         } else {
           print('No orders found in response');
         }
@@ -50,8 +57,8 @@ class HomePageController extends GetxController {
     return formattedDate;
   }
 
-  String formatPrice(String price) {
-    if (price == 'null') {
+  String formatPrice(String? price) {
+    if (price == null) {
       return 'N/A';
     } else {
       int intPrice = int.tryParse(price) ?? 0;
@@ -61,7 +68,7 @@ class HomePageController extends GetxController {
     }
   }
 
-  Future<void> fetchReviews() async {
+  Future<void> fetchReviews1() async {
     isLoading.value = true;
     final url = 'http://seatuersih.pradiptaahmad.tech/api';
     final token = box.read('token');
@@ -77,7 +84,39 @@ class HomePageController extends GetxController {
       if (response.statusCode == 200) {
         final data = json.decode(response.body)['reviews'];
         if (data != null && data is Iterable) {
-          reviews.assignAll(data);
+          reviews1.assignAll(data);
+        } else {
+          print('No reviews found in response');
+        }
+      } else {
+        print('Failed to fetch reviews: ${response.statusCode}');
+        print('Response body: ${response.body}');
+        throw Exception('Failed to fetch reviews');
+      }
+    } catch (e) {
+      print(e);
+    }
+
+    isLoading.value = false;
+  }
+
+  Future<void> fetchReviews2() async {
+    isLoading.value = true;
+    final url = 'http://seatuersih.pradiptaahmad.tech/api';
+    final token = box.read('token');
+    var headers = {
+      'Accept': 'application/json',
+      'Authorization': 'Bearer $token'
+    };
+
+    try {
+      final response =
+          await http.get(Uri.parse('$url/review/all/2'), headers: headers);
+
+      if (response.statusCode == 200) {
+        final data = json.decode(response.body)['reviews'];
+        if (data != null && data is Iterable) {
+          reviews2.assignAll(data);
         } else {
           print('No reviews found in response');
         }
@@ -96,7 +135,15 @@ class HomePageController extends GetxController {
   @override
   void onInit() {
     fetchOrder();
-    fetchReviews();
+    fetchReviews1();
+    fetchReviews2();
     super.onInit();
+  }
+
+  @override
+  void onReady() {
+    fetchReviews1();
+    fetchReviews2();
+    super.onReady();
   }
 }

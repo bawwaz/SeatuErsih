@@ -4,8 +4,10 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:seatu_ersih/app/pages/features/regular_shoe_list/regular_clean_list_controller.dart';
 import 'package:seatu_ersih/app/router/app_pages.dart';
 
-class RegCleanListView extends GetView<RegCleanListController> {
-  const RegCleanListView({super.key});
+class RegCleanListView extends StatelessWidget {
+  final RegCleanListController controller = Get.put(RegCleanListController());
+
+  RegCleanListView({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -38,6 +40,7 @@ class RegCleanListView extends GetView<RegCleanListController> {
                       itemCount: controller.shoes.length,
                       itemBuilder: (context, index) {
                         Map<dynamic, dynamic> shoe = controller.shoes[index];
+                        String brandName = shoe['brand'] ?? 'No Brand';
                         return Container(
                           margin: EdgeInsets.only(bottom: 20),
                           decoration: BoxDecoration(
@@ -68,15 +71,13 @@ class RegCleanListView extends GetView<RegCleanListController> {
                                     ),
                                   ),
                                 ),
-                                SizedBox(
-                                  width: 20,
-                                ),
+                                SizedBox(width: 20),
                                 Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   children: [
                                     Text(
-                                      "${shoe['name']}",
+                                      brandName,
                                       overflow: TextOverflow.ellipsis,
                                       maxLines: 1,
                                       style: GoogleFonts.poppins(
@@ -88,7 +89,7 @@ class RegCleanListView extends GetView<RegCleanListController> {
                                     Container(
                                       width: Get.width * 0.45,
                                       child: Text(
-                                        "Addons : ${shoe['addons']}",
+                                        "Addons: ${shoe['addons']}",
                                         overflow: TextOverflow.ellipsis,
                                         maxLines: 1,
                                         style: GoogleFonts.poppins(
@@ -99,7 +100,7 @@ class RegCleanListView extends GetView<RegCleanListController> {
                                       ),
                                     ),
                                     Text(
-                                      "Note : ${shoe['notes']}",
+                                      "Note: ${shoe['notes']}",
                                       maxLines: 1,
                                       overflow: TextOverflow.ellipsis,
                                       style: GoogleFonts.poppins(
@@ -109,7 +110,8 @@ class RegCleanListView extends GetView<RegCleanListController> {
                                       ),
                                     ),
                                     Text(
-                                      "${controller.formatPrice(int.parse(shoe['price'].toString()))}",
+                                      controller.formatPrice(
+                                          int.parse(shoe['price'].toString())),
                                       style: GoogleFonts.poppins(
                                         fontWeight: FontWeight.w600,
                                         color: Colors.black,
@@ -118,15 +120,14 @@ class RegCleanListView extends GetView<RegCleanListController> {
                                     ),
                                   ],
                                 ),
-                                SizedBox(
-                                  width: 5,
-                                ),
+                                SizedBox(width: 5),
                                 Spacer(),
                                 IconButton(
-                                    onPressed: () {
-                                      controller.deleteShoes(shoe['id']);
-                                    },
-                                    icon: Icon(Icons.delete))
+                                  onPressed: () {
+                                    controller.deleteShoes(shoe['id']);
+                                  },
+                                  icon: Icon(Icons.delete),
+                                ),
                               ],
                             ),
                           ),
@@ -169,7 +170,11 @@ class RegCleanListView extends GetView<RegCleanListController> {
                 SizedBox(height: 10),
                 InkWell(
                   onTap: () {
-                    Get.toNamed(Routes.PAYMENT_CONFIRMATION);
+                    Get.toNamed(Routes.PAYMENT_CONFIRMATION)?.then((value) {
+                      if (value == "success") {
+                        controller.clearShoes();
+                      }
+                    });
                   },
                   child: Container(
                     height: 50,

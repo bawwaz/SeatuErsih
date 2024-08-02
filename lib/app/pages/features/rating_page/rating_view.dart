@@ -13,6 +13,12 @@ class RatingView extends StatelessWidget {
     // Retrieve the order data from arguments
     final order = Get.arguments;
 
+    // Define a map for valid order types
+    final validOrderTypes = {
+      "regular_clean": "Regular Clean",
+      "deep_clean": "Deep Clean"
+    };
+
     return Scaffold(
       appBar: AppBar(
         automaticallyImplyLeading: false,
@@ -92,9 +98,7 @@ class RatingView extends StatelessWidget {
                         Row(
                           children: [
                             Text(
-                              order['order_type'] == "regular_clean"
-                                  ? "Regular Clean"
-                                  : "Deep Clean",
+                              validOrderTypes[order['order_type']] ?? "Unknown",
                               style: GoogleFonts.poppins(
                                 fontWeight: FontWeight.w600,
                                 color: Colors.black,
@@ -102,17 +106,8 @@ class RatingView extends StatelessWidget {
                               ),
                             ),
                             SizedBox(width: 8),
-                            // Text(
-                            //   'x${order['quantity']}',
-                            //   style: GoogleFonts.poppins(
-                            //     fontWeight: FontWeight.w400,
-                            //     color: Colors.black,
-                            //     fontSize: 14,
-                            //   ),
-                            // ),
                           ],
                         ),
-                        SizedBox(height: 8),
                         SizedBox(height: 8),
                         Text(
                           'Rp. ${order['total_price']}',
@@ -177,8 +172,17 @@ class RatingView extends StatelessWidget {
               InkWell(
                 onTap: () async {
                   controller.order_id.value = order['id'];
+                  controller.order_type.value =
+                      validOrderTypes[order['order_type']] ?? "Unknown";
+                  controller.laundry_id.value =
+                      int.tryParse(order['laundry_id'].toString()) ??
+                          0; // Convert to int
                   bool result = await controller.postReview();
-                  Get.toNamed(Routes.HOME);
+                  if (result) {
+                    Get.toNamed(Routes.HOME);
+                  } else {
+                    // Handle failure case
+                  }
                 },
                 child: Container(
                   height: 50,

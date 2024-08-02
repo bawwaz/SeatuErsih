@@ -6,11 +6,11 @@ import 'package:intl/intl.dart';
 
 class RegCleanListController extends GetxController {
   var isLoading = false.obs;
-  final shoes = [].obs;
+  final shoes = <Map<dynamic, dynamic>>[].obs;
 
   final box = GetStorage();
+
   Future<void> fetchShoes() async {
-    final order_id = box.read('order_id');
     isLoading.value = true;
 
     final url = 'http://seatuersih.pradiptaahmad.tech/api';
@@ -28,12 +28,17 @@ class RegCleanListController extends GetxController {
 
       if (response.statusCode == 200) {
         final data = json.decode(response.body)['data'];
-        shoes.assignAll(data);
+        if (data is List) {
+          shoes.assignAll(data.cast<Map<dynamic, dynamic>>());
+        } else {
+          throw Exception('Unexpected data format');
+        }
       } else {
         print('Failed to fetch shoes: ${response.statusCode}');
         print('Response body: ${response.body}');
         throw Exception('Failed to fetch shoes');
       }
+      print(shoes);
     } catch (e) {
       print(e);
     }
@@ -42,9 +47,7 @@ class RegCleanListController extends GetxController {
   }
 
   String formatPrice(int price) {
-    String formattedPrice =
-        NumberFormat.currency(locale: 'id_ID', symbol: 'Rp').format(price);
-    return formattedPrice;
+    return NumberFormat.currency(locale: 'id_ID', symbol: 'Rp').format(price);
   }
 
   Future<void> deleteShoes(int id) async {
@@ -68,13 +71,23 @@ class RegCleanListController extends GetxController {
         throw Exception('Failed to delete shoes');
       }
     } catch (e) {
-      Get.snackbar("Errro", e.toString());
+      Get.snackbar("Error", e.toString());
     }
+  }
+
+  void clearShoes() {
+    shoes.clear();
   }
 
   @override
   void onInit() {
     fetchShoes();
     super.onInit();
+  }
+
+  @override
+  void onClose() {
+    clearShoes();
+    super.onClose();
   }
 }
