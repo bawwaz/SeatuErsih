@@ -18,7 +18,7 @@ class MyOrder extends GetView<HomePageController> {
         'pending': 'Pending',
         'in_progress': 'In-Progress',
         'completed': 'Completed',
-        'rejected': 'Rejected',
+        'declined': 'Declined',
       };
 
       // Create TabBar and TabBarView widgets
