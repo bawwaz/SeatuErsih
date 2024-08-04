@@ -29,8 +29,9 @@ class DataPelangganRegController extends GetxController {
     final url = 'http://seatuersih.pradiptaahmad.tech/api';
     final token = box.read('token');
     // Forming detail address
-    detail_address.value = '${kabupatenName.value}, ${kecamatanName.value}, ${specificAddress.value}';
-    
+    detail_address.value =
+        '${kabupatenName.value}, ${kecamatanName.value}, ${specificAddress.value}';
+
     var data = {
       'laundry_id': Get.arguments.toString(),
       'order_type': 'regular_clean',
@@ -39,6 +40,8 @@ class DataPelangganRegController extends GetxController {
       'pickup_date': pickup_date.value.toString(),
       'notes': notes.value,
       'user_id': box.read('userid').toString(),
+      'kabupaten': kabupatenName.value, // Include kabupaten
+      'kecamatan': kecamatanName.value, // Include kecamatan
     };
 
     var headers = {
@@ -132,8 +135,8 @@ class DataPelangganRegController extends GetxController {
     };
 
     try {
-      final response = await http.get(Uri.parse('$url/kecamatan/laundry/1'),
-          headers: headers);
+      final response =
+          await http.get(Uri.parse('$url/kecamatan/getall'), headers: headers);
 
       if (response.statusCode == 200) {
         final data = json.decode(response.body);

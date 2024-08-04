@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "119922447613",
+    "project_id": "seatuersih",
+    "storage_bucket": "seatuersih.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:119922447613:android:eb3e0275df631a0ebe5a94",
+        "android_client_info": {
+          "package_name": "com.example.seatu_ersih"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC7zvw0SvLFvtx7CvZXjx_YMQ2RNTBl5Qw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

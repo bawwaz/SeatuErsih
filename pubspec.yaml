@@ -25,6 +25,12 @@ dependencies:
   flutter_rating_bar:
   dropdown_button2:
   shimmer: 
+  firebase_core:
+  firebase_messaging: 
+  webview_flutter: 
+  url_launcher: ^6.3.0
+
+
 
 dev_dependencies:
   flutter_test:
