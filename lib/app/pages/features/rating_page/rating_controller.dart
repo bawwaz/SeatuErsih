@@ -3,6 +3,8 @@ import 'package:get_storage/get_storage.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
+import 'package:seatu_ersih/app/router/app_pages.dart';
+
 class RatingController extends GetxController {
   var rating = 0.0.obs;
   var review = ''.obs;
@@ -34,7 +36,7 @@ class RatingController extends GetxController {
     try {
       final response =
           await http.post(Uri.parse(url), headers: headers, body: body);
-      if (response.statusCode == 200) {
+      if (response.statusCode == 201) {
         return true;
       } else {
         print('Failed to post review: ${response.statusCode}');
@@ -45,5 +47,10 @@ class RatingController extends GetxController {
       print('Error posting review: $e');
       return false;
     }
+  }
+
+  @override
+  void onInit() {
+    super.onInit();
   }
 }

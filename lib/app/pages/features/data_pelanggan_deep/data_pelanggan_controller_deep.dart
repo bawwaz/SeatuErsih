@@ -25,6 +25,7 @@ class DataPelangganControllerDeep extends GetxController {
   Future<bool> postOrders() async {
     final url = 'http://seatuersih.pradiptaahmad.tech/api';
     final token = box.read('token');
+
     var data = {
       'laundry_id': Get.arguments.toString(),
       'order_type': 'deep_clean',
@@ -33,6 +34,8 @@ class DataPelangganControllerDeep extends GetxController {
       'pickup_date': pickup_date.value.toString(),
       'notes': notes.value,
       'user_id': box.read('userid').toString(),
+      'kabupaten': kabupatenName.value,
+      'kecamatan': kecamatanName.value,
     };
 
     var headers = {
@@ -117,8 +120,8 @@ class DataPelangganControllerDeep extends GetxController {
     };
 
     try {
-      final response = await http.get(Uri.parse('$url/kecamatan/laundry/2'),
-          headers: headers);
+      final response =
+          await http.get(Uri.parse('$url/kecamatan/getall'), headers: headers);
 
       if (response.statusCode == 200) {
         final data = json.decode(response.body);

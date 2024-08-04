@@ -23,9 +23,8 @@ class HomeBody extends GetView<HomePageController> {
 
     return DefaultTabController(
       length: 2,
-      child: SingleChildScrollView(
-        physics: BouncingScrollPhysics(),
-        child: Column(
+      child: Scaffold(
+        body: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Stack(
@@ -92,10 +91,9 @@ class HomeBody extends GetView<HomePageController> {
               ),
             ),
             SizedBox(height: 10),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 15),
-              child: SizedBox(
-                height: 300, // Tinggi PageView
+            Expanded(
+              child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 15),
                 child: TabBarView(
                   children: [
                     // Tab 1: Regular Clean Reviews
@@ -106,25 +104,13 @@ class HomeBody extends GetView<HomePageController> {
                       if (homeController.reviews1.isEmpty) {
                         return Center(child: Text("No reviews found"));
                       }
-                      return PageView.builder(
-                        itemCount: (homeController.reviews1.length / 3)
-                            .ceil(), // Jumlah halaman
-                        itemBuilder: (context, pageIndex) {
-                          int startIndex = pageIndex * 3;
-                          int endIndex = startIndex + 3;
-                          var reviewsPage = homeController.reviews1.sublist(
-                            startIndex,
-                            endIndex > homeController.reviews1.length
-                                ? homeController.reviews1.length
-                                : endIndex,
-                          );
-                          return Column(
-                            children: reviewsPage.map((review) {
-                              return Padding(
-                                padding: const EdgeInsets.only(top: 20.0),
-                                child: CardReview(review: review),
-                              );
-                            }).toList(),
+                      return ListView.builder(
+                        itemCount: homeController.reviews1.length,
+                        itemBuilder: (context, index) {
+                          return Padding(
+                            padding: const EdgeInsets.only(top: 20.0),
+                            child: CardReview(
+                                review: homeController.reviews1[index]),
                           );
                         },
                       );
@@ -137,25 +123,13 @@ class HomeBody extends GetView<HomePageController> {
                       if (homeController.reviews2.isEmpty) {
                         return Center(child: Text("No reviews found"));
                       }
-                      return PageView.builder(
-                        itemCount: (homeController.reviews2.length / 3)
-                            .ceil(), // Jumlah halaman
-                        itemBuilder: (context, pageIndex) {
-                          int startIndex = pageIndex * 3;
-                          int endIndex = startIndex + 3;
-                          var reviewsPage = homeController.reviews2.sublist(
-                            startIndex,
-                            endIndex > homeController.reviews2.length
-                                ? homeController.reviews2.length
-                                : endIndex,
-                          );
-                          return Column(
-                            children: reviewsPage.map((review) {
-                              return Padding(
-                                padding: const EdgeInsets.only(top: 20.0),
-                                child: CardReview(review: review),
-                              );
-                            }).toList(),
+                      return ListView.builder(
+                        itemCount: homeController.reviews2.length,
+                        itemBuilder: (context, index) {
+                          return Padding(
+                            padding: const EdgeInsets.only(top: 20.0),
+                            child: CardReview(
+                                review: homeController.reviews2[index]),
                           );
                         },
                       );

@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:http/http.dart' as http;
@@ -41,7 +42,9 @@ class LoginPageController extends GetxController {
         box.write("token", token);
         box.write("username", userData['username']);
         box.write("userid", userData['id']);
-
+        await FirebaseMessaging.instance.requestPermission();
+        final fcmToken = await FirebaseMessaging.instance.getToken();
+        print('token : $fcmToken');
         user.value = userData; // Store user data
 
         Get.snackbar(

@@ -117,6 +117,10 @@ class CheckoutController extends GetxController {
     }
   }
 
+  Future <void> PostPayment () async{
+
+  }
+
   void clearData() {
     shoes.clear();
     pickupDate.value = '';

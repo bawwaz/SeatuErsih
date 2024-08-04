@@ -7,8 +7,17 @@ import 'package:intl/intl.dart';
 class RegCleanListController extends GetxController {
   var isLoading = false.obs;
   final shoes = <Map<dynamic, dynamic>>[].obs;
-
   final box = GetStorage();
+
+  late final String orderId;
+
+  @override
+  void onInit() {
+    // Initialize orderId from Get.arguments
+    orderId = Get.arguments[0].toString();
+    fetchShoes();
+    super.onInit();
+  }
 
   Future<void> fetchShoes() async {
     isLoading.value = true;
@@ -21,8 +30,9 @@ class RegCleanListController extends GetxController {
     };
 
     try {
+      // Fetch shoes based on orderId
       final response = await http.get(
-        Uri.parse('$url/shoe/getall'),
+        Uri.parse('$url/shoe/getshoe/$orderId'),
         headers: headers,
       );
 
@@ -59,8 +69,10 @@ class RegCleanListController extends GetxController {
     };
 
     try {
-      final response = await http.delete(Uri.parse('$url/shoe/delete/$id'),
-          headers: headers);
+      final response = await http.delete(
+        Uri.parse('$url/shoe/delete/$id'),
+        headers: headers
+      );
 
       if (response.statusCode == 200) {
         fetchShoes();
@@ -77,12 +89,6 @@ class RegCleanListController extends GetxController {
 
   void clearShoes() {
     shoes.clear();
-  }
-
-  @override
-  void onInit() {
-    fetchShoes();
-    super.onInit();
   }
 
   @override

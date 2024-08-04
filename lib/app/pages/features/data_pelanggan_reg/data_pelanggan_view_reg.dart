@@ -104,7 +104,12 @@ class DataPelangganRegView extends GetView<DataPelangganRegController> {
                   ),
                 ],
               ),
-              child: TextfieldAlamatSpesifik(controller: controller),
+              child: TextfieldAlamatSpesifik(
+                controller: controller,
+                onChanged: (value) {
+                  controller.specificAddress.value = value;
+                },
+              ),
             ),
             SizedBox(height: 20),
             _buildSectionHeader('Contact', 'No. Telephone'),

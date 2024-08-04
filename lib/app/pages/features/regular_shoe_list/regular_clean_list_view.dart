@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:seatu_ersih/app/pages/features/regular_shoe_list/regular_clean_list_controller.dart';
 import 'package:seatu_ersih/app/router/app_pages.dart';
+import 'package:seatu_ersih/themes/theme.dart';
 
 class RegCleanListView extends StatelessWidget {
   final RegCleanListController controller = Get.put(RegCleanListController());
@@ -29,11 +30,34 @@ class RegCleanListView extends StatelessWidget {
           ),
         ),
       ),
-      body: Column(
-        children: [
-          Obx(
-            () => controller.isLoading.value
-                ? CircularProgressIndicator()
+      body: Obx(
+        () => controller.isLoading.value
+            ? Center(child: CircularProgressIndicator())
+            : controller.shoes.isEmpty
+                ? Expanded(
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Center(
+                          child: Image.asset(
+                            'assets/img/no_item.png', // Change this to your image path
+                            width: 200,
+                            height: 200,
+                          ),
+                        ),
+                        SizedBox(height: 20),
+                        Text(
+                          'Tambah sepatu anda di bawah dan akan di tampilkan di sini',
+                          style: GoogleFonts.poppins(
+                            fontWeight: FontWeight.w600,
+                            color: Colors.black,
+                            fontSize: 16,
+                          ),
+                          textAlign: TextAlign.center,
+                        ),
+                      ],
+                    ),
+                  )
                 : Expanded(
                     child: ListView.builder(
                       padding: EdgeInsets.all(20),
@@ -135,69 +159,72 @@ class RegCleanListView extends StatelessWidget {
                       },
                     ),
                   ),
-          ),
-          Padding(
-            padding: const EdgeInsets.all(20.0),
-            child: Column(
-              children: [
-                InkWell(
-                  onTap: () {
-                    Get.toNamed(Routes.ADD_ONS, arguments: ['regular_clean'])
-                        ?.then((value) {
-                      if (value == "success") {
-                        controller.fetchShoes();
-                      }
-                    });
-                  },
-                  child: Container(
-                    height: 40,
-                    decoration: BoxDecoration(
-                      color: Color(0xFFC6EAFF),
-                      borderRadius: BorderRadius.circular(10),
-                    ),
-                    child: Center(
-                      child: Text(
-                        'Add Shoes',
-                        style: GoogleFonts.poppins(
-                          fontWeight: FontWeight.w600,
-                          color: Colors.white,
-                          fontSize: 16,
-                        ),
-                      ),
+      ),
+      bottomNavigationBar: Padding(
+        padding: const EdgeInsets.all(20.0),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            InkWell(
+              onTap: () {
+                Get.toNamed(Routes.ADD_ONS, arguments: ['regular_clean'])
+                    ?.then((value) {
+                  if (value == "success") {
+                    controller.fetchShoes();
+                  }
+                });
+              },
+              child: Container(
+                height: 40,
+                decoration: BoxDecoration(
+                  color: primaryColor,
+                  borderRadius: BorderRadius.circular(10),
+                ),
+                child: Center(
+                  child: Text(
+                    'Add Shoes',
+                    style: GoogleFonts.poppins(
+                      fontWeight: FontWeight.w600,
+                      color: Colors.white,
+                      fontSize: 16,
                     ),
                   ),
                 ),
-                SizedBox(height: 10),
-                InkWell(
-                  onTap: () {
-                    Get.toNamed(Routes.PAYMENT_CONFIRMATION)?.then((value) {
-                      if (value == "success") {
-                        controller.clearShoes();
-                      }
-                    });
-                  },
-                  child: Container(
-                    height: 50,
-                    decoration: BoxDecoration(
-                      color: Color(0xFF7EC1EB),
-                      borderRadius: BorderRadius.circular(10),
-                    ),
-                    child: Center(
-                      child: Text(
-                        'Checkout',
-                        style: GoogleFonts.poppins(
-                          fontWeight: FontWeight.w600,
-                          color: Colors.white,
-                          fontSize: 18,
-                        ),
-                      ),
-                    ),
-                  ),
-                ),
-              ],
+              ),
             ),
-          ),
-        ],
+            SizedBox(height: 10),
+            // Inside RegCleanListView
+            InkWell(
+              onTap: () {
+                Get.toNamed(
+                  Routes.PAYMENT_CONFIRMATION,
+                  arguments: [controller.orderId],
+                )?.then((value) {
+                  if (value == "success") {
+                    controller.clearShoes();
+                  }
+                });
+              },
+              child: Container(
+                height: 50,
+                decoration: BoxDecoration(
+                  color: Color(0xFF7EC1EB),
+                  borderRadius: BorderRadius.circular(10),
+                ),
+                child: Center(
+                  child: Text(
+                    'Checkout',
+                    style: GoogleFonts.poppins(
+                      fontWeight: FontWeight.w600,
+                      color: Colors.white,
+                      fontSize: 18,
+                    ),
+                  ),
+                ),
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }

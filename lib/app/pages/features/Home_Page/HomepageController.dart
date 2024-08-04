@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:http/http.dart' as http;
@@ -133,10 +134,11 @@ class HomePageController extends GetxController {
   }
 
   @override
-  void onInit() {
+  void onInit() async {
     fetchOrder();
     fetchReviews1();
     fetchReviews2();
+    
     super.onInit();
   }
 

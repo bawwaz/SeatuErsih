@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:get/get.dart';
+import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:seatu_ersih/app/router/app_pages.dart';
 import 'rating_controller.dart';
 
@@ -11,7 +11,10 @@ class RatingView extends StatelessWidget {
     final RatingController controller = Get.put(RatingController());
 
     // Retrieve the order data from arguments
-    final order = Get.arguments;
+    final RxMap<dynamic, dynamic>? rxOrder = Get.arguments;
+
+    // Convert RxMap to Map<String, dynamic>
+    final Map<String, dynamic>? order = rxOrder?.cast<String, dynamic>();
 
     // Define a map for valid order types
     final validOrderTypes = {
@@ -98,7 +101,7 @@ class RatingView extends StatelessWidget {
                         Row(
                           children: [
                             Text(
-                              validOrderTypes[order['order_type']] ?? "Unknown",
+                              validOrderTypes[order?['order_type']] ?? "Unknown",
                               style: GoogleFonts.poppins(
                                 fontWeight: FontWeight.w600,
                                 color: Colors.black,
@@ -110,7 +113,7 @@ class RatingView extends StatelessWidget {
                         ),
                         SizedBox(height: 8),
                         Text(
-                          'Rp. ${order['total_price']}',
+                          'Rp. ${order?['total_price'] ?? '0'}',
                           style: GoogleFonts.poppins(
                             fontWeight: FontWeight.w600,
                             color: Color(0xFF7EC1EB),
@@ -119,7 +122,7 @@ class RatingView extends StatelessWidget {
                         ),
                         SizedBox(height: 8),
                         Text(
-                          'Order Id: ${order['id']}',
+                          'Order Id: ${order?['id'] ?? 'N/A'}',
                           style: GoogleFonts.poppins(
                             fontWeight: FontWeight.w400,
                             color: Color(0xFF8F8F8F),
@@ -171,15 +174,14 @@ class RatingView extends StatelessWidget {
               SizedBox(height: 300),
               InkWell(
                 onTap: () async {
-                  controller.order_id.value = order['id'];
+                  controller.order_id.value = order?['id'] ?? 0;
                   controller.order_type.value =
-                      validOrderTypes[order['order_type']] ?? "Unknown";
+                      validOrderTypes[order?['order_type']] ?? "Unknown";
                   controller.laundry_id.value =
-                      int.tryParse(order['laundry_id'].toString()) ??
-                          0; // Convert to int
+                      int.tryParse(order?['laundry_id']?.toString() ?? '0') ?? 0;
                   bool result = await controller.postReview();
                   if (result) {
-                    Get.toNamed(Routes.HOME);
+                    Get.toNamed(Routes.BTMNAVBAR);
                   } else {
                     // Handle failure case
                   }

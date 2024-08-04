@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:seatu_ersih/app/pages/features/payment_confirmation_page/payment_confirmation_controller.dart';
+import 'package:seatu_ersih/app/pages/features/payment_confirmation_page/widget/paymentweb_view.dart';
 import 'package:seatu_ersih/app/router/app_pages.dart';
 
 class PaymentConfirmationView extends GetView<PaymentConfirmationController> {
@@ -185,17 +186,6 @@ class PaymentConfirmationView extends GetView<PaymentConfirmationController> {
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   children: [
-                                    // Text(
-                                    //   controller.orderData['order_type'] ==
-                                    //           "Regular Clean"
-                                    //       ? "Regular Clean"
-                                    //       : "Deep Clean",
-                                    //   style: GoogleFonts.poppins(
-                                    //     fontWeight: FontWeight.w600,
-                                    //     color: Colors.black,
-                                    //     fontSize: 16,
-                                    //   ),
-                                    // ),
                                     SizedBox(
                                       height: 1,
                                     ),
@@ -349,16 +339,19 @@ class PaymentConfirmationView extends GetView<PaymentConfirmationController> {
                       fontSize: 16,
                     ),
                   ),
-                  Obx(() => Text(
-                        controller.orderData['total_price'] == null
-                            ? "Loading..."
-                            : "${controller.formatPrice(int.parse(controller.orderData['total_price'].toString()))}",
-                        style: GoogleFonts.poppins(
-                          fontWeight: FontWeight.w600,
-                          color: Colors.black,
-                          fontSize: 16,
-                        ),
-                      )),
+                  Obx(() {
+                    final totalPrice = controller.orderData['total_price'];
+                    return Text(
+                      totalPrice == null
+                          ? "Loading..."
+                          : "${controller.formatPrice(totalPrice)}",
+                      style: GoogleFonts.poppins(
+                        fontWeight: FontWeight.w600,
+                        color: Colors.black,
+                        fontSize: 16,
+                      ),
+                    );
+                  }),
                 ],
               ),
             ),
@@ -373,8 +366,13 @@ class PaymentConfirmationView extends GetView<PaymentConfirmationController> {
         child: SizedBox(
           width: double.infinity,
           child: ElevatedButton(
-            onPressed: () {
-              Get.offAllNamed(Routes.CHECKOUT_ANIMATION);
+            onPressed: () async {
+              final success = await controller.createPayment();
+              if (success) {
+                Get.to(() => PaymentWebView);
+              } else {
+                Get.snackbar("Error", "Failed to create payment");
+              }
             },
             style: ElevatedButton.styleFrom(
               backgroundColor: Color(0xFF7EC1EB),
