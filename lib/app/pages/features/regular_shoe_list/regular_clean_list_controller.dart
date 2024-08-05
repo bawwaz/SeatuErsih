@@ -69,10 +69,8 @@ class RegCleanListController extends GetxController {
     };
 
     try {
-      final response = await http.delete(
-        Uri.parse('$url/shoe/delete/$id'),
-        headers: headers
-      );
+      final response = await http.delete(Uri.parse('$url/shoe/delete/$id'),
+          headers: headers);
 
       if (response.statusCode == 200) {
         fetchShoes();

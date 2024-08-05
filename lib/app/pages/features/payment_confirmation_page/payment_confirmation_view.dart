@@ -8,114 +8,6 @@ import 'package:seatu_ersih/app/router/app_pages.dart';
 class PaymentConfirmationView extends GetView<PaymentConfirmationController> {
   const PaymentConfirmationView({super.key});
 
-  void _showPaymentOptions(BuildContext context) {
-    showModalBottomSheet(
-      context: context,
-      builder: (BuildContext context) {
-        return SingleChildScrollView(
-          child: Container(
-            padding: EdgeInsets.all(20),
-            height: 400,
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  'Select payment method',
-                  style: GoogleFonts.poppins(
-                    fontWeight: FontWeight.w600,
-                    color: Colors.black,
-                    fontSize: 18,
-                  ),
-                ),
-                SizedBox(height: 10),
-                Text(
-                  'Digital Payment',
-                  style: GoogleFonts.poppins(
-                    fontWeight: FontWeight.w600,
-                    color: Colors.black,
-                    fontSize: 14,
-                  ),
-                ),
-                SizedBox(height: 10),
-                ListTile(
-                  leading: Image.asset(
-                    'assets/img/dana-icon.png',
-                    height: 24,
-                    width: 24,
-                  ),
-                  title: Text(
-                    'Dana',
-                    style: GoogleFonts.poppins(
-                      fontWeight: FontWeight.w600,
-                      color: Colors.black,
-                      fontSize: 16,
-                    ),
-                  ),
-                  onTap: () {
-                    Navigator.pop(context);
-                  },
-                ),
-                ListTile(
-                  leading: Image.asset(
-                    'assets/img/dana-icon.png',
-                    height: 24,
-                    width: 24,
-                  ),
-                  title: Text(
-                    'Qris',
-                    style: GoogleFonts.poppins(
-                      fontWeight: FontWeight.w600,
-                      color: Colors.black,
-                      fontSize: 16,
-                    ),
-                  ),
-                  onTap: () {
-                    Navigator.pop(context);
-                  },
-                ),
-                Center(
-                  child: Container(
-                    width: double.infinity,
-                    height: 1,
-                    decoration: BoxDecoration(
-                      color: Color(0xFFD9D9D9),
-                    ),
-                  ),
-                ),
-                SizedBox(height: 10),
-                Text(
-                  'Other option',
-                  style: GoogleFonts.poppins(
-                    fontWeight: FontWeight.w600,
-                    color: Colors.black,
-                    fontSize: 14,
-                  ),
-                ),
-                ListTile(
-                  leading: Icon(
-                    Icons.money,
-                    color: Colors.black,
-                  ),
-                  title: Text(
-                    'Cash',
-                    style: GoogleFonts.poppins(
-                      fontWeight: FontWeight.w600,
-                      color: Colors.black,
-                      fontSize: 16,
-                    ),
-                  ),
-                  onTap: () {
-                    Navigator.pop(context);
-                  },
-                ),
-              ],
-            ),
-          ),
-        );
-      },
-    );
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -271,49 +163,6 @@ class PaymentConfirmationView extends GetView<PaymentConfirmationController> {
                     ),
                   ),
                 ),
-                InkWell(
-                  onTap: () => _showPaymentOptions(context),
-                  child: Container(
-                    margin: EdgeInsets.symmetric(vertical: 10, horizontal: 20),
-                    padding: EdgeInsets.symmetric(horizontal: 15, vertical: 10),
-                    decoration: BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.circular(10),
-                      boxShadow: [
-                        BoxShadow(
-                          color: Colors.grey.withOpacity(0.5),
-                          spreadRadius: 0,
-                          blurRadius: 3,
-                          offset: Offset(0, 0),
-                        ),
-                      ],
-                    ),
-                    child: Row(
-                      children: [
-                        Image.asset(
-                          'assets/img/dana-icon.png',
-                          height: 24,
-                          width: 24,
-                        ),
-                        SizedBox(width: 10),
-                        Text(
-                          'Dana',
-                          style: GoogleFonts.poppins(
-                            fontWeight: FontWeight.w600,
-                            color: Colors.black,
-                            fontSize: 15,
-                          ),
-                        ),
-                        Spacer(),
-                        Icon(
-                          Icons.arrow_forward_ios,
-                          color: Color(0xFF8A8A8A),
-                          size: 16,
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
               ],
             ),
             Center(
@@ -367,12 +216,7 @@ class PaymentConfirmationView extends GetView<PaymentConfirmationController> {
           width: double.infinity,
           child: ElevatedButton(
             onPressed: () async {
-              final success = await controller.createPayment();
-              if (success) {
-                Get.to(() => PaymentWebView);
-              } else {
-                Get.snackbar("Error", "Failed to create payment");
-              }
+              await _handlePayment();
             },
             style: ElevatedButton.styleFrom(
               backgroundColor: Color(0xFF7EC1EB),
@@ -394,5 +238,16 @@ class PaymentConfirmationView extends GetView<PaymentConfirmationController> {
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
     );
+  }
+
+  Future<void> _handlePayment() async {
+    bool paymentCreated = await controller.createPayment();
+    if (paymentCreated && controller.checkoutLink != null) {
+      Uri checkoutUri = Uri.parse(controller.checkoutLink!);
+      await controller.proceedToPayment(checkoutUri);
+    } else {
+      Get.snackbar(
+          'Error', 'Failed to create payment: ${controller.errorMessage}');
+    }
   }
 }

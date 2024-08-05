@@ -198,7 +198,9 @@ class RegCleanListView extends StatelessWidget {
               onTap: () {
                 Get.toNamed(
                   Routes.PAYMENT_CONFIRMATION,
-                  arguments: [controller.orderId],
+                  arguments: [
+                    controller.orderId.toString(),
+                  ],
                 )?.then((value) {
                   if (value == "success") {
                     controller.clearShoes();
