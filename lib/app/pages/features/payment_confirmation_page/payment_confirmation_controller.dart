@@ -3,7 +3,7 @@ import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:http/http.dart' as http;
 import 'package:intl/intl.dart';
-import 'package:seatu_ersih/app/pages/features/payment_confirmation_page/widget/paymentweb_view.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class PaymentConfirmationController extends GetxController {
   final box = GetStorage();
@@ -90,7 +90,10 @@ class PaymentConfirmationController extends GetxController {
     }
   }
 
-  String formatPrice(int price) {
+  String formatPrice(int? price) {
+    if (price == null) {
+      return NumberFormat.currency(locale: 'id_ID', symbol: 'Rp').format(0);
+    }
     return NumberFormat.currency(locale: 'id_ID', symbol: 'Rp').format(price);
   }
 
@@ -105,8 +108,6 @@ class PaymentConfirmationController extends GetxController {
 
     var body = json.encode({
       'order_id': order_id,
-      'amount': orderData['total_price'],
-      // Include any other necessary fields based on Xendit API requirements
     });
 
     try {
@@ -116,40 +117,38 @@ class PaymentConfirmationController extends GetxController {
         body: body,
       );
 
-      if (response.statusCode == 200) {
+      if (response.statusCode == 200 || response.statusCode == 201) {
+        // Handle both 200 OK and 201 Created
         final responseData = json.decode(response.body);
 
         if (responseData['status'] == 'success') {
           final checkoutLink = responseData['checkout_link'];
-          this.checkoutLink = checkoutLink; // Store checkoutLink in controller
+          this.checkoutLink = checkoutLink;
           return true;
         } else {
-          // Extract and print error details from response
           errorMessage = responseData['message'] ?? 'Unknown error';
           print('Payment creation failed: $errorMessage');
           print('Response body: ${response.body}');
           return false;
         }
       } else {
-        // Print general API error with response body
-        errorMessage = 'Failed to create payment. Status code: ${response.statusCode}. Response body: ${response.body}';
+        errorMessage =
+            'Failed to create payment. Status code: ${response.statusCode}. Response body: ${response.body}';
         print(errorMessage);
         return false;
       }
     } catch (e) {
-      // Handle and print exceptions
       errorMessage = 'Exception occurred: $e';
       print(errorMessage);
       return false;
     }
   }
 
-  Future<void> proceedToPayment() async {
-    bool paymentCreated = await createPayment();
-    if (paymentCreated && checkoutLink != null) {
-      Get.to(() => PaymentWebView(url: checkoutLink!)); // Pass checkoutLink
+  Future<void> proceedToPayment(Uri url) async {
+    if (await canLaunchUrl(url)) {
+      await launchUrl(url);
     } else {
-      Get.snackbar("Error", errorMessage.isNotEmpty ? errorMessage : "Failed to create payment. Please try again.");
+      print('could not launch $url');
     }
   }
 }

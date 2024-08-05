@@ -8,6 +8,7 @@ import 'package:intl/intl.dart';
 class DeepCleanController extends GetxController {
   var isLoading = false.obs;
   final shoes = [].obs;
+  late final String orderId;
 
   final box = GetStorage();
   Future<void> fetchShoes() async {
@@ -23,7 +24,7 @@ class DeepCleanController extends GetxController {
 
     try {
       final response = await http.get(
-        Uri.parse('$url/shoe/getall'),
+        Uri.parse('$url/shoe/getshoe/$order_id'),
         headers: headers,
       );
 
@@ -80,6 +81,8 @@ class DeepCleanController extends GetxController {
   @override
   void onInit() {
     fetchShoes();
+    orderId = Get.arguments[0].toString();
+
     super.onInit();
   }
 
