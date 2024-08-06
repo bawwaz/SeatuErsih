@@ -13,10 +13,11 @@ class DeepCleanListView extends GetView<DeepCleanController> {
       appBar: AppBar(
         automaticallyImplyLeading: false,
         leading: InkWell(
-            onTap: () {
-              Get.back();
-            },
-            child: Image.asset('assets/img/angle-circle-right 1.png')),
+          onTap: () {
+            Get.back();
+          },
+          child: Image.asset('assets/img/angle-circle-right 1.png'),
+        ),
         centerTitle: true,
         title: Text(
           'Deep Clean',
@@ -27,11 +28,34 @@ class DeepCleanListView extends GetView<DeepCleanController> {
           ),
         ),
       ),
-      body: Column(
-        children: [
-          Obx(
-            () => controller.isLoading.value
-                ? CircularProgressIndicator()
+      body: Obx(
+        () => controller.isLoading.value
+            ? Center(child: CircularProgressIndicator())
+            : controller.shoes.isEmpty
+                ? Expanded(
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Center(
+                          child: Image.asset(
+                            'assets/img/no_item.png',
+                            width: 200,
+                            height: 200,
+                          ),
+                        ),
+                        SizedBox(height: 20),
+                        Text(
+                          'Tambah sepatu anda di bawah dan akan di tampilkan di sini',
+                          style: GoogleFonts.poppins(
+                            fontWeight: FontWeight.w600,
+                            color: Colors.black,
+                            fontSize: 16,
+                          ),
+                          textAlign: TextAlign.center,
+                        ),
+                      ],
+                    ),
+                  )
                 : Expanded(
                     child: ListView.builder(
                       padding: EdgeInsets.all(20),
@@ -39,6 +63,13 @@ class DeepCleanListView extends GetView<DeepCleanController> {
                       itemBuilder: (context, index) {
                         Map<dynamic, dynamic> shoe = controller.shoes[index];
                         String brandName = shoe['brand'] ?? 'No Brand';
+                        String addons = shoe['addons'] ?? 'No Addons';
+                        String notes = shoe['notes'] ?? 'No Notes';
+                        String price = controller.formatPrice(
+                          shoe['price'] != null
+                              ? int.parse(shoe['price'].toString())
+                              : 0,
+                        );
                         return Container(
                           margin: EdgeInsets.only(bottom: 20),
                           decoration: BoxDecoration(
@@ -69,61 +100,58 @@ class DeepCleanListView extends GetView<DeepCleanController> {
                                     ),
                                   ),
                                 ),
-                                SizedBox(
-                                  width: 20,
-                                ),
-                                Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    Text(
-                                      brandName,
-                                      overflow: TextOverflow.ellipsis,
-                                      maxLines: 1,
-                                      style: GoogleFonts.poppins(
-                                        fontWeight: FontWeight.w600,
-                                        color: Colors.black,
-                                        fontSize: 16,
-                                      ),
-                                    ),
-                                    Container(
-                                      width: Get.width * 0.45,
-                                      child: Text(
-                                        "Addons: ${shoe['addons']}",
+                                SizedBox(width: 20),
+                                Expanded(
+                                  child: Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      Text(
+                                        brandName,
                                         overflow: TextOverflow.ellipsis,
                                         maxLines: 1,
+                                        style: GoogleFonts.poppins(
+                                          fontWeight: FontWeight.w600,
+                                          color: Colors.black,
+                                          fontSize: 16,
+                                        ),
+                                      ),
+                                      Container(
+                                        width: Get.width * 0.45,
+                                        child: Text(
+                                          "Addons: $addons",
+                                          overflow: TextOverflow.ellipsis,
+                                          maxLines: 1,
+                                          style: GoogleFonts.poppins(
+                                            fontWeight: FontWeight.normal,
+                                            color: Color(0xFF8A8A8A),
+                                            fontSize: 14,
+                                          ),
+                                        ),
+                                      ),
+                                      Text(
+                                        "Note: $notes",
+                                        maxLines: 1,
+                                        overflow: TextOverflow.ellipsis,
                                         style: GoogleFonts.poppins(
                                           fontWeight: FontWeight.normal,
                                           color: Color(0xFF8A8A8A),
                                           fontSize: 14,
                                         ),
                                       ),
-                                    ),
-                                    Text(
-                                      "Note: ${shoe['notes']}",
-                                      maxLines: 1,
-                                      overflow: TextOverflow.ellipsis,
-                                      style: GoogleFonts.poppins(
-                                        fontWeight: FontWeight.normal,
-                                        color: Color(0xFF8A8A8A),
-                                        fontSize: 14,
+                                      Text(
+                                        price,
+                                        style: GoogleFonts.poppins(
+                                          fontWeight: FontWeight.w600,
+                                          color: Colors.black,
+                                          fontSize: 18,
+                                        ),
                                       ),
-                                    ),
-                                    Text(
-                                      controller.formatPrice(
-                                          int.parse(shoe['price'].toString())),
-                                      style: GoogleFonts.poppins(
-                                        fontWeight: FontWeight.w600,
-                                        color: Colors.black,
-                                        fontSize: 18,
-                                      ),
-                                    ),
-                                  ],
+                                    ],
+                                  ),
                                 ),
-                                SizedBox(
-                                  width: 5,
-                                ),
-                                Spacer(),
+                                SizedBox(width: 5),
                                 IconButton(
                                   onPressed: () {
                                     controller.deleteShoes(shoe['id']);
@@ -137,69 +165,73 @@ class DeepCleanListView extends GetView<DeepCleanController> {
                       },
                     ),
                   ),
-          ),
-          Padding(
-            padding: const EdgeInsets.all(20.0),
-            child: Column(
-              children: [
-                InkWell(
-                  onTap: () {
-                    Get.toNamed(Routes.ADD_ONS, arguments: ['deep_clean'])
-                        ?.then((value) {
-                      if (value == "success") {
-                        controller.fetchShoes();
-                      }
-                    });
-                  },
-                  child: Container(
-                    height: 40,
-                    decoration: BoxDecoration(
-                      color: Color(0xFFC6EAFF),
-                      borderRadius: BorderRadius.circular(10),
-                    ),
-                    child: Center(
-                      child: Text(
-                        'Add Shoes',
-                        style: GoogleFonts.poppins(
-                          fontWeight: FontWeight.w600,
-                          color: Colors.white,
-                          fontSize: 16,
-                        ),
-                      ),
+      ),
+      bottomNavigationBar: Padding(
+        padding: const EdgeInsets.all(20.0),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            InkWell(
+              onTap: () {
+                Get.toNamed(Routes.ADD_ONS, arguments: ['deep_clean'])
+                    ?.then((value) {
+                  if (value == "success") {
+                    controller.fetchShoes();
+                  }
+                });
+              },
+              child: Container(
+                height: 40,
+                decoration: BoxDecoration(
+                  color: Color(0xFFC6EAFF),
+                  borderRadius: BorderRadius.circular(10),
+                ),
+                child: Center(
+                  child: Text(
+                    'Add Shoes',
+                    style: GoogleFonts.poppins(
+                      fontWeight: FontWeight.w600,
+                      color: Colors.white,
+                      fontSize: 16,
                     ),
                   ),
                 ),
-                SizedBox(height: 10),
-                InkWell(
-                  onTap: () {
-                    Get.toNamed(Routes.PAYMENT_CONFIRMATION)?.then((value) {
-                      if (value == "success") {
-                        controller.clearShoes();
-                      }
-                    });
-                  },
-                  child: Container(
-                    height: 50,
-                    decoration: BoxDecoration(
-                      color: Color(0xFF7EC1EB),
-                      borderRadius: BorderRadius.circular(10),
-                    ),
-                    child: Center(
-                      child: Text(
-                        'Checkout',
-                        style: GoogleFonts.poppins(
-                          fontWeight: FontWeight.w600,
-                          color: Colors.white,
-                          fontSize: 18,
-                        ),
-                      ),
-                    ),
-                  ),
-                ),
-              ],
+              ),
             ),
-          ),
-        ],
+            SizedBox(height: 10),
+            InkWell(
+              onTap: () {
+                Get.toNamed(
+                  Routes.PAYMENT_CONFIRMATION,
+                  arguments: [
+                    controller.orderId.toString(),
+                  ],
+                )?.then((value) {
+                  if (value == "success") {
+                    controller.clearShoes();
+                  }
+                });
+              },
+              child: Container(
+                height: 50,
+                decoration: BoxDecoration(
+                  color: Color(0xFF7EC1EB),
+                  borderRadius: BorderRadius.circular(10),
+                ),
+                child: Center(
+                  child: Text(
+                    'Checkout',
+                    style: GoogleFonts.poppins(
+                      fontWeight: FontWeight.w600,
+                      color: Colors.white,
+                      fontSize: 18,
+                    ),
+                  ),
+                ),
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }

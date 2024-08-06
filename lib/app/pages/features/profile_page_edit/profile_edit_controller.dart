@@ -27,9 +27,12 @@ class ProfileEditController extends GetxController {
   }
 
   Future<void> initUsersData() async {
-    textNamaController.text = users['username'];
-    textEmailController.text = users['email'];
-    textPhoneController.text = users['phone'];
+    // Print user data for debugging
+    print(users.value);
+
+    textNamaController.text = users['username'] ?? '';
+    textEmailController.text = users['email'] ?? '';
+    textPhoneController.text = users['phone'] ?? '';
   }
 
   Future<void> updateUsers() async {

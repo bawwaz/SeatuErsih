@@ -40,7 +40,7 @@ class RegCleanListView extends StatelessWidget {
                       children: [
                         Center(
                           child: Image.asset(
-                            'assets/img/no_item.png', // Change this to your image path
+                            'assets/img/no_item.png',
                             width: 200,
                             height: 200,
                           ),
@@ -95,7 +95,7 @@ class RegCleanListView extends StatelessWidget {
                                     ),
                                   ),
                                 ),
-                                SizedBox(width: 20),
+                                SizedBox(width: 5),
                                 Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   mainAxisAlignment: MainAxisAlignment.center,
@@ -144,7 +144,6 @@ class RegCleanListView extends StatelessWidget {
                                     ),
                                   ],
                                 ),
-                                SizedBox(width: 5),
                                 Spacer(),
                                 IconButton(
                                   onPressed: () {
@@ -193,7 +192,6 @@ class RegCleanListView extends StatelessWidget {
               ),
             ),
             SizedBox(height: 10),
-            // Inside RegCleanListView
             InkWell(
               onTap: () {
                 Get.toNamed(

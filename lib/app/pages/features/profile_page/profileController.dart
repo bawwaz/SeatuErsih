@@ -60,7 +60,7 @@ class ProfileController extends GetxController {
       };
 
       final response =
-          await http.get(Uri.parse('$url/users/all'), headers: headers);
+          await http.get(Uri.parse('$url/users/detail'), headers: headers);
       if (response.statusCode == 200) {
         final jsonData = json.decode(response.body)['user'];
         users.value = jsonData;

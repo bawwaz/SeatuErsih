@@ -216,7 +216,15 @@ class PaymentConfirmationView extends GetView<PaymentConfirmationController> {
           width: double.infinity,
           child: ElevatedButton(
             onPressed: () async {
-              await _handlePayment();
+              _handlePayment().then((paymentCreated) {
+                if (paymentCreated) {
+                  Get.offAllNamed(
+                      Routes.BTMNAVBAR); // Replace with your home route
+                } else {
+                  Get.snackbar('Error',
+                      'Failed to create payment: ${controller.errorMessage}');
+                }
+              });
             },
             style: ElevatedButton.styleFrom(
               backgroundColor: Color(0xFF7EC1EB),
@@ -240,14 +248,12 @@ class PaymentConfirmationView extends GetView<PaymentConfirmationController> {
     );
   }
 
-  Future<void> _handlePayment() async {
+  Future<bool> _handlePayment() async {
     bool paymentCreated = await controller.createPayment();
     if (paymentCreated && controller.checkoutLink != null) {
       Uri checkoutUri = Uri.parse(controller.checkoutLink!);
       await controller.proceedToPayment(checkoutUri);
-    } else {
-      Get.snackbar(
-          'Error', 'Failed to create payment: ${controller.errorMessage}');
     }
+    return paymentCreated;
   }
 }

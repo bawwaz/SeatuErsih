@@ -91,13 +91,19 @@ class DataPelangganControllerDeep extends GetxController {
 
     try {
       final response =
-          await http.get(Uri.parse('$url/kabupaten/get/2'), headers: headers);
+          await http.get(Uri.parse('$url/kabupaten/getall'), headers: headers);
 
       if (response.statusCode == 200) {
         final data = json.decode(response.body);
-        if (data != null && data['data'] != null) {
-          kabupaten.assign({'name': data['data']['kabupaten']});
-          print('Kabupaten found: ${data['data']['kabupaten']}');
+        if (data != null && data['data'] != null && data['data'] is List) {
+          final List<dynamic> kabupatenList = data['data'] as List<dynamic>;
+          kabupaten.assignAll(kabupatenList
+              .map((item) => {
+                    'id': item['id'],
+                    'name': item['kabupaten'],
+                  } as Map<String, dynamic>)
+              .toList());
+          print('Kabupaten found: $kabupaten');
         } else {
           print('No kabupaten found');
         }
@@ -133,7 +139,7 @@ class DataPelangganControllerDeep extends GetxController {
                     'name': item['kecamatan'],
                   } as Map<String, dynamic>)
               .toList());
-          print('Kecamatan found: ${kecamatan}');
+          print('Kecamatan found: $kecamatan');
         } else {
           print('No kecamatan found');
         }

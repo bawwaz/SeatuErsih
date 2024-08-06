@@ -133,11 +133,15 @@ class HomePageController extends GetxController {
     isLoading.value = false;
   }
 
+  Future<void> refreshOrders() async {
+    await fetchOrder();
+  }
+
   @override
   void onInit() async {
-    fetchOrder();
-    fetchReviews1();
-    fetchReviews2();
+    await fetchOrder();
+    await fetchReviews1();
+    await fetchReviews2();
     
     super.onInit();
   }

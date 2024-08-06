@@ -39,38 +39,40 @@ class OrderContainer extends GetView<HomePageController> {
         child: Row(
           children: [
             Padding(
-              padding: const EdgeInsets.all(
-                  8.0), // Add some padding around the image
+              padding: const EdgeInsets.all(8.0),
               child: Image.asset('assets/img/Group 120.png'),
             ),
             Expanded(
-              // Use Expanded to take up remaining space
               child: Padding(
-                padding: const EdgeInsets.only(
-                    left: 8.0), // Add some left padding to the column
+                padding: const EdgeInsets.only(left: 8.0),
                 child: Column(
-                  crossAxisAlignment:
-                      CrossAxisAlignment.start, // Align items to the start
-                  mainAxisAlignment:
-                      MainAxisAlignment.spaceEvenly, // Distribute space evenly
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
                     Row(
                       children: [
-                        Text(
-                          '$title',
-                          style: Fonts.desc.copyWith(
-                            fontWeight: FontWeight.w800,
-                            fontSize: 16,
+                        Expanded(
+                          child: Text(
+                            '$title',
+                            style: Fonts.desc.copyWith(
+                              fontWeight: FontWeight.w800,
+                              fontSize: 16,
+                            ),
+                            overflow: TextOverflow.ellipsis, // Handle overflow
                           ),
                         ),
                         SizedBox(
                           width: MediaQuery.sizeOf(context).width / 20,
                         ),
-                        Text(
-                          '$status',
-                          style: Fonts.detail.copyWith(
-                            fontSize: 15,
-                            color: AppColors.primaryColor,
+                        Padding(
+                          padding: const EdgeInsets.only(right: 10.0),
+                          child: Text(
+                            '$status',
+                            style: Fonts.detail.copyWith(
+                              fontSize: 15,
+                              color: AppColors.primaryColor,
+                            ),
+                            overflow: TextOverflow.ellipsis, // Handle overflow
                           ),
                         ),
                       ],

@@ -87,15 +87,14 @@ class OrderCard extends StatelessWidget {
                 ],
               ),
             ),
-            SizedBox(
-              width: MediaQuery.sizeOf(context).width * 0.2,
-            ),
+            Spacer(),
             Padding(
               padding: const EdgeInsets.only(
-                top: 35.5,
-              ),
+                  top: 35.5, right: 10), // Adjust padding to prevent overflow
               child: Text(
                 'Selesai',
+                overflow: TextOverflow
+                    .ellipsis, // Ensure text is truncated if it overflows
               ),
             )
           ],
