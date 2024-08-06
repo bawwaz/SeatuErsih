@@ -58,15 +58,26 @@ class CardReview extends StatelessWidget {
                       Row(
                         children: List.generate(5, (index) {
                           return Icon(
-                            Icons.star,
-                            color: index < rating.floor()
-                                ? Color(0xffFFCE31)
+                            index < rating.floor()
+                                ? Icons.star
                                 : index < rating
-                                    ? Color(0xffFFCE31).withOpacity(0.5)
-                                    : Colors.grey.withOpacity(0.3),
+                                    ? Icons.star_half
+                                    : Icons.star_border,
+                            color: Color(0xffFFCE31),
                             size: 22,
                           );
                         }),
+                      ),
+                      SizedBox(
+                        width: 5,
+                      ),
+                      Text(
+                        '${review['rating']}',
+                        style: GoogleFonts.poppins(
+                          fontSize: 12,
+                          fontWeight: FontWeight.w600,
+                          color: Color(0xff8A8A8A),
+                        ),
                       ),
                       SizedBox(width: 5),
                       Text(
@@ -89,14 +100,6 @@ class CardReview extends StatelessWidget {
                     ),
                   ),
                   SizedBox(height: 5),
-                  // Text(
-                  //   'Rp50.000',
-                  //   style: GoogleFonts.poppins(
-                  //     fontSize: 15,
-                  //     color: Color(0xFF7EC1EB),
-                  //     fontWeight: FontWeight.w600,
-                  //   ),
-                  // ),
                 ],
               ),
             ],
