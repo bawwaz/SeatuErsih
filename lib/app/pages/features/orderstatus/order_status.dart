@@ -13,7 +13,6 @@ class MyOrder extends GetView<HomePageController> {
   @override
   Widget build(BuildContext context) {
     return Obx(() {
-      // Define tabs and their corresponding statuses
       final Map<String, String> tabs = {
         'pending': 'Pending',
         'in-progress': 'In-Progress',

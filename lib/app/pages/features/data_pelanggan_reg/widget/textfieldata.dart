@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:seatu_ersih/themes/theme.dart';
 
 class TextFieldData extends StatelessWidget {
@@ -8,6 +9,8 @@ class TextFieldData extends StatelessWidget {
   final bool readOnly;
   final EdgeInsets? padding;
   final TextAlign textAlign;
+  final TextInputType keyboardType; // Tambahkan ini
+  final List<TextInputFormatter>? inputFormatters; // Tambahkan ini
 
   const TextFieldData({
     Key? key,
@@ -17,6 +20,8 @@ class TextFieldData extends StatelessWidget {
     this.readOnly = false,
     this.textAlign = TextAlign.left,
     this.padding = const EdgeInsets.only(left: 15),
+    this.keyboardType = TextInputType.text, // Tambahkan ini
+    this.inputFormatters, // Tambahkan ini
   }) : super(key: key);
 
   @override
@@ -39,6 +44,8 @@ class TextFieldData extends StatelessWidget {
         controller: TextEditingController(text: initialValue),
         onChanged: onChanged,
         textAlign: textAlign,
+        keyboardType: keyboardType, // Tambahkan ini
+        inputFormatters: inputFormatters, // Tambahkan ini
         decoration: InputDecoration(
           hintText: hintText,
           hintStyle: tsBodyMediumMedium(darkGrey),
