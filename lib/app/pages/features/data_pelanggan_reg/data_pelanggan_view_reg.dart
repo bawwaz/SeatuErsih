@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:seatu_ersih/app/pages/features/data_pelanggan_reg/data_pelanggan_controller_reg.dart';
@@ -114,6 +115,8 @@ class DataPelangganRegView extends GetView<DataPelangganRegController> {
             SizedBox(height: 20),
             _buildSectionHeader('Contact', 'No. Telephone'),
             TextFieldData(
+              keyboardType: TextInputType.number,
+              inputFormatters: [FilteringTextInputFormatter.digitsOnly],
               hintText: 'Masukkan no. telephone',
               onChanged: (value) {
                 controller.phone.value = value;

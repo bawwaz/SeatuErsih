@@ -28,10 +28,10 @@ class RatingController extends GetxController {
       'review': review.value,
       'order_id': order_id.value,
       'order_type': order_type.value,
-      'laundry_id': laundry_id.value // Include laundry_id
+      'laundry_id': laundry_id.value 
     });
 
-    print('Posting review with body: $body'); // Log the request body
+    print('Posting review with body: $body'); 
 
     try {
       final response =

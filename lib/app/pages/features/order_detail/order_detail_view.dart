@@ -74,21 +74,30 @@ class OrderDetailView extends GetView<OrderDetailcontroller> {
           Padding(
             padding: const EdgeInsets.all(20.0),
             child: GestureDetector(
-              onTap: () {
-                Get.toNamed(Routes.RATING, arguments: controller.orders);
-              },
+              onTap: controller.orders['order_status'] == 'completed'
+                  ? () {
+                      Get.toNamed(Routes.RATING, arguments: controller.orders);
+                    }
+                  : null,
               child: Container(
                 width: double.infinity,
                 height: 55,
                 decoration: BoxDecoration(
-                  color: AppColors.primaryColor,
+                  color: controller.orders['order_status'] == 'completed'
+                      ? AppColors.primaryColor
+                      : Colors.grey,
                   borderRadius: BorderRadius.circular(10),
                 ),
                 child: Center(
                   child: Text(
                     'Berikan Ulasan',
-                    style: Fonts.header1
-                        .copyWith(fontWeight: FontWeight.w100, fontSize: 18),
+                    style: Fonts.header1.copyWith(
+                      fontWeight: FontWeight.w100,
+                      fontSize: 18,
+                      color: controller.orders['order_status'] == 'completed'
+                          ? Colors.white
+                          : Colors.black54,
+                    ),
                   ),
                 ),
               ),

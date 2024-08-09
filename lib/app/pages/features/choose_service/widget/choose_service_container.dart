@@ -7,6 +7,7 @@ class ServiceContainer extends StatelessWidget {
   final String? title;
   final String? description;
   final String? price;
+  final double? avgRating;
   final String? buttonText;
   final IconData? icon;
   final VoidCallback? onPressed;
@@ -21,6 +22,7 @@ class ServiceContainer extends StatelessWidget {
     this.icon,
     this.onPressed,
     this.isLoading = false,
+    this.avgRating,
   }) : super(key: key);
 
   @override
@@ -132,7 +134,6 @@ class ServiceContainer extends StatelessWidget {
             ),
             const SizedBox(height: 16),
             Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 ElevatedButton(
                   onPressed: onPressed,
@@ -153,11 +154,21 @@ class ServiceContainer extends StatelessWidget {
                     ),
                   ),
                 ),
+                SizedBox(
+                  width: 55,
+                ),
                 Icon(
                   icon!,
-                  size: 40,
-                  color: Colors.blue,
+                  size: 30,
+                  color: Colors.yellow,
                 ),
+                Text(
+                  avgRating!.toString(),
+                  style: GoogleFonts.poppins(
+                    fontSize: 14,
+                    color: Colors.black54,
+                  ),
+                )
               ],
             ),
           ],

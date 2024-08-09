@@ -5,7 +5,7 @@ import 'package:seatu_ersih/app/pages/features/choose_service/choose_service_con
 import 'package:seatu_ersih/app/pages/features/choose_service/widget/choose_service_container.dart';
 import 'package:seatu_ersih/app/router/app_pages.dart';
 import 'package:seatu_ersih/themes/fonts.dart';
-import 'package:shimmer/shimmer.dart'; // Import shimmer package
+import 'package:shimmer/shimmer.dart';
 
 class ChooseService extends GetView<ChooseServiceController> {
   const ChooseService({super.key});
@@ -64,17 +64,23 @@ class ChooseService extends GetView<ChooseServiceController> {
                     },
                   );
                 } else {
-                  // Show actual data when fetched
                   return ListView.builder(
                     itemCount: controller.laundries.length,
                     shrinkWrap: true,
                     itemBuilder: (BuildContext context, int index) {
+                      // Ensure average_rating has an entry for this index
+                      double avgRating =
+                          (index < controller.average_rating.length)
+                              ? controller.average_rating[index]
+                              : 0.0; // Default to 0.0 if no rating is available
+
                       return ServiceContainer(
                         title: controller.laundries[index]["name"],
                         description: controller.laundries[index]["Description"],
                         price: '25K',
                         buttonText: "Pesan Sekarang",
-                        icon: Icons.cleaning_services,
+                        icon: Icons.star_rounded,
+                        avgRating: avgRating,
                         onPressed: () {
                           if (controller.laundries[index]["name"] ==
                               "Regular Clean") {

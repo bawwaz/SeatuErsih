@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:seatu_ersih/app/pages/features/data_pelanggan_deep/data_pelanggan_controller_deep.dart';
@@ -110,6 +111,8 @@ class DataPelangganDeepView extends GetView<DataPelangganControllerDeep> {
             _buildSectionHeader('Contact', 'No. Telephone'),
             TextFieldData(
               hintText: 'Masukkan no. telephone',
+              keyboardType: TextInputType.number, 
+              inputFormatters: [FilteringTextInputFormatter.digitsOnly],
               onChanged: (value) {
                 controller.phone.value = value;
               },
