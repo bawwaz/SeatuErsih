@@ -73,4 +73,5 @@ class Routes {
   static const String PAYMENT_CONFIRMATION = '/paymentconfirmation';
   static const String RATING = '/rating';
   static const String OTP = '/otp';
+  static const String AVAILABLECOUPONS = '/availablecoupons';
 }

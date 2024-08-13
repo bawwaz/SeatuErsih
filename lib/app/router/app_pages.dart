@@ -6,6 +6,8 @@ import 'package:seatu_ersih/app/pages/features/add_ons_page/add_ons_binding.dart
 import 'package:seatu_ersih/app/pages/features/add_ons_page/add_ons_view.dart';
 import 'package:seatu_ersih/app/pages/features/address_detail_page/address_detail_binding.dart';
 import 'package:seatu_ersih/app/pages/features/address_detail_page/address_detail_view.dart';
+import 'package:seatu_ersih/app/pages/features/available_coupons_page/available_coupons_bindings.dart';
+import 'package:seatu_ersih/app/pages/features/available_coupons_page/available_coupons_view.dart';
 import 'package:seatu_ersih/app/pages/features/checkout_Animation/animationBinding.dart';
 import 'package:seatu_ersih/app/pages/features/checkout_Order/checkout_order_binding.dart';
 import 'package:seatu_ersih/app/pages/features/choose_service/choose_service_binding.dart';
@@ -223,6 +225,11 @@ class AppPages {
       page: () => OtpPageView(),
       binding: OtpPageBinding(),
       transition: Transition.noTransition,
-    )
+    ),
+    GetPage(
+        name: Routes.AVAILABLECOUPONS,
+        page: () => AvailableCoupon(),
+        binding: AvailableCouponBindings(),
+        transition: Transition.noTransition)
   ];
 }
