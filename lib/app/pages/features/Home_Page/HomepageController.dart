@@ -8,10 +8,9 @@ import 'package:intl/intl.dart';
 class HomePageController extends GetxController {
   var isLoading = false.obs;
   final orders = [].obs;
-  final reviews1 = [].obs; // Reviews for Regular Clean
-  final reviews2 = [].obs; // Reviews for Deep Clean
+  final reviews1 = [].obs; 
+  final reviews2 = [].obs; 
 
-  // GetStorage
   final box = GetStorage();
 
   Future<void> fetchOrder() async {
@@ -30,12 +29,11 @@ class HomePageController extends GetxController {
       if (response.statusCode == 200) {
         final data = json.decode(response.body)['data'];
         if (data != null && data is Iterable) {
-          // Mengurutkan pesanan berdasarkan tanggal created_at secara terbalik
           List<dynamic> sortedData = data.toList();
           sortedData.sort((a, b) {
             DateTime dateA = DateTime.parse(a['created_at']);
             DateTime dateB = DateTime.parse(b['created_at']);
-            return dateB.compareTo(dateA); // Urutan terbalik
+            return dateB.compareTo(dateA); 
           });
           orders.assignAll(sortedData);
         } else {

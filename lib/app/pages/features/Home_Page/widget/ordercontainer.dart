@@ -9,8 +9,13 @@ class OrderContainer extends GetView<HomePageController> {
   final String pickupDate;
   final String price;
   final String status;
+  final int id;
+  final String? decline_note;
+
   const OrderContainer({
     Key? key,
+    required this.decline_note,
+    required this.id,
     required this.title,
     required this.pickupDate,
     required this.price,
@@ -22,7 +27,7 @@ class OrderContainer extends GetView<HomePageController> {
     return Padding(
       padding: const EdgeInsets.only(top: 8.0),
       child: Container(
-        height: 100,
+        height: 134,
         width: double.infinity,
         decoration: BoxDecoration(
           color: Colors.white,
@@ -66,13 +71,22 @@ class OrderContainer extends GetView<HomePageController> {
                         ),
                         Padding(
                           padding: const EdgeInsets.only(right: 10.0),
-                          child: Text(
-                            '$status',
-                            style: Fonts.detail.copyWith(
-                              fontSize: 15,
-                              color: AppColors.primaryColor,
-                            ),
-                            overflow: TextOverflow.ellipsis, // Handle overflow
+                          child: Column(
+                            children: [
+                              Text(
+                                '$status',
+                                style: Fonts.detail.copyWith(
+                                  fontSize: 15,
+                                  color: AppColors.primaryColor,
+                                ),
+                                overflow:
+                                    TextOverflow.ellipsis, // Handle overflow
+                              ),
+                              SizedBox(
+                                height: 10,
+                              ),
+                              Text(''),
+                            ],
                           ),
                         ),
                       ],
@@ -91,6 +105,16 @@ class OrderContainer extends GetView<HomePageController> {
                         fontSize: 15,
                         color: AppColors.primaryColor,
                       ),
+                    ),
+                    Text(
+                      'Note dari admin : $decline_note',
+                      style: TextStyle(
+                          fontWeight: FontWeight.normal, color: Colors.grey),
+                    ),
+                    Text(
+                      'Order id : $id',
+                      style: TextStyle(
+                          fontWeight: FontWeight.normal, color: Colors.grey),
                     ),
                   ],
                 ),

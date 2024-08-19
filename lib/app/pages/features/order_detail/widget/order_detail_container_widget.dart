@@ -7,6 +7,7 @@ class DetailContainerWidget extends StatelessWidget {
   final String? pickupDate;
   final String? noteOrder;
   final String? price;
+  final int? id;
 
   const DetailContainerWidget({
     super.key,
@@ -15,6 +16,7 @@ class DetailContainerWidget extends StatelessWidget {
     this.pickupDate,
     this.noteOrder,
     this.price,
+    this.id,
   });
 
   @override
@@ -116,7 +118,7 @@ class DetailContainerWidget extends StatelessWidget {
                 color: Colors.grey,
                 fontSize: 14,
               ),
-            )
+            ),
           ],
         ],
       ),
