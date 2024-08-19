@@ -17,7 +17,7 @@ class MyOrder extends GetView<HomePageController> {
         'pending': 'Pending',
         'in-progress': 'In-Progress',
         'completed': 'Completed',
-        'declined': 'Declined',
+        'decline': 'Declined',
       };
 
       // Create TabBar and TabBarView widgets
@@ -99,6 +99,8 @@ class MyOrder extends GetView<HomePageController> {
                                       price: controller.formatPrice(
                                           order['total_price'].toString()),
                                       status: order['order_status'],
+                                      id: order['id'],
+                                      decline_note: order['decline_note'],
                                     ),
                                   ),
                                 );
