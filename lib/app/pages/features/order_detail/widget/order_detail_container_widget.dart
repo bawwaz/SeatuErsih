@@ -1,5 +1,9 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
+import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:seatu_ersih/app/router/app_pages.dart';
 
 class DetailContainerWidget extends StatelessWidget {
   final String? productName;
@@ -39,6 +43,16 @@ class DetailContainerWidget extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
+          if (id != null) ...[
+            Text(
+              'Order ID: $id',
+              style: GoogleFonts.poppins(
+                  fontWeight: FontWeight.normal,
+                  fontSize: 14,
+                  color: Colors.black.withOpacity(0.5)),
+            ),
+            Divider(color: Colors.grey),
+          ],
           if (productName != null || productStatus != null) ...[
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -105,6 +119,8 @@ class DetailContainerWidget extends StatelessWidget {
               ),
             ),
             Divider(color: Colors.grey),
+          ],
+          if (price != null) ...[
             Text(
               'Price',
               style: GoogleFonts.poppins(
@@ -112,11 +128,30 @@ class DetailContainerWidget extends StatelessWidget {
                 fontSize: 16,
               ),
             ),
-            Text(
-              price!,
-              style: GoogleFonts.poppins(
-                color: Colors.grey,
-                fontSize: 14,
+            GestureDetector(
+              onTap: () {
+                if (id != null) {
+                  Get.toNamed(Routes.MYSHOES, arguments: {'id': id});
+                }
+              },
+              child: Row(
+                children: [
+                  Text(
+                    price!,
+                    style: GoogleFonts.poppins(
+                      color: Colors.grey,
+                      fontSize: 14,
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(left: 10.0, bottom: 2.5),
+                    child: Icon(
+                      Icons.info,
+                      size: 20,
+                      color: Colors.lightBlue,
+                    ),
+                  )
+                ],
               ),
             ),
           ],

@@ -8,12 +8,13 @@ import 'package:intl/intl.dart';
 class HomePageController extends GetxController {
   var isLoading = false.obs;
   final orders = [].obs;
-  final reviews1 = [].obs; 
-  final reviews2 = [].obs; 
+  final reviews1 = [].obs;
+  final reviews2 = [].obs;
 
   final box = GetStorage();
 
   Future<void> fetchOrder() async {
+    if (isClosed) return; // Ensure the controller is still active
     isLoading.value = true;
     final url = 'http://seatuersih.pradiptaahmad.tech/api';
     final token = box.read('token');
@@ -33,7 +34,7 @@ class HomePageController extends GetxController {
           sortedData.sort((a, b) {
             DateTime dateA = DateTime.parse(a['created_at']);
             DateTime dateB = DateTime.parse(b['created_at']);
-            return dateB.compareTo(dateA); 
+            return dateB.compareTo(dateA);
           });
           orders.assignAll(sortedData);
         } else {
@@ -46,8 +47,9 @@ class HomePageController extends GetxController {
       }
     } catch (e) {
       print(e);
+    } finally {
+      isLoading.value = false; // Set loading to false in finally block
     }
-    isLoading.value = false;
   }
 
   String formatDate(String date) {
@@ -68,6 +70,7 @@ class HomePageController extends GetxController {
   }
 
   Future<void> fetchReviews1() async {
+    if (isClosed) return; // Ensure the controller is still active
     isLoading.value = true;
     final url = 'http://seatuersih.pradiptaahmad.tech/api';
     final token = box.read('token');
@@ -94,12 +97,13 @@ class HomePageController extends GetxController {
       }
     } catch (e) {
       print(e);
+    } finally {
+      isLoading.value = false; // Set loading to false in finally block
     }
-
-    isLoading.value = false;
   }
 
   Future<void> fetchReviews2() async {
+    if (isClosed) return; // Ensure the controller is still active
     isLoading.value = true;
     final url = 'http://seatuersih.pradiptaahmad.tech/api';
     final token = box.read('token');
@@ -126,9 +130,9 @@ class HomePageController extends GetxController {
       }
     } catch (e) {
       print(e);
+    } finally {
+      isLoading.value = false; // Set loading to false in finally block
     }
-
-    isLoading.value = false;
   }
 
   Future<void> refreshOrders() async {
@@ -140,7 +144,6 @@ class HomePageController extends GetxController {
     await fetchOrder();
     await fetchReviews1();
     await fetchReviews2();
-    
     super.onInit();
   }
 

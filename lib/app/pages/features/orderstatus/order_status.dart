@@ -15,6 +15,7 @@ class MyOrder extends GetView<HomePageController> {
     return Obx(() {
       final Map<String, String> tabs = {
         'pending': 'Pending',
+        'waiting_for_payment': 'waiting for payment',
         'in-progress': 'In-Progress',
         'completed': 'Completed',
         'decline': 'Declined',
@@ -84,7 +85,7 @@ class MyOrder extends GetView<HomePageController> {
                                 return InkWell(
                                   onTap: () {
                                     Get.toNamed(Routes.ORDER_DETAIL,
-                                        arguments: [order]);
+                                        arguments: order);
                                   },
                                   child: Container(
                                     margin: EdgeInsets.symmetric(

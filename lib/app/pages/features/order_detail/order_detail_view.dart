@@ -12,6 +12,8 @@ class OrderDetailView extends GetView<OrderDetailcontroller> {
 
   @override
   Widget build(BuildContext context) {
+    final Map<dynamic, dynamic> order = Get.arguments;
+
     return Scaffold(
       appBar: AppBar(
         title: Text('Order Detail'),
@@ -40,15 +42,14 @@ class OrderDetailView extends GetView<OrderDetailcontroller> {
                     ),
                   ),
                   DetailContainerWidget(
-                    productName:
-                        controller.orders['order_type'] == "regular_clean"
-                            ? "Regular Clean"
-                            : "Deep Clean",
-                    productStatus: controller.orders['order_status'],
-                    pickupDate:
-                        '${controller.formatDate(controller.orders['pickup_date'].toString())}',
-                    noteOrder: '${controller.orders['notes']}',
-                    price: '${controller.orders['total_price']}',
+                    productName: order['order_type'] == "regular_clean"
+                        ? "Regular Clean"
+                        : "Deep Clean",
+                    productStatus: order['order_status'],
+                    pickupDate: '${order['pickup_date']}',
+                    noteOrder: '${order['notes']}',
+                    price: '${order['total_price']}',
+                    id: order['id'], // Tampilkan id atau data lainnya
                   ),
                   Align(
                     alignment: Alignment.centerLeft,
@@ -64,8 +65,8 @@ class OrderDetailView extends GetView<OrderDetailcontroller> {
                     ),
                   ),
                   OrderDetailContactWidget(
-                    alamat: '${controller.orders['detail_address']}',
-                    phone: '${controller.orders['phone']}',
+                    alamat: '${order['detail_address']}',
+                    phone: '${order['phone']}',
                   ),
                 ],
               ),
@@ -74,16 +75,16 @@ class OrderDetailView extends GetView<OrderDetailcontroller> {
           Padding(
             padding: const EdgeInsets.all(20.0),
             child: GestureDetector(
-              onTap: controller.orders['order_status'] == 'completed'
+              onTap: order['order_status'] == 'completed'
                   ? () {
-                      Get.toNamed(Routes.RATING, arguments: controller.orders);
+                      Get.toNamed(Routes.RATING, arguments: order);
                     }
                   : null,
               child: Container(
                 width: double.infinity,
                 height: 55,
                 decoration: BoxDecoration(
-                  color: controller.orders['order_status'] == 'completed'
+                  color: order['order_status'] == 'completed'
                       ? AppColors.primaryColor
                       : Colors.grey,
                   borderRadius: BorderRadius.circular(10),
@@ -94,7 +95,7 @@ class OrderDetailView extends GetView<OrderDetailcontroller> {
                     style: Fonts.header1.copyWith(
                       fontWeight: FontWeight.w100,
                       fontSize: 18,
-                      color: controller.orders['order_status'] == 'completed'
+                      color: order['order_status'] == 'completed'
                           ? Colors.white
                           : Colors.black54,
                     ),
