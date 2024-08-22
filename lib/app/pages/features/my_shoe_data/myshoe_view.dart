@@ -1,15 +1,33 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:seatu_ersih/app/pages/features/my_shoe_data/myshoe_contoller.dart';
+import 'package:seatu_ersih/app/pages/features/my_shoe_data/widgets/shoedetailwidget.dart';
 
 class Myshoes extends StatelessWidget {
   final MyShoeController controller = Get.put(MyShoeController());
 
   @override
   Widget build(BuildContext context) {
-    final int orderId = Get.arguments['id'];
+    final int orderId = Get.arguments != null ? Get.arguments['id'] : null;
 
-    controller.fetchShoebyId(orderId);
+    if (orderId != null) {
+      controller.fetchShoebyId(orderId);
+    } else {
+      return Scaffold(
+        appBar: AppBar(
+          leading: InkWell(
+              onTap: () {
+                Get.back();
+              },
+              child: Image.asset('assets/img/angle-circle-right 1.png')),
+          title: Text('Sepatu saya'),
+          centerTitle: true,
+        ),
+        body: Center(
+          child: Text('Invalid order ID'),
+        ),
+      );
+    }
 
     return Scaffold(
       appBar: AppBar(
@@ -30,9 +48,10 @@ class Myshoes extends StatelessWidget {
             itemCount: controller.shoeData.length,
             itemBuilder: (context, index) {
               final shoe = controller.shoeData[index];
-              return ListTile(
-                title: Text(shoe['brand']),
-                subtitle: Text('${shoe['addons']} - ${shoe['price']}'),
+              return ShoeDetailWidget(
+                shoeName: shoe['brand'] ?? 'Unknown Brand',
+                addOns: shoe['addons'] ?? 'No Add-ons',
+                notes: shoe['notes'] ?? 'No Notes',
               );
             },
           );

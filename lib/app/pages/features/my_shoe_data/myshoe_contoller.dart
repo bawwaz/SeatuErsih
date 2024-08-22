@@ -2,7 +2,6 @@ import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
-
 class MyShoeController extends GetxController {
   var isLoading = false.obs;
   var shoeData = [].obs;
@@ -15,7 +14,7 @@ class MyShoeController extends GetxController {
 
     var headers = {
       'Accept': 'application/json',
-      'Authorization': 'Bearer $token'
+      'Authorization': 'Bearer $token',
     };
 
     try {
@@ -23,15 +22,20 @@ class MyShoeController extends GetxController {
 
       if (response.statusCode == 200) {
         var data = json.decode(response.body)['data'];
-        shoeData.value = data;
+        if (data != null && data is List) {
+          shoeData.value = data;
+        } else {
+          shoeData.clear();
+        }
       } else {
-        // Handle error response
         print('Failed to load shoes');
       }
     } catch (e) {
       print('Error: $e');
+      shoeData.clear(); // Clear data on error
     } finally {
       isLoading.value = false;
     }
   }
 }
+
