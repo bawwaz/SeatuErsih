@@ -18,7 +18,6 @@ class DataPelangganRegController extends GetxController {
   var isOtherSelected = false.obs;
   var kabupatenName = "".obs;
   var kecamatanName = "".obs;
-  var specificAddress = "".obs;
 
   final box = GetStorage();
   final orders = {}.obs;
@@ -30,7 +29,7 @@ class DataPelangganRegController extends GetxController {
     final token = box.read('token');
     // Forming detail address
     detail_address.value =
-        '${kabupatenName.value}, ${kecamatanName.value}, ${specificAddress.value}';
+        '${kabupatenName.value}, ${kecamatanName.value}, ${detail_address.value}';
 
     var data = {
       'laundry_id': Get.arguments.toString(),

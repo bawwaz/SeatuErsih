@@ -9,7 +9,6 @@ import 'package:seatu_ersih/app/pages/intial_pages/login_page/widget/login_Icon.
 import 'package:seatu_ersih/app/pages/intial_pages/login_page/widget/login_forget_password.dart';
 import 'package:seatu_ersih/app/pages/intial_pages/login_page/widget/auth_textfield.dart';
 import 'package:seatu_ersih/app/pages/intial_pages/login_page/widget/login_sign.dart';
-import 'package:seatu_ersih/app/pages/intial_pages/login_page/widget/login_sign_google.dart';
 import 'package:seatu_ersih/themes/colors.dart';
 import 'package:seatu_ersih/themes/theme.dart';
 
@@ -153,7 +152,7 @@ class LoginPage extends GetView<LoginPageController> {
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 10),
                     child: Text(
-                      "or continue with",
+                      "or sign up",
                       style: GoogleFonts.poppins(
                         color: Color(0xFF8A8A8A),
                         fontWeight: FontWeight.w500,
@@ -171,14 +170,6 @@ class LoginPage extends GetView<LoginPageController> {
                     ),
                   ),
                 ],
-              ),
-              SizedBox(
-                height: 33,
-              ),
-              SizedBox(
-                width: double.infinity,
-                height: 53,
-                child: SignInGoogle(),
               ),
               SizedBox(
                 height: 20,
