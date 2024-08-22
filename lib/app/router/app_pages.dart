@@ -18,6 +18,8 @@ import 'package:seatu_ersih/app/pages/features/data_pelanggan_reg/data_pelanggan
 import 'package:seatu_ersih/app/pages/features/data_pelanggan_reg/data_pelanggan_view_reg.dart';
 import 'package:seatu_ersih/app/pages/features/deep_shoe_list/deep_clean_list_binding.dart';
 import 'package:seatu_ersih/app/pages/features/deep_shoe_list/deep_clean_list_view.dart';
+import 'package:seatu_ersih/app/pages/features/my_shoe_data/myshoe_bindings.dart';
+import 'package:seatu_ersih/app/pages/features/my_shoe_data/myshoe_view.dart';
 import 'package:seatu_ersih/app/pages/features/order_detail/order_detail_view.dart';
 import 'package:seatu_ersih/app/pages/features/payment_confirmation_page/payment_confirmation_binding.dart';
 import 'package:seatu_ersih/app/pages/features/payment_confirmation_page/payment_confirmation_view.dart';
@@ -230,6 +232,11 @@ class AppPages {
         name: Routes.AVAILABLECOUPONS,
         page: () => AvailableCoupon(),
         binding: AvailableCouponBindings(),
-        transition: Transition.noTransition)
+        transition: Transition.noTransition),
+    GetPage(
+        name: Routes.MYSHOES,
+        page: () => Myshoes(),
+        binding: MyShoesBindings(),
+        transition: Transition.noTransition),
   ];
 }

@@ -74,4 +74,5 @@ class Routes {
   static const String RATING = '/rating';
   static const String OTP = '/otp';
   static const String AVAILABLECOUPONS = '/availablecoupons';
+  static const String MYSHOES = '/myshoes';
 }
