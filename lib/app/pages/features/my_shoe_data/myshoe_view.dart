@@ -8,7 +8,7 @@ class Myshoes extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final int orderId = Get.arguments != null ? Get.arguments['id'] : null;
+    final int? orderId = Get.arguments?['id']; // Use safe access with ?
 
     if (orderId != null) {
       controller.fetchShoebyId(orderId);

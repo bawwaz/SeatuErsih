@@ -63,7 +63,7 @@ class OrderContainer extends GetView<HomePageController> {
                               fontWeight: FontWeight.w800,
                               fontSize: 16,
                             ),
-                            overflow: TextOverflow.ellipsis, // Handle overflow
+                            overflow: TextOverflow.ellipsis,
                           ),
                         ),
                         SizedBox(
@@ -79,8 +79,7 @@ class OrderContainer extends GetView<HomePageController> {
                                   fontSize: 15,
                                   color: AppColors.primaryColor,
                                 ),
-                                overflow:
-                                    TextOverflow.ellipsis, // Handle overflow
+                                overflow: TextOverflow.ellipsis,
                               ),
                               SizedBox(
                                 height: 10,

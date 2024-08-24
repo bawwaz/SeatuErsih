@@ -12,12 +12,17 @@ class PaymentConfirmationController extends GetxController {
   var isLoading = false.obs;
   var shoeData = <Map<String, dynamic>>[].obs;
   var orderData = {}.obs;
-  String? checkoutLink; // Add a variable to store checkoutLink
-  String errorMessage = ''; // Variable to store the error message
+  String? checkoutLink;
+  String errorMessage = '';
 
   @override
   void onInit() {
-    order_id = Get.arguments[0].toString();
+    // Extract order ID from the passed arguments
+    Map<String, dynamic> orderDetails = Get.arguments[0];
+    order_id = orderDetails['id'].toString(); // Get the ID from the map
+
+    print('Order ID received: $order_id'); // Debugging line
+
     fetchShoe();
     super.onInit();
   }
@@ -107,7 +112,7 @@ class PaymentConfirmationController extends GetxController {
     };
 
     var body = json.encode({
-      'order_id': order_id,
+      'order_id': int.parse(order_id), // Convert order_id to an integer
     });
 
     try {
@@ -118,7 +123,6 @@ class PaymentConfirmationController extends GetxController {
       );
 
       if (response.statusCode == 200 || response.statusCode == 201) {
-        // Handle both 200 OK and 201 Created
         final responseData = json.decode(response.body);
 
         if (responseData['status'] == 'success') {
@@ -152,3 +156,4 @@ class PaymentConfirmationController extends GetxController {
     }
   }
 }
+  

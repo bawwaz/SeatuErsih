@@ -25,6 +25,10 @@ class DetailContainerWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    String statusToShow = productStatus == 'waiting_for_payment'
+        ? 'To be paid'
+        : productStatus ?? '';
+
     return Container(
       padding: const EdgeInsets.all(16.0),
       margin: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 16.0),
@@ -65,9 +69,10 @@ class DetailContainerWidget extends StatelessWidget {
                       fontSize: 16,
                     ),
                   ),
-                if (productStatus != null)
+                if (statusToShow
+                    .isNotEmpty) // Check if statusToShow is not empty
                   Text(
-                    productStatus!,
+                    statusToShow,
                     style: GoogleFonts.poppins(
                       color: Colors.lightBlue,
                       fontWeight: FontWeight.bold,
@@ -145,10 +150,17 @@ class DetailContainerWidget extends StatelessWidget {
                   ),
                   Padding(
                     padding: const EdgeInsets.only(left: 10.0, bottom: 2.5),
-                    child: Icon(
-                      Icons.info,
-                      size: 20,
-                      color: Colors.lightBlue,
+                    child: IconButton(
+                      onPressed: () {
+                        if (id != null) {
+                          Get.toNamed(Routes.MYSHOES, arguments: {'id': id});
+                        }
+                      },
+                      icon: Icon(
+                        Icons.info,
+                        size: 20,
+                        color: Colors.lightBlue,
+                      ),
                     ),
                   )
                 ],

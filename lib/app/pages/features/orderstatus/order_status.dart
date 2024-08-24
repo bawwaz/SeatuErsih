@@ -85,7 +85,11 @@ class MyOrder extends GetView<HomePageController> {
                                 return InkWell(
                                   onTap: () {
                                     Get.toNamed(Routes.ORDER_DETAIL,
-                                        arguments: order);
+                                        arguments: [
+                                          order,
+                                          order['id']
+                                              .toString(), // Correctly accessing 'id' from order
+                                        ]);
                                   },
                                   child: Container(
                                     margin: EdgeInsets.symmetric(
