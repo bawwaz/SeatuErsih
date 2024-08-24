@@ -13,9 +13,9 @@ class AddOnsController extends GetxController {
       'price': 5000
     },
     {
-      'title': 'Base Repaint - 10K',
+      'title': 'Base Repaint - 20K',
       'description': 'Cat ulang warna dasar sepatu',
-      'price': 10000
+      'price': 20000
     },
     {
       'title': 'Compound - 5K',

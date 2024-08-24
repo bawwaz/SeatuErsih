@@ -13,7 +13,6 @@ class RegCleanListController extends GetxController {
 
   @override
   void onInit() {
-    // Initialize orderId from Get.arguments
     orderId = Get.arguments[0].toString();
     fetchShoes();
     super.onInit();

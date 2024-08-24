@@ -215,8 +215,16 @@ class PaymentConfirmationView extends GetView<PaymentConfirmationController> {
         child: SizedBox(
           width: double.infinity,
           child: ElevatedButton(
-            onPressed: () {
-              Get.offAllNamed(Routes.CHECKOUT_ANIMATION);
+            onPressed: () async {
+              _handlePayment().then((paymentCreated) {
+                if (paymentCreated) {
+                  Get.offAllNamed(
+                      Routes.BTMNAVBAR); // Replace with your home route
+                } else {
+                  Get.snackbar('Error',
+                      'Failed to create payment: ${controller.errorMessage}');
+                }
+              });
             },
             style: ElevatedButton.styleFrom(
               backgroundColor: Color(0xFF7EC1EB),

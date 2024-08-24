@@ -32,7 +32,7 @@ class MyShoeController extends GetxController {
       }
     } catch (e) {
       print('Error: $e');
-      shoeData.clear(); // Clear data on error
+      shoeData.clear(); 
     } finally {
       isLoading.value = false;
     }

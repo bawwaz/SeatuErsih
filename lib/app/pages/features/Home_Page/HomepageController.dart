@@ -30,7 +30,9 @@ class HomePageController extends GetxController {
       if (response.statusCode == 200) {
         final data = json.decode(response.body)['data'];
         if (data != null && data is Iterable) {
-          List<dynamic> sortedData = data.toList();
+          List<dynamic> sortedData = data.map((item) {
+            return item;
+          }).toList();
           sortedData.sort((a, b) {
             DateTime dateA = DateTime.parse(a['created_at']);
             DateTime dateB = DateTime.parse(b['created_at']);
