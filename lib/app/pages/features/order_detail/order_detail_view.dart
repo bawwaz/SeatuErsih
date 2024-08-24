@@ -79,7 +79,6 @@ class OrderDetailView extends StatelessWidget {
               ),
             ),
           ),
-          // "Pay Now" button for 'waiting_for_payment' status
           if (orderDetailController.orders['order_status'] ==
               'waiting_for_payment')
             Padding(
@@ -154,9 +153,31 @@ class OrderDetailView extends StatelessWidget {
       PaymentConfirmationController paymentController) async {
     final paymentCreated = await paymentController.createPayment();
     if (paymentCreated && paymentController.checkoutLink != null) {
+      // Proceed to payment
       paymentController
           .proceedToPayment(Uri.parse(paymentController.checkoutLink!));
+      // Poll the server to check if payment was successful
+      return await _pollForPaymentStatus();
     }
-    return paymentCreated;
+    return false;
+  }
+
+  Future<bool> _pollForPaymentStatus() async {
+    const int maxAttempts = 10;
+    int attempt = 0;
+    const Duration delayBetweenAttempts = Duration(seconds: 3);
+
+    while (attempt < maxAttempts) {
+      attempt++;
+      await Future.delayed(delayBetweenAttempts);
+
+      // Fetch the latest order details
+      await paymentController.fetchOrders();
+
+      if (paymentController.orderData['order_status'] == 'in-progress') {
+        return true; // Payment was successful
+      }
+    }
+    return false; // Timeout or failure
   }
 }

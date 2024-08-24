@@ -175,12 +175,6 @@ class AppPages {
       transition: Transition.noTransition,
     ),
     GetPage(
-      name: Routes.DATA_PELANGGAN_DEEP,
-      page: () => DataPelangganDeepView(),
-      binding: DataPelangganDeepBinding(),
-      transition: Transition.noTransition,
-    ),
-    GetPage(
       name: Routes.REG_CLEAN_LIST,
       page: () => RegCleanListView(),
       binding: RegCleanListBinding(),
