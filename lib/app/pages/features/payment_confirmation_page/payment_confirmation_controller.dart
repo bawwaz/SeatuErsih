@@ -7,7 +7,7 @@ import 'package:url_launcher/url_launcher.dart';
 
 class PaymentConfirmationController extends GetxController {
   final box = GetStorage();
-  late final String order_id;
+  var orderId = 0;
 
   var isLoading = false.obs;
   var shoeData = <Map<String, dynamic>>[].obs;
@@ -17,7 +17,9 @@ class PaymentConfirmationController extends GetxController {
 
   @override
   void onInit() {
-    order_id = Get.arguments[0].toString();
+    orderId = Get.arguments['regList'] ??
+        Get.arguments['deepList'] ??
+        Get.arguments['orderStatus'];
     fetchShoe();
     super.onInit();
   }
@@ -33,7 +35,7 @@ class PaymentConfirmationController extends GetxController {
 
     try {
       final response = await http.get(
-        Uri.parse('$url/shoe/getshoe/$order_id'),
+        Uri.parse('$url/shoe/getshoe/$orderId'),
         headers: headers,
       );
 
@@ -66,7 +68,7 @@ class PaymentConfirmationController extends GetxController {
     };
 
     var body = {
-      'order_id': order_id.toString(),
+      'order_id': orderId.toString(),
     };
 
     try {
@@ -107,7 +109,7 @@ class PaymentConfirmationController extends GetxController {
     };
 
     var body = json.encode({
-      'order_id': order_id,
+      'order_id': orderId,
     });
 
     try {
@@ -144,9 +146,43 @@ class PaymentConfirmationController extends GetxController {
     }
   }
 
+  Future<void> updateOrderStatus(String orderId, String status) async {
+    final url = 'http://seatuersih.pradiptaahmad.tech/api/order/update';
+    final token = box.read('token');
+    var headers = {
+      "Accept": "application/json",
+      "Authorization": "Bearer $token",
+      "Content-Type": "application/json"
+    };
+
+    var body = json.encode({
+      'id': orderId,
+      'order_status': status,
+    });
+
+    try {
+      final response = await http.post(
+        Uri.parse(url),
+        headers: headers,
+        body: body,
+      );
+
+      if (response.statusCode == 200) {
+        print('Order status updated successfully.');
+      } else {
+        print('Failed to update order status: ${response.body}');
+      }
+    } catch (e) {
+      print('Exception occurred while updating order status: $e');
+    }
+  }
+
   Future<void> proceedToPayment(Uri url) async {
     if (await canLaunchUrl(url)) {
-      await launchUrl(url);
+      await launchUrl(
+        url,
+        mode: LaunchMode.externalApplication,
+      );
     } else {
       print('could not launch $url');
     }

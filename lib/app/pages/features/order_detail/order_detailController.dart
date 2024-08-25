@@ -15,7 +15,7 @@ class OrderDetailcontroller extends GetxController {
   @override
   void onInit() {
     arguments = Get.arguments;
-    orders.value = arguments[0];
+    orders.value = arguments['orderList'];
     super.onInit();
   }
 }

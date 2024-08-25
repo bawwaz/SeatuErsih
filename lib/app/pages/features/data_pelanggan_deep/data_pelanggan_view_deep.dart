@@ -161,7 +161,7 @@ class DataPelangganDeepView extends GetView<DataPelangganControllerDeep> {
                     bool success = await controller.postOrders();
                     if (success) {
                       Get.offNamed(Routes.DEEP_CLEAN_LIST,
-                          arguments: [controller.orders['id'].toString()]);
+                          arguments: [controller.orders['id']]);
                     } else {
                       Get.snackbar('Error', 'Failed to submit data');
                     }

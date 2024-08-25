@@ -8,7 +8,7 @@ import 'package:intl/intl.dart';
 class DeepCleanController extends GetxController {
   var isLoading = false.obs;
   final shoes = [].obs;
-  late final String orderId;
+  late final int orderId;
 
   final box = GetStorage();
   Future<void> fetchShoes() async {
@@ -81,7 +81,7 @@ class DeepCleanController extends GetxController {
   @override
   void onInit() {
     fetchShoes();
-    orderId = Get.arguments[0].toString();
+    orderId = Get.arguments[0];
 
     super.onInit();
   }
