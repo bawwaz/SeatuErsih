@@ -203,9 +203,11 @@ class DeepCleanListView extends GetView<DeepCleanController> {
               onTap: () {
                 Get.toNamed(
                   Routes.PAYMENT_CONFIRMATION,
-                  arguments: [
-                    controller.orderId.toString(),
-                  ],
+                  arguments: {
+                    'deepList' : controller.orderId
+                  }
+                    
+                  
                 )?.then((value) {
                   if (value == "success") {
                     controller.clearShoes();

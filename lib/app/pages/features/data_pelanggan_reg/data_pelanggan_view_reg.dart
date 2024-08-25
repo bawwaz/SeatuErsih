@@ -167,7 +167,7 @@ class DataPelangganRegView extends GetView<DataPelangganRegController> {
                     bool success = await controller.postOrders();
                     if (success) {
                       Get.offNamed(Routes.REG_CLEAN_LIST, arguments: [
-                        controller.orders['id'].toString(),
+                        controller.orders['id'],
                         controller.orders['laundry_id'].toString(),
                       ]);
                     } else {

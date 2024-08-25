@@ -9,11 +9,11 @@ class RegCleanListController extends GetxController {
   final shoes = <Map<dynamic, dynamic>>[].obs;
   final box = GetStorage();
 
-  late final String orderId;
+  late final int orderId;
 
   @override
   void onInit() {
-    orderId = Get.arguments[0].toString();
+    orderId = Get.arguments[0];
     fetchShoes();
     super.onInit();
   }

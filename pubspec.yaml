@@ -28,7 +28,7 @@ dependencies:
   firebase_core:
   firebase_messaging: 
   webview_flutter: 
-  url_launcher: 
+  url_launcher: ^6.1.7
 
 
 
