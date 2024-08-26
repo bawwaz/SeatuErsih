@@ -62,9 +62,21 @@ class HomeBody extends GetView<HomePageController> {
                     padding: const EdgeInsets.only(top: 100.0),
                     child: InkWell(
                       onTap: () {
-                        Get.toNamed(Routes.CHOOSE_SERVICE);
+                        if (homeController.isStoreOpen.value) {
+                          Get.toNamed(Routes.CHOOSE_SERVICE);
+                        } else {
+                          Get.snackbar(
+                            'Store Closed',
+                            'Sorry, the store is closed',
+                            snackPosition: SnackPosition.BOTTOM,
+                            backgroundColor: Colors.redAccent,
+                            colorText: Colors.white,
+                          );
+                        }
                       },
-                      child: OrderService(),
+                      child: OrderService(
+                        isStoreOpen: homeController.isStoreOpen.value,
+                      ),
                     ),
                   ),
                 ),

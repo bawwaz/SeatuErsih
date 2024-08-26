@@ -20,7 +20,7 @@ class LoginPageController extends GetxController {
   @override
   void onInit() {
     super.onInit();
-    
+
     _checkAutoLogin();
   }
 
@@ -67,10 +67,12 @@ class LoginPageController extends GetxController {
 
   Future<void> login() async {
     isLoading.value = true;
+    var notificationToken = GetStorage().read('notificationToken');
     final url = 'http://seatuersih.pradiptaahmad.tech/api';
     var data = {
       'email': email.value,
       'password': password.value,
+      'notification_token': notificationToken,
     };
     var headers = {
       'Accept': 'application/json',
@@ -96,9 +98,7 @@ class LoginPageController extends GetxController {
         box.write("token", token);
         box.write("username", userData['username']);
         box.write("userid", userData['id']);
-        await FirebaseMessaging.instance.requestPermission();
-        final fcmToken = await FirebaseMessaging.instance.getToken();
-        print('FCM Token: $fcmToken');
+
         user.value = userData; // Store user data
 
         Get.snackbar(
@@ -125,6 +125,7 @@ class LoginPageController extends GetxController {
         "$e",
         snackPosition: SnackPosition.TOP,
       );
+      print(e);
       isLoading.value = true;
     }
   }

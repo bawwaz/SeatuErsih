@@ -5,9 +5,11 @@ import 'package:http/http.dart' as http;
 
 class ChooseServiceController extends GetxController {
   var laundries = <Map<String, dynamic>>[].obs;
-  var average_rating = <double>[].obs; // Explicitly typed as RxList<double>
+  var average_rating = <double>[].obs; 
   var isLoading = false.obs;
+  var shopStatus = ''.obs;
   final box = GetStorage();
+
 
   @override
   void onInit() {
@@ -59,13 +61,13 @@ class ChooseServiceController extends GetxController {
     try {
       for (var laundry in laundries) {
         final id = laundry["id"];
-        final response = await http.get(
-            Uri.parse('$url/review/average/$id'),
+        final response = await http.get(Uri.parse('$url/review/average/$id'),
             headers: headers);
 
         if (response.statusCode == 200) {
           final data = json.decode(response.body);
-          final rating = double.tryParse(data['average_rating'].toString()) ?? 0.0;
+          final rating =
+              double.tryParse(data['average_rating'].toString()) ?? 0.0;
           int index = laundries.indexWhere((l) => l["id"] == id);
           if (index != -1) {
             ratings[index] = rating;
@@ -107,4 +109,6 @@ class ChooseServiceController extends GetxController {
       Get.snackbar('Error', 'Gagal memesan: ${response.statusCode}');
     }
   }
+
+  
 }

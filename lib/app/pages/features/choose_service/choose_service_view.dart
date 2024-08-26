@@ -3,7 +3,6 @@ import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:seatu_ersih/app/pages/features/choose_service/choose_service_controller.dart';
 import 'package:seatu_ersih/app/pages/features/choose_service/widget/choose_service_container.dart';
-import 'package:seatu_ersih/app/pages/features/choose_service/widget/coupon_widget.dart';
 import 'package:seatu_ersih/app/router/app_pages.dart';
 import 'package:seatu_ersih/themes/fonts.dart';
 import 'package:shimmer/shimmer.dart';
@@ -36,29 +35,12 @@ class ChooseService extends GetView<ChooseServiceController> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Center(
-              child: Text(
-                'Diskon',
-                style: GoogleFonts.poppins(
-                  color: Colors.black,
-                  fontWeight: FontWeight.w600,
-                  fontSize: 18,
-                ),
-              ),
-            ),
-            InkWell(
-              onTap: () {
-                Get.toNamed(Routes.AVAILABLECOUPONS);
-              },
-              child: Padding(
-                padding: const EdgeInsets.only(top: 20.0),
-                child: Coupon(),
-              ),
-            ),
             Align(
               alignment: Alignment.centerLeft,
               child: Padding(
-                padding: const EdgeInsets.only(left: 4.0, top: 20),
+                padding: const EdgeInsets.only(
+                  left: 4.0,
+                ),
                 child: Center(
                   child: Text(
                     'Jasa yang kami sediakan',
@@ -76,7 +58,7 @@ class ChooseService extends GetView<ChooseServiceController> {
               if (controller.laundries.isEmpty) {
                 // Show shimmer loading if data is not yet fetched
                 return ListView.builder(
-                  itemCount: 5, // Placeholder count
+                  itemCount: 2, // Placeholder count
                   shrinkWrap: true,
                   physics: NeverScrollableScrollPhysics(),
                   itemBuilder: (BuildContext context, int index) {
@@ -97,16 +79,27 @@ class ChooseService extends GetView<ChooseServiceController> {
                             ? controller.average_rating[index]
                             : 0.0; // Default to 0.0 if no rating is available
 
+                    // Determine the price based on the product name
+                    String productName = controller.laundries[index]["name"];
+                    String price = "N/A";
+
+                    if (productName == "Regular Clean") {
+                      price = "25k";
+                    } else if (productName == "Deep Clean") {
+                      price = "35k";
+                    } else {
+                      price = controller.laundries[index]["price"] ?? "N/A";
+                    }
+
                     return ServiceContainer(
-                      title: controller.laundries[index]["name"],
+                      title: productName,
                       description: controller.laundries[index]["Description"],
-                      price: '25K',
+                      price: price,
                       buttonText: "Pesan Sekarang",
                       icon: Icons.star_rounded,
                       avgRating: avgRating,
                       onPressed: () {
-                        if (controller.laundries[index]["name"] ==
-                            "Regular Clean") {
+                        if (productName == "Regular Clean") {
                           Get.toNamed(Routes.DATA_PELANGGAN_REG,
                               arguments: controller.laundries[index]["id"]);
                         } else {

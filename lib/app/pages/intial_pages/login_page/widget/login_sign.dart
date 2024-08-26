@@ -4,7 +4,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:seatu_ersih/app/pages/intial_pages/login_page/loginController.dart';
 
 
-class SignIn extends GetView<LoginPageController> {
+class SignIn extends GetView {
   final void Function()? onPressed;
   SignIn({Key? key, this.onPressed}) : super(key: key);
 
