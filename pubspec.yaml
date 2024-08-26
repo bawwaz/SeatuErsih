@@ -29,6 +29,7 @@ dependencies:
   firebase_messaging: 
   webview_flutter: 
   url_launcher: ^6.1.7
+  flutter_local_notifications:  
 
 
 

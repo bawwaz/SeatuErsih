@@ -8,6 +8,7 @@ import 'package:intl/intl.dart';
 class HomePageController extends GetxController {
   var isLoading = false.obs;
   final orders = [].obs;
+  var isStoreOpen = true.obs;
   final reviews1 = [].obs;
   final reviews2 = [].obs;
 
@@ -141,9 +142,33 @@ class HomePageController extends GetxController {
     await fetchOrder();
   }
 
+  Future<void> fetchShopStatus() async {
+    print('controller called');
+    final url =
+        'http://seatuersih.pradiptaahmad.tech/api/store-status/status-toko/1';
+    final token = box.read('token');
+    var headers = {
+      'Accept': 'application/json',
+      'Authorization': 'Bearer $token',
+    };
+
+    try {
+      final response = await http.get(Uri.parse(url), headers: headers);
+      if (response.statusCode == 200) {
+        final data = json.decode(response.body);
+        isStoreOpen.value = data['is_open'] ?? false; // Set the store status
+      } else {
+        print('Failed to fetch shop status: ${response.statusCode}');
+      }
+    } catch (e) {
+      print('Error fetching shop status: $e');
+    }
+  }
+
   @override
   void onInit() async {
     await fetchOrder();
+    await fetchShopStatus();
     await fetchReviews1();
     await fetchReviews2();
     super.onInit();
