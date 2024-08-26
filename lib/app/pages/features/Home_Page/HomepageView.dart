@@ -3,12 +3,15 @@ import 'package:get/get.dart';
 import 'package:seatu_ersih/app/router/app_pages.dart';
 import 'package:seatu_ersih/themes/colors.dart';
 import 'package:seatu_ersih/app/pages/features/Home_Page/widget/HomepageBody.dart';
+import 'package:seatu_ersih/app/pages/features/Home_Page/HomepageController.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    final homeController = Get.put(HomePageController());
+
     return Scaffold(
       appBar: AppBar(
         automaticallyImplyLeading: false,
@@ -19,7 +22,13 @@ class HomePage extends StatelessWidget {
         ),
       ),
       body: SafeArea(
-        child: HomeBody(),
+        child: RefreshIndicator(
+          onRefresh: () async {
+            await homeController.fetchReviews1();
+            await homeController.fetchReviews2();
+          },
+          child: HomeBody(),
+        ),
       ),
     );
   }

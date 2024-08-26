@@ -12,6 +12,7 @@ class ServiceContainer extends StatelessWidget {
   final IconData? icon;
   final VoidCallback? onPressed;
   final bool isLoading;
+  final bool isStoreOpen;
 
   const ServiceContainer({
     Key? key,
@@ -23,12 +24,12 @@ class ServiceContainer extends StatelessWidget {
     this.onPressed,
     this.isLoading = false,
     this.avgRating,
+    this.isStoreOpen = true, // Added isStoreOpen parameter
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     if (isLoading) {
-      // Shimmer effect for loading state
       return Shimmer.fromColors(
         baseColor: Colors.grey[300]!,
         highlightColor: Colors.grey[100]!,
@@ -83,7 +84,6 @@ class ServiceContainer extends StatelessWidget {
         ),
       );
     } else {
-      // Actual content when not loading
       return Container(
         width: MediaQuery.of(context).size.width * 0.9,
         padding: const EdgeInsets.all(16.0),
@@ -136,9 +136,10 @@ class ServiceContainer extends StatelessWidget {
             Row(
               children: [
                 ElevatedButton(
-                  onPressed: onPressed,
+                  onPressed: isStoreOpen ? onPressed : null,
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: AppColors.primaryColor,
+                    backgroundColor:
+                        isStoreOpen ? AppColors.primaryColor : Colors.grey[400],
                     padding: const EdgeInsets.symmetric(
                         horizontal: 24, vertical: 12),
                     shape: RoundedRectangleBorder(
