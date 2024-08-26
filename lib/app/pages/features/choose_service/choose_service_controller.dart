@@ -5,15 +5,16 @@ import 'package:http/http.dart' as http;
 
 class ChooseServiceController extends GetxController {
   var laundries = <Map<String, dynamic>>[].obs;
-  var average_rating = <double>[].obs; 
+  var average_rating = <double>[].obs;
   var isLoading = false.obs;
-  var shopStatus = ''.obs;
+  var isStoreOpen = true.obs;
   final box = GetStorage();
-
 
   @override
   void onInit() {
     super.onInit();
+    print("ChooseServiceController initialized");
+    fetchShopStatus();
     fetchLaundries();
   }
 
@@ -55,7 +56,6 @@ class ChooseServiceController extends GetxController {
       'Authorization': 'Bearer $token',
     };
 
-    // Initialize the ratings list
     List<double> ratings = List<double>.filled(laundries.length, 0.0);
 
     try {
@@ -76,7 +76,7 @@ class ChooseServiceController extends GetxController {
           print('Failed to fetch reviews for id $id: ${response.statusCode}');
         }
       }
-      average_rating.value = ratings; // Update the average_rating list
+      average_rating.value = ratings;
     } catch (e) {
       print(e);
     } finally {
@@ -99,16 +99,59 @@ class ChooseServiceController extends GetxController {
     );
 
     if (response.statusCode == 200) {
-      // Penanganan sukses
       print('Sukses: ${response.body}');
       Get.snackbar('Sukses', 'Pesanan Anda telah diterima');
     } else {
-      // Penanganan error
       print('Error: ${response.statusCode}');
       print('Isi respon: ${response.body}');
       Get.snackbar('Error', 'Gagal memesan: ${response.statusCode}');
     }
   }
 
-  
+  Future<void> fetchShopStatus() async {
+    print('Fetching shop status...');
+    final url =
+        'http://seatuersih.pradiptaahmad.tech/api/store-status/status-toko/1';
+    final token = box.read('token');
+    var headers = {
+      'Accept': 'application/json',
+      'Authorization': 'Bearer $token',
+    };
+
+    try {
+      final response = await http.get(Uri.parse(url), headers: headers);
+      if (response.statusCode == 200) {
+        final data = json.decode(response.body);
+
+        if (data.containsKey('data') && data['data'] != null) {
+          final storeData = data['data'];
+          if (storeData.containsKey('is_open') &&
+              storeData['is_open'] != null) {
+            isStoreOpen.value = storeData['is_open'] == true;
+          } else {
+            print('is_open field is missing or null in the data object');
+            isStoreOpen.value = false;
+          }
+
+          if (isStoreOpen.value) {
+            print('Store is OPEN');
+          } else {
+            print('Store is CLOSED');
+          }
+        } else {
+          print('Data object is missing or null');
+          isStoreOpen.value = false;
+        }
+      } else {
+        print('Failed to fetch shop status: ${response.statusCode}');
+      }
+    } catch (e) {
+      print('Error fetching shop status: $e');
+    }
+  }
+
+  Future<void> refreshData() async {
+    await fetchShopStatus();
+    await fetchLaundries();
+  }
 }
