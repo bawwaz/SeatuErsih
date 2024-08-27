@@ -183,7 +183,7 @@ class DeepCleanListView extends GetView<DeepCleanController> {
               child: Container(
                 height: 40,
                 decoration: BoxDecoration(
-                  color: Color(0xFFC6EAFF),
+                  color: Color(0xFF7EC1EB),
                   borderRadius: BorderRadius.circular(10),
                 ),
                 child: Center(
