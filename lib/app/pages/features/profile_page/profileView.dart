@@ -18,9 +18,10 @@ class ProfilePage extends GetView<ProfileController> {
       body: RefreshIndicator(
         onRefresh: controller.fetchUser, // Method untuk merefresh data
         child: SingleChildScrollView(
-          physics: const AlwaysScrollableScrollPhysics(), // Memungkinkan scroll meskipun konten tidak penuh
+          physics:
+              const AlwaysScrollableScrollPhysics(), // Memungkinkan scroll meskipun konten tidak penuh
           child: Container(
-            margin: const EdgeInsets.only(left: 28, right: 28),
+            margin: const EdgeInsets.symmetric(horizontal: 28),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -53,32 +54,34 @@ class ProfilePage extends GetView<ProfileController> {
                             () => Text(
                               controller.isLoading.value
                                   ? "Loading..."
-                                  : controller.users['username'] ?? "No Username",
-                              style: Fonts.header1
-                                  .copyWith(color: Colors.black, fontSize: 16),
+                                  : controller.users['username'] ??
+                                      "No Username",
+                              style: Fonts.header1.copyWith(
+                                color: Colors.black,
+                                fontSize: 16,
+                              ),
                             ),
                           ),
                           const SizedBox(height: 8),
-                          Column(
-                            children: [
-                              Obx(
-                                () => Text(
+                          Obx(
+                            () => Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
                                   controller.isLoading.value
                                       ? "Loading..."
                                       : controller.users['email'] ?? "No Email",
                                   style: TextStyle(fontSize: 14),
                                 ),
-                              ),
-                              const SizedBox(width: 16),
-                              Obx(
-                                () => Text(
+                                const SizedBox(height: 8),
+                                Text(
                                   controller.isLoading.value
                                       ? "Loading..."
                                       : controller.users['phone'] ?? "No Phone",
                                   style: TextStyle(fontSize: 14),
                                 ),
-                              ),
-                            ],
+                              ],
+                            ),
                           ),
                         ],
                       ),
@@ -99,13 +102,6 @@ class ProfilePage extends GetView<ProfileController> {
                     title: 'Edit Profile',
                     arrowIcon: Icons.arrow_forward_ios_rounded,
                   ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.only(top: 17.0),
-                  child: ProfileWidgetContainer(
-                      icon: Icons.notifications,
-                      title: 'Notification',
-                      arrowIcon: Icons.arrow_forward_ios_rounded),
                 ),
                 Padding(
                   padding: const EdgeInsets.only(top: 17.0),
