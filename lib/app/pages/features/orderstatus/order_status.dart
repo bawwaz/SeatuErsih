@@ -87,10 +87,8 @@ class MyOrder extends GetView<HomePageController> {
                                     Get.toNamed(Routes.ORDER_DETAIL,
                                         // arguments: [order, order['id']]);
                                         arguments: {
-                                          
                                           'orderList': order,
                                           'orderStatus': order['id'],
-                                          
                                         });
                                   },
                                   child: Container(

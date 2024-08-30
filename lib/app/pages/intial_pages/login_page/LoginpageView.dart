@@ -178,7 +178,7 @@ class LoginPage extends GetView<LoginPageController> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Text(
-                    "Don’t have an account?",
+                    "Don't have an account?",
                     style: GoogleFonts.poppins(
                       color: Color(0xFF1F1F1F),
                       fontWeight: FontWeight.normal,

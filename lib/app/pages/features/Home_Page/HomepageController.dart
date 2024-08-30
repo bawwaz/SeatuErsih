@@ -4,6 +4,8 @@ import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:http/http.dart' as http;
 import 'package:intl/intl.dart';
+import 'package:seatu_ersih/app/api/api_endpoint.dart';
+import 'package:seatu_ersih/app/api/baseurl.dart';
 
 class HomePageController extends GetxController {
   var isLoading = false.obs;
@@ -17,7 +19,7 @@ class HomePageController extends GetxController {
   Future<void> fetchOrder() async {
     if (isClosed) return; // Ensure the controller is still active
     isLoading.value = true;
-    final url = 'http://seatuersih.pradiptaahmad.tech/api';
+    final url = ApiEndpoint.baseUrl;
     final token = box.read('token');
     var headers = {
       'Accept': 'application/json',
@@ -75,7 +77,7 @@ class HomePageController extends GetxController {
   Future<void> fetchReviews1() async {
     if (isClosed) return; // Ensure the controller is still active
     isLoading.value = true;
-    final url = 'http://seatuersih.pradiptaahmad.tech/api';
+    final url = ApiEndpoint.baseUrl;
     final token = box.read('token');
     var headers = {
       'Accept': 'application/json',
@@ -108,7 +110,7 @@ class HomePageController extends GetxController {
   Future<void> fetchReviews2() async {
     if (isClosed) return; // Ensure the controller is still active
     isLoading.value = true;
-    final url = 'http://seatuersih.pradiptaahmad.tech/api';
+    final url = ApiEndpoint.baseUrl;
     final token = box.read('token');
     var headers = {
       'Accept': 'application/json',
@@ -141,8 +143,6 @@ class HomePageController extends GetxController {
   Future<void> refreshOrders() async {
     await fetchOrder();
   }
-
-  
 
   @override
   void onInit() async {

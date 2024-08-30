@@ -4,6 +4,7 @@ import 'package:seatu_ersih/app/router/app_pages.dart';
 import 'package:seatu_ersih/themes/colors.dart';
 import 'package:seatu_ersih/app/pages/features/Home_Page/widget/HomepageBody.dart';
 import 'package:seatu_ersih/app/pages/features/Home_Page/HomepageController.dart';
+import 'package:flutter_svg/svg.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -20,6 +21,7 @@ class HomePage extends StatelessWidget {
           padding: const EdgeInsets.only(left: 10.0),
           child: Image(image: AssetImage('assets/img/icon.png')),
         ),
+        actions: [],
       ),
       body: SafeArea(
         child: RefreshIndicator(

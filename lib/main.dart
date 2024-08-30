@@ -14,9 +14,13 @@ void main() async {
     options: DefaultFirebaseOptions.currentPlatform,
   );
   await GetStorage.init();
+  final box = GetStorage();
+  final storedToken = box.read('token');
+  final allKeys = box.getKeys();
+  print('Stored token: $storedToken');
+  print('All stored keys: $allKeys');
   PushNotificationService.initNotification();
   Get.put(BottomNavigationController());
-
 
   runApp(const MyApp());
 }
