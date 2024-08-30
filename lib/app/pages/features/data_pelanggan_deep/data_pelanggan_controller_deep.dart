@@ -22,9 +22,9 @@ class DataPelangganControllerDeep extends GetxController {
   final orders = {}.obs;
   final kabupaten = [].obs;
   final kecamatan = [].obs;
+  final filteredKecamatan = [].obs;
 
   Future<bool> postOrders() async {
-    // final url = 'http://seatuersih.pradiptaahmad.tech/api';
     final url = ApiEndpoint.baseUrl;
     final token = box.read('token');
 
@@ -46,7 +46,7 @@ class DataPelangganControllerDeep extends GetxController {
     };
 
     try {
-      print('Sending data: $data'); // Log the data being sent
+      print('Sending data: $data');
       var response = await http.post(
         Uri.parse("$url/order/add"),
         headers: headers,
@@ -84,7 +84,6 @@ class DataPelangganControllerDeep extends GetxController {
   }
 
   Future<void> fetchKabupaten() async {
-    // final url = 'http://seatuersih.pradiptaahmad.tech/api';
     final url = ApiEndpoint.baseUrl;
     final token = box.read('token');
     var headers = {
@@ -121,7 +120,6 @@ class DataPelangganControllerDeep extends GetxController {
   }
 
   Future<void> fetchKecamatan() async {
-    // final url = 'http://seatuersih.pradiptaahmad.tech/api';
     final url = ApiEndpoint.baseUrl;
     final token = box.read('token');
     var headers = {

@@ -25,80 +25,8 @@ class DataPelangganRegController extends GetxController {
   final kabupaten = [].obs;
   final kecamatan = [].obs;
 
-  Future<bool> postOrders() async {
-    // final url = 'http://seatuersih.pradiptaahmad.tech/api';
-    final url = ApiEndpoint.baseUrl;
-    final token = box.read('token');
-    // Forming detail address
-    detail_address.value =
-        '${kabupatenName.value}, ${kecamatanName.value}, ${detail_address.value}';
-
-    var data = {
-      'laundry_id': Get.arguments.toString(),
-      'order_type': 'regular_clean',
-      'detail_address': detail_address.value,
-      'phone': phone.value,
-      'pickup_date': pickup_date.value.toString(),
-      'notes': notes.value,
-      'user_id': box.read('userid').toString(),
-      'kabupaten': kabupatenName.value, // Include kabupaten
-      'kecamatan': kecamatanName.value, // Include kecamatan
-    };
-
-    var headers = {
-      "Accept": 'application/json',
-      "Authorization": "Bearer $token"
-    };
-
-    try {
-      print('Sending data: $data'); // Log the data being sent
-      var response = await http.post(
-        Uri.parse("$url/order/add"),
-        headers: headers,
-        body: data,
-      );
-
-      print('Response status: ${response.statusCode}');
-      print('Response body: ${response.body}');
-
-      if (response.statusCode == 201) {
-        orders.value = json.decode(response.body)['order'];
-        box.write(
-          'order_id',
-          orders['id'].toString(),
-        );
-        return true;
-      } else {
-        Get.snackbar('Error', 'Failed to submit data: ${response.body}');
-        return false;
-      }
-    } catch (e) {
-      Get.snackbar('Error', 'Exception occurred: $e');
-      return false;
-    }
-  }
-
-  void checkKabupatenName() {
-    if (kabupatenName.value.isEmpty) {
-      isOtherSelected.value = false;
-    }
-  }
-
-  Future<void> pickDate(BuildContext context) async {
-    DateTime? picked = await showDatePicker(
-      context: context,
-      initialDate: DateTime.now(),
-      firstDate: DateTime.now(),
-      lastDate: DateTime(2101),
-    );
-
-    if (picked != null) {
-      pickup_date.value = picked.toLocal().toString().split(' ')[0];
-    }
-  }
-
+  // Fetch Kabupaten
   Future<void> fetchKabupaten() async {
-    // final url = 'http://seatuersih.pradiptaahmad.tech/api';
     final url = ApiEndpoint.baseUrl;
     final token = box.read('token');
     var headers = {
@@ -108,13 +36,13 @@ class DataPelangganRegController extends GetxController {
 
     try {
       final response =
-          await http.get(Uri.parse('$url/kabupaten/get/1'), headers: headers);
+          await http.get(Uri.parse('$url/kabupaten/getall'), headers: headers);
 
       if (response.statusCode == 200) {
         final data = json.decode(response.body);
         if (data != null && data['data'] != null) {
-          kabupaten.assign({'name': data['data']['kabupaten']});
-          print('Kabupaten found: ${data['data']['kabupaten']}');
+          kabupaten.assignAll(data['data']);
+          print('Kabupaten found: ${data['data']}');
         } else {
           print('No kabupaten found');
         }
@@ -128,8 +56,8 @@ class DataPelangganRegController extends GetxController {
     }
   }
 
-  Future<void> fetchKecamatan() async {
-    // final url = 'http://seatuersih.pradiptaahmad.tech/api';
+  // Fetch Kecamatan by Kabupaten ID
+  Future<void> fetchKecamatanByKabupatenId(int kabupatenId) async {
     final url = ApiEndpoint.baseUrl;
     final token = box.read('token');
     var headers = {
@@ -138,26 +66,14 @@ class DataPelangganRegController extends GetxController {
     };
 
     try {
-      final response =
-          await http.get(Uri.parse('$url/kecamatan/getall'), headers: headers);
+      final response = await http.get(
+          Uri.parse('$url/kecamatan/get-kecamatan-kabupatenid/$kabupatenId'),
+          headers: headers);
 
       if (response.statusCode == 200) {
         final data = json.decode(response.body);
-        if (data != null && data['data'] != null && data['data'] is List) {
-          final List<dynamic> kecamatanList = data['data'] as List<dynamic>;
-          kecamatan.assignAll(kecamatanList
-              .map((item) => {
-                    'id': item['id'],
-                    'name': item['kecamatan'],
-                  } as Map<String, dynamic>)
-              .toList());
-          print('Kecamatan found: ${kecamatan}');
-        } else {
-          print('No kecamatan found');
-        }
+        kecamatan.assignAll(data['data']);
       } else {
-        print('Failed to fetch kecamatan: ${response.statusCode}');
-        print('Response body: ${response.body}');
         throw Exception('Failed to fetch kecamatan');
       }
     } catch (e) {
@@ -168,7 +84,53 @@ class DataPelangganRegController extends GetxController {
   @override
   void onInit() {
     fetchKabupaten();
-    fetchKecamatan();
     super.onInit();
+  }
+
+  Future<void> pickDate(BuildContext context) async {
+    DateTime? picked = await showDatePicker(
+      context: context,
+      initialDate: DateTime.now(),
+      firstDate: DateTime.now(),
+      lastDate: DateTime(2101),
+    );
+    if (picked != null) {
+      pickup_date.value = picked.toString().split(' ')[0];
+    }
+  }
+
+  Future<bool> postOrders() async {
+    final url = ApiEndpoint.baseUrl + '/orders';
+    final token = box.read('token');
+    var headers = {
+      'Accept': 'application/json',
+      'Authorization': 'Bearer $token'
+    };
+
+    var data = {
+      'detail_address': detail_address.value,
+      'phone': phone.value,
+      'total_price': total_price.value,
+      'pickup_date': pickup_date.value,
+      'notes': notes.value,
+      'shoes_id': shoesId.value,
+      'user_id': userId.value,
+      'laundry_id': laundry_id.value,
+    };
+
+    try {
+      final response = await http.post(Uri.parse(url),
+          headers: headers, body: json.encode(data));
+
+      if (response.statusCode == 201) {
+        orders.assignAll(json.decode(response.body));
+        return true;
+      } else {
+        return false;
+      }
+    } catch (e) {
+      print(e);
+      return false;
+    }
   }
 }
