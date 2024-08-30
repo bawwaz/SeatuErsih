@@ -1,3 +1,4 @@
+import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 import 'package:seatu_ersih/app/pages/features/Home_Page/HomepageBinding.dart';
 import 'package:seatu_ersih/app/pages/features/add_address_page/add_address_binding.dart';
@@ -20,6 +21,8 @@ import 'package:seatu_ersih/app/pages/features/deep_shoe_list/deep_clean_list_bi
 import 'package:seatu_ersih/app/pages/features/deep_shoe_list/deep_clean_list_view.dart';
 import 'package:seatu_ersih/app/pages/features/my_shoe_data/myshoe_bindings.dart';
 import 'package:seatu_ersih/app/pages/features/my_shoe_data/myshoe_view.dart';
+import 'package:seatu_ersih/app/pages/features/notification_page/notification_bindings.dart';
+import 'package:seatu_ersih/app/pages/features/notification_page/notification_view.dart';
 import 'package:seatu_ersih/app/pages/features/order_detail/order_detail_view.dart';
 import 'package:seatu_ersih/app/pages/features/payment_confirmation_page/payment_confirmation_binding.dart';
 import 'package:seatu_ersih/app/pages/features/payment_confirmation_page/payment_confirmation_view.dart';
@@ -237,6 +240,11 @@ class AppPages {
         name: Routes.MYSHOES,
         page: () => Myshoes(),
         binding: MyShoesBindings(),
+        transition: Transition.noTransition),
+    GetPage(
+        name: Routes.NOTIFICATION,
+        page: () => NotificationView(),
+        binding: NotificationBinding(),
         transition: Transition.noTransition),
   ];
 }

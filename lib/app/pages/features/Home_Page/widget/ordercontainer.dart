@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:seatu_ersih/app/pages/features/Home_Page/HomepageController.dart';
 import 'package:seatu_ersih/themes/colors.dart';
@@ -21,6 +22,36 @@ class OrderContainer extends GetView<HomePageController> {
     required this.price,
     required this.status,
   }) : super(key: key);
+
+  Widget getStatusIcon(String status) {
+    switch (status) {
+      case 'pending':
+        return SvgPicture.asset('assets/svg/pending.svg');
+      case 'waiting_for_payment':
+        return SvgPicture.asset('assets/svg/wait.svg');
+      case 'in-progress':
+        return SvgPicture.asset('assets/svg/inprogress2.svg');
+      case 'completed':
+        return SvgPicture.asset('assets/svg/completed.svg');
+      case 'decline':
+        return InkWell(
+          onTap: () {
+            if (decline_note != null && decline_note!.isNotEmpty) {
+              Get.snackbar(
+                'Decline Note',
+                decline_note!,
+                snackPosition: SnackPosition.BOTTOM,
+                backgroundColor: Colors.white,
+                colorText: Colors.white,
+              );
+            }
+          },
+          child: SvgPicture.asset('assets/svg/decline.svg'),
+        );
+      default:
+        return SizedBox.shrink();
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -58,7 +89,7 @@ class OrderContainer extends GetView<HomePageController> {
                       children: [
                         Expanded(
                           child: Text(
-                            '$title',
+                            title,
                             style: Fonts.desc.copyWith(
                               fontWeight: FontWeight.w800,
                               fontSize: 16,
@@ -73,25 +104,15 @@ class OrderContainer extends GetView<HomePageController> {
                           padding: const EdgeInsets.only(right: 10.0),
                           child: Column(
                             children: [
-                              Text(
-                                '$status',
-                                style: Fonts.detail.copyWith(
-                                  fontSize: 15,
-                                  color: AppColors.primaryColor,
-                                ),
-                                overflow: TextOverflow.ellipsis,
-                              ),
-                              SizedBox(
-                                height: 10,
-                              ),
-                              Text(''),
+                              getStatusIcon(status),
+                              SizedBox(height: 10),
                             ],
                           ),
                         ),
                       ],
                     ),
                     Text(
-                      '$pickupDate',
+                      pickupDate,
                       style: Fonts.desc.copyWith(
                         fontSize: 15,
                         fontWeight: FontWeight.normal,
@@ -99,21 +120,18 @@ class OrderContainer extends GetView<HomePageController> {
                       ),
                     ),
                     Text(
-                      '$price',
+                      price,
                       style: Fonts.detail.copyWith(
                         fontSize: 15,
                         color: AppColors.primaryColor,
                       ),
                     ),
                     Text(
-                      'Note dari admin : $decline_note',
-                      style: TextStyle(
-                          fontWeight: FontWeight.normal, color: Colors.grey),
-                    ),
-                    Text(
                       'Order id : $id',
                       style: TextStyle(
-                          fontWeight: FontWeight.normal, color: Colors.grey),
+                        fontWeight: FontWeight.normal,
+                        color: Colors.grey,
+                      ),
                     ),
                   ],
                 ),

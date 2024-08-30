@@ -2,6 +2,7 @@
 import 'dart:convert';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
+import 'package:seatu_ersih/app/api/api_endpoint.dart';
 import 'package:seatu_ersih/app/api/auth/authentication_service.dart';
 import 'package:seatu_ersih/app/router/app_pages.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -16,7 +17,7 @@ class ProfileController extends GetxController {
 
   final users = {}.obs;
   final box = GetStorage();
-  final url = 'http://seatuersih.pradiptaahmad.tech/api';
+  final url = ApiEndpoint.baseUrl;
 
   @override
   void onInit() {

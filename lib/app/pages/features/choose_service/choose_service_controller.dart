@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:http/http.dart' as http;
+import 'package:seatu_ersih/app/api/api_endpoint.dart';
 
 class ChooseServiceController extends GetxController {
   var laundries = <Map<String, dynamic>>[].obs;
@@ -49,7 +50,7 @@ class ChooseServiceController extends GetxController {
 
   Future<void> fetchAverageReviews() async {
     isLoading.value = true;
-    final url = 'http://seatuersih.pradiptaahmad.tech/api';
+    final url = ApiEndpoint.baseUrl;
     final token = box.read('token');
     var headers = {
       'Accept': 'application/json',
@@ -111,7 +112,8 @@ class ChooseServiceController extends GetxController {
   Future<void> fetchShopStatus() async {
     print('Fetching shop status...');
     final url =
-        'http://seatuersih.pradiptaahmad.tech/api/store-status/status-toko/1';
+        // 'http://seatuersih.pradiptaahmad.tech/api/store-status/status-toko/1';
+        ApiEndpoint.baseUrl;
     final token = box.read('token');
     var headers = {
       'Accept': 'application/json',
@@ -119,7 +121,8 @@ class ChooseServiceController extends GetxController {
     };
 
     try {
-      final response = await http.get(Uri.parse(url), headers: headers);
+      final response = await http
+          .get(Uri.parse('$url/store-status/status-toko/1'), headers: headers);
       if (response.statusCode == 200) {
         final data = json.decode(response.body);
 

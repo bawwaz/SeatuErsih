@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:http/http.dart' as http;
 import 'package:intl/intl.dart';
+import 'package:seatu_ersih/app/api/api_endpoint.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class PaymentConfirmationController extends GetxController {
@@ -26,7 +27,7 @@ class PaymentConfirmationController extends GetxController {
 
   Future<void> fetchShoe() async {
     isLoading.value = true;
-    final url = 'http://seatuersih.pradiptaahmad.tech/api';
+    final url = ApiEndpoint.baseUrl;
     final token = box.read('token');
     var headers = {
       'Accept': 'application/json',
@@ -60,7 +61,7 @@ class PaymentConfirmationController extends GetxController {
   }
 
   Future<void> fetchOrders() async {
-    final url = 'http://seatuersih.pradiptaahmad.tech/api';
+    final url = ApiEndpoint.baseUrl;
     final token = box.read('token');
     var headers = {
       'Accept': 'application/json',
@@ -100,7 +101,8 @@ class PaymentConfirmationController extends GetxController {
   }
 
   Future<bool> createPayment() async {
-    final url = 'http://seatuersih.pradiptaahmad.tech/api/payment/create';
+    // final url = 'http://seatuersih.pradiptaahmad.tech/api/payment/create';
+    final url = ApiEndpoint.baseUrl;
     final token = box.read('token');
     var headers = {
       'Accept': 'application/json',
@@ -114,7 +116,7 @@ class PaymentConfirmationController extends GetxController {
 
     try {
       final response = await http.post(
-        Uri.parse(url),
+        Uri.parse('$url/payment/create'),
         headers: headers,
         body: body,
       );
@@ -147,7 +149,8 @@ class PaymentConfirmationController extends GetxController {
   }
 
   Future<void> updateOrderStatus(String orderId, String status) async {
-    final url = 'http://seatuersih.pradiptaahmad.tech/api/order/update';
+    // final url = 'http://seatuersih.pradiptaahmad.tech/api/order/update';
+    final url = ApiEndpoint.baseUrl;
     final token = box.read('token');
     var headers = {
       "Accept": "application/json",
@@ -162,7 +165,7 @@ class PaymentConfirmationController extends GetxController {
 
     try {
       final response = await http.post(
-        Uri.parse(url),
+        Uri.parse('$url/order/update'),
         headers: headers,
         body: body,
       );

@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:http/http.dart' as http;
+import 'package:seatu_ersih/app/api/api_endpoint.dart';
 
 class DataPelangganRegController extends GetxController {
   var detail_address = "".obs;
@@ -25,7 +26,8 @@ class DataPelangganRegController extends GetxController {
   final kecamatan = [].obs;
 
   Future<bool> postOrders() async {
-    final url = 'http://seatuersih.pradiptaahmad.tech/api';
+    // final url = 'http://seatuersih.pradiptaahmad.tech/api';
+    final url = ApiEndpoint.baseUrl;
     final token = box.read('token');
     // Forming detail address
     detail_address.value =
@@ -96,7 +98,8 @@ class DataPelangganRegController extends GetxController {
   }
 
   Future<void> fetchKabupaten() async {
-    final url = 'http://seatuersih.pradiptaahmad.tech/api';
+    // final url = 'http://seatuersih.pradiptaahmad.tech/api';
+    final url = ApiEndpoint.baseUrl;
     final token = box.read('token');
     var headers = {
       'Accept': 'application/json',
@@ -126,7 +129,8 @@ class DataPelangganRegController extends GetxController {
   }
 
   Future<void> fetchKecamatan() async {
-    final url = 'http://seatuersih.pradiptaahmad.tech/api';
+    // final url = 'http://seatuersih.pradiptaahmad.tech/api';
+    final url = ApiEndpoint.baseUrl;
     final token = box.read('token');
     var headers = {
       'Accept': 'application/json',

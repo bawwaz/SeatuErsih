@@ -29,7 +29,8 @@ dependencies:
   firebase_messaging: 
   webview_flutter: 
   url_launcher: ^6.1.7
-  flutter_local_notifications:  
+  flutter_local_notifications:
+  flutter_svg: ^2.0.5
 
 
 
@@ -42,3 +43,4 @@ flutter:
   assets:
     - assets/img/
     - assets/img/cleaning.png
+    - assets/svg/
