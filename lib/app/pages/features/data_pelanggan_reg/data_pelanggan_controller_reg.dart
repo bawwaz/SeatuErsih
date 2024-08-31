@@ -100,7 +100,7 @@ class DataPelangganRegController extends GetxController {
   }
 
   Future<bool> postOrders() async {
-    final url = ApiEndpoint.baseUrl + '/orders';
+    final url = ApiEndpoint.baseUrl + '/order/add';
     final token = box.read('token');
     var headers = {
       'Accept': 'application/json',
@@ -123,9 +123,11 @@ class DataPelangganRegController extends GetxController {
           headers: headers, body: json.encode(data));
 
       if (response.statusCode == 201) {
+        print('success');
         orders.assignAll(json.decode(response.body));
         return true;
       } else {
+        print(response.body);
         return false;
       }
     } catch (e) {
