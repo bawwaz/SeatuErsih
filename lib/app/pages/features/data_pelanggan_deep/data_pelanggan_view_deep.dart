@@ -111,7 +111,7 @@ class DataPelangganDeepView extends GetView<DataPelangganControllerDeep> {
             _buildSectionHeader('Contact', 'No. Telephone'),
             TextFieldData(
               hintText: 'Masukkan no. telephone',
-              keyboardType: TextInputType.number, 
+              keyboardType: TextInputType.number,
               inputFormatters: [FilteringTextInputFormatter.digitsOnly],
               onChanged: (value) {
                 controller.phone.value = value;

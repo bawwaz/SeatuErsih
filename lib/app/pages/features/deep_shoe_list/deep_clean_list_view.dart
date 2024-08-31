@@ -83,7 +83,7 @@ class DeepCleanListView extends GetView<DeepCleanController> {
                             ],
                             borderRadius: BorderRadius.circular(10),
                           ),
-                          height: 140,
+                          height: 155,
                           width: double.infinity,
                           child: Padding(
                             padding: const EdgeInsets.all(20),
@@ -201,14 +201,8 @@ class DeepCleanListView extends GetView<DeepCleanController> {
             SizedBox(height: 10),
             InkWell(
               onTap: () {
-                Get.toNamed(
-                  Routes.PAYMENT_CONFIRMATION,
-                  arguments: {
-                    'deepList' : controller.orderId
-                  }
-                    
-                  
-                )?.then((value) {
+                Get.toNamed(Routes.PAYMENT_CONFIRMATION,
+                    arguments: {'deepList': controller.orderId})?.then((value) {
                   if (value == "success") {
                     controller.clearShoes();
                   }

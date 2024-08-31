@@ -6,6 +6,7 @@ import 'package:http/http.dart' as http;
 class AddOnsController extends GetxController {
   late final arguments;
   final brand = <Map<String, dynamic>>[].obs;
+  var orderId = 0.obs;
   List<dynamic> addOnsData = [
     {
       'title': 'Un-Yellowing - 5k',
@@ -128,9 +129,10 @@ class AddOnsController extends GetxController {
     if (arguments[0].toString() == 'regular_clean') {
       total_price.value = 25000;
     } else {
-      total_price.value = 30000;
+      total_price.value = 35000;
     }
     isSelected = List.generate(addOnsData.length, (index) => false.obs).obs;
+   
     fetchShoename();
     super.onInit();
   }

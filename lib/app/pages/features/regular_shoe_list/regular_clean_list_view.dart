@@ -78,7 +78,7 @@ class RegCleanListView extends StatelessWidget {
                             ],
                             borderRadius: BorderRadius.circular(10),
                           ),
-                          height: 140,
+                          height: 150,
                           width: double.infinity,
                           child: Padding(
                             padding: const EdgeInsets.all(20),
@@ -194,14 +194,8 @@ class RegCleanListView extends StatelessWidget {
             SizedBox(height: 10),
             InkWell(
               onTap: () {
-                Get.toNamed(
-                  Routes.PAYMENT_CONFIRMATION,
-                  arguments: 
-                    {
-                      'regList' : controller.orderId
-                    }
-                 
-                )?.then((value) {
+                Get.toNamed(Routes.PAYMENT_CONFIRMATION,
+                    arguments: {'regList': controller.orderId})?.then((value) {
                   if (value == "success") {
                     controller.clearShoes();
                   }

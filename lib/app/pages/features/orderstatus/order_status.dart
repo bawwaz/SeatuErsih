@@ -32,7 +32,7 @@ class MyOrder extends GetView<HomePageController> {
 
       List<Widget> tabViews = tabs.keys.map((status) {
         return RefreshIndicator(
-          onRefresh: controller.refreshOrders, // Refresh logic
+          onRefresh: controller.refreshOrders,
           child: CustomScrollView(
             slivers: [
               Obx(
