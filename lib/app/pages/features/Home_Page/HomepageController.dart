@@ -9,8 +9,7 @@ import 'package:seatu_ersih/app/api/baseurl.dart';
 
 class HomePageController extends GetxController {
   var isLoading = false.obs;
-  final orders =
-      <Map<dynamic, dynamic>>[].obs; 
+  final orders = <Map<dynamic, dynamic>>[].obs; 
   var isStoreOpen = true.obs;
   final reviews1 = [].obs;
   final reviews2 = [].obs;
@@ -62,6 +61,7 @@ class HomePageController extends GetxController {
       print(e);
     } finally {
       isLoading(false);
+      Get.forceAppUpdate(); // Force a full app update to refresh UI
     }
   }
 
