@@ -10,7 +10,6 @@ class ProfilePage extends GetView<ProfileController> {
 
   @override
   Widget build(BuildContext context) {
-    // Memanggil fetchUser setiap kali widget dibangun
     controller.fetchUser();
 
     return Scaffold(

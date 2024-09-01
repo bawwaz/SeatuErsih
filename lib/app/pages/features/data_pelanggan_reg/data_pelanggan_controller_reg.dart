@@ -40,6 +40,7 @@ class DataPelangganRegController extends GetxController {
 
       if (response.statusCode == 200) {
         final data = json.decode(response.body);
+
         if (data != null && data['data'] != null) {
           kabupaten.assignAll(data['data']);
           print('Kabupaten found: ${data['data']}');
@@ -100,7 +101,30 @@ class DataPelangganRegController extends GetxController {
   }
 
   Future<bool> postOrders() async {
-    final url = ApiEndpoint.baseUrl + '/order/add';
+    // Debugging: Print values before sending
+    print('Order Type: regular_clean');
+    print('Detail Address: ${detail_address.value}');
+    print('Phone: ${phone.value}');
+    print('Total Price: ${total_price.value}');
+    print('Pickup Date: ${pickup_date.value}');
+    print('Notes: ${notes.value}');
+    print('Shoes ID: ${shoesId.value}');
+    print('User ID: ${userId.value}');
+    print('Laundry ID: ${laundry_id.value}');
+    print('Kabupaten: ${kabupatenName.value}');
+    print('Kecamatan: ${kecamatanName.value}');
+
+    // Validation checks
+    if (detail_address.value.isEmpty ||
+        phone.value.isEmpty ||
+        pickup_date.value.isEmpty ||
+        kabupatenName.value.isEmpty ||
+        kecamatanName.value.isEmpty) {
+      print('Please fill in all required fields.');
+      return false;
+    }
+
+    final url = 'http://seatuersih.pradiptaahmad.tech/api/order/add';
     final token = box.read('token');
     var headers = {
       'Accept': 'application/json',
@@ -110,28 +134,31 @@ class DataPelangganRegController extends GetxController {
     var data = {
       'detail_address': detail_address.value,
       'phone': phone.value,
-      'total_price': total_price.value,
+      'total_price': total_price.value.toString(),
       'pickup_date': pickup_date.value,
+      'user_id': box.read('userid').toString(),
       'notes': notes.value,
-      'shoes_id': shoesId.value,
-      'user_id': userId.value,
-      'laundry_id': laundry_id.value,
+      'laundry_id': Get.arguments.toString(),
+      'order_type': 'regular_clean',
+      'kabupaten': kabupatenName.value,
+      'kecamatan': kecamatanName.value,
     };
 
     try {
-      final response = await http.post(Uri.parse(url),
-          headers: headers, body: json.encode(data));
-
+      final response =
+          await http.post(Uri.parse(url), headers: headers, body: data);
+      print('Response Status: ${response.statusCode}');
       if (response.statusCode == 201) {
-        print('success');
-        orders.assignAll(json.decode(response.body));
+        print('Order placed successfully');
+        orders.value = json.decode(response.body)['order'];
+        box.write('order_id', orders['id'].toString());
         return true;
       } else {
-        print(response.body);
+        print('Error: ${response.body}');
         return false;
       }
     } catch (e) {
-      print(e);
+      print('Exception: $e');
       return false;
     }
   }

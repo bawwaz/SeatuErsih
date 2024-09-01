@@ -29,6 +29,7 @@ class RegCleanListController extends GetxController {
     };
 
     try {
+      print(orderId);
       // Fetch shoes based on orderId
       final response = await http.get(
         Uri.parse('$url/shoe/getshoe/$orderId'),
@@ -36,6 +37,7 @@ class RegCleanListController extends GetxController {
       );
 
       if (response.statusCode == 200) {
+        print(response.statusCode);
         final data = json.decode(response.body)['data'];
         if (data is List) {
           shoes.assignAll(data.cast<Map<dynamic, dynamic>>());

@@ -7,11 +7,9 @@ class TextfieldAlamatSpesifik extends StatelessWidget {
 
   const TextfieldAlamatSpesifik({
     super.key,
-    required this.controller,
     this.onChanged,
   });
 
-  final DataPelangganRegController controller;
 
   @override
   Widget build(BuildContext context) {
@@ -26,9 +24,7 @@ class TextfieldAlamatSpesifik extends StatelessWidget {
         border: InputBorder.none,
         contentPadding: EdgeInsets.all(10),
       ),
-      onChanged: (value) {
-        controller.detail_address.value = value;
-      },
+      onChanged: onChanged,
     );
   }
 }

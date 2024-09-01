@@ -10,7 +10,7 @@ class RatingController extends GetxController {
   var review = ''.obs;
   var order_id = 0.obs;
   var order_type = ''.obs;
-  var laundry_id = 0.obs; // Add laundry_id
+  var laundry_id = 0.obs;
   final box = GetStorage();
 
   Future<bool> postReview() async {
@@ -28,10 +28,10 @@ class RatingController extends GetxController {
       'review': review.value,
       'order_id': order_id.value,
       'order_type': order_type.value,
-      'laundry_id': laundry_id.value 
+      'laundry_id': laundry_id.value,
     });
 
-    print('Posting review with body: $body'); 
+    print('Posting review with body: $body');
 
     try {
       final response =

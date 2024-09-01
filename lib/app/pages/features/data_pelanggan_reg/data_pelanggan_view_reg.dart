@@ -106,7 +106,6 @@ class DataPelangganRegView extends GetView<DataPelangganRegController> {
                 ],
               ),
               child: TextfieldAlamatSpesifik(
-                controller: controller,
                 onChanged: (value) {
                   controller.detail_address.value = value;
                 },

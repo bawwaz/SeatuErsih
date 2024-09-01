@@ -17,7 +17,7 @@ class HomePageController extends GetxController {
   final box = GetStorage();
 
   Future<void> fetchOrder() async {
-    if (isClosed) return; // Ensure the controller is still active
+    if (isClosed) return;
     isLoading.value = true;
     final url = ApiEndpoint.baseUrl;
     final token = box.read('token');
@@ -27,6 +27,8 @@ class HomePageController extends GetxController {
     };
 
     try {
+      orders.clear();
+      isLoading(true);
       final response =
           await http.get(Uri.parse('$url/order/getall'), headers: headers);
 
@@ -45,12 +47,15 @@ class HomePageController extends GetxController {
         } else {
           print('No orders found in response');
         }
+        isLoading(false);
       } else {
+        isLoading(false);
         print('Failed to fetch orders: ${response.statusCode}');
         print('Response body: ${response.body}');
         throw Exception('Failed to fetch orders');
       }
     } catch (e) {
+      isLoading(false);
       print(e);
     } finally {
       isLoading.value = false; // Set loading to false in finally block
