@@ -1,4 +1,3 @@
-// profileController.dart
 import 'dart:convert';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
@@ -21,20 +20,18 @@ class ProfileController extends GetxController {
 
   @override
   void onInit() {
-    fetchUser();
     super.onInit();
+    fetchUser();
     loadProfile();
     authenticationService = AuthenticationService();
   }
 
   void loadProfile() {
-    GetStorage box = GetStorage();
     username.value = box.read('username') ?? 'No Username';
     phoneNumber.value = box.read('phoneNumber') ?? 'No Phone Number';
   }
 
   Future<void> logout() async {
-    GetStorage box = GetStorage(); // Move this line here
     try {
       SharedPreferences prefs = await SharedPreferences.getInstance();
       await authenticationService.logoutService();
@@ -48,7 +45,7 @@ class ProfileController extends GetxController {
         e.toString(),
       );
     }
-    email.value = box.read('email') ?? 'No email'; // Access box variable here
+    email.value = box.read('email') ?? 'No email';
   }
 
   Future<void> fetchUser() async {
@@ -65,12 +62,13 @@ class ProfileController extends GetxController {
       if (response.statusCode == 200) {
         final jsonData = json.decode(response.body)['user'];
         users.value = jsonData;
-        isLoading.value = false;
       } else {
         print("Failed to fetch user");
       }
     } catch (e) {
       print("Fetch user error: $e");
+    } finally {
+      isLoading.value = false;
     }
   }
 }

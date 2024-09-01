@@ -12,11 +12,12 @@ import 'package:seatu_ersih/themes/colors.dart';
 import 'package:seatu_ersih/themes/fonts.dart';
 
 class DataPelangganRegView extends GetView<DataPelangganRegController> {
-  const DataPelangganRegView({super.key});
+  const DataPelangganRegView({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      
       appBar: AppBar(
         automaticallyImplyLeading: false,
         title: Text(
@@ -26,7 +27,7 @@ class DataPelangganRegView extends GetView<DataPelangganRegController> {
         ),
         leading: InkWell(
           onTap: () {
-            Get.toNamed(Routes.CHOOSE_SERVICE);
+            _confirmCancelDialog(context);
           },
           child: Image.asset('assets/img/angle-circle-right 1.png'),
         ),
@@ -68,7 +69,7 @@ class DataPelangganRegView extends GetView<DataPelangganRegController> {
                     ),
                   ],
                 ),
-                child: DropdownKabupatenReg(), // No need to pass kabupaten here
+                child: DropdownKabupatenReg(),
               ),
             ),
             Padding(
@@ -187,6 +188,64 @@ class DataPelangganRegView extends GetView<DataPelangganRegController> {
         ),
       ),
     );
+  }
+
+  Future<bool> _confirmCancelDialog(BuildContext context) async {
+    return (await showDialog<bool>(
+          context: context,
+          barrierDismissible: false, // User must tap a button
+          builder: (context) => AlertDialog(
+            backgroundColor: Colors.white,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(20),
+            ),
+            title: Row(
+              children: [
+                Icon(
+                  Icons.cancel,
+                  color: AppColors.primaryColor,
+                ),
+                SizedBox(width: 10),
+                Text(
+                  'Cancel Order?',
+                  style: Fonts.header1.copyWith(
+                    fontSize: 18,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.black,
+                  ),
+                ),
+              ],
+            ),
+            content: Text(
+              'Do you want to cancel this order?',
+              style: Fonts.detail.copyWith(
+                fontSize: 16,
+                color: Colors.black54,
+              ),
+            ),
+            actions: <Widget>[
+              TextButton(
+                onPressed: () => Navigator.of(context).pop(false),
+                child: Text(
+                  'No',
+                  style: Fonts.header1.copyWith(color: AppColors.primaryColor),
+                ),
+              ),
+              TextButton(
+                onPressed: () {
+                  Navigator.of(context).pop(true); // Close the dialog
+                  Get.toNamed(
+                      Routes.CHOOSE_SERVICE); // Navigate to the desired route
+                },
+                child: Text(
+                  'Yes',
+                  style: Fonts.header1.copyWith(color: AppColors.primaryColor),
+                ),
+              ),
+            ],
+          ),
+        )) ??
+        false; // Return false if the dialog is dismissed
   }
 
   Widget _buildSectionHeader(String title, String subtitle) {

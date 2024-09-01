@@ -5,20 +5,23 @@ import 'package:seatu_ersih/app/router/app_pages.dart';
 import 'package:seatu_ersih/themes/fonts.dart';
 import 'profileController.dart';
 
-class ProfilePage extends GetView<ProfileController> {
+class ProfilePage extends StatelessWidget {
+  // Change GetView<ProfileController> to StatelessWidget
   const ProfilePage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    controller.fetchUser();
+    // Initialize the ProfileController here
+    final ProfileController controller = Get.put(ProfileController());
 
     return Scaffold(
+      appBar: AppBar(),
       backgroundColor: Colors.white,
       body: RefreshIndicator(
-        onRefresh: controller.fetchUser, // Method untuk merefresh data
+        onRefresh: controller.fetchUser, // Method for refreshing data
         child: SingleChildScrollView(
           physics:
-              const AlwaysScrollableScrollPhysics(), // Memungkinkan scroll meskipun konten tidak penuh
+              const AlwaysScrollableScrollPhysics(), // Allow scroll even when content is not full
           child: Container(
             margin: const EdgeInsets.symmetric(horizontal: 28),
             child: Column(
@@ -39,8 +42,8 @@ class ProfilePage extends GetView<ProfileController> {
                               )
                             : CircleAvatar(
                                 radius: 60,
-                                backgroundImage:
-                                    AssetImage('assets/img/profile-icon.png'),
+                                backgroundImage: const AssetImage(
+                                    'assets/img/profile-icon.png'),
                               ),
                       ),
                     ),
@@ -70,14 +73,14 @@ class ProfilePage extends GetView<ProfileController> {
                                   controller.isLoading.value
                                       ? "Loading..."
                                       : controller.users['email'] ?? "No Email",
-                                  style: TextStyle(fontSize: 14),
+                                  style: const TextStyle(fontSize: 14),
                                 ),
                                 const SizedBox(height: 8),
                                 Text(
                                   controller.isLoading.value
                                       ? "Loading..."
                                       : controller.users['phone'] ?? "No Phone",
-                                  style: TextStyle(fontSize: 14),
+                                  style: const TextStyle(fontSize: 14),
                                 ),
                               ],
                             ),
@@ -87,7 +90,7 @@ class ProfilePage extends GetView<ProfileController> {
                     ),
                   ],
                 ),
-                SizedBox(height: 36),
+                const SizedBox(height: 36),
                 InkWell(
                   onTap: () async {
                     await Get.toNamed(Routes.PROFILE_EDIT,

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:seatu_ersih/app/pages/features/data_pelanggan_deep/data_pelanggan_controller_deep.dart';
 
 class DropdownKabupatenDeep extends GetView<DataPelangganControllerDeep> {
@@ -8,50 +7,32 @@ class DropdownKabupatenDeep extends GetView<DataPelangganControllerDeep> {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      width: double.infinity,
-      padding: EdgeInsets.symmetric(horizontal: 10),
-      decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(10),
-        boxShadow: [
-          BoxShadow(
-            color: Colors.grey.withOpacity(0.5),
-            spreadRadius: 0,
-            blurRadius: 3,
-            offset: Offset(0, 0),
+    return Obx(() {
+      return DropdownButtonFormField<int>(
+        decoration: InputDecoration(
+          border: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(10),
           ),
-        ],
-      ),
-      child: Obx(
-        () => DropdownButtonHideUnderline(
-          child: DropdownButton<String>(
-            hint: Text(
-              'Kabupaten',
-              style: GoogleFonts.poppins(
-                color: Colors.grey,
-                fontSize: 16,
-              ),
-            ),
-            value: controller.kabupatenName.value.isEmpty
-                ? null
-                : controller.kabupatenName.value,
-            items: controller.kabupaten.map((kab) {
-              return DropdownMenuItem<String>(
-                value: kab['name'],
-                child: Text(
-                  kab['name'],
-                  style: GoogleFonts.poppins(fontSize: 16),
-                ),
-              );
-            }).toList(),
-            onChanged: (value) {
-              controller.kabupatenName.value = value ?? '';
-            },
-            icon: Icon(Icons.arrow_drop_down, color: Colors.grey),
-          ),
+          contentPadding: EdgeInsets.symmetric(horizontal: 15),
         ),
-      ),
-    );
+        hint: Text('Pilih Kabupaten'),
+        value: controller.kabupatenName.value.isEmpty
+            ? null
+            : int.tryParse(controller.kabupatenName.value),
+        items: controller.kabupaten.map((kab) {
+          return DropdownMenuItem<int>(
+            value: kab['id'],
+            child: Text(kab['kabupaten']),
+          );
+        }).toList(),
+        onChanged: (int? newValue) {
+          if (newValue != null) {
+            controller.kabupatenName.value = newValue.toString();
+            controller.kecamatanName.value = ''; // Reset kecamatan value
+            controller.fetchKecamatanByKabupatenId(newValue);
+          }
+        },
+      );
+    });
   }
 }

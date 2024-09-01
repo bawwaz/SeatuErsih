@@ -1,14 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:seatu_ersih/app/pages/features/data_pelanggan_deep/data_pelanggan_controller_deep.dart';
+import 'package:seatu_ersih/app/pages/features/data_pelanggan_reg/data_pelanggan_controller_reg.dart';
 
-class TextfieldAlamatSpesifikDeep extends StatelessWidget {
-  const TextfieldAlamatSpesifikDeep({
+class TextfieldAlamatSpesifik extends StatelessWidget {
+  final ValueChanged<String>? onChanged; // Add this line
+
+  const TextfieldAlamatSpesifik({
     super.key,
-    required this.controller,
+    this.onChanged,
   });
 
-  final DataPelangganControllerDeep controller;
 
   @override
   Widget build(BuildContext context) {
@@ -23,9 +24,7 @@ class TextfieldAlamatSpesifikDeep extends StatelessWidget {
         border: InputBorder.none,
         contentPadding: EdgeInsets.all(10),
       ),
-      onChanged: (value) {
-        controller.detail_address.value = value;
-      },
+      onChanged: onChanged,
     );
   }
 }

@@ -5,7 +5,9 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:seatu_ersih/app/pages/features/data_pelanggan_deep/data_pelanggan_controller_deep.dart';
 import 'package:seatu_ersih/app/pages/features/data_pelanggan_deep/widget/dropdown_kabupaten.dart';
 import 'package:seatu_ersih/app/pages/features/data_pelanggan_deep/widget/dropdown_kecamatan.dart';
-import 'package:seatu_ersih/app/pages/features/data_pelanggan_deep/widget/textfield_alamat_spesifik.dart';
+import 'package:seatu_ersih/app/pages/features/data_pelanggan_reg/widget/dropdown_kabupaten.dart';
+import 'package:seatu_ersih/app/pages/features/data_pelanggan_reg/widget/dropdown_kecamatan.dart';
+import 'package:seatu_ersih/app/pages/features/data_pelanggan_reg/widget/textfield_alamat_spesifik.dart';
 import 'package:seatu_ersih/app/pages/features/data_pelanggan_reg/widget/textfieldata.dart';
 import 'package:seatu_ersih/app/router/app_pages.dart';
 import 'package:seatu_ersih/themes/colors.dart';
@@ -20,7 +22,7 @@ class DataPelangganDeepView extends GetView<DataPelangganControllerDeep> {
       appBar: AppBar(
         automaticallyImplyLeading: false,
         title: Text(
-          'Data Pelanggan ',
+          'Data Pelanggan',
           style: Fonts.header1.copyWith(
               color: Colors.black, fontSize: 16, fontWeight: FontWeight.w500),
         ),
@@ -68,7 +70,8 @@ class DataPelangganDeepView extends GetView<DataPelangganControllerDeep> {
                     ),
                   ],
                 ),
-                child: DropdownKabupatenDeep(),
+                child:
+                    DropdownKabupatenDeep(), // No need to pass kabupaten here
               ),
             ),
             Padding(
@@ -105,14 +108,18 @@ class DataPelangganDeepView extends GetView<DataPelangganControllerDeep> {
                   ),
                 ],
               ),
-              child: TextfieldAlamatSpesifikDeep(controller: controller),
+              child: TextfieldAlamatSpesifik(
+                onChanged: (value) {
+                  controller.detail_address.value = value;
+                },
+              ),
             ),
             SizedBox(height: 20),
             _buildSectionHeader('Contact', 'No. Telephone'),
             TextFieldData(
-              hintText: 'Masukkan no. telephone',
               keyboardType: TextInputType.number,
               inputFormatters: [FilteringTextInputFormatter.digitsOnly],
+              hintText: 'Masukkan no. telephone',
               onChanged: (value) {
                 controller.phone.value = value;
               },
@@ -125,7 +132,8 @@ class DataPelangganDeepView extends GetView<DataPelangganControllerDeep> {
                       hintText: 'Masukkan tanggal pengambilan',
                       initialValue: controller.pickup_date.value,
                       readOnly: true,
-                      textAlign: TextAlign.center,
+                      textAlign: TextAlign.start,
+                      padding: EdgeInsets.only(left: 50),
                     )),
                 Positioned(
                   left: 10,
@@ -160,8 +168,10 @@ class DataPelangganDeepView extends GetView<DataPelangganControllerDeep> {
                   onTap: () async {
                     bool success = await controller.postOrders();
                     if (success) {
-                      Get.offNamed(Routes.DEEP_CLEAN_LIST,
-                          arguments: [controller.orders['id']]);
+                      Get.offNamed(Routes.DEEP_CLEAN_LIST, arguments: [
+                        controller.orders['id'],
+                        controller.orders['laundry_id'].toString(),
+                      ]);
                     } else {
                       Get.snackbar('Error', 'Failed to submit data');
                     }

@@ -42,7 +42,7 @@ class OrderContainer extends GetView<HomePageController> {
                 decline_note!,
                 snackPosition: SnackPosition.BOTTOM,
                 backgroundColor: Colors.white,
-                colorText: Colors.white,
+                colorText: Colors.black.withOpacity(0.5),
               );
             }
           },

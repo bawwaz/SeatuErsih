@@ -33,12 +33,13 @@ class ChooseServiceController extends GetxController {
           headers: headers);
 
       if (response.statusCode == 200) {
+        isLoading(true);
         var data = jsonDecode(response.body);
         if (data['laundries'] != null && data['laundries'] is List) {
           laundries.value = List<Map<String, dynamic>>.from(data['laundries']);
-
           // Fetch and update average ratings
           await fetchAverageReviews();
+          isLoading(false);
         }
       } else {
         print('Error: ${response.statusCode}');

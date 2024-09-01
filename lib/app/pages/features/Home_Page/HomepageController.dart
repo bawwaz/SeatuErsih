@@ -9,7 +9,8 @@ import 'package:seatu_ersih/app/api/baseurl.dart';
 
 class HomePageController extends GetxController {
   var isLoading = false.obs;
-  final orders = [].obs;
+  final orders =
+      <Map<dynamic, dynamic>>[].obs; 
   var isStoreOpen = true.obs;
   final reviews1 = [].obs;
   final reviews2 = [].obs;
@@ -18,7 +19,7 @@ class HomePageController extends GetxController {
 
   Future<void> fetchOrder() async {
     if (isClosed) return;
-    isLoading.value = true;
+    isLoading(true);
     final url = ApiEndpoint.baseUrl;
     final token = box.read('token');
     var headers = {
@@ -28,44 +29,45 @@ class HomePageController extends GetxController {
 
     try {
       orders.clear();
-      isLoading(true);
       final response =
           await http.get(Uri.parse('$url/order/getall'), headers: headers);
 
       if (response.statusCode == 200) {
         final data = json.decode(response.body)['data'];
+
         if (data != null && data is Iterable) {
-          List<dynamic> sortedData = data.map((item) {
-            return item;
+          List<Map<dynamic, dynamic>> sortedData =
+              data.map<Map<dynamic, dynamic>>((item) {
+            return item as Map<dynamic,
+                dynamic>; // memastikan item adalah Map<dynamic, dynamic>
           }).toList();
+
           sortedData.sort((a, b) {
             DateTime dateA = DateTime.parse(a['created_at']);
             DateTime dateB = DateTime.parse(b['created_at']);
             return dateB.compareTo(dateA);
           });
-          orders.assignAll(sortedData);
+
+          orders.assignAll(
+              sortedData); // assignAll sekarang menerima tipe yang sesuai
         } else {
           print('No orders found in response');
         }
-        isLoading(false);
       } else {
-        isLoading(false);
         print('Failed to fetch orders: ${response.statusCode}');
         print('Response body: ${response.body}');
         throw Exception('Failed to fetch orders');
       }
     } catch (e) {
-      isLoading(false);
       print(e);
     } finally {
-      isLoading.value = false; // Set loading to false in finally block
+      isLoading(false);
     }
   }
 
   String formatDate(String date) {
     DateTime dateTime = DateTime.parse(date);
-    String formattedDate = "${dateTime.day}/${dateTime.month}/${dateTime.year}";
-    return formattedDate;
+    return DateFormat('dd/MM/yyyy').format(dateTime);
   }
 
   String formatPrice(String? price) {
@@ -73,15 +75,25 @@ class HomePageController extends GetxController {
       return 'N/A';
     } else {
       int intPrice = int.tryParse(price) ?? 0;
-      String formattedPrice =
-          NumberFormat.currency(locale: 'id_ID', symbol: 'Rp').format(intPrice);
-      return formattedPrice;
+      return NumberFormat.currency(locale: 'id_ID', symbol: 'Rp')
+          .format(intPrice);
     }
   }
 
+  Future<void> refreshOrders() async {
+    await fetchOrder();
+  }
+
+  @override
+  void onInit() async {
+    super.onInit();
+    await fetchOrder();
+    await fetchReviews1();
+    await fetchReviews2();
+  }
+
   Future<void> fetchReviews1() async {
-    if (isClosed) return; // Ensure the controller is still active
-    isLoading.value = true;
+    isLoading(true);
     final url = ApiEndpoint.baseUrl;
     final token = box.read('token');
     var headers = {
@@ -108,13 +120,12 @@ class HomePageController extends GetxController {
     } catch (e) {
       print(e);
     } finally {
-      isLoading.value = false; // Set loading to false in finally block
+      isLoading(false);
     }
   }
 
   Future<void> fetchReviews2() async {
-    if (isClosed) return; // Ensure the controller is still active
-    isLoading.value = true;
+    isLoading(true);
     final url = ApiEndpoint.baseUrl;
     final token = box.read('token');
     var headers = {
@@ -141,26 +152,7 @@ class HomePageController extends GetxController {
     } catch (e) {
       print(e);
     } finally {
-      isLoading.value = false; // Set loading to false in finally block
+      isLoading(false);
     }
-  }
-
-  Future<void> refreshOrders() async {
-    await fetchOrder();
-  }
-
-  @override
-  void onInit() async {
-    await fetchOrder();
-    await fetchReviews1();
-    await fetchReviews2();
-    super.onInit();
-  }
-
-  @override
-  void onReady() {
-    fetchReviews1();
-    fetchReviews2();
-    super.onReady();
   }
 }
