@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:seatu_ersih/app/global_component/navbar/btmnavcontroller.dart';
 import 'package:seatu_ersih/app/pages/features/Home_Page/HomepageView.dart';
@@ -14,27 +15,46 @@ class BottomNavBar extends StatelessWidget {
     return Scaffold(
       body: Obx(() => _buildPage(navController.currentIndex.value)),
       bottomNavigationBar: Obx(() {
+        final BottomNavigationController navController = Get.find();
         return BottomNavigationBar(
           currentIndex: navController.currentIndex.value,
           onTap: (index) {
             navController.currentIndex.value = index;
           },
           backgroundColor: Colors.white,
-          selectedItemColor: AppColors.primaryColor,
-          unselectedItemColor: Colors.grey,
-          type: BottomNavigationBarType.fixed,
-          items: const [
+          selectedItemColor: Color(0xFF7EC1EB),
+          unselectedItemColor: Color(0xFF607D8B),
+          selectedLabelStyle: TextStyle(fontWeight: FontWeight.bold),
+          items: [
             BottomNavigationBarItem(
-              icon: Icon(Icons.home_rounded),
+              icon: SvgPicture.asset(
+                'assets/svg/home.svg',
+                height: navController.currentIndex.value == 0 ? 28.0 : 24.0,
+                color: navController.currentIndex.value == 0
+                    ? Color(0xFF7EC1EB)
+                    : Color(0xFF607D8B),
+              ),
               label: 'Home',
             ),
             BottomNavigationBarItem(
-              icon: Icon(Icons.local_laundry_service),
-              label: 'My Orders',
+              icon: SvgPicture.asset(
+                'assets/svg/Bag.svg',
+                height: navController.currentIndex.value == 1 ? 28.0 : 24.0,
+                color: navController.currentIndex.value == 1
+                    ? Color(0xFF7EC1EB)
+                    : Color(0xFF607D8B),
+              ),
+              label: 'My order',
             ),
             BottomNavigationBarItem(
-              icon: Icon(Icons.person),
-              label: 'Profile',
+              icon: SvgPicture.asset(
+                "assets/svg/user.svg",
+                height: navController.currentIndex.value == 2 ? 28.0 : 24.0,
+                color: navController.currentIndex.value == 2
+                    ? Color(0xFF7EC1EB)
+                    : Color(0xFF607D8B),
+              ),
+              label: 'Me',
             ),
           ],
         );
