@@ -102,7 +102,7 @@ class DataPelangganControllerDeep extends GetxController {
 
   Future<bool> postOrders() async {
     // Debugging: Print values before sending
-    print('Order Type: regular_clean');
+    print('Order Type: deep_clean');
     print('Detail Address: ${detail_address.value}');
     print('Phone: ${phone.value}');
     print('Total Price: ${total_price.value}');
@@ -139,7 +139,7 @@ class DataPelangganControllerDeep extends GetxController {
       'user_id': box.read('userid').toString(),
       'notes': notes.value,
       'laundry_id': Get.arguments.toString(),
-      'order_type': 'regular_clean',
+      'order_type': 'deep_clean',
       'kabupaten': kabupatenName.value,
       'kecamatan': kecamatanName.value,
     };

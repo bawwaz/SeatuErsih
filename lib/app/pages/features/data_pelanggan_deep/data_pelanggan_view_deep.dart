@@ -5,16 +5,18 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:seatu_ersih/app/pages/features/data_pelanggan_deep/data_pelanggan_controller_deep.dart';
 import 'package:seatu_ersih/app/pages/features/data_pelanggan_deep/widget/dropdown_kabupaten.dart';
 import 'package:seatu_ersih/app/pages/features/data_pelanggan_deep/widget/dropdown_kecamatan.dart';
-import 'package:seatu_ersih/app/pages/features/data_pelanggan_reg/widget/dropdown_kabupaten.dart';
-import 'package:seatu_ersih/app/pages/features/data_pelanggan_reg/widget/dropdown_kecamatan.dart';
 import 'package:seatu_ersih/app/pages/features/data_pelanggan_reg/widget/textfield_alamat_spesifik.dart';
 import 'package:seatu_ersih/app/pages/features/data_pelanggan_reg/widget/textfieldata.dart';
 import 'package:seatu_ersih/app/router/app_pages.dart';
 import 'package:seatu_ersih/themes/colors.dart';
 import 'package:seatu_ersih/themes/fonts.dart';
 
-class DataPelangganDeepView extends GetView<DataPelangganControllerDeep> {
-  const DataPelangganDeepView({super.key});
+class DataPelangganDeepView extends StatelessWidget {
+  DataPelangganDeepView({super.key});
+
+  // Inject the controller
+  final DataPelangganControllerDeep controller =
+      Get.put(DataPelangganControllerDeep());
 
   @override
   Widget build(BuildContext context) {
@@ -70,8 +72,7 @@ class DataPelangganDeepView extends GetView<DataPelangganControllerDeep> {
                     ),
                   ],
                 ),
-                child:
-                    DropdownKabupatenDeep(), // No need to pass kabupaten here
+                child: DropdownKabupatenDeep(),
               ),
             ),
             Padding(
