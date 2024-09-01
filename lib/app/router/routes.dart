@@ -45,6 +45,7 @@
 part of 'app_pages.dart';
 
 class Routes {
+  static const String SPLASHSCREEN = '/splashscreen';
   static const String NOTIFICATION = '/notification';
   static const String DEEP_CLEAN_LIST = '/deep_clean_list';
   static const String ADD_ONS = '/add_ons';

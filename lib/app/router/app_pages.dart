@@ -57,15 +57,23 @@ import 'package:seatu_ersih/app/pages/intial_pages/otp_page/otp_page_binding.dar
 import 'package:seatu_ersih/app/pages/intial_pages/otp_page/otp_page_view.dart';
 import 'package:seatu_ersih/app/pages/intial_pages/register_page/RegisterviewPage.dart';
 import 'package:seatu_ersih/app/pages/intial_pages/register_page/registerBinding.dart';
+import 'package:seatu_ersih/app/pages/intial_pages/splash_screen/splash_screen_binding.dart';
+import 'package:seatu_ersih/app/pages/intial_pages/splash_screen/splash_screen_view.dart';
 
 part 'routes.dart';
 
 class AppPages {
   AppPages._();
 
-  static const INITIAL = Routes.LOGIN;
+  static const INITIAL = Routes.SPLASHSCREEN;
 
   static final routes = [
+    GetPage(
+      name: Routes.SPLASHSCREEN,
+      page: () => SplashScreenView(),
+      binding: SplashScreenBinding(),
+      transition: Transition.noTransition,
+    ),
     GetPage(
       name: Routes.CHOOSE_SERVICE,
       page: () => ChooseService(),
