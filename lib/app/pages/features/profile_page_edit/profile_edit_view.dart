@@ -107,26 +107,8 @@ class ProfileEditView extends GetView<ProfileEditController> {
                     controller: controller.textEmailController,
                   ),
                 ),
-                Align(
-                  alignment: Alignment.centerLeft,
-                  child: Padding(
-                    padding: const EdgeInsets.only(top: 20.0),
-                    child: Text(
-                      'Nomor Telepon',
-                      style: Fonts.header1
-                          .copyWith(color: Colors.black, fontSize: 15),
-                    ),
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.only(top: 10.0),
-                  child: ProfileEditTextField(
-                    hintText: 'Telepon',
-                    controller: controller.textPhoneController,
-                  ),
-                ),
                 SizedBox(
-                  height: 15,
+                  height: 150,
                 ),
                 GestureDetector(
                   onTap: () async {

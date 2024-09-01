@@ -41,7 +41,9 @@ class MyOrder extends GetView<HomePageController> {
                         baseColor: Colors.grey[300]!,
                         highlightColor: Colors.grey[100]!,
                         child: Container(
-                          margin: const EdgeInsets.symmetric(vertical: 8.0),
+                          decoration: BoxDecoration(),
+                          height: 20,
+                          width: double.infinity,
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
