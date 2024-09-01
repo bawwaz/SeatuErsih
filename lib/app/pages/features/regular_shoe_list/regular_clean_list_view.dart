@@ -15,11 +15,6 @@ class RegCleanListView extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         automaticallyImplyLeading: false,
-        leading: InkWell(
-            onTap: () {
-              Get.back();
-            },
-            child: Image.asset('assets/img/angle-circle-right 1.png')),
         centerTitle: true,
         title: Text(
           'Regular Clean',

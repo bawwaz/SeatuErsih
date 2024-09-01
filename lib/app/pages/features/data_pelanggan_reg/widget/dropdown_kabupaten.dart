@@ -2,20 +2,25 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:seatu_ersih/app/pages/features/data_pelanggan_reg/data_pelanggan_controller_reg.dart';
 
-class DropdownKabupatenReg extends GetView<DataPelangganRegController> {
+class DropdownKabupatenReg extends StatelessWidget {
+  // Change GetView<DataPelangganRegController> to StatelessWidget
   const DropdownKabupatenReg({super.key});
 
   @override
   Widget build(BuildContext context) {
+    // Initialize the DataPelangganRegController here
+    final DataPelangganRegController controller =
+        Get.put(DataPelangganRegController());
+
     return Obx(() {
       return DropdownButtonFormField<int>(
         decoration: InputDecoration(
           border: OutlineInputBorder(
             borderRadius: BorderRadius.circular(10),
           ),
-          contentPadding: EdgeInsets.symmetric(horizontal: 15),
+          contentPadding: const EdgeInsets.symmetric(horizontal: 15),
         ),
-        hint: Text('Pilih Kabupaten'),
+        hint: const Text('Pilih Kabupaten'),
         value: controller.kabupatenName.value.isEmpty
             ? null
             : int.tryParse(controller.kabupatenName.value),

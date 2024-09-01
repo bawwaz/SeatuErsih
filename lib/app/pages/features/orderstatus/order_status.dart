@@ -15,15 +15,13 @@ class MyOrder extends GetView<HomePageController> {
     return Obx(() {
       final Map<String, String> tabs = {
         'pending': 'Pending',
-        'waiting_for_payment': 'waiting for payment',
+        'waiting_for_payment': 'Waiting for Payment',
         'in-progress': 'In-Progress',
         'completed': 'Completed',
         'decline': 'Declined',
       };
 
-      // Create TabBar and TabBarView widgets
       List<Widget> tabWidgets = tabs.entries.map((entry) {
-        // Count the number of orders for this status
         int count = controller.orders
             .where((order) => order['order_status'] == entry.key)
             .length;
@@ -33,89 +31,89 @@ class MyOrder extends GetView<HomePageController> {
       List<Widget> tabViews = tabs.keys.map((status) {
         return RefreshIndicator(
           onRefresh: controller.refreshOrders,
-          child: CustomScrollView(
-            slivers: [
-              Obx(
-                () => controller.isLoading.value
-                    ? SliverList(
-                        delegate: SliverChildBuilderDelegate(
-                          (context, index) => Shimmer.fromColors(
-                            baseColor: Colors.grey[300]!,
-                            highlightColor: Colors.grey[100]!,
-                            child: Container(
-                              margin: EdgeInsets.symmetric(vertical: 8.0),
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Container(
-                                    width: double.infinity,
-                                    height: 20.0,
-                                    color: Colors.white,
-                                  ),
-                                  SizedBox(height: 10.0),
-                                  Container(
-                                    width: double.infinity,
-                                    height: 20.0,
-                                    color: Colors.white,
-                                  ),
-                                  SizedBox(height: 10.0),
-                                  Container(
-                                    width: 100.0,
-                                    height: 20.0,
-                                    color: Colors.white,
-                                  ),
-                                ],
+          child: Obx(() {
+            return CustomScrollView(
+              slivers: [
+                if (controller.isLoading.value)
+                  SliverList(
+                    delegate: SliverChildBuilderDelegate(
+                      (context, index) => Shimmer.fromColors(
+                        baseColor: Colors.grey[300]!,
+                        highlightColor: Colors.grey[100]!,
+                        child: Container(
+                          margin: const EdgeInsets.symmetric(vertical: 8.0),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Container(
+                                width: double.infinity,
+                                height: 20.0,
+                                color: Colors.white,
                               ),
-                            ),
+                              const SizedBox(height: 10.0),
+                              Container(
+                                width: double.infinity,
+                                height: 20.0,
+                                color: Colors.white,
+                              ),
+                              const SizedBox(height: 10.0),
+                              Container(
+                                width: 100.0,
+                                height: 20.0,
+                                color: Colors.white,
+                              ),
+                            ],
                           ),
-                          childCount: 6,
                         ),
-                      )
-                    : controller.orders.isEmpty
-                        ? SliverFillRemaining(
-                            child: Center(child: ImgIfEmpty()),
-                          )
-                        : SliverList(
-                            delegate: SliverChildBuilderDelegate(
-                              (context, index) {
-                                Map<dynamic, dynamic> order =
-                                    controller.orders[index];
-                                if (order['order_status'] != status)
-                                  return SizedBox.shrink();
-                                return InkWell(
-                                  onTap: () {
-                                    Get.toNamed(Routes.ORDER_DETAIL,
-                                        // arguments: [order, order['id']]);
-                                        arguments: {
-                                          'orderList': order,
-                                          'orderStatus': order['id'],
-                                        });
-                                  },
-                                  child: Container(
-                                    margin: EdgeInsets.symmetric(
-                                        vertical: 10, horizontal: 20),
-                                    child: OrderContainer(
-                                      title:
-                                          order['order_type'] == "regular_clean"
-                                              ? "Regular Cleaning"
-                                              : "Deep Cleaning",
-                                      pickupDate: controller.formatDate(
-                                          order['pickup_date'].toString()),
-                                      price: controller.formatPrice(
-                                          order['total_price'].toString()),
-                                      status: order['order_status'],
-                                      id: order['id'],
-                                      decline_note: order['decline_note'],
-                                    ),
-                                  ),
-                                );
+                      ),
+                      childCount: 6,
+                    ),
+                  )
+                else if (controller.orders.isEmpty)
+                  SliverFillRemaining(
+                    child: Center(child: ImgIfEmpty()),
+                  )
+                else
+                  SliverList(
+                    delegate: SliverChildBuilderDelegate(
+                      (context, index) {
+                        Map<dynamic, dynamic> order = controller.orders[index];
+                        if (order['order_status'] != status)
+                          return const SizedBox.shrink();
+                        return InkWell(
+                          onTap: () {
+                            Get.toNamed(
+                              Routes.ORDER_DETAIL,
+                              arguments: {
+                                'orderList': order,
+                                'orderStatus': order['id'],
                               },
-                              childCount: controller.orders.length,
+                            );
+                          },
+                          child: Container(
+                            margin: const EdgeInsets.symmetric(
+                                vertical: 10, horizontal: 20),
+                            child: OrderContainer(
+                              title: order['order_type'] == "regular_clean"
+                                  ? "Regular Cleaning"
+                                  : "Deep Cleaning",
+                              pickupDate: controller
+                                  .formatDate(order['pickup_date'].toString()),
+                              price: controller
+                                  .formatPrice(order['total_price'].toString()),
+                              status: order['order_status'],
+                              id: order['id'],
+                              decline_note: order['decline_note'],
                             ),
                           ),
-              ),
-            ],
-          ),
+                        );
+                      },
+                      childCount: controller.orders.length,
+                    ),
+                  ),
+              ],
+            );
+          }),
         );
       }).toList();
 
@@ -130,7 +128,7 @@ class MyOrder extends GetView<HomePageController> {
             ),
             centerTitle: true,
             bottom: PreferredSize(
-              preferredSize: Size.fromHeight(50.0),
+              preferredSize: const Size.fromHeight(50.0),
               child: TabBar(
                 isScrollable: true,
                 tabs: tabWidgets,
