@@ -1,5 +1,3 @@
-// login_page.dart
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -13,16 +11,12 @@ import 'package:seatu_ersih/themes/colors.dart';
 import 'package:seatu_ersih/themes/theme.dart';
 
 class LoginPage extends GetView<LoginPageController> {
-  final LoginPageController loginPageController =
-      Get.put(LoginPageController());
-
   LoginPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     final emailKey = GlobalKey<FormState>();
     final passwordKey = GlobalKey<FormState>();
-    final controller = Get.put(LoginPageController());
 
     return Scaffold(
       body: Container(
@@ -90,13 +84,13 @@ class LoginPage extends GetView<LoginPageController> {
                     color: darkGrey,
                   ),
                   obsecureText: true,
-                  isPasswordHidden: loginPageController.isPasswordHidden.value,
+                  isPasswordHidden: controller.isPasswordHidden.value,
                   onChanged: (value) {
-                    loginPageController.password.value = value!;
+                    controller.password.value = value!;
                   },
                   toggleVisibility: () {
-                    loginPageController.isPasswordHidden.value =
-                        !loginPageController.isPasswordHidden.value;
+                    controller.isPasswordHidden.value =
+                        !controller.isPasswordHidden.value;
                   },
                 ),
               ),

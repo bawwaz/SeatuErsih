@@ -101,7 +101,7 @@ class RegisterPage extends StatelessWidget {
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 10),
                     child: Text(
-                      "or continue with",
+                      "already singed up?",
                       style: GoogleFonts.poppins(
                         color: Color(0xFF8A8A8A),
                         fontWeight: FontWeight.w500,
@@ -121,23 +121,9 @@ class RegisterPage extends StatelessWidget {
                 ],
               ),
               SizedBox(height: 33),
-              SizedBox(
-                width: double.infinity,
-                height: 53,
-                child: SignUpGoogle(),
-              ),
-              SizedBox(height: 20),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Text(
-                    "Already have an account?",
-                    style: GoogleFonts.poppins(
-                      color: Color(0xFF1F1F1F),
-                      fontWeight: FontWeight.normal,
-                      fontSize: 13,
-                    ),
-                  ),
                   TextButton(
                     onPressed: () {
                       Get.toNamed(Routes.LOGIN);

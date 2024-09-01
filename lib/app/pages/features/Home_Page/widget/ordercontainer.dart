@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import 'package:seatu_ersih/app/pages/features/Home_Page/HomepageController.dart';
 import 'package:seatu_ersih/themes/colors.dart';
 import 'package:seatu_ersih/themes/fonts.dart';
+import 'package:seatu_ersih/themes/theme.dart';
 
 class OrderContainer extends GetView<HomePageController> {
   final String title;
@@ -37,13 +38,10 @@ class OrderContainer extends GetView<HomePageController> {
         return InkWell(
           onTap: () {
             if (decline_note != null && decline_note!.isNotEmpty) {
-              Get.snackbar(
-                'Decline Note',
-                decline_note!,
-                snackPosition: SnackPosition.BOTTOM,
-                backgroundColor: Colors.white,
-                colorText: Colors.black.withOpacity(0.5),
-              );
+              Get.snackbar('Decline Note', decline_note!,
+                  snackPosition: SnackPosition.BOTTOM,
+                  backgroundColor: primaryColor,
+                  colorText: Colors.white);
             }
           },
           child: SvgPicture.asset('assets/svg/decline.svg'),

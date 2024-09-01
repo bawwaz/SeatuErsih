@@ -1,5 +1,4 @@
 import 'dart:convert';
-import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:http/http.dart' as http;
@@ -20,7 +19,6 @@ class LoginPageController extends GetxController {
   @override
   void onInit() {
     super.onInit();
-
     _checkAutoLogin();
   }
 
@@ -33,8 +31,7 @@ class LoginPageController extends GetxController {
   }
 
   Future<void> _fetchUserData(String token) async {
-    final url =
-        'http://seatuersih.pradiptaahmad.tech/api/users/me'; // Adjust endpoint if necessary
+    final url = 'http://seatuersih.pradiptaahmad.tech/api/users/me'; // Adjust endpoint if necessary
     var headers = {
       'Accept': 'application/json',
       'Authorization': 'Bearer $token',
@@ -49,7 +46,6 @@ class LoginPageController extends GetxController {
       if (response.statusCode == 200) {
         final userData = json.decode(response.body)['user'];
         user.value = userData; // Store user data
-
         Get.offNamed(Routes.BTMNAVBAR); // Navigate to the main page
       } else {
         // Token might be invalid, clear storage
@@ -85,15 +81,9 @@ class LoginPageController extends GetxController {
         body: data,
       );
 
-      print('Login response status: ${response.statusCode}');
-      print('Login response body: ${response.body}');
-
       if (response.statusCode == 200) {
         final token = json.decode(response.body)['token'];
         final userData = json.decode(response.body)['user'];
-
-        print('Token: $token');
-        print('User data: $userData');
 
         box.write("token", token);
         box.write("username", userData['username']);
@@ -107,11 +97,9 @@ class LoginPageController extends GetxController {
           snackPosition: SnackPosition.TOP,
         );
         isLoading.value = false;
-        Get.offAllNamed(
-            Routes.BTMNAVBAR); // Use offAllNamed to ensure navigation
+        Get.offAllNamed(Routes.BTMNAVBAR); // Use offAllNamed to ensure navigation
       } else {
-        final message =
-            json.decode(response.body)['message'] ?? 'Unknown error';
+        final message = json.decode(response.body)['message'] ?? 'Unknown error';
         Get.snackbar(
           "Login Failed",
           message,
@@ -125,7 +113,6 @@ class LoginPageController extends GetxController {
         "$e",
         snackPosition: SnackPosition.TOP,
       );
-      print(e);
       isLoading.value = true;
     }
   }
