@@ -101,7 +101,8 @@ class RatingView extends StatelessWidget {
                         Row(
                           children: [
                             Text(
-                              validOrderTypes[order?['order_type']] ?? "Unknown",
+                              validOrderTypes[order?['order_type']] ??
+                                  "Unknown",
                               style: GoogleFonts.poppins(
                                 fontWeight: FontWeight.w600,
                                 color: Colors.black,
@@ -178,12 +179,22 @@ class RatingView extends StatelessWidget {
                   controller.order_type.value =
                       validOrderTypes[order?['order_type']] ?? "Unknown";
                   controller.laundry_id.value =
-                      int.tryParse(order?['laundry_id']?.toString() ?? '0') ?? 0;
-                  bool result = await controller.postReview();
-                  if (result) {
-                    Get.toNamed(Routes.BTMNAVBAR);
+                      int.tryParse(order?['laundry_id']?.toString() ?? '0') ??
+                          0;
+
+                  bool reviewResult = await controller.postReview();
+                  if (reviewResult) {
+                    bool statusUpdateResult =
+                        await controller.updateOrderStatus();
+                    if (statusUpdateResult) {
+                      Get.toNamed(Routes.BTMNAVBAR);
+                    } else {
+                      // Handle status update failure
+                      print('Failed to update order status.');
+                    }
                   } else {
-                    // Handle failure case
+                    // Handle review submission failure
+                    print('Failed to post review.');
                   }
                 },
                 child: Container(
@@ -203,7 +214,7 @@ class RatingView extends StatelessWidget {
                     ),
                   ),
                 ),
-              ),
+              )
             ],
           ),
         ),

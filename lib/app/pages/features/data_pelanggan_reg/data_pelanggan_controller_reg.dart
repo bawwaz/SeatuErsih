@@ -20,6 +20,9 @@ class DataPelangganRegController extends GetxController {
   var kabupatenName = "".obs;
   var kecamatanName = "".obs;
 
+  var selectedKabupatenId = 0.obs;
+  var selectedKecamatanId = 0.obs;
+
   final box = GetStorage();
   final orders = {}.obs;
   final kabupaten = [].obs;
