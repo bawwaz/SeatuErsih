@@ -17,7 +17,6 @@ class DataPelangganRegView extends GetView<DataPelangganRegController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      
       appBar: AppBar(
         automaticallyImplyLeading: false,
         title: Text(
@@ -111,16 +110,6 @@ class DataPelangganRegView extends GetView<DataPelangganRegController> {
                   controller.detail_address.value = value;
                 },
               ),
-            ),
-            SizedBox(height: 20),
-            _buildSectionHeader('Contact', 'No. Telephone'),
-            TextFieldData(
-              keyboardType: TextInputType.number,
-              inputFormatters: [FilteringTextInputFormatter.digitsOnly],
-              hintText: 'Masukkan no. telephone',
-              onChanged: (value) {
-                controller.phone.value = value;
-              },
             ),
             SizedBox(height: 20),
             _buildSectionHeader('Jadwal', 'Tanggal pengambilan'),

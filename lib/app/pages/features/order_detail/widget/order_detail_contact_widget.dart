@@ -47,23 +47,6 @@ class OrderDetailContactWidget extends StatelessWidget {
                 fontSize: 14,
               ),
             ),
-            Divider(color: Colors.grey),
-          ],
-          if (phone != null) ...[
-            Text(
-              'No. Telp',
-              style: GoogleFonts.poppins(
-                fontWeight: FontWeight.bold,
-                fontSize: 16,
-              ),
-            ),
-            Text(
-              phone!,
-              style: GoogleFonts.poppins(
-                color: Colors.grey,
-                fontSize: 14,
-              ),
-            ),
           ],
         ],
       ),

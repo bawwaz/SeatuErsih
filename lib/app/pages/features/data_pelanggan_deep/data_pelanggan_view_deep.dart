@@ -116,16 +116,6 @@ class DataPelangganDeepView extends StatelessWidget {
               ),
             ),
             SizedBox(height: 20),
-            _buildSectionHeader('Contact', 'No. Telephone'),
-            TextFieldData(
-              keyboardType: TextInputType.number,
-              inputFormatters: [FilteringTextInputFormatter.digitsOnly],
-              hintText: 'Masukkan no. telephone',
-              onChanged: (value) {
-                controller.phone.value = value;
-              },
-            ),
-            SizedBox(height: 20),
             _buildSectionHeader('Jadwal', 'Tanggal pengambilan'),
             Stack(
               children: [
