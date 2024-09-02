@@ -8,7 +8,6 @@ import 'package:seatu_ersih/app/api/api_endpoint.dart';
 
 class DataPelangganControllerDeep extends GetxController {
   var detail_address = "".obs;
-  var phone = "".obs;
   var total_price = 0.obs;
   var pickup_date = "".obs;
   var notes = ''.obs;
@@ -104,7 +103,6 @@ class DataPelangganControllerDeep extends GetxController {
     // Debugging: Print values before sending
     print('Order Type: deep_clean');
     print('Detail Address: ${detail_address.value}');
-    print('Phone: ${phone.value}');
     print('Total Price: ${total_price.value}');
     print('Pickup Date: ${pickup_date.value}');
     print('Notes: ${notes.value}');
@@ -116,7 +114,6 @@ class DataPelangganControllerDeep extends GetxController {
 
     // Validation checks
     if (detail_address.value.isEmpty ||
-        phone.value.isEmpty ||
         pickup_date.value.isEmpty ||
         kabupatenName.value.isEmpty ||
         kecamatanName.value.isEmpty) {
@@ -133,7 +130,6 @@ class DataPelangganControllerDeep extends GetxController {
 
     var data = {
       'detail_address': detail_address.value,
-      'phone': phone.value,
       'total_price': total_price.value.toString(),
       'pickup_date': pickup_date.value,
       'user_id': box.read('userid').toString(),

@@ -52,11 +52,10 @@ class OrderDetailView extends StatelessWidget {
                       ),
                     ),
                     DetailContainerWidget(
-                      productName:
-                          orderDetailController.orders['order_type'] ==
-                                  "regular_clean"
-                              ? "Regular Clean"
-                              : "Deep Clean",
+                      productName: orderDetailController.orders['order_type'] ==
+                              "regular_clean"
+                          ? "Regular Clean"
+                          : "Deep Clean",
                       productStatus:
                           orderDetailController.orders['order_status'],
                       pickupDate:
@@ -71,7 +70,7 @@ class OrderDetailView extends StatelessWidget {
                       child: Padding(
                         padding: const EdgeInsets.only(left: 20.0, top: 20),
                         child: Text(
-                          'Contact',
+                          'Address',
                           style: Fonts.header1.copyWith(
                               color: Colors.black,
                               fontSize: 20,
