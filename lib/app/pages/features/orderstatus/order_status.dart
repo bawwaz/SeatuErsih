@@ -18,8 +18,7 @@ class MyOrder extends GetView<HomePageController> {
         'waiting_for_payment': 'Waiting for Payment',
         'in-progress': 'In-Progress',
         'completed': 'Completed',
-        'reviewed': 'Reviewed',
-        'decline': 'Declined',
+        'declined': 'Declined',
       };
 
       List<Widget> tabWidgets = tabs.entries.map((entry) {
@@ -31,94 +30,97 @@ class MyOrder extends GetView<HomePageController> {
 
       List<Widget> tabViews = tabs.keys.map((status) {
         return RefreshIndicator(
-          onRefresh: controller.refreshOrders,
-          child: Obx(() {
-            final filteredOrders = controller.orders
-                .where((order) => order['order_status'] == status)
-                .toList();
-
-            return CustomScrollView(
-              slivers: [
-                if (controller.isLoading.value)
-                  SliverList(
-                    delegate: SliverChildBuilderDelegate(
-                      (context, index) => Shimmer.fromColors(
-                        baseColor: Colors.grey[300]!,
-                        highlightColor: Colors.grey[100]!,
-                        child: Container(
-                          decoration: BoxDecoration(),
-                          height: 20,
-                          width: double.infinity,
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Container(
-                                width: double.infinity,
-                                height: 20.0,
-                                color: Colors.white,
-                              ),
-                              const SizedBox(height: 10.0),
-                              Container(
-                                width: double.infinity,
-                                height: 20.0,
-                                color: Colors.white,
-                              ),
-                              const SizedBox(height: 10.0),
-                              Container(
-                                width: 100.0,
-                                height: 20.0,
-                                color: Colors.white,
-                              ),
-                            ],
-                          ),
+          onRefresh: () async {
+            await controller.forceReloadPage();
+          },
+          child: CustomScrollView(
+            slivers: [
+              if (controller.isLoading.value)
+                SliverList(
+                  delegate: SliverChildBuilderDelegate(
+                    (context, index) => Shimmer.fromColors(
+                      baseColor: Colors.grey[300]!,
+                      highlightColor: Colors.grey[100]!,
+                      child: Container(
+                        decoration: BoxDecoration(),
+                        height: 20,
+                        width: double.infinity,
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Container(
+                              width: double.infinity,
+                              height: 20.0,
+                              color: Colors.white,
+                            ),
+                            const SizedBox(height: 10.0),
+                            Container(
+                              width: double.infinity,
+                              height: 20.0,
+                              color: Colors.white,
+                            ),
+                            const SizedBox(height: 10.0),
+                            Container(
+                              width: 100.0,
+                              height: 20.0,
+                              color: Colors.white,
+                            ),
+                          ],
                         ),
                       ),
-                      childCount: 6,
                     ),
-                  )
-                else if (filteredOrders.isEmpty)
-                  SliverFillRemaining(
-                    child: Center(child: ImgIfEmpty()),
-                  )
-                else
-                  SliverList(
-                    delegate: SliverChildBuilderDelegate(
-                      (context, index) {
-                        Map<dynamic, dynamic> order = filteredOrders[index];
-                        return InkWell(
-                          onTap: () {
-                            Get.toNamed(
-                              Routes.ORDER_DETAIL,
-                              arguments: {
-                                'orderList': order,
-                                'orderStatus': order['id'],
-                              },
-                            );
-                          },
-                          child: Container(
-                            margin: const EdgeInsets.symmetric(
-                                vertical: 10, horizontal: 20),
-                            child: OrderContainer(
-                              title: order['order_type'] == "regular_clean"
-                                  ? "Regular Cleaning"
-                                  : "Deep Cleaning",
-                              pickupDate: controller
-                                  .formatDate(order['pickup_date'].toString()),
-                              price: controller
-                                  .formatPrice(order['total_price'].toString()),
-                              status: order['order_status'],
-                              id: order['id'],
-                              decline_note: order['decline_note'],
-                            ),
-                          ),
-                        );
-                      },
-                      childCount: filteredOrders.length,
-                    ),
+                    childCount: 6,
                   ),
-              ],
-            );
-          }),
+                )
+              else if (controller.orders.isEmpty ||
+                  controller.orders
+                      .where((order) => order['order_status'] == status)
+                      .isEmpty)
+                SliverFillRemaining(
+                  child: Center(child: ImgIfEmpty()),
+                )
+              else
+                SliverList(
+                  delegate: SliverChildBuilderDelegate(
+                    (context, index) {
+                      Map<dynamic, dynamic> order = controller.orders
+                          .where((order) => order['order_status'] == status)
+                          .toList()[index];
+                      return InkWell(
+                        onTap: () {
+                          Get.toNamed(
+                            Routes.ORDER_DETAIL,
+                            arguments: {
+                              'orderList': order,
+                              'orderStatus': order['id'],
+                            },
+                          );
+                        },
+                        child: Container(
+                          margin: const EdgeInsets.symmetric(
+                              vertical: 10, horizontal: 20),
+                          child: OrderContainer(
+                            title: order['order_type'] == "regular_clean"
+                                ? "Regular Cleaning"
+                                : "Deep Cleaning",
+                            pickupDate: controller
+                                .formatDate(order['pickup_date'].toString()),
+                            price: controller
+                                .formatPrice(order['total_price'].toString()),
+                            status: order['order_status'],
+                            id: order['id'],
+                            decline_note: order['decline_note'],
+                          ),
+                        ),
+                      );
+                    },
+                    childCount: controller.orders
+                        .where((order) => order['order_status'] == status)
+                        .length,
+                  ),
+                ),
+            ],
+          ),
         );
       }).toList();
 

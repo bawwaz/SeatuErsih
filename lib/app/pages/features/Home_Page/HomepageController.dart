@@ -1,16 +1,15 @@
 import 'dart:convert';
-import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:http/http.dart' as http;
 import 'package:intl/intl.dart';
 import 'package:seatu_ersih/app/api/api_endpoint.dart';
-import 'package:seatu_ersih/app/api/baseurl.dart';
+import 'package:seatu_ersih/app/router/app_pages.dart';
 
 class HomePageController extends GetxController {
   var isLoading = false.obs;
   final orders = <Map<dynamic, dynamic>>[].obs;
-  var isStoreOpen = true.obs;
+  final isStoreOpen = true.obs;
   final reviews1 = [].obs;
   final reviews2 = [].obs;
 
@@ -27,7 +26,6 @@ class HomePageController extends GetxController {
     };
 
     try {
-      orders.clear();
       final response =
           await http.get(Uri.parse('$url/order/getall'), headers: headers);
 
@@ -37,8 +35,7 @@ class HomePageController extends GetxController {
         if (data != null && data is Iterable) {
           List<Map<dynamic, dynamic>> sortedData =
               data.map<Map<dynamic, dynamic>>((item) {
-            return item as Map<dynamic,
-                dynamic>; // memastikan item adalah Map<dynamic, dynamic>
+            return item as Map<dynamic, dynamic>;
           }).toList();
 
           sortedData.sort((a, b) {
@@ -47,8 +44,13 @@ class HomePageController extends GetxController {
             return dateB.compareTo(dateA);
           });
 
-          orders.assignAll(
-              sortedData); // assignAll sekarang menerima tipe yang sesuai
+          orders.assignAll(sortedData); // Update orders list with new data
+
+          // Print the fetched data for debugging purposes
+          print('Fetched Orders:');
+          for (var order in sortedData) {
+            print(order);
+          }
         } else {
           print('No orders found in response');
         }
@@ -65,32 +67,14 @@ class HomePageController extends GetxController {
     }
   }
 
-  String formatDate(String date) {
-    DateTime dateTime = DateTime.parse(date);
-    return DateFormat('dd/MM/yyyy').format(dateTime);
-  }
-
-  String formatPrice(String? price) {
-    if (price == null) {
-      return 'N/A';
-    } else {
-      int intPrice = int.tryParse(price) ?? 0;
-      return NumberFormat.currency(locale: 'id_ID', symbol: 'Rp')
-          .format(intPrice);
-    }
-  }
-
   Future<void> refreshOrders() async {
-    orders.clear();
-    await fetchOrder();
+    await fetchOrder(); // Fetch new orders and update the list
   }
 
   @override
   void onInit() async {
     super.onInit();
     await fetchOrder();
-    await fetchReviews1();
-    await fetchReviews2();
   }
 
   Future<void> fetchReviews1() async {
@@ -154,6 +138,27 @@ class HomePageController extends GetxController {
       print(e);
     } finally {
       isLoading(false);
+    }
+  }
+  Future<void> forceReloadPage() async {
+    // Navigate back and then to the same page
+    await Get.offNamedUntil(Routes.BTMNAVBAR, (route) => false);
+    await Future.delayed(Duration(milliseconds: 100)); // Small delay to ensure navigation
+    await Get.toNamed(Routes.BTMNAVBAR);
+  }
+
+  String formatDate(String date) {
+    DateTime dateTime = DateTime.parse(date);
+    return DateFormat('dd/MM/yyyy').format(dateTime);
+  }
+
+  String formatPrice(String? price) {
+    if (price == null) {
+      return 'N/A';
+    } else {
+      int intPrice = int.tryParse(price) ?? 0;
+      return NumberFormat.currency(locale: 'id_ID', symbol: 'Rp')
+          .format(intPrice);
     }
   }
 }
