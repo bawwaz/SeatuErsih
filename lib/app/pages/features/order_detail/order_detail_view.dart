@@ -24,128 +24,137 @@ class OrderDetailView extends StatelessWidget {
         centerTitle: true,
         automaticallyImplyLeading: true,
       ),
-      body: Column(
-        children: [
-          Expanded(
-            child: SingleChildScrollView(
-              padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Align(
-                    alignment: Alignment.centerLeft,
-                    child: Padding(
-                      padding: const EdgeInsets.only(left: 20.0),
-                      child: Text(
-                        'Order',
-                        style: Fonts.header1.copyWith(
-                            color: Colors.black,
-                            fontSize: 20,
-                            fontWeight: FontWeight.bold),
+      body: Obx(() {
+        if (orderDetailController.isLoading.value) {
+          return Center(child: CircularProgressIndicator());
+        }
+
+        return Column(
+          children: [
+            Expanded(
+              child: SingleChildScrollView(
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Align(
+                      alignment: Alignment.centerLeft,
+                      child: Padding(
+                        padding: const EdgeInsets.only(left: 20.0),
+                        child: Text(
+                          'Order',
+                          style: Fonts.header1.copyWith(
+                              color: Colors.black,
+                              fontSize: 20,
+                              fontWeight: FontWeight.bold),
+                        ),
                       ),
                     ),
-                  ),
-                  DetailContainerWidget(
-                    productName: orderDetailController.orders['order_type'] ==
-                            "regular_clean"
-                        ? "Regular Clean"
-                        : "Deep Clean",
-                    productStatus: orderDetailController.orders['order_status'],
-                    pickupDate:
-                        '${orderDetailController.formatDate(orderDetailController.orders['pickup_date'].toString())}',
-                    noteOrder: '${orderDetailController.orders['notes']}',
-                    price: '${orderDetailController.orders['total_price']}',
-                    id: int.parse(
-                        orderDetailController.orders['id'].toString()),
-                  ),
-                  Align(
-                    alignment: Alignment.centerLeft,
-                    child: Padding(
-                      padding: const EdgeInsets.only(left: 20.0, top: 20),
-                      child: Text(
-                        'Contact',
-                        style: Fonts.header1.copyWith(
-                            color: Colors.black,
-                            fontSize: 20,
-                            fontWeight: FontWeight.bold),
+                    DetailContainerWidget(
+                      productName:
+                          orderDetailController.orders['order_type'] ==
+                                  "regular_clean"
+                              ? "Regular Clean"
+                              : "Deep Clean",
+                      productStatus:
+                          orderDetailController.orders['order_status'],
+                      pickupDate:
+                          '${orderDetailController.formatDate(orderDetailController.orders['pickup_date'].toString())}',
+                      noteOrder: '${orderDetailController.orders['notes']}',
+                      price: '${orderDetailController.orders['total_price']}',
+                      id: int.parse(
+                          orderDetailController.orders['id'].toString()),
+                    ),
+                    Align(
+                      alignment: Alignment.centerLeft,
+                      child: Padding(
+                        padding: const EdgeInsets.only(left: 20.0, top: 20),
+                        child: Text(
+                          'Contact',
+                          style: Fonts.header1.copyWith(
+                              color: Colors.black,
+                              fontSize: 20,
+                              fontWeight: FontWeight.bold),
+                        ),
                       ),
                     ),
-                  ),
-                  OrderDetailContactWidget(
-                    alamat: '${orderDetailController.orders['detail_address']}',
-                    phone: '${orderDetailController.orders['phone']}',
-                  ),
-                ],
+                    OrderDetailContactWidget(
+                      alamat:
+                          '${orderDetailController.orders['detail_address']}, ${orderDetailController.orders['kecamatan']}, ${orderDetailController.orders['kabupaten']}',
+                      phone: '${orderDetailController.orders['phone']}',
+                    ),
+                  ],
+                ),
               ),
             ),
-          ),
-          if (orderDetailController.orders['order_status'] ==
-              'waiting_for_payment')
-            Padding(
-              padding: const EdgeInsets.all(20.0),
-              child: ElevatedButton(
-                onPressed: () async {
-                  await paymentController.fetchShoe();
-                  _handlePayment(paymentController).then((paymentCreated) {
-                    if (paymentCreated) {
-                      Get.offAllNamed(Routes.BTMNAVBAR);
-                    } else {
-                      Get.snackbar('Error',
-                          'Failed to create payment: ${paymentController.errorMessage}');
-                    }
-                  });
-                },
-                child: Container(
-                  width: double.infinity,
-                  height: 55,
-                  decoration: BoxDecoration(
-                    color: AppColors.primaryColor,
-                    borderRadius: BorderRadius.circular(10),
-                  ),
-                  child: Center(
-                    child: Text(
-                      'Pay Now',
-                      style: Fonts.header1.copyWith(
-                        fontWeight: FontWeight.w100,
-                        fontSize: 18,
-                        color: Colors.white,
+            if (orderDetailController.orders['order_status'] ==
+                'waiting_for_payment')
+              Padding(
+                padding: const EdgeInsets.all(20.0),
+                child: ElevatedButton(
+                  onPressed: () async {
+                    await paymentController.fetchShoe();
+                    _handlePayment(paymentController).then((paymentCreated) {
+                      if (paymentCreated) {
+                        Get.offAllNamed(Routes.BTMNAVBAR);
+                      } else {
+                        Get.snackbar('Error',
+                            'Failed to create payment: ${paymentController.errorMessage}');
+                      }
+                    });
+                  },
+                  child: Container(
+                    width: double.infinity,
+                    height: 55,
+                    decoration: BoxDecoration(
+                      color: AppColors.primaryColor,
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                    child: Center(
+                      child: Text(
+                        'Pay Now',
+                        style: Fonts.header1.copyWith(
+                          fontWeight: FontWeight.w100,
+                          fontSize: 18,
+                          color: Colors.white,
+                        ),
                       ),
                     ),
                   ),
                 ),
               ),
-            ),
-          // "Berikan Ulasan" button for 'completed' status
-          if (orderDetailController.orders['order_status'] == 'completed')
-            Padding(
-              padding: const EdgeInsets.all(20.0),
-              child: GestureDetector(
-                onTap: () {
-                  Get.toNamed(Routes.RATING,
-                      arguments: orderDetailController.orders);
-                },
-                child: Container(
-                  width: double.infinity,
-                  height: 55,
-                  decoration: BoxDecoration(
-                    color: AppColors.primaryColor,
-                    borderRadius: BorderRadius.circular(10),
-                  ),
-                  child: Center(
-                    child: Text(
-                      'Berikan Ulasan',
-                      style: Fonts.header1.copyWith(
-                        fontWeight: FontWeight.w100,
-                        fontSize: 18,
-                        color: Colors.white,
+            if (orderDetailController.orders['order_status'] == 'completed')
+              Padding(
+                padding: const EdgeInsets.all(20.0),
+                child: GestureDetector(
+                  onTap: () {
+                    Get.toNamed(Routes.RATING,
+                        arguments: orderDetailController.orders);
+                  },
+                  child: Container(
+                    width: double.infinity,
+                    height: 55,
+                    decoration: BoxDecoration(
+                      color: AppColors.primaryColor,
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                    child: Center(
+                      child: Text(
+                        'Berikan Ulasan',
+                        style: Fonts.header1.copyWith(
+                          fontWeight: FontWeight.w100,
+                          fontSize: 18,
+                          color: Colors.white,
+                        ),
                       ),
                     ),
                   ),
                 ),
               ),
-            ),
-        ],
-      ),
+          ],
+        );
+      }),
     );
   }
 
@@ -153,10 +162,8 @@ class OrderDetailView extends StatelessWidget {
       PaymentConfirmationController paymentController) async {
     final paymentCreated = await paymentController.createPayment();
     if (paymentCreated && paymentController.checkoutLink != null) {
-      // Proceed to payment
       paymentController
           .proceedToPayment(Uri.parse(paymentController.checkoutLink!));
-      // Poll the server to check if payment was successful
       return await _pollForPaymentStatus();
     }
     return false;
@@ -171,13 +178,12 @@ class OrderDetailView extends StatelessWidget {
       attempt++;
       await Future.delayed(delayBetweenAttempts);
 
-      // Fetch the latest order details
       await paymentController.fetchOrders();
 
       if (paymentController.orderData['order_status'] == 'in-progress') {
-        return true; // Payment was successful
+        return true;
       }
     }
-    return false; // Timeout or failure
+    return false;
   }
 }

@@ -16,9 +16,9 @@ class DropdownKecamatanReg extends GetView<DataPelangganRegController> {
           contentPadding: EdgeInsets.symmetric(horizontal: 15),
         ),
         hint: Text('Pilih Kecamatan'),
-        value: controller.kecamatanName.value.isEmpty
+        value: controller.selectedKecamatanId.value == 0
             ? null
-            : int.tryParse(controller.kecamatanName.value),
+            : controller.selectedKecamatanId.value,
         items: controller.kecamatan.map((kec) {
           return DropdownMenuItem<int>(
             value: kec['id'],
@@ -27,7 +27,9 @@ class DropdownKecamatanReg extends GetView<DataPelangganRegController> {
         }).toList(),
         onChanged: (int? newValue) {
           if (newValue != null) {
-            controller.kecamatanName.value = newValue.toString();
+            controller.selectedKecamatanId.value = newValue;
+            controller.kecamatanName.value = controller.kecamatan
+                .firstWhere((kec) => kec['id'] == newValue)['kecamatan'];
           }
         },
       );

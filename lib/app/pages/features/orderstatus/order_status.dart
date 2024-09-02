@@ -18,6 +18,7 @@ class MyOrder extends GetView<HomePageController> {
         'waiting_for_payment': 'Waiting for Payment',
         'in-progress': 'In-Progress',
         'completed': 'Completed',
+        'reviewed': 'Reviewed',
         'decline': 'Declined',
       };
 
@@ -32,6 +33,10 @@ class MyOrder extends GetView<HomePageController> {
         return RefreshIndicator(
           onRefresh: controller.refreshOrders,
           child: Obx(() {
+            final filteredOrders = controller.orders
+                .where((order) => order['order_status'] == status)
+                .toList();
+
             return CustomScrollView(
               slivers: [
                 if (controller.isLoading.value)
@@ -71,7 +76,7 @@ class MyOrder extends GetView<HomePageController> {
                       childCount: 6,
                     ),
                   )
-                else if (controller.orders.isEmpty)
+                else if (filteredOrders.isEmpty)
                   SliverFillRemaining(
                     child: Center(child: ImgIfEmpty()),
                   )
@@ -79,9 +84,7 @@ class MyOrder extends GetView<HomePageController> {
                   SliverList(
                     delegate: SliverChildBuilderDelegate(
                       (context, index) {
-                        Map<dynamic, dynamic> order = controller.orders[index];
-                        if (order['order_status'] != status)
-                          return const SizedBox.shrink();
+                        Map<dynamic, dynamic> order = filteredOrders[index];
                         return InkWell(
                           onTap: () {
                             Get.toNamed(
@@ -110,7 +113,7 @@ class MyOrder extends GetView<HomePageController> {
                           ),
                         );
                       },
-                      childCount: controller.orders.length,
+                      childCount: filteredOrders.length,
                     ),
                   ),
               ],

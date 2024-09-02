@@ -40,7 +40,7 @@ class PushNotificationService {
       provisional: false,
       sound: true,
     );
-    final token = await _firebaseMessaging.getToken();
+      final token = await _firebaseMessaging.getToken();
     PushNotificationService.initLocalNotification();
     FirebaseMessaging.onMessage.listen(PushNotificationService.handleMessage);
     FirebaseMessaging.onMessageOpenedApp.listen(handleForegroundMessage);
