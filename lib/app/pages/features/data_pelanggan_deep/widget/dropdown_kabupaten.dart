@@ -16,9 +16,9 @@ class DropdownKabupatenDeep extends GetView<DataPelangganControllerDeep> {
           contentPadding: EdgeInsets.symmetric(horizontal: 15),
         ),
         hint: Text('Pilih Kabupaten'),
-        value: controller.kabupatenName.value.isEmpty
+        value: controller.selectedKabupatenId.value == 0
             ? null
-            : int.tryParse(controller.kabupatenName.value),
+            : controller.selectedKabupatenId.value,
         items: controller.kabupaten.map((kab) {
           return DropdownMenuItem<int>(
             value: kab['id'],
@@ -27,7 +27,9 @@ class DropdownKabupatenDeep extends GetView<DataPelangganControllerDeep> {
         }).toList(),
         onChanged: (int? newValue) {
           if (newValue != null) {
-            controller.kabupatenName.value = newValue.toString();
+            controller.selectedKabupatenId.value = newValue;
+            controller.kabupatenName.value = controller.kabupaten
+                .firstWhere((kab) => kab['id'] == newValue)['kabupaten'];
             controller.kecamatanName.value = ''; // Reset kecamatan value
             controller.fetchKecamatanByKabupatenId(newValue);
           }

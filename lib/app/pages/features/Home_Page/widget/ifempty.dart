@@ -11,13 +11,16 @@ class ImgIfEmpty extends StatelessWidget {
       child: Column(
         children: [
           Image.asset('assets/img/box 1.png'),
+          SizedBox(
+            height: 10,
+          ),
           Text(
-            'You havent ordered anything...',
+            'Tidak ada pesanan di ',
             style: Fonts.desc,
             textAlign: TextAlign.center,
           ),
           Text(
-            'there’s nothing to see here',
+            'status ini',
             style: Fonts.desc,
             textAlign: TextAlign.center,
           ),

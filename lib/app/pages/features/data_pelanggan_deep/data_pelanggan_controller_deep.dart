@@ -19,6 +19,9 @@ class DataPelangganControllerDeep extends GetxController {
   var kabupatenName = "".obs;
   var kecamatanName = "".obs;
 
+  var selectedKabupatenId = 0.obs;
+  var selectedKecamatanId = 0.obs;
+
   final box = GetStorage();
   final orders = {}.obs;
   final kabupaten = [].obs;
@@ -109,8 +112,10 @@ class DataPelangganControllerDeep extends GetxController {
     print('Shoes ID: ${shoesId.value}');
     print('User ID: ${userId.value}');
     print('Laundry ID: ${laundry_id.value}');
-    print('Kabupaten: ${kabupatenName.value}');
-    print('Kecamatan: ${kecamatanName.value}');
+    print('Kabupaten ID: ${selectedKabupatenId.value}');
+    print('Kabupaten Name: ${kabupatenName.value}');
+    print('Kecamatan ID: ${selectedKecamatanId.value}');
+    print('Kecamatan Name: ${kecamatanName.value}');
 
     // Validation checks
     if (detail_address.value.isEmpty ||

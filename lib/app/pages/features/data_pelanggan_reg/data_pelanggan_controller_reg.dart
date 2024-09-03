@@ -103,7 +103,6 @@ class DataPelangganRegController extends GetxController {
   }
 
   Future<bool> postOrders() async {
-    // Debugging: Print values before sending
     print('Order Type: regular_clean');
     print('Detail Address: ${detail_address.value}');
     print('Total Price: ${total_price.value}');

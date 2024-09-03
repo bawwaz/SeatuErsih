@@ -51,19 +51,9 @@ class MyOrder extends GetView<HomePageController> {
                             Container(
                               width: double.infinity,
                               height: 20.0,
-                              color: Colors.white,
-                            ),
-                            const SizedBox(height: 10.0),
-                            Container(
-                              width: double.infinity,
-                              height: 20.0,
-                              color: Colors.white,
-                            ),
-                            const SizedBox(height: 10.0),
-                            Container(
-                              width: 100.0,
-                              height: 20.0,
-                              color: Colors.white,
+                              decoration: BoxDecoration(
+                                color: Colors.white,
+                              ),
                             ),
                           ],
                         ),
@@ -77,7 +67,11 @@ class MyOrder extends GetView<HomePageController> {
                       .where((order) => order['order_status'] == status)
                       .isEmpty)
                 SliverFillRemaining(
-                  child: Center(child: ImgIfEmpty()),
+                  child: Center(
+                      child: Padding(
+                    padding: const EdgeInsets.only(top: 80.0),
+                    child: ImgIfEmpty(),
+                  )),
                 )
               else
                 SliverList(
@@ -142,8 +136,11 @@ class MyOrder extends GetView<HomePageController> {
               ),
             ),
           ),
-          body: TabBarView(
-            children: tabViews,
+          body: Padding(
+            padding: const EdgeInsets.all(16.0), // Global padding
+            child: TabBarView(
+              children: tabViews,
+            ),
           ),
         ),
       );

@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:seatu_ersih/app/pages/features/data_pelanggan_deep/data_pelanggan_controller_deep.dart';
-import 'package:seatu_ersih/app/pages/features/data_pelanggan_reg/data_pelanggan_controller_reg.dart';
 
 class DropdownKecamatanDeep extends GetView<DataPelangganControllerDeep> {
   const DropdownKecamatanDeep({super.key});
@@ -17,9 +16,9 @@ class DropdownKecamatanDeep extends GetView<DataPelangganControllerDeep> {
           contentPadding: EdgeInsets.symmetric(horizontal: 15),
         ),
         hint: Text('Pilih Kecamatan'),
-        value: controller.kecamatanName.value.isEmpty
+        value: controller.selectedKecamatanId.value == 0
             ? null
-            : int.tryParse(controller.kecamatanName.value),
+            : controller.selectedKecamatanId.value,
         items: controller.kecamatan.map((kec) {
           return DropdownMenuItem<int>(
             value: kec['id'],
@@ -28,7 +27,9 @@ class DropdownKecamatanDeep extends GetView<DataPelangganControllerDeep> {
         }).toList(),
         onChanged: (int? newValue) {
           if (newValue != null) {
-            controller.kecamatanName.value = newValue.toString();
+            controller.selectedKecamatanId.value = newValue;
+            controller.kecamatanName.value = controller.kecamatan
+                .firstWhere((kec) => kec['id'] == newValue)['kecamatan'];
           }
         },
       );
