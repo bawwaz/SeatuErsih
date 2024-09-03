@@ -18,7 +18,7 @@ class MyOrder extends GetView<HomePageController> {
         'waiting_for_payment': 'Waiting for Payment',
         'in-progress': 'In-Progress',
         'completed': 'Completed',
-        'declined': 'Declined',
+        'decline': 'Declined',
       };
 
       List<Widget> tabWidgets = tabs.entries.map((entry) {
