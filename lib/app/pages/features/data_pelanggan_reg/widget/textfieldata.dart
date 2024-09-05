@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:seatu_ersih/themes/theme.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:seatu_ersih/themes/theme.dart'; // Assuming tsBodyMediumMedium and darkGrey are defined in your theme file
 
 class TextFieldData extends StatelessWidget {
   final String hintText;
@@ -9,8 +10,8 @@ class TextFieldData extends StatelessWidget {
   final bool readOnly;
   final EdgeInsets? padding;
   final TextAlign textAlign;
-  final TextInputType keyboardType; // Tambahkan ini
-  final List<TextInputFormatter>? inputFormatters; // Tambahkan ini
+  final TextInputType keyboardType;
+  final List<TextInputFormatter>? inputFormatters;
 
   const TextFieldData({
     Key? key,
@@ -20,8 +21,8 @@ class TextFieldData extends StatelessWidget {
     this.readOnly = false,
     this.textAlign = TextAlign.left,
     this.padding = const EdgeInsets.only(left: 15),
-    this.keyboardType = TextInputType.text, // Tambahkan ini
-    this.inputFormatters, // Tambahkan ini
+    this.keyboardType = TextInputType.text,
+    this.inputFormatters,
   }) : super(key: key);
 
   @override
@@ -32,10 +33,10 @@ class TextFieldData extends StatelessWidget {
         borderRadius: BorderRadius.circular(10),
         boxShadow: [
           BoxShadow(
-            color: Colors.grey.withOpacity(0.5),
+            color: Colors.grey.withOpacity(0.3),
             spreadRadius: 1,
             blurRadius: 5,
-            offset: Offset(0, 0),
+            offset: Offset(0, 3), // Provides a slight elevation effect
           ),
         ],
       ),
@@ -44,12 +45,17 @@ class TextFieldData extends StatelessWidget {
         controller: TextEditingController(text: initialValue),
         onChanged: onChanged,
         textAlign: textAlign,
-        keyboardType: keyboardType, // Tambahkan ini
-        inputFormatters: inputFormatters, // Tambahkan ini
+        keyboardType: keyboardType,
+        inputFormatters: inputFormatters,
+        style: GoogleFonts.poppins(
+          fontSize: 16,
+          color: Colors.black,
+          fontWeight: FontWeight.w500, // Medium weight for the input text
+        ),
         decoration: InputDecoration(
           hintText: hintText,
           hintStyle: tsBodyMediumMedium(darkGrey),
-          border: InputBorder.none,
+          border: InputBorder.none, // Removes the default border
           contentPadding: padding,
         ),
       ),

@@ -9,7 +9,8 @@ class OtpPageController extends GetxController {
   var controllers = List.generate(6, (_) => TextEditingController()).obs;
   var isFocused = List.generate(6, (_) => false.obs);
 
-  static const String serverUrl = 'http://seatuersih.pradiptaahmad.tech/api'; // URL server Anda
+  static const String Url =
+      'http://seatuersih.pradiptaahmad.tech/api'; // URL server Anda
 
   @override
   void onClose() {
@@ -40,7 +41,7 @@ class OtpPageController extends GetxController {
 
     try {
       final response = await http.post(
-        Uri.parse('$serverUrl/users/verify-otp'),
+        Uri.parse('$Url/users/verify-otp'),
         headers: headers,
         body: data,
       );

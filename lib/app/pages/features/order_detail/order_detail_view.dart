@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:intl/intl.dart'; // Import this for date formatting
 import 'package:seatu_ersih/app/pages/features/order_detail/order_detailController.dart';
 import 'package:seatu_ersih/app/pages/features/order_detail/widget/order_detail_contact_widget.dart';
 import 'package:seatu_ersih/app/pages/features/order_detail/widget/order_detail_container_widget.dart';
@@ -58,8 +59,9 @@ class OrderDetailView extends StatelessWidget {
                           : "Deep Clean",
                       productStatus:
                           orderDetailController.orders['order_status'],
-                      pickupDate:
-                          '${orderDetailController.formatDate(orderDetailController.orders['pickup_date'].toString())}',
+                      pickupDate: orderDetailController.formatDate(
+                        orderDetailController.orders['pickup_date'].toString(),
+                      ),
                       noteOrder: '${orderDetailController.orders['notes']}',
                       price: '${orderDetailController.orders['total_price']}',
                       id: int.parse(

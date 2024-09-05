@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
 import 'package:seatu_ersih/app/pages/features/checkout_Order/checkout_order_Controller.dart';
 import 'package:seatu_ersih/themes/fonts.dart';
 import 'package:seatu_ersih/app/pages/features/checkout_Order/widget/greyLines.dart';
@@ -10,6 +11,13 @@ class OrderDetail extends GetView<CheckoutController> {
   @override
   Widget build(BuildContext context) {
     return Obx(() {
+      // Date formatting
+      String formattedDate = '';
+      if (controller.pickupDate.value.isNotEmpty) {
+        DateTime parsedDate = DateTime.parse(controller.pickupDate.value);
+        formattedDate = DateFormat('d MMMM yyyy').format(parsedDate);
+      }
+
       return Padding(
         padding: const EdgeInsets.only(left: 22.0, right: 22, bottom: 50),
         child: Column(
@@ -108,7 +116,7 @@ class OrderDetail extends GetView<CheckoutController> {
                   padding: const EdgeInsets.only(left: 105.0),
                   child: Obx(
                     () => Text(
-                      controller.pickupDate.value,
+                      formattedDate, // Display the formatted date here
                       style: Fonts.detail,
                     ),
                   ),

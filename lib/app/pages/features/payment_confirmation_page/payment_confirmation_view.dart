@@ -226,7 +226,7 @@ class PaymentConfirmationView extends GetView<PaymentConfirmationController> {
               ),
             ),
             child: Text(
-              'Pay',
+              'Place order',
               style: GoogleFonts.poppins(
                 fontWeight: FontWeight.w600,
                 color: Colors.white,

@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:intl/intl.dart'; // Import this for date formatting
 import 'package:seatu_ersih/app/router/app_pages.dart';
 
 class DetailContainerWidget extends StatelessWidget {
@@ -100,7 +101,7 @@ class DetailContainerWidget extends StatelessWidget {
               ),
             ),
             Text(
-              'Pick Up: $pickupDate',
+              'Pick Up: ${_formatDate(pickupDate!)}',
               style: GoogleFonts.poppins(
                 color: Colors.grey,
                 fontSize: 14,
@@ -170,5 +171,16 @@ class DetailContainerWidget extends StatelessWidget {
         ],
       ),
     );
+  }
+
+  // Function to format date
+  String _formatDate(String date) {
+    try {
+      DateTime parsedDate = DateTime.parse(date);
+      return DateFormat('d MMMM yyyy')
+          .format(parsedDate); // Formats as 28 September 2024
+    } catch (e) {
+      return date; // Return the original date if parsing fails
+    }
   }
 }

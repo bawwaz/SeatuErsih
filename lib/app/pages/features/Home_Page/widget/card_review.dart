@@ -15,8 +15,7 @@ class CardReview extends StatelessWidget {
     double rating = double.tryParse(review['rating'] ?? '0') ?? 0.0;
 
     return Container(
-      width:
-          MediaQuery.of(context).size.width * 0.8, // Adjust the width as needed
+      width: MediaQuery.of(context).size.width * 0.8,
       margin: EdgeInsets.symmetric(horizontal: 10),
       padding: EdgeInsets.all(10),
       decoration: BoxDecoration(
@@ -34,12 +33,28 @@ class CardReview extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(
-            review['order_type'] ?? 'Regular Clean',
-            style: GoogleFonts.poppins(
-              fontSize: 15,
-              fontWeight: FontWeight.w600,
-            ),
+          Row(
+            children: [
+              Text(
+                review['order_type'] ?? 'Regular Clean',
+                style: GoogleFonts.poppins(
+                  fontSize: 15,
+                  fontWeight: FontWeight.w600,
+                ),
+              ),
+              Text(''),
+              Padding(
+                padding: const EdgeInsets.only(left: 8.0),
+                child: Text(
+                  formatDate(review['created_at']),
+                  style: GoogleFonts.poppins(
+                    fontSize: 12,
+                    fontWeight: FontWeight.w600,
+                    color: Color(0xff8A8A8A),
+                  ),
+                ),
+              ),
+            ],
           ),
           SizedBox(height: 5),
           Row(
@@ -68,20 +83,9 @@ class CardReview extends StatelessWidget {
                           );
                         }),
                       ),
-                      SizedBox(
-                        width: 5,
-                      ),
-                      Text(
-                        '${review['rating']}',
-                        style: GoogleFonts.poppins(
-                          fontSize: 12,
-                          fontWeight: FontWeight.w600,
-                          color: Color(0xff8A8A8A),
-                        ),
-                      ),
                       SizedBox(width: 5),
                       Text(
-                        '• ${formatDate(review['created_at'])}',
+                        '${review['rating']}',
                         style: GoogleFonts.poppins(
                           fontSize: 12,
                           fontWeight: FontWeight.w600,
@@ -110,8 +114,10 @@ class CardReview extends StatelessWidget {
   }
 
   String formatDate(String date) {
+    // Parse the date string assuming the input format is "yyyy-MM-ddTHH:mm:ss"
     DateTime dateTime = DateTime.parse(date);
-    String formattedDate = "${dateTime.day}/${dateTime.month}/${dateTime.year}";
-    return formattedDate;
+
+    // Format the date to "4 September 2024"
+    return DateFormat('d MMMM y').format(dateTime);
   }
 }

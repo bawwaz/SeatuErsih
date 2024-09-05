@@ -1,4 +1,5 @@
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
 
 class OrderDetailcontroller extends GetxController {
   late final arguments;
@@ -6,10 +7,13 @@ class OrderDetailcontroller extends GetxController {
   final orders = {}.obs;
 
   String formatDate(String date) {
-    DateTime dateTime = DateTime.parse(date);
-    String formattedDate =
-        "${dateTime.day}/${dateTime.month}/${dateTime.year}";
-    return formattedDate;
+    try {
+      DateTime dateTime = DateTime.parse(date);
+      String formattedDate = DateFormat('d MMMM yyyy').format(dateTime);
+      return formattedDate;
+    } catch (e) {
+      return date; // Return the original date if parsing fails
+    }
   }
 
   @override
