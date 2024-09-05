@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:intl/intl.dart';
 import 'package:seatu_ersih/app/pages/features/data_pelanggan_reg/data_pelanggan_controller_reg.dart';
 import 'package:seatu_ersih/app/pages/features/data_pelanggan_reg/widget/dropdown_kabupaten.dart';
 import 'package:seatu_ersih/app/pages/features/data_pelanggan_reg/widget/dropdown_kecamatan.dart';
@@ -117,7 +117,7 @@ class DataPelangganRegView extends GetView<DataPelangganRegController> {
               children: [
                 Obx(() => TextFieldData(
                       hintText: 'Masukkan tanggal pengambilan',
-                      initialValue: controller.pickup_date.value,
+                      initialValue: _formatDate(controller.pickup_date.value),
                       readOnly: true,
                       textAlign: TextAlign.start,
                       padding: EdgeInsets.only(left: 50),
@@ -127,7 +127,7 @@ class DataPelangganRegView extends GetView<DataPelangganRegController> {
                   top: 15,
                   child: InkWell(
                     onTap: () {
-                      controller.pickDate(context);
+                      _pickDate(context);
                     },
                     child: Icon(Icons.calendar_month),
                   ),
@@ -177,6 +177,29 @@ class DataPelangganRegView extends GetView<DataPelangganRegController> {
         ),
       ),
     );
+  }
+
+  Future<void> _pickDate(BuildContext context) async {
+    DateTime? pickedDate = await showDatePicker(
+      context: context,
+      initialDate: DateTime.now(),
+      firstDate: DateTime(2000),
+      lastDate: DateTime(2101),
+    );
+
+    if (pickedDate != null) {
+      // If the date is picked, update the controller with the formatted date
+      controller.pickup_date.value = _formatDate(pickedDate.toIso8601String());
+    }
+  }
+
+  String _formatDate(String date) {
+    try {
+      DateTime dateTime = DateTime.parse(date);
+      return DateFormat('d MMMM y').format(dateTime);
+    } catch (e) {
+      return date; // Return the original date string if parsing fails
+    }
   }
 
   Future<bool> _confirmCancelDialog(BuildContext context) async {

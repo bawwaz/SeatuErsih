@@ -140,16 +140,19 @@ class HomePageController extends GetxController {
       isLoading(false);
     }
   }
+
   Future<void> forceReloadPage() async {
     // Navigate back and then to the same page
     await Get.offNamedUntil(Routes.BTMNAVBAR, (route) => false);
-    await Future.delayed(Duration(milliseconds: 100)); // Small delay to ensure navigation
+    await Future.delayed(
+        Duration(milliseconds: 100)); // Small delay to ensure navigation
     await Get.toNamed(Routes.BTMNAVBAR);
   }
 
   String formatDate(String date) {
     DateTime dateTime = DateTime.parse(date);
-    return DateFormat('dd/MM/yyyy').format(dateTime);
+
+    return DateFormat('d MMMM y').format(dateTime);
   }
 
   String formatPrice(String? price) {
