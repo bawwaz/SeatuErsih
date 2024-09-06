@@ -145,8 +145,7 @@ class RegCleanListView extends StatelessWidget {
                                   IconButton(
                                     onPressed: () async {
                                       await controller.deleteShoes(shoe['id']);
-                                      controller
-                                          .fetchShoes(); 
+                                      controller.fetchShoes();
                                     },
                                     icon: Icon(Icons.delete),
                                   ),
@@ -165,7 +164,7 @@ class RegCleanListView extends StatelessWidget {
           children: [
             InkWell(
               onTap: () {
-                Get.toNamed(Routes.ADD_ONS, arguments: ['regular_clean'])
+                Get.toNamed(Routes.ADD_ONS, arguments: ['regular clean'])
                     ?.then((value) {
                   if (value == "success") {
                     controller.fetchShoes();

@@ -65,11 +65,6 @@ class ChooseService extends GetView<ChooseServiceController> {
                       shrinkWrap: true,
                       physics: NeverScrollableScrollPhysics(),
                       itemBuilder: (BuildContext context, int index) {
-                        double avgRating =
-                            (index < controller.average_rating.length)
-                                ? controller.average_rating[index]
-                                : 0.0;
-
                         String productName =
                             controller.laundries[index]["name"];
                         String price = "N/A";
@@ -88,32 +83,17 @@ class ChooseService extends GetView<ChooseServiceController> {
                               ["Description"],
                           price: price,
                           buttonText: "Pesan Sekarang",
-                          icon: Icons.star_rounded,
-                          avgRating: avgRating,
-                          isStoreOpen: controller.isStoreOpen.value,
+                          totalOrder: productName == "Regular Clean"
+                              ? controller.totalOrder1.value
+                              : controller.totalOrder2.value,
                           onPressed: () {
-                            print("Button pressed");
-                            if (controller.isStoreOpen.value) {
-                              print("Navigating to order page");
-                              if (productName == "Regular Clean") {
-                                Get.toNamed(Routes.DATA_PELANGGAN_REG,
-                                    arguments: controller.laundries[index]
-                                        ["id"]);
-                              } else {
-                                Get.toNamed(Routes.DATA_PELANGGAN_DEEP,
-                                    arguments: controller.laundries[index]
-                                        ["id"]);
-                              }
+                            print("Clicked: $productName");
+                            if (productName == "Regular Clean") {
+                              Get.toNamed(Routes.DATA_PELANGGAN_REG,
+                                  arguments: controller.laundries[index]["id"]);
                             } else {
-                              print("Store is closed, showing snackbar");
-                              Get.snackbar(
-                                'Store Closed',
-                                'Sorry, the store is closed',
-                                snackPosition: SnackPosition.BOTTOM,
-                                backgroundColor: Colors.white,
-                                colorText: Colors.black,
-                                icon: Icon(Icons.info, color: Colors.blue),
-                              );
+                              Get.toNamed(Routes.DATA_PELANGGAN_DEEP,
+                                  arguments: controller.laundries[index]["id"]);
                             }
                           },
                         );

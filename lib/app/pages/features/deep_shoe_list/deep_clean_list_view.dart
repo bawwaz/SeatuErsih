@@ -173,7 +173,7 @@ class DeepCleanListView extends GetView<DeepCleanController> {
           children: [
             InkWell(
               onTap: () {
-                Get.toNamed(Routes.ADD_ONS, arguments: ['deep_clean'])
+                Get.toNamed(Routes.ADD_ONS, arguments: ['deep clean'])
                     ?.then((value) {
                   if (value == "success") {
                     controller.fetchShoes();

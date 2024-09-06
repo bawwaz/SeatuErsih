@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:http/http.dart' as http;
+import 'package:intl/intl.dart'; // Add this import for date formatting
 import 'package:seatu_ersih/app/api/api_endpoint.dart';
 
 class DataPelangganRegController extends GetxController {
@@ -42,7 +43,6 @@ class DataPelangganRegController extends GetxController {
 
       if (response.statusCode == 200) {
         final data = json.decode(response.body);
-
         if (data != null && data['data'] != null) {
           kabupaten.assignAll(data['data']);
           print('Kabupaten found: ${data['data']}');
@@ -98,12 +98,13 @@ class DataPelangganRegController extends GetxController {
       lastDate: DateTime(2101),
     );
     if (picked != null) {
-      pickup_date.value = picked.toString().split(' ')[0];
+      // Format the date to 'YYYY-MM-DD'
+      pickup_date.value = DateFormat('yyyy-MM-dd').format(picked);
     }
   }
 
   Future<bool> postOrders() async {
-    print('Order Type: regular_clean');
+    print('Order Type: Regular Clean');
     print('Detail Address: ${detail_address.value}');
     print('Total Price: ${total_price.value}');
     print('Pickup Date: ${pickup_date.value}');
@@ -133,7 +134,7 @@ class DataPelangganRegController extends GetxController {
     var data = {
       'detail_address': detail_address.value,
       'total_price': total_price.value.toString(),
-      'pickup_date': pickup_date.value,
+      'pickup_date': pickup_date.value, // Date now in 'YYYY-MM-DD' format
       'user_id': box.read('userid').toString(),
       'notes': notes.value,
       'laundry_id': Get.arguments.toString(),

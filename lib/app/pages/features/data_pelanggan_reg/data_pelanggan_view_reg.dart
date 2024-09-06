@@ -127,7 +127,7 @@ class DataPelangganRegView extends GetView<DataPelangganRegController> {
                   top: 15,
                   child: InkWell(
                     onTap: () {
-                      _pickDate(context);
+                      pickDate(context);
                     },
                     child: Icon(Icons.calendar_month),
                   ),
@@ -179,17 +179,16 @@ class DataPelangganRegView extends GetView<DataPelangganRegController> {
     );
   }
 
-  Future<void> _pickDate(BuildContext context) async {
-    DateTime? pickedDate = await showDatePicker(
+  Future<void> pickDate(BuildContext context) async {
+    DateTime? picked = await showDatePicker(
       context: context,
       initialDate: DateTime.now(),
-      firstDate: DateTime(2000),
+      firstDate: DateTime.now(),
       lastDate: DateTime(2101),
     );
-
-    if (pickedDate != null) {
-      // If the date is picked, update the controller with the formatted date
-      controller.pickup_date.value = _formatDate(pickedDate.toIso8601String());
+    if (picked != null) {
+      // Format the selected date to YYYY-MM-DD
+      controller.pickup_date.value = DateFormat('yyyy-MM-dd').format(picked);
     }
   }
 
