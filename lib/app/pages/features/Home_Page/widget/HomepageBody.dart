@@ -68,17 +68,6 @@ class HomeBody extends GetView<HomePageController> {
                       child: InkWell(
                         onTap: () {
                           Get.toNamed(Routes.CHOOSE_SERVICE);
-                          // if (homeController.isStoreOpen.value) {
-                          //   Get.toNamed(Routes.CHOOSE_SERVICE);
-                          // } else {
-                          //   Get.snackbar(
-                          //     'Store Closed',
-                          //     'Sorry, the store is closed',
-                          //     snackPosition: SnackPosition.BOTTOM,
-                          //     backgroundColor: Colors.redAccent,
-                          //     colorText: Colors.white,
-                          //   );
-                          // }
                         },
                         child: OrderService(
                           isStoreOpen: homeController.isStoreOpen.value,
@@ -98,14 +87,27 @@ class HomeBody extends GetView<HomePageController> {
               SizedBox(height: 10),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 15),
-                child: TabBar(
-                  labelColor: Colors.black,
-                  unselectedLabelColor: Colors.grey,
-                  indicatorColor: AppColors.primaryColor,
-                  tabs: [
-                    Tab(text: 'Regular Clean'),
-                    Tab(text: 'Deep Clean'),
-                  ],
+                child: Container(
+                  decoration: BoxDecoration(
+                    color: Colors.grey[300], // Background color
+                    borderRadius: BorderRadius.circular(20), // Rounded corners
+                  ),
+                  child: Padding(
+                    padding: const EdgeInsets.all(5.0),
+                    child: TabBar(
+                      labelColor: Colors.white,
+                      unselectedLabelColor: Colors.black,
+                      indicator: BoxDecoration(
+                        color: AppColors.primaryColor, // Selected tab color
+                        borderRadius: BorderRadius.circular(
+                            5), // Rounded corners for indicator
+                      ),
+                      tabs: [
+                        Tab(text: 'Regular Clean'),
+                        Tab(text: 'Deep Clean'),
+                      ],
+                    ),
+                  ),
                 ),
               ),
               SizedBox(height: 10),

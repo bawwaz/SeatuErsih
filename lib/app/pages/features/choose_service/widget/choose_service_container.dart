@@ -10,6 +10,7 @@ class ServiceContainer extends StatelessWidget {
   final double? avgRating;
   final String? buttonText;
   final IconData? icon;
+  final int? totalOrder;
   final VoidCallback? onPressed;
   final bool isLoading;
   final bool isStoreOpen;
@@ -24,7 +25,8 @@ class ServiceContainer extends StatelessWidget {
     this.onPressed,
     this.isLoading = false,
     this.avgRating,
-    this.isStoreOpen = true, // Added isStoreOpen parameter
+    this.isStoreOpen = true,
+    this.totalOrder,
   }) : super(key: key);
 
   @override
@@ -156,18 +158,24 @@ class ServiceContainer extends StatelessWidget {
                   ),
                 ),
                 SizedBox(
-                  width: 55,
-                ),
-                Icon(
-                  icon!,
-                  size: 30,
-                  color: Colors.yellow,
+                  width: 20,
                 ),
                 Text(
-                  avgRating!.toString(),
+                  'Total Order:',
                   style: GoogleFonts.poppins(
-                    fontSize: 14,
-                    color: Colors.black54,
+                      fontSize: 14,
+                      fontWeight: FontWeight.w500,
+                      color: Colors.black.withOpacity(0.5)),
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(left: 4.0),
+                  child: Text(
+                    totalOrder.toString() ??
+                        'N/A', // Display 'N/A' if totalOrder is null
+                    style: GoogleFonts.poppins(
+                      fontSize: 14,
+                      color: Colors.black54,
+                    ),
                   ),
                 )
               ],

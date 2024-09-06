@@ -103,7 +103,6 @@ class DataPelangganControllerDeep extends GetxController {
   }
 
   Future<bool> postOrders() async {
-    // Debugging: Print values before sending
     print('Order Type: deep_clean');
     print('Detail Address: ${detail_address.value}');
     print('Total Price: ${total_price.value}');
@@ -112,10 +111,8 @@ class DataPelangganControllerDeep extends GetxController {
     print('Shoes ID: ${shoesId.value}');
     print('User ID: ${userId.value}');
     print('Laundry ID: ${laundry_id.value}');
-    print('Kabupaten ID: ${selectedKabupatenId.value}');
-    print('Kabupaten Name: ${kabupatenName.value}');
-    print('Kecamatan ID: ${selectedKecamatanId.value}');
-    print('Kecamatan Name: ${kecamatanName.value}');
+    print('Kabupaten: ${kabupatenName.value}');
+    print('Kecamatan: ${kecamatanName.value}');
 
     // Validation checks
     if (detail_address.value.isEmpty ||
