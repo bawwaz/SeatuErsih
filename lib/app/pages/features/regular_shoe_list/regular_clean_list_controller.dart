@@ -3,6 +3,7 @@ import 'package:http/http.dart' as http;
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:intl/intl.dart';
+import 'package:seatu_ersih/app/api/api_endpoint.dart';
 
 class RegCleanListController extends GetxController {
   var isLoading = false.obs;
@@ -62,7 +63,8 @@ class RegCleanListController extends GetxController {
   }
 
   Future<void> deleteShoes(int id) async {
-    final url = 'http://seatuersih.pradiptaahmad.tech/api';
+    // final url = 'http://seatuersih.pradiptaahmad.tech/api';
+    final url = ApiEndpoint.baseUrl;
     final token = box.read('token');
     var headers = {
       'Accept': 'application/json',
