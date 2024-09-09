@@ -1,8 +1,11 @@
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
+import 'package:seatu_ersih/app/api/api_endpoint.dart';
+
 class Login {
-  final String baseUrl = 'http://seatuersih.pradiptaahmad.tech/api';
+  // final String baseUrl = 'http://seatuersih.pradiptaahmad.tech/api';
+  final String baseUrl = ApiEndpoint.baseUrl;
 
   Future<void> loginUser(Map<String, String> data) async {
     final url = Uri.parse('$baseUrl/Users/login');

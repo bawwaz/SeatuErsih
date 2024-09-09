@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:http/http.dart' as http;
+import 'package:seatu_ersih/app/api/api_endpoint.dart';
 import 'package:seatu_ersih/app/router/app_pages.dart';
 
 class LoginPageController extends GetxController {
@@ -31,7 +32,7 @@ class LoginPageController extends GetxController {
   }
 
   Future<void> _fetchUserData(String token) async {
-    final url = 'http://seatuersih.pradiptaahmad.tech/api/users/me'; // Adjust endpoint if necessary
+    final url = 'http://seatuersih.pradiptaahmad.tech/api/users/me';
     var headers = {
       'Accept': 'application/json',
       'Authorization': 'Bearer $token',
@@ -64,7 +65,8 @@ class LoginPageController extends GetxController {
   Future<void> login() async {
     isLoading.value = true;
     var notificationToken = GetStorage().read('notificationToken');
-    final url = 'http://seatuersih.pradiptaahmad.tech/api';
+    // final url = 'http://seatuersih.pradiptaahmad.tech/api';
+    final url = ApiEndpoint.baseUrl;
     var data = {
       'email': email.value,
       'password': password.value,
@@ -97,9 +99,11 @@ class LoginPageController extends GetxController {
           snackPosition: SnackPosition.TOP,
         );
         isLoading.value = false;
-        Get.offAllNamed(Routes.BTMNAVBAR); // Use offAllNamed to ensure navigation
+        Get.offAllNamed(
+            Routes.BTMNAVBAR); // Use offAllNamed to ensure navigation
       } else {
-        final message = json.decode(response.body)['message'] ?? 'Unknown error';
+        final message =
+            json.decode(response.body)['message'] ?? 'Unknown error';
         Get.snackbar(
           "Login Failed",
           message,
