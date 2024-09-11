@@ -15,7 +15,7 @@ class DeepCleanController extends GetxController {
     final order_id = box.read('order_id');
     isLoading.value = true;
 
-    final url = 'http://seatuersih.pradiptaahmad.tech/api';
+    final url = 'http://seatuersih.xyz/api';
     final token = box.read('token');
     var headers = {
       'Accept': 'application/json',

@@ -22,7 +22,7 @@ class RegCleanListController extends GetxController {
   Future<void> fetchShoes() async {
     isLoading.value = true;
 
-    final url = 'http://seatuersih.pradiptaahmad.tech/api';
+    final url = 'http://seatuersih.xyz/api';
     final token = box.read('token');
     var headers = {
       'Accept': 'application/json',

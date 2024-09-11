@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:intl/intl.dart'; // Import intl package
 import 'package:seatu_ersih/app/pages/features/choose_service/choose_service_controller.dart';
 import 'package:seatu_ersih/app/pages/features/choose_service/widget/choose_service_container.dart';
 import 'package:seatu_ersih/app/router/app_pages.dart';
@@ -12,6 +13,13 @@ class ChooseService extends GetView<ChooseServiceController> {
   Widget build(BuildContext context) {
     final ChooseServiceController controller =
         Get.put(ChooseServiceController());
+
+    // NumberFormat for formatting prices
+    final NumberFormat currencyFormatter = NumberFormat.currency(
+      locale: 'id_ID', // Locale for Indonesian Rupiah
+      symbol: 'Rp', // Rupiah symbol
+      decimalDigits: 0, // No decimal places
+    );
 
     return Scaffold(
       appBar: AppBar(
@@ -67,15 +75,13 @@ class ChooseService extends GetView<ChooseServiceController> {
                       itemBuilder: (BuildContext context, int index) {
                         String productName =
                             controller.laundries[index]["name"];
-                        // Deklarasi variabel price hanya sekali
                         String price =
                             controller.laundries[index]["price"] ?? "N/A";
 
-                        // Kondisi untuk Regular dan Deep Clean
-                        if (productName == "Regular Clean") {
-                          price = controller.laundries[index]["price"] ?? "N/A";
-                        } else if (productName == "Deep Clean") {
-                          price = controller.laundries[index]["price"] ?? "N/A";
+                        // Format price if it's not null
+                        if (price != "N/A") {
+                          double parsedPrice = double.tryParse(price) ?? 0.0;
+                          price = currencyFormatter.format(parsedPrice);
                         }
 
                         return ServiceContainer(
@@ -84,6 +90,9 @@ class ChooseService extends GetView<ChooseServiceController> {
                               ["description"],
                           price: price,
                           buttonText: "Pesan Sekarang",
+                          totalOrder: productName == "Regular Clean"
+                              ? controller.totalOrder1.value
+                              : controller.totalOrder2.value,
                           onPressed: () {
                             print("Clicked: $productName");
                             if (productName == "Regular Clean") {
