@@ -61,7 +61,6 @@ class AddOnsController extends GetxController {
     print('Total price (after calculation): ${total_price.value}');
   }
 
-  // Post shoe data to the API
   Future<void> postShoes() async {
     final url = ApiEndpoint.baseUrl;
     final token = box.read('token');
@@ -71,19 +70,18 @@ class AddOnsController extends GetxController {
       'Authorization': 'Bearer $token',
     };
 
-    // Print the total price before submitting the data
     print('Total price being submitted: ${total_price.value}');
 
     var body = {
       'brand': shoesName.value.toString(),
       'price': total_price.value
-          .toString(), // Total price including base price and add-ons
+          .toString(), 
       'addons': nameSelectedAddons.join(', '),
       'notes': shoesNote.value.toString(),
       'order_id': box.read('order_id').toString(),
     };
 
-    print('Body data: $body'); // Debug log for POST body
+    print('Body data: $body'); 
 
     try {
       final response = await http.post(Uri.parse('$url/shoe/add'),
@@ -101,7 +99,6 @@ class AddOnsController extends GetxController {
     }
   }
 
-  // Fetch shoe brand names from API
   Future<void> fetchShoename() async {
     final url = ApiEndpoint.baseUrl;
     final token = box.read('token');
@@ -155,28 +152,27 @@ class AddOnsController extends GetxController {
       if (response.statusCode == 200) {
         print('controller successfully initialized');
         final data = json.decode(response.body);
-        print('Response data: ${response.body}'); 
+        print('Response data: ${response.body}');
 
         if (data != null && data['laundries'] != null) {
           print('Success, found laundries');
-          print('Service type passed: $serviceType'); 
+          print('Service type passed: $serviceType');
 
           bool priceFound = false;
           String normalizedServiceType = serviceType.toLowerCase().trim();
 
           for (var laundry in data['laundries']) {
             String laundryName = (laundry['name'] ?? '').trim().toLowerCase();
-            print('Laundry name: $laundryName'); 
+            print('Laundry name: $laundryName');
 
             print('Laundry price: ${laundry['price']}');
 
             if (laundryName.contains(normalizedServiceType)) {
-              base_price.value =
-                  int.tryParse(laundry['price']) ?? 0; 
+              base_price.value = int.tryParse(laundry['price']) ?? 0;
               priceFound = true;
               print(
                   'Matched laundry: ${laundry['name']} with price: ${laundry['price']}');
-              break; 
+              break;
             }
           }
 
