@@ -5,6 +5,7 @@ import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:http/http.dart' as http;
 import 'package:image_picker/image_picker.dart';
+import 'package:seatu_ersih/app/api/api_endpoint.dart';
 
 class ProfileEditController extends GetxController {
   final textNamaController = TextEditingController();
@@ -36,7 +37,7 @@ class ProfileEditController extends GetxController {
   }
 
   Future<void> updateUsers() async {
-    final url = 'http://seatuersih.pradiptaahmad.tech/api';
+    final url = ApiEndpoint.baseUrl;
     final token = box.read('token');
 
     var headers = {
@@ -65,7 +66,7 @@ class ProfileEditController extends GetxController {
   }
 
   Future<void> uploadImage() async {
-    final url = 'http://seatuersih.pradiptaahmad.tech/api';
+    final url = ApiEndpoint.baseUrl;
     final token = box.read('token');
 
     var headers = {

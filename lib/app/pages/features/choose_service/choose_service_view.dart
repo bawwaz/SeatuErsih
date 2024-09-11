@@ -67,25 +67,23 @@ class ChooseService extends GetView<ChooseServiceController> {
                       itemBuilder: (BuildContext context, int index) {
                         String productName =
                             controller.laundries[index]["name"];
-                        String price = "N/A";
+                        // Deklarasi variabel price hanya sekali
+                        String price =
+                            controller.laundries[index]["price"] ?? "N/A";
 
+                        // Kondisi untuk Regular dan Deep Clean
                         if (productName == "Regular Clean") {
-                          price = "25k";
+                          price = controller.laundries[index]["price"] ?? "N/A";
                         } else if (productName == "Deep Clean") {
-                          price = "35k";
-                        } else {
                           price = controller.laundries[index]["price"] ?? "N/A";
                         }
 
                         return ServiceContainer(
                           title: productName,
                           description: controller.laundries[index]
-                              ["Description"],
+                              ["description"],
                           price: price,
                           buttonText: "Pesan Sekarang",
-                          totalOrder: productName == "Regular Clean"
-                              ? controller.totalOrder1.value
-                              : controller.totalOrder2.value,
                           onPressed: () {
                             print("Clicked: $productName");
                             if (productName == "Regular Clean") {

@@ -1,3 +1,3 @@
 class APIEndpoints {
-  static const String baseUrl = 'http://seatuersih.pradiptaahmad.tech/api';
+  static const String baseUrl = 'http://seatuersih.xyz/api';
 }

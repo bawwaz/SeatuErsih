@@ -11,6 +11,7 @@ class ChooseServiceController extends GetxController {
   var isStoreOpen = true.obs;
   var totalOrder1 = 0.obs; // Observable for Regular Clean
   var totalOrder2 = 0.obs; // Observable for Deep Clean
+  var base_price = 0.obs;
 
   final box = GetStorage();
 
@@ -18,6 +19,8 @@ class ChooseServiceController extends GetxController {
   void onInit() {
     super.onInit();
     fetchShopStatus();
+    fetchPrice("Regular Clean");
+    fetchPrice("Deep Clean");
     fetchTotalOrders();
     fetchLaundries();
   }
@@ -43,7 +46,8 @@ class ChooseServiceController extends GetxController {
         final data = jsonDecode(response.body);
         if (data.containsKey('data') &&
             data['data'].containsKey('regular_clean')) {
-          totalOrder1.value = data['data']['regular_clean']; // Update observable
+          totalOrder1.value =
+              data['data']['regular_clean']; // Update observable
           print("Total Regular Clean Orders: ${totalOrder1.value}");
         } else {
           print("Unexpected response structure: ${response.body}");
@@ -98,14 +102,13 @@ class ChooseServiceController extends GetxController {
     try {
       isLoading(true);
       final response = await http.get(
-          Uri.parse('http://seatuersih.pradiptaahmad.tech/api/laundry/getall'),
+          Uri.parse('http://seatuersih.xyz/api/laundry/getall'),
           headers: headers);
 
       if (response.statusCode == 200) {
         var data = jsonDecode(response.body);
         if (data['laundries'] != null && data['laundries'] is List) {
           laundries.value = List<Map<String, dynamic>>.from(data['laundries']);
-          await fetchAverageReviews();
         } else {
           print('Unexpected response structure: ${response.body}');
         }
@@ -116,39 +119,6 @@ class ChooseServiceController extends GetxController {
       print('Error fetching laundries: $e');
     } finally {
       isLoading(false);
-    }
-  }
-
-  Future<void> fetchAverageReviews() async {
-    final url = ApiEndpoint.baseUrl;
-    final token = box.read('token');
-    var headers = {
-      'Accept': 'application/json',
-      'Authorization': 'Bearer $token',
-    };
-
-    try {
-      List<double> ratings = List<double>.filled(laundries.length, 0.0);
-
-      for (int i = 0; i < laundries.length; i++) {
-        final id = laundries[i]["id"];
-        final response = await http.get(Uri.parse('$url/review/average/$id'),
-            headers: headers);
-
-        if (response.statusCode == 200) {
-          final data = json.decode(response.body);
-          final rating =
-              double.tryParse(data['average_rating'].toString()) ?? 0.0;
-          ratings[i] = rating;
-        } else {
-          print(
-              'Failed to fetch reviews for laundry $id: ${response.statusCode}');
-        }
-      }
-
-      averageRating.value = ratings;
-    } catch (e) {
-      print('Error fetching average reviews: $e');
     }
   }
 
@@ -183,9 +153,66 @@ class ChooseServiceController extends GetxController {
     }
   }
 
+  Future<void> fetchPrice(String serviceType) async {
+    final url = ApiEndpoint.baseUrl;
+    final token = box.read('token');
+
+    var headers = {
+      "Accept": 'application/json',
+      'Authorization': 'Bearer $token',
+    };
+
+    try {
+      final response =
+          await http.get(Uri.parse('$url/laundry/getall'), headers: headers);
+
+      if (response.statusCode == 200) {
+        print('controller successfully initialized');
+        final data = json.decode(response.body);
+        print('Response data: ${response.body}');
+
+        if (data != null && data['laundries'] != null) {
+          print('Success, found laundries');
+          print('Service type passed: $serviceType');
+
+          bool priceFound = false;
+          String normalizedServiceType = serviceType.toLowerCase().trim();
+
+          for (var laundry in data['laundries']) {
+            String laundryName = (laundry['name'] ?? '').trim().toLowerCase();
+            print('Laundry name: $laundryName');
+
+            print('Laundry price: ${laundry['price']}');
+
+            if (laundryName.contains(normalizedServiceType)) {
+              base_price.value = int.tryParse(laundry['price']) ?? 0;
+              priceFound = true;
+              print(
+                  'Matched laundry: ${laundry['name']} with price: ${laundry['price']}');
+              break;
+            }
+          }
+
+          if (!priceFound) {
+            print('No matching laundry service found for type: $serviceType');
+          }
+        } else {
+          print('No laundries found');
+        }
+      } else {
+        print('Failed to fetch price: ${response.statusCode}');
+        print('Response body: ${response.body}');
+      }
+    } catch (e) {
+      print('Error fetching price: $e');
+    }
+  }
+
   Future<void> refreshData() async {
     await fetchShopStatus();
     await fetchTotalOrders();
     await fetchLaundries();
+    await fetchPrice("Regular Clean");
+    await fetchPrice("Deep Clean");
   }
 }
