@@ -160,24 +160,24 @@ class ServiceContainer extends StatelessWidget {
                 SizedBox(
                   width: 20,
                 ),
-                Text(
-                  'Total Order:',
-                  style: GoogleFonts.poppins(
-                      fontSize: 14,
-                      fontWeight: FontWeight.w500,
-                      color: Colors.black.withOpacity(0.5)),
-                ),
-                Padding(
-                  padding: const EdgeInsets.only(left: 4.0),
-                  child: Text(
-                    totalOrder.toString() ??
-                        'N/A', // Display 'N/A' if totalOrder is null
-                    style: GoogleFonts.poppins(
-                      fontSize: 14,
-                      color: Colors.black54,
-                    ),
-                  ),
-                )
+                // Text(
+                //   'Total Order:',
+                //   style: GoogleFonts.poppins(
+                //       fontSize: 14,
+                //       fontWeight: FontWeight.w500,
+                //       color: Colors.black.withOpacity(0.5)),
+                // ),
+                // Padding(
+                //   padding: const EdgeInsets.only(left: 4.0),
+                //   child: Text(
+                //     totalOrder.toString() ??
+                //         'N/A', // Display 'N/A' if totalOrder is null
+                //     style: GoogleFonts.poppins(
+                //       fontSize: 14,
+                //       color: Colors.black54,
+                //     ),
+                //   ),
+                // )
               ],
             ),
           ],

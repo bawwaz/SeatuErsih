@@ -124,7 +124,7 @@ class DataPelangganRegController extends GetxController {
       return false;
     }
 
-    final url = 'http://seatuersih.pradiptaahmad.tech/api/order/add';
+    final url = 'http://seatuersih.xyz/api/order/add';
     final token = box.read('token');
     var headers = {
       'Accept': 'application/json',

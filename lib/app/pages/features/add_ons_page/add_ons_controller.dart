@@ -139,7 +139,6 @@ class AddOnsController extends GetxController {
     }
   }
 
-  // Fetch price for the selected laundry service
   Future<void> fetchPrice(String serviceType) async {
     final url = ApiEndpoint.baseUrl;
     final token = box.read('token');
@@ -156,30 +155,28 @@ class AddOnsController extends GetxController {
       if (response.statusCode == 200) {
         print('controller successfully initialized');
         final data = json.decode(response.body);
-        print('Response data: ${response.body}'); // Check the API response
+        print('Response data: ${response.body}'); 
 
         if (data != null && data['laundries'] != null) {
           print('Success, found laundries');
-          print('Service type passed: $serviceType'); // Debug service type
+          print('Service type passed: $serviceType'); 
 
           bool priceFound = false;
           String normalizedServiceType = serviceType.toLowerCase().trim();
 
           for (var laundry in data['laundries']) {
             String laundryName = (laundry['name'] ?? '').trim().toLowerCase();
-            print('Laundry name: $laundryName'); // Print each laundry name
+            print('Laundry name: $laundryName'); 
 
-            // Debug log for laundry price
             print('Laundry price: ${laundry['price']}');
 
-            // Check if normalized service type matches the normalized laundry name
             if (laundryName.contains(normalizedServiceType)) {
               base_price.value =
-                  int.tryParse(laundry['price']) ?? 0; // Safe parse
+                  int.tryParse(laundry['price']) ?? 0; 
               priceFound = true;
               print(
                   'Matched laundry: ${laundry['name']} with price: ${laundry['price']}');
-              break; // Exit loop once match is found
+              break; 
             }
           }
 
@@ -187,7 +184,6 @@ class AddOnsController extends GetxController {
             print('No matching laundry service found for type: $serviceType');
           }
 
-          // Ensure total is calculated after fetching the base price
           calculateTotal();
         } else {
           print('No laundries found');

@@ -4,7 +4,6 @@ import 'dart:convert';
 import 'package:seatu_ersih/app/api/api_endpoint.dart';
 
 class ApiService {
-  // final String baseUrl = 'http://seatuersih.pradiptaahmad.tech/api';
   final String baseUrl = ApiEndpoint.baseUrl;
 
   Future<void> registerUser(Map<String, String> data) async {
